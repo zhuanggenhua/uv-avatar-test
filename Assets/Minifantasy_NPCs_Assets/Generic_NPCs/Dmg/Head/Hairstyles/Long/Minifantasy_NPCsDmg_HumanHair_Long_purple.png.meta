@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: ceef990d8c932384b87615be38fa91c0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7059555611064324349
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_0
+  - first:
+      213: 8877375805177838022
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_1
+  - first:
+      213: 3886602198141432307
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_2
+  - first:
+      213: 8850613671493138542
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_3
+  - first:
+      213: 5179265838989462764
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_4
+  - first:
+      213: -7238315779173777276
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_5
+  - first:
+      213: 7810503473149222036
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_6
+  - first:
+      213: -9061390593669031712
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_7
+  - first:
+      213: 4676004985853762971
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_8
+  - first:
+      213: -7191975649995973970
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_9
+  - first:
+      213: 5066394962515800974
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_10
+  - first:
+      213: 3699909007278934619
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_11
+  - first:
+      213: 1643701731303943373
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_12
+  - first:
+      213: 1124199256853563454
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_13
+  - first:
+      213: -4028173458500826400
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_14
+  - first:
+      213: 2119622856191968625
+    second: Minifantasy_NPCsDmg_HumanHair_Long_purple_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 110
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df0da95dc6498f160800000000000000
+      internalID: 7059555611064324349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 110
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c9b54da246c23b70800000000000000
+      internalID: 8877375805177838022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 110
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f1f87b6b1cffe530800000000000000
+      internalID: 3886602198141432307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 110
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e68709ddd32b3da70800000000000000
+      internalID: 8850613671493138542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 78
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cec4842f6d270e740800000000000000
+      internalID: 5179265838989462764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 78
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4800e3a26265c8b90800000000000000
+      internalID: -7238315779173777276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 78
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c930ae68b746c60800000000000000
+      internalID: 7810503473149222036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 78
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e89a4da3497f3280800000000000000
+      internalID: -9061390593669031712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 46
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9dd4c592c184e040800000000000000
+      internalID: 4676004985853762971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 46
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaa1bb44048f03c90800000000000000
+      internalID: -7191975649995973970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_10
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 46
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83359020637f4640800000000000000
+      internalID: 5066394962515800974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 46
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5a0120a3a7b85330800000000000000
+      internalID: 3699909007278934619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 14
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcce013140a9fc610800000000000000
+      internalID: 1643701731303943373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 14
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e38c3819445f99f00800000000000000
+      internalID: 1124199256853563454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 14
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eac668e49d0918c0800000000000000
+      internalID: -4028173458500826400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Long_purple_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 14
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1750f19e1c96a6d10800000000000000
+      internalID: 2119622856191968625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_0: 7059555611064324349
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_1: 8877375805177838022
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_10: 5066394962515800974
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_11: 3699909007278934619
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_12: 1643701731303943373
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_13: 1124199256853563454
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_14: -4028173458500826400
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_15: 2119622856191968625
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_2: 3886602198141432307
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_3: 8850613671493138542
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_4: 5179265838989462764
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_5: -7238315779173777276
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_6: 7810503473149222036
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_7: -9061390593669031712
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_8: 4676004985853762971
+      Minifantasy_NPCsDmg_HumanHair_Long_purple_9: -7191975649995973970
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

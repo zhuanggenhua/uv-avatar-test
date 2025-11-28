@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 530d8fcc13c8eb74a82db29ba62ba501
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3577551590312207600
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_0
+  - first:
+      213: 4282876415818232628
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_1
+  - first:
+      213: -7299271972585658768
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_2
+  - first:
+      213: 9087811704443178772
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_3
+  - first:
+      213: -5300232354032437445
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_4
+  - first:
+      213: 6667052831079736761
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_5
+  - first:
+      213: -5083397349823889465
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_6
+  - first:
+      213: 5757483780833860535
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_7
+  - first:
+      213: 7221029829747010982
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_8
+  - first:
+      213: -4017410236364175369
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_9
+  - first:
+      213: 4589919720056813185
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_10
+  - first:
+      213: 7452161178968052217
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_11
+  - first:
+      213: -4557943531508330484
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_12
+  - first:
+      213: -8868441905809443192
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_13
+  - first:
+      213: -2264234626986910233
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_14
+  - first:
+      213: 7016346511186412945
+    second: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f4613a773406a130800000000000000
+      internalID: 3577551590312207600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 114
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4337eb59865df6b30800000000000000
+      internalID: 4282876415818232628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 076211b60d6c3ba90800000000000000
+      internalID: -7299271972585658768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 114
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41f09fc88946e1e70800000000000000
+      internalID: 9087811704443178772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b373dde71cac176b0800000000000000
+      internalID: -5300232354032437445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 82
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5254fe931268c50800000000000000
+      internalID: 6667052831079736761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cfb5971b052479b0800000000000000
+      internalID: -5083397349823889465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 82
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bbdca48ef0b6ef40800000000000000
+      internalID: 5757483780833860535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_8
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 48
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ade19a1f50463460800000000000000
+      internalID: 7221029829747010982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_9
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 49
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f7ce78dcaa4f38c0800000000000000
+      internalID: -4017410236364175369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_10
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 48
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186fb8dbaaba2bf30800000000000000
+      internalID: 4589919720056813185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_11
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 49
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1d859eb156b6760800000000000000
+      internalID: 7452161178968052217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 16
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c001822d18eeeb0c0800000000000000
+      internalID: -4557943531508330484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 17
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8863a0dd217fce480800000000000000
+      internalID: -8868441905809443192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 16
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed5e4a6a92d390e0800000000000000
+      internalID: -2264234626986910233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mohawk_black_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 17
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 195415c4af11f5160800000000000000
+      internalID: 7016346511186412945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_0: 3577551590312207600
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_1: 4282876415818232628
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_10: 4589919720056813185
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_11: 7452161178968052217
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_12: -4557943531508330484
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_13: -8868441905809443192
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_14: -2264234626986910233
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_15: 7016346511186412945
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_2: -7299271972585658768
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_3: 9087811704443178772
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_4: -5300232354032437445
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_5: 6667052831079736761
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_6: -5083397349823889465
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_7: 5757483780833860535
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_8: 7221029829747010982
+      Minifantasy_NPCsWalk_HumanHair_Mohawk_black_9: -4017410236364175369
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

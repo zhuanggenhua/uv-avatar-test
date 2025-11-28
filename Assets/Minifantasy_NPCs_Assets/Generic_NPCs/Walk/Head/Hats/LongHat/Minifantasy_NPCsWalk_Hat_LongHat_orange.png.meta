@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 9b6b7ea7abeaf3144bf4b6705549d71f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3058344143520922105
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_0
+  - first:
+      213: 7082924472404557151
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_1
+  - first:
+      213: 3819565668823606809
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_2
+  - first:
+      213: -1426100178782591015
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_3
+  - first:
+      213: -617898532441051342
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_4
+  - first:
+      213: 4765491576230355687
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_5
+  - first:
+      213: -8380001152443785068
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_6
+  - first:
+      213: -609814806233386249
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_7
+  - first:
+      213: 3359293195401280584
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_8
+  - first:
+      213: 4044737733746303169
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_9
+  - first:
+      213: -3870022644159126877
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_10
+  - first:
+      213: 2061633628247084644
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_11
+  - first:
+      213: 8377634745057200530
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_12
+  - first:
+      213: -7970866818828461565
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_13
+  - first:
+      213: 5828104029391428487
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_14
+  - first:
+      213: -7627432005940758235
+    second: Minifantasy_NPCsWalk_Hat_LongHat_orange_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f9f5737bcb617a20800000000000000
+      internalID: 3058344143520922105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 113
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5d389cd74a9b4260800000000000000
+      internalID: 7082924472404557151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 112
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91622862db2d10530800000000000000
+      internalID: 3819565668823606809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 113
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d7ea857179753ce0800000000000000
+      internalID: -1426100178782591015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 80
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23fad9afe88cc67f0800000000000000
+      internalID: -617898532441051342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 81
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e2a355075d622240800000000000000
+      internalID: 4765491576230355687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 80
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 490693bd95144bb80800000000000000
+      internalID: -8380001152443785068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 81
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f27fa72aa08987f0800000000000000
+      internalID: -609814806233386249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84cb748ec5b9e9e20800000000000000
+      internalID: 3359293195401280584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 49
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c02195f98bc12830800000000000000
+      internalID: 4044737733746303169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a26d2ec8eaea4ac0800000000000000
+      internalID: -3870022644159126877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 49
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46ecaa4acd46c9c10800000000000000
+      internalID: 2061633628247084644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299ca1df966534470800000000000000
+      internalID: 8377634745057200530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 17
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30a18c71cdac16190800000000000000
+      internalID: -7970866818828461565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78b16e17cb591e050800000000000000
+      internalID: 5828104029391428487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_LongHat_orange_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 17
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 529b471a00be52690800000000000000
+      internalID: -7627432005940758235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_0: 3058344143520922105
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_1: 7082924472404557151
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_10: -3870022644159126877
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_11: 2061633628247084644
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_12: 8377634745057200530
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_13: -7970866818828461565
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_14: 5828104029391428487
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_15: -7627432005940758235
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_2: 3819565668823606809
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_3: -1426100178782591015
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_4: -617898532441051342
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_5: 4765491576230355687
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_6: -8380001152443785068
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_7: -609814806233386249
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_8: 3359293195401280584
+      Minifantasy_NPCsWalk_Hat_LongHat_orange_9: 4044737733746303169
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

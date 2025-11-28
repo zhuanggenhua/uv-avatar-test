@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 4013757eae9429a40a93edbbc1a06e1b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6829246452907272764
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_0
+  - first:
+      213: 883747056085286821
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_1
+  - first:
+      213: -8963806784704444344
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_2
+  - first:
+      213: 5320327081271638162
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_3
+  - first:
+      213: 451882831985880032
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_4
+  - first:
+      213: -738367273510628339
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_5
+  - first:
+      213: -200362768852460754
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_6
+  - first:
+      213: -6612953462081610462
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_7
+  - first:
+      213: -2830393440214255915
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_8
+  - first:
+      213: -1346447828704883701
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_9
+  - first:
+      213: -4680726018326566313
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_10
+  - first:
+      213: 8950738666980701927
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_11
+  - first:
+      213: -5934104785806573693
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_12
+  - first:
+      213: 6920589791267180342
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_13
+  - first:
+      213: -1239914662985870990
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_14
+  - first:
+      213: 532192153837284611
+    second: Minifantasy_NPCsWalk_HumanHair_Bubble_white_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3a622d477b56ce50800000000000000
+      internalID: 6829246452907272764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 112
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5afb245e343b34c00800000000000000
+      internalID: 883747056085286821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 848847ab8392a9380800000000000000
+      internalID: -8963806784704444344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 112
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2983618ca4995d940800000000000000
+      internalID: 5320327081271638162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ebad90aa09654600800000000000000
+      internalID: 451882831985880032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 80
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0410a470eac0c5f0800000000000000
+      internalID: -738367273510628339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_6
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2bd5509f1b283df0800000000000000
+      internalID: -200362768852460754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_7
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 80
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22d9f68fcd11a34a0800000000000000
+      internalID: -6612953462081610462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d6fe65892c68b8d0800000000000000
+      internalID: -2830393440214255915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 48
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0c037565d4705de0800000000000000
+      internalID: -1346447828704883701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75a67b26c78ba0fb0800000000000000
+      internalID: -4680726018326566313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 48
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e6fcb20569673c70800000000000000
+      internalID: 8950738666980701927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38fbd063323d5ada0800000000000000
+      internalID: -5934104785806573693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_13
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 16
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63fcca09fbfda0060800000000000000
+      internalID: 6920589791267180342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_14
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271dde0fe20facee0800000000000000
+      internalID: -1239914662985870990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Bubble_white_15
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 16
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30da8b9b1f9b26700800000000000000
+      internalID: 532192153837284611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_0: 6829246452907272764
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_1: 883747056085286821
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_10: -4680726018326566313
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_11: 8950738666980701927
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_12: -5934104785806573693
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_13: 6920589791267180342
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_14: -1239914662985870990
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_15: 532192153837284611
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_2: -8963806784704444344
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_3: 5320327081271638162
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_4: 451882831985880032
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_5: -738367273510628339
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_6: -200362768852460754
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_7: -6612953462081610462
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_8: -2830393440214255915
+      Minifantasy_NPCsWalk_HumanHair_Bubble_white_9: -1346447828704883701
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

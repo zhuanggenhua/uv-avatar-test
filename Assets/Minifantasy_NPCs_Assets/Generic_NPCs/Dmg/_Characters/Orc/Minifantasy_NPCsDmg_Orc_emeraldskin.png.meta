@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: a12d88277fb44b944b34b58ea30be5d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1816377857072396475
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_0
+  - first:
+      213: 5823166548665952278
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_1
+  - first:
+      213: -1410089943350029993
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_2
+  - first:
+      213: -488341137635885241
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_3
+  - first:
+      213: -4647172127991690444
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_4
+  - first:
+      213: -9147203726806150815
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_5
+  - first:
+      213: 7666195363204427068
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_6
+  - first:
+      213: -5016615527739235525
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_7
+  - first:
+      213: -5970688334387319970
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_8
+  - first:
+      213: 5873150041598079725
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_9
+  - first:
+      213: -3828310986401237809
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_10
+  - first:
+      213: -3379810537392305396
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_11
+  - first:
+      213: -4474110884561026424
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_12
+  - first:
+      213: -2257976341807383186
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_13
+  - first:
+      213: -7099532500245479775
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_14
+  - first:
+      213: -4639543807633607989
+    second: Minifantasy_NPCsDmg_Orc_emeraldskin_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 108
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb87fa49902153910800000000000000
+      internalID: 1816377857072396475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 108
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 618eb21af1b00d050800000000000000
+      internalID: 5823166548665952278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 108
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7515541eaaa5e6ce0800000000000000
+      internalID: -1410089943350029993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 108
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74fb00a92501939f0800000000000000
+      internalID: -488341137635885241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 76
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43b85f4429de18fb0800000000000000
+      internalID: -4647172127991690444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 76
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1611797acaa9e0180800000000000000
+      internalID: -9147203726806150815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 76
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3deb8ac01cc36a60800000000000000
+      internalID: 7666195363204427068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 76
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b33e466b1c6616ab0800000000000000
+      internalID: -5016615527739235525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 44
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b664c089ad32da0800000000000000
+      internalID: -5970688334387319970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 44
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de2360678de918150800000000000000
+      internalID: 5873150041598079725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_10
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 44
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc434dde07b1fdac0800000000000000
+      internalID: -3828310986401237809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 44
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b0c9629308811d0800000000000000
+      internalID: -3379810537392305396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 12
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8820808fad3c8e1c0800000000000000
+      internalID: -4474110884561026424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 12
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6db55bfa7e0aa0e0800000000000000
+      internalID: -2257976341807383186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 12
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aef6835ec4697d90800000000000000
+      internalID: -7099532500245479775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Orc_emeraldskin_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 12
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc2b2220d770d9fb0800000000000000
+      internalID: -4639543807633607989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_Orc_emeraldskin_0: 1816377857072396475
+      Minifantasy_NPCsDmg_Orc_emeraldskin_1: 5823166548665952278
+      Minifantasy_NPCsDmg_Orc_emeraldskin_10: -3828310986401237809
+      Minifantasy_NPCsDmg_Orc_emeraldskin_11: -3379810537392305396
+      Minifantasy_NPCsDmg_Orc_emeraldskin_12: -4474110884561026424
+      Minifantasy_NPCsDmg_Orc_emeraldskin_13: -2257976341807383186
+      Minifantasy_NPCsDmg_Orc_emeraldskin_14: -7099532500245479775
+      Minifantasy_NPCsDmg_Orc_emeraldskin_15: -4639543807633607989
+      Minifantasy_NPCsDmg_Orc_emeraldskin_2: -1410089943350029993
+      Minifantasy_NPCsDmg_Orc_emeraldskin_3: -488341137635885241
+      Minifantasy_NPCsDmg_Orc_emeraldskin_4: -4647172127991690444
+      Minifantasy_NPCsDmg_Orc_emeraldskin_5: -9147203726806150815
+      Minifantasy_NPCsDmg_Orc_emeraldskin_6: 7666195363204427068
+      Minifantasy_NPCsDmg_Orc_emeraldskin_7: -5016615527739235525
+      Minifantasy_NPCsDmg_Orc_emeraldskin_8: -5970688334387319970
+      Minifantasy_NPCsDmg_Orc_emeraldskin_9: 5873150041598079725
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

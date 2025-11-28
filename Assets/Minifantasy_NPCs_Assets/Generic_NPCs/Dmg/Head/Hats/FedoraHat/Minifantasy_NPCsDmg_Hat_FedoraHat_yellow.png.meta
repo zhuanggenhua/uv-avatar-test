@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 40879dfd2f622c646be4456bc61a9008
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6373655756545977445
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_0
+  - first:
+      213: -4106484036630879926
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_1
+  - first:
+      213: 29554947808904561
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_2
+  - first:
+      213: -6375811869661996790
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_3
+  - first:
+      213: -2349746489472553979
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_4
+  - first:
+      213: -9068425203730519072
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_5
+  - first:
+      213: -8788523777781519318
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_6
+  - first:
+      213: 3968345761286488293
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_7
+  - first:
+      213: 1191953525714114954
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_8
+  - first:
+      213: -739913259257903998
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_9
+  - first:
+      213: 8317631620377057923
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_10
+  - first:
+      213: 569080504664742526
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_11
+  - first:
+      213: 7751749603143507455
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_12
+  - first:
+      213: 3343156902575249202
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_13
+  - first:
+      213: -3416043495534592132
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_14
+  - first:
+      213: 3558037417661928152
+    second: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b931476cbd93c87a0800000000000000
+      internalID: -6373655756545977445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 112
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a41edc89686d207c0800000000000000
+      internalID: -4106484036630879926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 112
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17541858110096000800000000000000
+      internalID: 29554947808904561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 112
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a09d31292e09487a0800000000000000
+      internalID: -6375811869661996790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 80
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50c64ce6406046fd0800000000000000
+      internalID: -2349746489472553979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 80
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb6173e25b762280800000000000000
+      internalID: -9068425203730519072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 80
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2c224d0034e80680800000000000000
+      internalID: -8788523777781519318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 80
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e08867d175621730800000000000000
+      internalID: 3968345761286488293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a89d6f89a6baa8010800000000000000
+      internalID: 1191953525714114954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 48
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 284c4599fcc4bb5f0800000000000000
+      internalID: -739913259257903998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38a9129d3e92e6370800000000000000
+      internalID: 8317631620377057923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 48
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7a542134b7c5e700800000000000000
+      internalID: 569080504664742526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffdd42b813fb39b60800000000000000
+      internalID: 7751749603143507455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 16
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23794667d77456e20800000000000000
+      internalID: 3343156902575249202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 16
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7f706f2a86c790d0800000000000000
+      internalID: -3416043495534592132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 16
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d299491e20b06130800000000000000
+      internalID: 3558037417661928152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_0: -6373655756545977445
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_1: -4106484036630879926
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_10: 8317631620377057923
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_11: 569080504664742526
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_12: 7751749603143507455
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_13: 3343156902575249202
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_14: -3416043495534592132
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_15: 3558037417661928152
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_2: 29554947808904561
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_3: -6375811869661996790
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_4: -2349746489472553979
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_5: -9068425203730519072
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_6: -8788523777781519318
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_7: 3968345761286488293
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_8: 1191953525714114954
+      Minifantasy_NPCsDmg_Hat_FedoraHat_yellow_9: -739913259257903998
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

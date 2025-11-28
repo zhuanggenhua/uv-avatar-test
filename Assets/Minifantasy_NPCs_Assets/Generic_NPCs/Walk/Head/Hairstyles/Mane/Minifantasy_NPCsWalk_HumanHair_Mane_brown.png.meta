@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 43df07d5796eff1468e6394cd685dbcc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9101387436967993680
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_0
+  - first:
+      213: -6271606572377898676
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_1
+  - first:
+      213: -1403064822716498731
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_2
+  - first:
+      213: -2495048879840801133
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_3
+  - first:
+      213: 6122589023347078679
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_4
+  - first:
+      213: -6337744310308976507
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_5
+  - first:
+      213: -5880027222219681046
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_6
+  - first:
+      213: -2125820768199928718
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_7
+  - first:
+      213: 5818130007921767380
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_8
+  - first:
+      213: -4108956800208111130
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_9
+  - first:
+      213: 4412589689782227616
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_10
+  - first:
+      213: 2469323761351719226
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_11
+  - first:
+      213: -4856865147472883624
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_12
+  - first:
+      213: -3130938130365616250
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_13
+  - first:
+      213: -4782033278280999840
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_14
+  - first:
+      213: -2842423805594721458
+    second: Minifantasy_NPCsWalk_HumanHair_Mane_brown_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 110
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bed158e85061b180800000000000000
+      internalID: -9101387436967993680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 111
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4109620d07c6f8a0800000000000000
+      internalID: -6271606572377898676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 110
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dcf22d3aff478ce0800000000000000
+      internalID: -1403064822716498731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 111
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39e4adb534ecf5dd0800000000000000
+      internalID: -2495048879840801133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 78
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 716fe42274ec7f450800000000000000
+      internalID: 6122589023347078679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 79
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 588c7cae02fcb08a0800000000000000
+      internalID: -6337744310308976507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 78
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae218f52562f56ea0800000000000000
+      internalID: -5880027222219681046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 79
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2749b4f36419f72e0800000000000000
+      internalID: -2125820768199928718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d3b73b9a662eb050800000000000000
+      internalID: 5818130007921767380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 47
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e97b267f8d0af6c0800000000000000
+      internalID: -4108956800208111130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a25507a1faac3d30800000000000000
+      internalID: 4412589689782227616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 47
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a39fcceb0ecc44220800000000000000
+      internalID: 2469323761351719226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 14
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85057e291e2f89cb0800000000000000
+      internalID: -4856865147472883624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 15
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68fe4dddb5cac84d0800000000000000
+      internalID: -3130938130365616250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 14
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06cd6f7d11ec2adb0800000000000000
+      internalID: -4782033278280999840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Mane_brown_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 15
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43a96ecb9ead88d0800000000000000
+      internalID: -2842423805594721458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_0: -9101387436967993680
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_1: -6271606572377898676
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_10: 4412589689782227616
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_11: 2469323761351719226
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_12: -4856865147472883624
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_13: -3130938130365616250
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_14: -4782033278280999840
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_15: -2842423805594721458
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_2: -1403064822716498731
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_3: -2495048879840801133
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_4: 6122589023347078679
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_5: -6337744310308976507
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_6: -5880027222219681046
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_7: -2125820768199928718
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_8: 5818130007921767380
+      Minifantasy_NPCsWalk_HumanHair_Mane_brown_9: -4108956800208111130
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,436 @@
+fileFormatVersion: 2
+guid: 84a4f53ec0e0c3b4cb102a5e9c1091d7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1283336954943338879
+    second: LaboratoryWorking_elf_0_00
+  - first:
+      213: -6078421721632142133
+    second: LaboratoryWorking_elf_0_01
+  - first:
+      213: -5682928683739676741
+    second: LaboratoryWorking_elf_0_02
+  - first:
+      213: 3937777029746353432
+    second: LaboratoryWorking_elf_0_03
+  - first:
+      213: 6786038824925206365
+    second: LaboratoryWorking_elf_0_04
+  - first:
+      213: -1044226205104465360
+    second: LaboratoryWorking_elf_0_05
+  - first:
+      213: 7079885077102111170
+    second: LaboratoryWorking_elf_0_06
+  - first:
+      213: -5699440830162806621
+    second: LaboratoryWorking_elf_0_07
+  - first:
+      213: -5183884359007031526
+    second: LaboratoryWorking_elf_0_08
+  - first:
+      213: -3407404259328758111
+    second: LaboratoryWorking_elf_0_09
+  - first:
+      213: 7842991683620551717
+    second: LaboratoryWorking_elf_0_10
+  - first:
+      213: 987787539787071517
+    second: Elf_LaboratoryWorking_0_00
+  - first:
+      213: 3310550089940021672
+    second: Elf_LaboratoryWorking_0_01
+  - first:
+      213: -5844481005550359387
+    second: Elf_LaboratoryWorking_0_02
+  - first:
+      213: 6981949082445123665
+    second: Elf_LaboratoryWorking_0_03
+  - first:
+      213: 2015977759598605009
+    second: Elf_LaboratoryWorking_0_04
+  - first:
+      213: 8518433483769208809
+    second: Elf_LaboratoryWorking_0_05
+  - first:
+      213: 1795928752860845187
+    second: Elf_LaboratoryWorking_0_06
+  - first:
+      213: -7749641617605848995
+    second: Elf_LaboratoryWorking_0_07
+  - first:
+      213: 7529146251679977602
+    second: Elf_LaboratoryWorking_0_08
+  - first:
+      213: 3167656915072205047
+    second: Elf_LaboratoryWorking_0_09
+  - first:
+      213: -9149804650896713491
+    second: Elf_LaboratoryWorking_0_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d10c09ea88355bd00800000000000000
+      internalID: 987787539787071517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1330a44cf61fd20800000000000000
+      internalID: 3310550089940021672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ac27a7ad7b34eea0800000000000000
+      internalID: -5844481005550359387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1509103d2bdd4e060800000000000000
+      internalID: 6981949082445123665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d276fb57113afb10800000000000000
+      internalID: 2015977759598605009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ef5bd2fe1e873670800000000000000
+      internalID: 8518433483769208809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_06
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3845e2c7fab6ce810800000000000000
+      internalID: 1795928752860845187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_07
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d501506120eb37490800000000000000
+      internalID: -7749641617605848995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_08
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2805951ff96ec7860800000000000000
+      internalID: 7529146251679977602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_09
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f040396e27c5fb20800000000000000
+      internalID: 3167656915072205047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_LaboratoryWorking_0_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de89513d52d550180800000000000000
+      internalID: -9149804650896713491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Elf_LaboratoryWorking_0_00: 987787539787071517
+      Elf_LaboratoryWorking_0_01: 3310550089940021672
+      Elf_LaboratoryWorking_0_02: -5844481005550359387
+      Elf_LaboratoryWorking_0_03: 6981949082445123665
+      Elf_LaboratoryWorking_0_04: 2015977759598605009
+      Elf_LaboratoryWorking_0_05: 8518433483769208809
+      Elf_LaboratoryWorking_0_06: 1795928752860845187
+      Elf_LaboratoryWorking_0_07: -7749641617605848995
+      Elf_LaboratoryWorking_0_08: 7529146251679977602
+      Elf_LaboratoryWorking_0_09: 3167656915072205047
+      Elf_LaboratoryWorking_0_10: -9149804650896713491
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 684c5b16ab44d1d4a93b94bc1bdb13d8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -915625830567484043
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_0
+  - first:
+      213: 4347101072408527164
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_1
+  - first:
+      213: 8989918159617146962
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_2
+  - first:
+      213: 3441703486714760314
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_3
+  - first:
+      213: -7109146284181515035
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_4
+  - first:
+      213: 715862281245781986
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_5
+  - first:
+      213: 4387287944483967790
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_6
+  - first:
+      213: -9198410863018515731
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_7
+  - first:
+      213: -5797569333221611946
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_8
+  - first:
+      213: 7037564556189303398
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_9
+  - first:
+      213: -2023647034766018751
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_10
+  - first:
+      213: 2398282047781347766
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_11
+  - first:
+      213: 6666567560959990731
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_12
+  - first:
+      213: 1758580697640805519
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_13
+  - first:
+      213: 7473350127241427798
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_14
+  - first:
+      213: -1073391502179574036
+    second: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5756ad5882b0b43f0800000000000000
+      internalID: -915625830567484043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 113
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3141a7b461045c30800000000000000
+      internalID: 4347101072408527164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 112
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25040df7fea92cc70800000000000000
+      internalID: 8989918159617146962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 113
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c4bd3161363cf20800000000000000
+      internalID: 3441703486714760314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 80
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e49213de1d375d90800000000000000
+      internalID: -7109146284181515035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 81
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ef61c5b3f04fe900800000000000000
+      internalID: 715862281245781986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 80
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2312520427c2ec30800000000000000
+      internalID: 4387287944483967790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 81
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de2efab2e0ea85080800000000000000
+      internalID: -9198410863018515731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 656a0a48865ea8fa0800000000000000
+      internalID: -5797569333221611946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 49
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6620b8f5da37aa160800000000000000
+      internalID: 7037564556189303398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 147bffd5ebf8ae3e0800000000000000
+      internalID: -2023647034766018751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 49
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b12439d0d8684120800000000000000
+      internalID: 2398282047781347766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb992e20e7648c50800000000000000
+      internalID: 6666567560959990731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 17
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f842dbfb3dbb76810800000000000000
+      internalID: 1758580697640805519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65b7850685ca6b760800000000000000
+      internalID: 7473350127241427798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_CowboyHat_blue_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 17
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceed9a7ad1c8a11f0800000000000000
+      internalID: -1073391502179574036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_0: -915625830567484043
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_1: 4347101072408527164
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_10: -2023647034766018751
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_11: 2398282047781347766
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_12: 6666567560959990731
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_13: 1758580697640805519
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_14: 7473350127241427798
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_15: -1073391502179574036
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_2: 8989918159617146962
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_3: 3441703486714760314
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_4: -7109146284181515035
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_5: 715862281245781986
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_6: 4387287944483967790
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_7: -9198410863018515731
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_8: -5797569333221611946
+      Minifantasy_NPCsWalk_Hat_CowboyHat_blue_9: 7037564556189303398
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 0f3e4dd81ea452e4eb5aa0183649167a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2635834556793118377
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_0
+  - first:
+      213: 8110679310944921916
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_1
+  - first:
+      213: 569746987236470885
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_2
+  - first:
+      213: 3946665415055145091
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_3
+  - first:
+      213: 1565112861143185523
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_4
+  - first:
+      213: 8951890350830822328
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_5
+  - first:
+      213: -4898741529514609603
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_6
+  - first:
+      213: -326140017545526238
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_7
+  - first:
+      213: 3680930211401374682
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_8
+  - first:
+      213: 2729192959665419700
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_9
+  - first:
+      213: 487213228290075682
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_10
+  - first:
+      213: 587989528233576627
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_11
+  - first:
+      213: -2847437661184431650
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_12
+  - first:
+      213: -2700116123187652045
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_13
+  - first:
+      213: 1324352245408752452
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_14
+  - first:
+      213: -5505239967902459815
+    second: Minifantasy_NPCsDmg_Hat_TrapperHat_white_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ae5a5c609d549420800000000000000
+      internalID: 2635834556793118377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c396bff6cdbee8070800000000000000
+      internalID: 8110679310944921916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5603412cdd528e700800000000000000
+      internalID: 569746987236470885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3887eafd84f55c630800000000000000
+      internalID: 3946665415055145091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378b5d9dad568b510800000000000000
+      internalID: 1565112861143185523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b3a48d48d08b3c70800000000000000
+      internalID: 8951890350830822328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d34f3d6988c240cb0800000000000000
+      internalID: -4898741529514609603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 224c82bc161597bf0800000000000000
+      internalID: -326140017545526238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 49
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adb159d568a451330800000000000000
+      internalID: 3680930211401374682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 49
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b5ba54798a00e520800000000000000
+      internalID: 2729192959665419700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_10
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 49
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22ce91a89dde2c600800000000000000
+      internalID: 487213228290075682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 49
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b803025c55f82800800000000000000
+      internalID: 587989528233576627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 17
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed96805988edb78d0800000000000000
+      internalID: -2847437661184431650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 17
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33a581911b2478ad0800000000000000
+      internalID: -2700116123187652045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 17
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4436419b95b016210800000000000000
+      internalID: 1324352245408752452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_TrapperHat_white_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 17
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95814edca657993b0800000000000000
+      internalID: -5505239967902459815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_0: 2635834556793118377
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_1: 8110679310944921916
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_10: 487213228290075682
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_11: 587989528233576627
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_12: -2847437661184431650
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_13: -2700116123187652045
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_14: 1324352245408752452
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_15: -5505239967902459815
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_2: 569746987236470885
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_3: 3946665415055145091
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_4: 1565112861143185523
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_5: 8951890350830822328
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_6: -4898741529514609603
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_7: -326140017545526238
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_8: 3680930211401374682
+      Minifantasy_NPCsDmg_Hat_TrapperHat_white_9: 2729192959665419700
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

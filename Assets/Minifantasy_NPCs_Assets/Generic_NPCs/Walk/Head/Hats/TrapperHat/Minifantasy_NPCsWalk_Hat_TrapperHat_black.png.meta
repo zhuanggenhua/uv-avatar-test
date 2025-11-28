@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: c35958f8351425a40a020af375321004
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9102497045213964020
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_0
+  - first:
+      213: 5680252671797810225
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_1
+  - first:
+      213: 2973012877368169840
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_2
+  - first:
+      213: 8153223698605192922
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_3
+  - first:
+      213: -4248278949388389271
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_4
+  - first:
+      213: 6279408213223874935
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_5
+  - first:
+      213: -5748856628804993414
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_6
+  - first:
+      213: -5520229151272296533
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_7
+  - first:
+      213: -5500322105393643894
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_8
+  - first:
+      213: -2878814409640252121
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_9
+  - first:
+      213: -2618150204908658790
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_10
+  - first:
+      213: -7577768193371649851
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_11
+  - first:
+      213: 4663375129738733376
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_12
+  - first:
+      213: -7607393872005103885
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_13
+  - first:
+      213: -1322176927010737823
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_14
+  - first:
+      213: 8151437294022041262
+    second: Minifantasy_NPCsWalk_Hat_TrapperHat_black_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c099afa1a2f6da180800000000000000
+      internalID: -9102497045213964020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 114
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134d8f0b5bf44de40800000000000000
+      internalID: 5680252671797810225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 113
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0751134d573424920800000000000000
+      internalID: 2973012877368169840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 114
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad6b8a991c1162170800000000000000
+      internalID: 8153223698605192922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9647feacdc41b05c0800000000000000
+      internalID: -4248278949388389271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 82
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77121ec0080f42750800000000000000
+      internalID: 6279408213223874935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 81
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7ebd67da55f730b0800000000000000
+      internalID: -5748856628804993414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 82
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baf98a795d43463b0800000000000000
+      internalID: -5520229151272296533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 49
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8e78c5ef2eeaa3b0800000000000000
+      internalID: -5500322105393643894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 50
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ded1b0c856c08d0800000000000000
+      internalID: -2878814409640252121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_10
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 49
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f9dcb92467aabd0800000000000000
+      internalID: -2618150204908658790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 50
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c844d31afb56d690800000000000000
+      internalID: -7577768193371649851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 17
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 047e77e09f2a7b040800000000000000
+      internalID: 4663375129738733376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 18
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fef6a0449b1d6690800000000000000
+      internalID: -7607393872005103885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 17
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 161be4f071fa6ade0800000000000000
+      internalID: -1322176927010737823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_TrapperHat_black_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 18
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eae1e0fd709bf1170800000000000000
+      internalID: 8151437294022041262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_0: -9102497045213964020
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_1: 5680252671797810225
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_10: -2618150204908658790
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_11: -7577768193371649851
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_12: 4663375129738733376
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_13: -7607393872005103885
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_14: -1322176927010737823
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_15: 8151437294022041262
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_2: 2973012877368169840
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_3: 8153223698605192922
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_4: -4248278949388389271
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_5: 6279408213223874935
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_6: -5748856628804993414
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_7: -5520229151272296533
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_8: -5500322105393643894
+      Minifantasy_NPCsWalk_Hat_TrapperHat_black_9: -2878814409640252121
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

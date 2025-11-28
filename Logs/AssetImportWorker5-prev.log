@@ -1,0 +1,1941 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.2/staging' branch; Version is '6000.2.9f1 (e0c4e791ab71) revision 14730471'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 23777 MB
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao" at "2025-11-27T14:23:43.2988466Z"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+Date: 2025-11-27T14:23:43Z
+
+COMMAND LINE ARGUMENTS:
+D:\gameObject\develop\Editor\6000.2.9f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker5
+-projectPath
+C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
+-logFile
+Logs/AssetImportWorker5.log
+-srvPort
+8415
+-job-worker-count
+7
+-background-job-worker-count
+8
+-gc-helper-count
+1
+-name
+AssetImport
+Successfully changed project path to: C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
+C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [46960]  Target information:
+
+Player connection [46960]  * "[IP] 192.168.2.6 [Port] 0 [Flags] 2 [Guid] 3540753143 [EditorId] 3540753143 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KP4589M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [46960] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [46960] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 7
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 16584, path: "D:/gameObject/develop/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.3+a4e98f1
+  Session Id:              0d5d221bff38463c87b107862598766d
+  Correlation Id:          2394aaeaed7913337e9a71a9ed977b21
+  External correlation Id: 4341704763525513232
+  Machine Id:              K60tJ5c+ydKCg23vUYm+4PjQmTY=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-zhuagenbao" (connect: 0.00s, validation: 0.01s, handshake: 0.08s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao-notifications" at "2025-11-27T14:23:43.389476Z"
+[Licensing::Module] Licensing Background thread has ended after 0.09s
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 3.71 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.2.9f1 (e0c4e791ab71)
+[Subsystems] Discovering subsystems at path D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4060 Laptop GPU (ID=0x28a0)
+    Vendor:   NVIDIA
+    VRAM:     7957 MB
+    Driver:   32.0.15.7283
+Initialize mono
+Mono path[0] = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/Managed'
+Mono path[1] = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56164
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001195 seconds.
+- Loaded All Assemblies, in  1.141 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.762 seconds
+Domain Reload Profiling: 1900ms
+	BeginReloadAssembly (162ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (46ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (54ms)
+	LoadAllAssembliesAndSetupDomain (864ms)
+		LoadAssemblies (160ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (858ms)
+			TypeCache.Refresh (855ms)
+				TypeCache.ScanAssembly (822ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (763ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (665ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (66ms)
+			SetLoadedEditorAssemblies (11ms)
+			BeforeProcessingInitializeOnLoad (233ms)
+			ProcessInitializeOnLoadAttributes (237ms)
+			ProcessInitializeOnLoadMethodAttributes (117ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Import Worker Mode flag is 0x00
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: 2025-12-08T02:11:26Z
+[Licensing::Module] License group:
+  Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
+  Product: Unity Personal Version
+  Type: Assigned
+  Expiration: Unlimited
+- Loaded All Assemblies, in  1.733 seconds
+Refreshing native plugins compatible for Editor in 1.70 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[ScriptCompilation] NOT recompiling all scripts because this is an import worker process. Reason to compile was: Define symbols changed
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.252 seconds
+Domain Reload Profiling: 3978ms
+	BeginReloadAssembly (275ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (43ms)
+	RebuildCommonClasses (47ms)
+	RebuildNativeTypeToScriptingClass (26ms)
+	initialDomainReloadingComplete (66ms)
+	LoadAllAssembliesAndSetupDomain (1311ms)
+		LoadAssemblies (964ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (513ms)
+			TypeCache.Refresh (370ms)
+				TypeCache.ScanAssembly (351ms)
+			BuildScriptInfoCaches (123ms)
+			ResolveRequiredComponents (15ms)
+	FinalizeReload (2253ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2006ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (4ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (246ms)
+			ProcessInitializeOnLoadAttributes (1486ms)
+			ProcessInitializeOnLoadMethodAttributes (245ms)
+			AfterProcessingInitializeOnLoad (17ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (24ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Refreshing native plugins compatible for Editor in 3.99 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 36 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6971 unused Assets / (7.5 MB). Loaded Objects now: 7692.
+Memory consumption went from 154.4 MB to 146.9 MB.
+Total: 152.495900 ms (FindLiveObjects: 19.608000 ms CreateObjectMapping: 85.211800 ms MarkObjects: 41.805400 ms  DeleteObjects: 5.868500 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 18306.157067 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopIdle_SE.anim
+  artifactKey: Guid(3cd6d70e4c57b5449bf7d0f5b3b0b556) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopIdle_SE.anim using Guid(3cd6d70e4c57b5449bf7d0f5b3b0b556) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '806f52bbc898c8ce24ce9c1739c9dd75') in 0.2866465 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkChargedAttack_SE.anim
+  artifactKey: Guid(bf5517e7889bf7d4f88fae26f9e43374) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkChargedAttack_SE.anim using Guid(bf5517e7889bf7d4f88fae26f9e43374) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '41e9e7f2ba92d723b2ffb0d5f01c273f') in 0.0102701 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Wildfire/Wildfire_Fly_NW.anim
+  artifactKey: Guid(3fbde48f3920bf24ea56a50599a52757) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Wildfire/Wildfire_Fly_NW.anim using Guid(3fbde48f3920bf24ea56a50599a52757) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '868448d4381ef622c909549d33c88143') in 0.0118092 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Green
+  artifactKey: Guid(78900db024610c445a04789fa18a8452) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Green using Guid(78900db024610c445a04789fa18a8452) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '83f85dc5ce84410d563e559bb90d00fb') in 0.0058947 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Green_Mother_Slime/Minifantasy_CreaturesMotherSlimeGreenJumpAttack.png
+  artifactKey: Guid(8ad8e2098117ee64bac1da463498668f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Green_Mother_Slime/Minifantasy_CreaturesMotherSlimeGreenJumpAttack.png using Guid(8ad8e2098117ee64bac1da463498668f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ab46ece4aa63c01409f984b66293c53c') in 0.1401451 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopIdle_NW.anim
+  artifactKey: Guid(9097772a9b9fc2f48bc47310ef30600b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopIdle_NW.anim using Guid(9097772a9b9fc2f48bc47310ef30600b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '12237f89fb5c3db24b044257d6429449') in 0.0118908 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollWalk_SW.anim
+  artifactKey: Guid(0277c83ae3160004288a34f725e9291d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollWalk_SW.anim using Guid(0277c83ae3160004288a34f725e9291d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5e227bbc77c50cc593e1f42c11bc7732') in 0.0117202 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Centaur
+  artifactKey: Guid(9e5f5b5a71e6a894885bb819c3b38f61) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Centaur using Guid(9e5f5b5a71e6a894885bb819c3b38f61) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd97ee9ba6299b66b95c4864d8dd54a71') in 0.0062194 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Amazon/Minifantasy_CreaturesAmazonWalk.png
+  artifactKey: Guid(2bf864398c0755740be188a3c2c17a52) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Amazon/Minifantasy_CreaturesAmazonWalk.png using Guid(2bf864398c0755740be188a3c2c17a52) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd69665a7868729653f6ff36ccb2d9d65') in 0.0727351 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopDmg.png
+  artifactKey: Guid(7fa1f1cf916254f478fe12c36de8fd67) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopDmg.png using Guid(7fa1f1cf916254f478fe12c36de8fd67) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c5a07afb8f9aa3e8d8ba033fad2ca65f') in 0.0662578 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanIdle_NE.anim
+  artifactKey: Guid(d84b968edababb04683039a20b4e47e6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanIdle_NE.anim using Guid(d84b968edababb04683039a20b4e47e6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8ee8ce3638e1af4ddafcb07027447aea') in 0.0104999 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkSpinDie_SE.anim
+  artifactKey: Guid(5d822101478671645a6c29b57b1bfb61) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkSpinDie_SE.anim using Guid(5d822101478671645a6c29b57b1bfb61) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd83fc31d9034bdc547433ea87ae6bda0') in 0.0097344 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinWalk_SW.anim
+  artifactKey: Guid(de4ec040b50b09c4bbf0c1a09789dd16) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinWalk_SW.anim using Guid(de4ec040b50b09c4bbf0c1a09789dd16) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3362509331d01821b45758ca511b53e8') in 0.0085985 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Wolf/Wolf_Idle_NW.anim
+  artifactKey: Guid(6630887c897c2df458313f75de768dd6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Wolf/Wolf_Idle_NW.anim using Guid(6630887c897c2df458313f75de768dd6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b840d508d99032c241e199ce76f0d3c6') in 0.0100659 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingAttack_NE.anim
+  artifactKey: Guid(049528609910e8245a2884977d18cf98) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingAttack_NE.anim using Guid(049528609910e8245a2884977d18cf98) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '196985d96d4b7564aa408b66ba878c3b') in 0.0103181 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Green/MotherSlimeGreenIdle_NW.anim
+  artifactKey: Guid(6e1ad696fcce3004f902ee0a91837ec2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Green/MotherSlimeGreenIdle_NW.anim using Guid(6e1ad696fcce3004f902ee0a91837ec2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7b474ff0f863c5fb54f1bbbdd64b6596') in 0.0093219 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters/Green Slime.prefab
+  artifactKey: Guid(eeaffde3550e45341aa27b5320edb06a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters/Green Slime.prefab using Guid(eeaffde3550e45341aa27b5320edb06a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c24aa347cd05507c7d58ac6a1f1c1b95') in 0.0213803 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearJump_SW.anim
+  artifactKey: Guid(9a3c2c00cadb45d46b60ee4399727b77) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearJump_SW.anim using Guid(9a3c2c00cadb45d46b60ee4399727b77) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '01b9ce6f60f2b3bbbf74394bf356b1d2') in 0.0076686 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinAttack_NE.anim
+  artifactKey: Guid(7107e3487eda59844a87b524192c934a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinAttack_NE.anim using Guid(7107e3487eda59844a87b524192c934a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0d72ba2d3f780876fcfd40adc84af006') in 0.0147313 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollDmg_SE.anim
+  artifactKey: Guid(15061d95dd4104d4ea48dd0a73137df2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollDmg_SE.anim using Guid(15061d95dd4104d4ea48dd0a73137df2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a13c903b60bd3df3f4d19bede724102f') in 0.0119538 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin
+  artifactKey: Guid(f61285bc803b8ca4282aca98ebc33a05) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin using Guid(f61285bc803b8ca4282aca98ebc33a05) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '983d3149f11cb688731479ba95358ca0') in 0.0068384 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Idle.png
+  artifactKey: Guid(fe5ac4342d61a4f4b9d77bdfa32e8f46) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Idle.png using Guid(fe5ac4342d61a4f4b9d77bdfa32e8f46) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '27c9da5a7f323ca9802d75590327aa32') in 0.2688402 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 67
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs
+  artifactKey: Guid(5c760442a8c5ae44480f370e96adce0d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs using Guid(5c760442a8c5ae44480f370e96adce0d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'bd27c1f2ade0e597b19c092cc925ec60') in 0.0065318 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiIdle_SE.anim
+  artifactKey: Guid(3a6516b5a4e345f41b091f43baa84837) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiIdle_SE.anim using Guid(3a6516b5a4e345f41b091f43baa84837) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '147488727d124dfc099fd0c1c4e199d9') in 0.0129004 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_JumpAttack_NE.anim
+  artifactKey: Guid(db6bb040b4b44bb409e4a84701e85634) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_JumpAttack_NE.anim using Guid(db6bb040b4b44bb409e4a84701e85634) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f32069069a7107a93cdaf1cee9f31347') in 0.0108837 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinWalk.png
+  artifactKey: Guid(9927284a6829a5b43ab73c5f568d6125) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinWalk.png using Guid(9927284a6829a5b43ab73c5f568d6125) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'cedd7a109ab1a6e00ca58200304f4a23') in 0.1172706 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Trasgo/Trasgo_SpinDie.png
+  artifactKey: Guid(3c35be7b03b84da44b89784cff222e25) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Trasgo/Trasgo_SpinDie.png using Guid(3c35be7b03b84da44b89784cff222e25) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '809da31c7c940147cd92a7023fefd0ff') in 0.0596226 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human
+  artifactKey: Guid(b0ec877d8eb1ee046998862892e9ecb6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human using Guid(b0ec877d8eb1ee046998862892e9ecb6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '214a654b7d74902ab25eddb016a520ad') in 0.008643 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoBaseWalk_SW.anim
+  artifactKey: Guid(bcaa7548e586c7f489e9b14a3a7f8246) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoBaseWalk_SW.anim using Guid(bcaa7548e586c7f489e9b14a3a7f8246) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '4b8b7ac1e69e628cc06a2a8fb5d35d1d') in 0.0153513 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000060 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Blue/BlueSlime_Dmg_NW.anim
+  artifactKey: Guid(ab65635bdee855743a0c08c51ca0de8b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Blue/BlueSlime_Dmg_NW.anim using Guid(ab65635bdee855743a0c08c51ca0de8b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '23d4d19cbaa93ae5e53be90c2fd3fdc5') in 0.0132675 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Jump_NE.anim
+  artifactKey: Guid(65c115e9cc0df66459185049e94c1a74) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Jump_NE.anim using Guid(65c115e9cc0df66459185049e94c1a74) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a9766c2317e1e22214fffb176d83457c') in 0.0108359 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearDmg_SW.anim
+  artifactKey: Guid(bf9bba5c5ef75d942b755773ab70fe6c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearDmg_SW.anim using Guid(bf9bba5c5ef75d942b755773ab70fe6c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'bdc96607eef351c648e151d060ee7f50') in 0.0132592 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur/MinotaurDmg_SW.anim
+  artifactKey: Guid(d891b2d9a8d0b4d49b4d0828dcd45ede) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur/MinotaurDmg_SW.anim using Guid(d891b2d9a8d0b4d49b4d0828dcd45ede) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '680fcd95a923a1264ff0efb67c385aaf') in 0.0131776 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_Dmg_NE.anim
+  artifactKey: Guid(558b245d6f4c51d4b8a03fb5c79a4e68) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_Dmg_NE.anim using Guid(558b245d6f4c51d4b8a03fb5c79a4e68) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e64fa38fbcfdc304fd69bc0cc477105f') in 0.0242953 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Centaur/Centaur_Walk.png
+  artifactKey: Guid(3667f7a086f06c04987f1bcbd024abf1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Centaur/Centaur_Walk.png using Guid(3667f7a086f06c04987f1bcbd024abf1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '22a4d57f2ffd156c0ef094743138c3ca') in 0.077416 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopAttack_SE.anim
+  artifactKey: Guid(03b699ba5241d9b4195f22d9a1708be7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopAttack_SE.anim using Guid(03b699ba5241d9b4195f22d9a1708be7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'bf427374cc00818c0f68084cfebc7ae1') in 0.015677 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeDie.png
+  artifactKey: Guid(f176a6f9641b17446b90cc8583b87f53) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeDie.png using Guid(f176a6f9641b17446b90cc8583b87f53) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '67ff3a13b4f66cee2f9cdb150380ff7c') in 0.0570391 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanWalk_SE.anim
+  artifactKey: Guid(afa739bbb85292d44911a1091858c372) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanWalk_SE.anim using Guid(afa739bbb85292d44911a1091858c372) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a62192f224921c28a4a7b85975eb1f12') in 0.0118902 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanWalk.png
+  artifactKey: Guid(4c22395747f62d84e8c7c5e2ac027e1a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanWalk.png using Guid(4c22395747f62d84e8c7c5e2ac027e1a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8196987ee91040987963aca6c6fa80c8') in 0.0667444 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green
+  artifactKey: Guid(fba5ea9f09d577e47bd7e98de54d0867) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green using Guid(fba5ea9f09d577e47bd7e98de54d0867) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1a38087f38a3d5a99315267550ab91d3') in 0.0067216 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000107 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/Wargo_AnimatorOverrideController.overrideController
+  artifactKey: Guid(f5d43929c14f17444ac112fdde561d90) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/Wargo_AnimatorOverrideController.overrideController using Guid(f5d43929c14f17444ac112fdde561d90) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b8c3c7a760ed286f8f2190a46e821ff6') in 0.0330984 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 63
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Evil Snowman
+  artifactKey: Guid(8ebc6139af186e04c9f6f3929a7c1046) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Evil Snowman using Guid(8ebc6139af186e04c9f6f3929a7c1046) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '32c0af8eb9f7a20bc3d39abca81648e7') in 0.0074106 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Dmg_SW.anim
+  artifactKey: Guid(ff0ebc9de8e64e84b93a5b03d657b9c9) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Dmg_SW.anim using Guid(ff0ebc9de8e64e84b93a5b03d657b9c9) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '46aa08f73670c369c1a8031991e181c4') in 0.0096532 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Mother Slime/Green/Minifantasy_CreaturesShadowMotherSlimeDmg.png
+  artifactKey: Guid(934baf093b6319d4c9cc7fb08e3d0e9f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Mother Slime/Green/Minifantasy_CreaturesShadowMotherSlimeDmg.png using Guid(934baf093b6319d4c9cc7fb08e3d0e9f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f14f34b0ad8d849f619b0e66b9683899') in 0.078716 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonIdle_SE.anim
+  artifactKey: Guid(8a8452f91f475d340ab035584cf432c0) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonIdle_SE.anim using Guid(8a8452f91f475d340ab035584cf432c0) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '67c7f30018c4b1333b6eb09a1d9b2102') in 0.0095557 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Bat/BatShadow_Attack.png
+  artifactKey: Guid(94bd386f12e941541a294e75dcd1cb47) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Bat/BatShadow_Attack.png using Guid(94bd386f12e941541a294e75dcd1cb47) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fbdcf6d480dc951fd46644fc97ef1d6e') in 0.0710709 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scripts/CTR_ShadowSwitch.cs
+  artifactKey: Guid(ad359971f8177b54fbbae75c9ee1634a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scripts/CTR_ShadowSwitch.cs using Guid(ad359971f8177b54fbbae75c9ee1634a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fbdce4036e722952ab80c158e07acf3e') in 0.009129 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfWalk_SW.anim
+  artifactKey: Guid(57b639f7f311b7648a13bf3c7ae5ee65) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfWalk_SW.anim using Guid(57b639f7f311b7648a13bf3c7ae5ee65) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'aae371f901140812a32bb217ce4fedf2') in 0.0113347 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_Dmg_SE.anim
+  artifactKey: Guid(87681700fe5c96c40827cf92d9c1498b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_Dmg_SE.anim using Guid(87681700fe5c96c40827cf92d9c1498b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '68ba6b132e84ece2ecdc804e2121988c') in 0.0088436 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Human, Elf, Orc, Goblin, Halfling/Minifantasy_CreaturesShadowHumanoidWalk.png
+  artifactKey: Guid(2e64277a4cb81074abb2492aebf33139) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Human, Elf, Orc, Goblin, Halfling/Minifantasy_CreaturesShadowHumanoidWalk.png using Guid(2e64277a4cb81074abb2492aebf33139) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e614ffb43ceb1e8fe0949ec6302f8738') in 0.0636437 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys
+  artifactKey: Guid(4a7872bfc9c9eba409ebb661b6577dc2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys using Guid(4a7872bfc9c9eba409ebb661b6577dc2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ca611d1b68305b12598793245d1e9ada') in 0.0063507 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters/Wildfire.prefab
+  artifactKey: Guid(e3aceb0d879e7c041ab51ff1d861678e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters/Wildfire.prefab using Guid(e3aceb0d879e7c041ab51ff1d861678e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'afe9f035a2bee2a9c1b2024cdcdd69d1') in 0.0133948 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters
+  artifactKey: Guid(acefe3998bb24b94d8f7291ecc647fde) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters using Guid(acefe3998bb24b94d8f7291ecc647fde) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3fdddfa0fe94457db01bfcb9a371b0b1') in 0.0058683 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime
+  artifactKey: Guid(454168d2a6f5c8646a3fa50427ad7926) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime using Guid(454168d2a6f5c8646a3fa50427ad7926) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b3355d244ee2b04f44d12eb6f1443d9b') in 0.1539551 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Pumpkin_Horror/PumpkinHorror_BaseDmg_SE.anim
+  artifactKey: Guid(67fd0cfe8ccfc2343846e8995ba98aac) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Pumpkin_Horror/PumpkinHorror_BaseDmg_SE.anim using Guid(67fd0cfe8ccfc2343846e8995ba98aac) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'dc8d25c4c569dca81e4cf04794c20ccc') in 0.0078144 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonWalk_NE.anim
+  artifactKey: Guid(a374d9e0a14dd1b45a57db14cf16c8a0) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonWalk_NE.anim using Guid(a374d9e0a14dd1b45a57db14cf16c8a0) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd9fc7690fbabb0df5140cdbe6cab0413') in 0.0114649 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo
+  artifactKey: Guid(f0d0c70a7500ef34084c4daf6443ce7a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo using Guid(f0d0c70a7500ef34084c4daf6443ce7a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'daeb1dfbd355e9c18921723451f07905') in 0.0078028 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Yeti/Minifantasy_CreaturesYetiDie.png
+  artifactKey: Guid(26625c6acd3729e49860a01496159dae) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Yeti/Minifantasy_CreaturesYetiDie.png using Guid(26625c6acd3729e49860a01496159dae) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f9b05916583dd7691e8e296d72f067c8') in 0.077654 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Amazon/Minifantasy_CreaturesAmazonIdle.png
+  artifactKey: Guid(ce977cdff80b5684e92a11e50e90d685) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Amazon/Minifantasy_CreaturesAmazonIdle.png using Guid(ce977cdff80b5684e92a11e50e90d685) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '022fe70c372be9b78dae9838228eef03') in 0.2544668 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 67
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf
+  artifactKey: Guid(318e0cfe452963542a4b3f26072d8ecd) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf using Guid(318e0cfe452963542a4b3f26072d8ecd) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0f515da89d1b02db710d20523144b53a') in 0.0066735 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/Wolf/Wolf_Die.png
+  artifactKey: Guid(ccf254a667e943c468c271d0bdd35011) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/Wolf/Wolf_Die.png using Guid(ccf254a667e943c468c271d0bdd35011) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5c8b061d8373d167b5b9fa329da10d5b') in 0.1126755 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopAttack_NE.anim
+  artifactKey: Guid(963a897141bff6143bb56d9bb798da50) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopAttack_NE.anim using Guid(963a897141bff6143bb56d9bb798da50) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '91fbe6a93ec697ad17d1bb4c4a1ad384') in 0.0144155 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_Attack_SE.anim
+  artifactKey: Guid(e0f3f7cf0451d1b498651fa734bbfab0) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_Attack_SE.anim using Guid(e0f3f7cf0451d1b498651fa734bbfab0) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '28f955cd2e15009d7bd25a8566099195') in 0.0175568 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Beasts
+  artifactKey: Guid(eda3a145e8413024a85dd21f59fd4ee2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Beasts using Guid(eda3a145e8413024a85dd21f59fd4ee2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '09a7904e033855a576ae053f16832993') in 0.0061916 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoJump_SE.anim
+  artifactKey: Guid(e941e86e27b90a64387c1eafc6da5829) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoJump_SE.anim using Guid(e941e86e27b90a64387c1eafc6da5829) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ace18d90a7795a92497a15ecb6b1878f') in 0.0100797 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfJump_SE.anim
+  artifactKey: Guid(cb376bdde4f18434882410071fb176a1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfJump_SE.anim using Guid(cb376bdde4f18434882410071fb176a1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '4bd795deb75981126e15d718821cadda') in 0.0112188 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_AnimatorOverrideController.overrideController
+  artifactKey: Guid(9a16bc52bb021c24a869ff50b707a36b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_AnimatorOverrideController.overrideController using Guid(9a16bc52bb021c24a869ff50b707a36b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c233215b669adc9abc53fd1340b98537') in 0.027336 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 50
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Dmg_NE.anim
+  artifactKey: Guid(1f4760628b8952f4b955c46afa128f9c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Dmg_NE.anim using Guid(1f4760628b8952f4b955c46afa128f9c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2165a92efa6a09f818eec7003a5acc60') in 0.0114717 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinIdle.png
+  artifactKey: Guid(4c16e5972ac5d744894dc6faa29929ef) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinIdle.png using Guid(4c16e5972ac5d744894dc6faa29929ef) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ea4455c1bc188b6ae683309065e1a012') in 0.2155397 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 67
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinJump_SW.anim
+  artifactKey: Guid(1f224c9cbffba7a429cdb779e8c65a1c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinJump_SW.anim using Guid(1f224c9cbffba7a429cdb779e8c65a1c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '9523929e36761ff4547c30d0263957a3') in 0.0120287 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_Dmg_NW.anim
+  artifactKey: Guid(66accd5a7a5b1ad4ebdfa0a634901971) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_Dmg_NW.anim using Guid(66accd5a7a5b1ad4ebdfa0a634901971) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6623dfba4f519540a518b329fa45d277') in 0.0129502 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Attack_SW.anim
+  artifactKey: Guid(0ec85c06699a61643bff69e8215c9414) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Attack_SW.anim using Guid(0ec85c06699a61643bff69e8215c9414) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '10b5835eb443409665c22b42b21dde55') in 0.0089069 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkJump_NW.anim
+  artifactKey: Guid(a4f9fd24518231242a7cb1ed9353882c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkJump_NW.anim using Guid(a4f9fd24518231242a7cb1ed9353882c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2ed017c8e5ede2be89380561c41cc6e1') in 0.0084155 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopWalk.png
+  artifactKey: Guid(cdaf32f1aa5e2bd42adf4d5ce1328c8a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopWalk.png using Guid(cdaf32f1aa5e2bd42adf4d5ce1328c8a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '603e69c23e45b374a79d7ed1720775ce') in 0.1007309 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Centaur/Minifantasy_CreaturesShadowCentaurWalk.png
+  artifactKey: Guid(6e1411777c5582b4d9c213dcf74574a2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Centaur/Minifantasy_CreaturesShadowCentaurWalk.png using Guid(6e1411777c5582b4d9c213dcf74574a2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0f393e4669d3cd0c214fe5c3dd9e8baf') in 0.0614833 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonIdle.png
+  artifactKey: Guid(81496796a510a154a928046b898a195e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonIdle.png using Guid(81496796a510a154a928046b898a195e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fa7d9165fb7b3ab4fd2472705d192753') in 0.0622514 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters
+  artifactKey: Guid(80abd8623967a1847b7f849401fd7414) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters using Guid(80abd8623967a1847b7f849401fd7414) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '325e36698e4f387adfc6b59d07187304') in 0.0075504 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000078 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBeardIdle_SW.anim
+  artifactKey: Guid(a16673bbaf338cb4ba176261807e5996) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBeardIdle_SW.anim using Guid(a16673bbaf338cb4ba176261807e5996) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b418e7a04a2bc49f0329d691b15e0da4') in 0.0118865 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Yeti/Minifantasy_CreaturesYetiWalk.png
+  artifactKey: Guid(48ffeb886f2c1f7489cbb05f37bb01fa) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Yeti/Minifantasy_CreaturesYetiWalk.png using Guid(48ffeb886f2c1f7489cbb05f37bb01fa) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0fda2be339a94891e4f299bd0a474d12') in 0.1180953 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Wildfire/Wildfire_Die.anim
+  artifactKey: Guid(b0add55884f71de4b896d420d8fb7c0a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Wildfire/Wildfire_Die.anim using Guid(b0add55884f71de4b896d420d8fb7c0a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '736d2bd852da29ec12e430de514ff50e') in 0.0155439 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur
+  artifactKey: Guid(f2491021ccc88ff45978fc517c187fdd) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur using Guid(f2491021ccc88ff45978fc517c187fdd) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ab72ef053a56796ed38e2425f94f28e1') in 0.0089137 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeJumpAttack_SW.anim
+  artifactKey: Guid(991522bc600fa8441ae6abe67905edae) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeJumpAttack_SW.anim using Guid(991522bc600fa8441ae6abe67905edae) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a856c08991dbe257fc53f67732fa7ac0') in 0.0162852 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanJump_SW.anim
+  artifactKey: Guid(3e2699742d1951d47b86b5ae3ca714a1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanJump_SW.anim using Guid(3e2699742d1951d47b86b5ae3ca714a1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0626a1fc50e81ee629049835b61da511') in 0.0156059 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopAttack_NW.anim
+  artifactKey: Guid(9c3347e040dfc1f47a2251054a0f72c6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopAttack_NW.anim using Guid(9c3347e040dfc1f47a2251054a0f72c6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6ab923b834a3dea1aa9cc5aa5f8b5745') in 0.0465379 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollAttack_SE.anim
+  artifactKey: Guid(a3f2c39ad4d50e74ea1e806c30385361) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollAttack_SE.anim using Guid(a3f2c39ad4d50e74ea1e806c30385361) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3f88bab9119478e7f1d63227d930382d') in 0.0171343 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoDmg_NE.anim
+  artifactKey: Guid(a19435e8dd47d324dbb39e5d002327d2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoDmg_NE.anim using Guid(a19435e8dd47d324dbb39e5d002327d2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '45320be2fe750502128e03d08f0d370e') in 0.0131094 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Pumpkin_Horror/PumpkinHorror_BaseAttack.png
+  artifactKey: Guid(0589492e84e99f146bf489a3cd4cca9f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Pumpkin_Horror/PumpkinHorror_BaseAttack.png using Guid(0589492e84e99f146bf489a3cd4cca9f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '46bc8f4c8fc693726d0676f905af5b2a') in 0.0825044 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 22
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur/MinotaurJump_SE.anim
+  artifactKey: Guid(1ced01c7d5107964191a94ebff309c24) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur/MinotaurJump_SE.anim using Guid(1ced01c7d5107964191a94ebff309c24) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3d7309c5f6cb90b7ed3c6d53910ca4af') in 0.0142381 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfAttack.png
+  artifactKey: Guid(7b4eae179fe47e148b1e6cb531cce2ae) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfAttack.png using Guid(7b4eae179fe47e148b1e6cb531cce2ae) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3a0f407a609704f35a2b40b7ab90d690') in 0.0732506 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Pumpkin_Horror/PumpkinHorror_BaseDmg_NE.anim
+  artifactKey: Guid(bcc7083f59f7d6342af29047aa2259a4) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Pumpkin_Horror/PumpkinHorror_BaseDmg_NE.anim using Guid(bcc7083f59f7d6342af29047aa2259a4) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '79221757e7b38617863d3cd6f9412d6f') in 0.0097561 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkAttack_SW.anim
+  artifactKey: Guid(7edf5bbebc21a6d4092e8572459a288b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkAttack_SW.anim using Guid(7edf5bbebc21a6d4092e8572459a288b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd510ab3ef01bc12fcbd7f0ebd6d8c225') in 0.0137467 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Elf/ElfJump_SE.anim
+  artifactKey: Guid(88bc360404edf6840b1cfc12a576a688) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Elf/ElfJump_SE.anim using Guid(88bc360404edf6840b1cfc12a576a688) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '488895203571668f63c08bf92fc9de1b') in 0.0112679 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinIdle_SW.anim
+  artifactKey: Guid(7271d832fb9aea844900428a678590aa) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinIdle_SW.anim using Guid(7271d832fb9aea844900428a678590aa) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '989315d3d01991ef273dc144e0c34338') in 0.0114545 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Centaur/Minifantasy_CreaturesShadowCentaurDmg.png
+  artifactKey: Guid(0361729ac61bfb24fbab6d6ca1dcbb93) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Centaur/Minifantasy_CreaturesShadowCentaurDmg.png using Guid(0361729ac61bfb24fbab6d6ca1dcbb93) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '4c3fbd57e5c836b3dc7f28e4804d6332') in 0.087752 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Wolf/WolfShadow_Attack.png
+  artifactKey: Guid(20121037be2d67f479a11e64cc047718) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Wolf/WolfShadow_Attack.png using Guid(20121037be2d67f479a11e64cc047718) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '07b69f5abc5d70c2523548d311cb3425') in 0.0803546 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoIdle_SW.anim
+  artifactKey: Guid(456bca94f18a44246a133d5026fc464d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoIdle_SW.anim using Guid(456bca94f18a44246a133d5026fc464d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '90226440c7ddd29541d69717f1d85546') in 0.0262159 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_Idle_NW.anim
+  artifactKey: Guid(25708a31987c9654baedd7312e7767ec) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_Idle_NW.anim using Guid(25708a31987c9654baedd7312e7767ec) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '66ebbda76193900ec85665e48ccef171') in 0.0148314 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scenes/Demo - Animated Creatures.unity
+  artifactKey: Guid(72d21de280ce1454a8576451bc41bc57) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scenes/Demo - Animated Creatures.unity using Guid(72d21de280ce1454a8576451bc41bc57) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0ee263387b73df2b1dfe44c05543437b') in 0.0272365 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearAttack_NE.anim
+  artifactKey: Guid(b1b7d4790957b884eb511a13f1cda370) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearAttack_NE.anim using Guid(b1b7d4790957b884eb511a13f1cda370) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5ad549b42fd188cbfdf2903ea5d66ff1') in 0.0367213 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoDmg_NW.anim
+  artifactKey: Guid(0ef7ee5feb6cf3a4f9abb2497c7fdff7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoDmg_NW.anim using Guid(0ef7ee5feb6cf3a4f9abb2497c7fdff7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '229e59b1ff6a28aa37d5ca39f8ddec56') in 0.0107393 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeJumpAttack_NE.anim
+  artifactKey: Guid(8001636b5a3855e40b217271c0427a67) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeJumpAttack_NE.anim using Guid(8001636b5a3855e40b217271c0427a67) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'cf968ca2fe62b34d7f46f959b196bb3a') in 0.0101599 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinJump.png
+  artifactKey: Guid(8154bd0dd0a769d42813c1a355d1842b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinJump.png using Guid(8154bd0dd0a769d42813c1a355d1842b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '381b6b8c6ceee452a87135031079d49e') in 0.0545282 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanChargedAttack.png
+  artifactKey: Guid(4e593cec3f8922840ac3ee3f3dba689c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanChargedAttack.png using Guid(4e593cec3f8922840ac3ee3f3dba689c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ccbaabb6cc5020b98f14d196bb552aa5') in 0.0602682 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Bat/Bat_FlyIdle_NW.anim
+  artifactKey: Guid(167e36bf516de1e4daad0b2b400a0ece) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Bat/Bat_FlyIdle_NW.anim using Guid(167e36bf516de1e4daad0b2b400a0ece) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '86d9ba9d4ad03ec60eb6ffb1288d408f') in 0.0113168 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Jump.png
+  artifactKey: Guid(575b5a188dbf3d14a9f86e4ed1b64e96) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Jump.png using Guid(575b5a188dbf3d14a9f86e4ed1b64e96) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c4fb69fddd8531c85aee7757707480cf') in 0.0658576 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio
+  artifactKey: Guid(247b2ddc01fdee947a91d0b407ee286d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio using Guid(247b2ddc01fdee947a91d0b407ee286d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '57f6da5c3080d35c94607c7f1ffeee18') in 0.0124013 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Attack_NW.anim
+  artifactKey: Guid(5367f97ea3d57c6458a02078f5c6846c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Attack_NW.anim using Guid(5367f97ea3d57c6458a02078f5c6846c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '480efab2c7ef577de85d97321047f36a') in 0.00913 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_ChargedAttack_SE.anim
+  artifactKey: Guid(071380776881d034e82f4cc9a5845bfc) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Orc/Orc_ChargedAttack_SE.anim using Guid(071380776881d034e82f4cc9a5845bfc) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0eafe2c254b6632cac5cef1be2e42be1') in 0.0108327 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfIdle_NW.anim
+  artifactKey: Guid(260acb01f7609fe498540bd80206d14a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfIdle_NW.anim using Guid(260acb01f7609fe498540bd80206d14a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0b96d45436e78ad8a52cc75776e48cde') in 0.0101933 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Minotaur/Minifantasy_CreaturesMinotaurJump.png
+  artifactKey: Guid(8ffad5561d4c7f74ab3491e8da087db8) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Minotaur/Minifantasy_CreaturesMinotaurJump.png using Guid(8ffad5561d4c7f74ab3491e8da087db8) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '87b585fa052078a615e6e3d697af10ce') in 0.0664063 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk
+  artifactKey: Guid(1f9793ee593d17844abcc270175ee4ed) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk using Guid(1f9793ee593d17844abcc270175ee4ed) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '03c9c2895c80d294a0f0622df8d63a00') in 0.0057704 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Dmg_SW.anim
+  artifactKey: Guid(943fed029edced34fbde5e0461ce5463) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Dmg_SW.anim using Guid(943fed029edced34fbde5e0461ce5463) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1177ab0e2f21a43263cffbe767b6ec02') in 0.0103338 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Wildfire/Minifantasy_CreaturesWildfireAnimations.png
+  artifactKey: Guid(a975180f06245fd40b424fc64496c3ea) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Wildfire/Minifantasy_CreaturesWildfireAnimations.png using Guid(a975180f06245fd40b424fc64496c3ea) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5edea1bc26d774a4af7e765b568199ce') in 0.0169107 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_Die_SE.anim
+  artifactKey: Guid(85f482ee011bc6e41b933e724e0aec5c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_Die_SE.anim using Guid(85f482ee011bc6e41b933e724e0aec5c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'eb8e470fc0f81c7da8f7eb820e71b315') in 0.0103718 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfDmg_SE.anim
+  artifactKey: Guid(cff7ce0fc94d8d0438680fae00c8e537) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfDmg_SE.anim using Guid(cff7ce0fc94d8d0438680fae00c8e537) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a392760821b227065984370e4b618be7') in 0.0118818 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeDmg.png
+  artifactKey: Guid(8ba8a02f0a1abe54c848e74f968d48d8) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeDmg.png using Guid(8ba8a02f0a1abe54c848e74f968d48d8) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a456d00df53c787382b928fa553a7ffd') in 0.065412 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoAttack_NW.anim
+  artifactKey: Guid(4d08d3bf87d53e54fb4ca36a18342b72) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoAttack_NW.anim using Guid(4d08d3bf87d53e54fb4ca36a18342b72) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8b6ddc883b9e31cc54be14070fa11d4a') in 0.0137526 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/Bat/Minifantasy_CreaturesBatAnimations.png
+  artifactKey: Guid(2acdd30c5e1d64a4c8fe329cc83bf322) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/Bat/Minifantasy_CreaturesBatAnimations.png using Guid(2acdd30c5e1d64a4c8fe329cc83bf322) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '006558313b8887b8e5aab6be07ae9680') in 0.0274365 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Troll/Minifantasy_CreaturesTrollJump.png
+  artifactKey: Guid(b91b687370db02445b249b7aa365eb16) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Troll/Minifantasy_CreaturesTrollJump.png using Guid(b91b687370db02445b249b7aa365eb16) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ebf4a0811a734df7207b63d4dd66b8dd') in 0.1328329 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Zombie_Dmg.png
+  artifactKey: Guid(f8dc26d1457b5fa4c8f3f7fb204ce6d5) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Zombie_Dmg.png using Guid(f8dc26d1457b5fa4c8f3f7fb204ce6d5) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '26d4bb70d69ce98a00a437a4f050ce02') in 0.0740616 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearJump_NW.anim
+  artifactKey: Guid(790d22d31f667a84d8a4c8010a1947d1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearJump_NW.anim using Guid(790d22d31f667a84d8a4c8010a1947d1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2244bcb1a65ad40addcdfb1204a01c79') in 0.0124878 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingAttack_SW.anim
+  artifactKey: Guid(14e6385742055af4e8d0250d424d3f7e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingAttack_SW.anim using Guid(14e6385742055af4e8d0250d424d3f7e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e3befc4d817ebae865fc021d96ea10fb') in 0.0093843 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Green_Mother_Slime/Minifantasy_CreaturesMotherSlimeGreenIdle.png
+  artifactKey: Guid(3e5b70e94679dd6488a2bd5ce4014442) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Green_Mother_Slime/Minifantasy_CreaturesMotherSlimeGreenIdle.png using Guid(3e5b70e94679dd6488a2bd5ce4014442) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8f00561c2216451cec457f92042af832') in 0.172495 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 35
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfJump_SW.anim
+  artifactKey: Guid(204c75ff8635df443996b481394774c5) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf/DwarfJump_SW.anim using Guid(204c75ff8635df443996b481394774c5) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6929049fcf80e8c1a65055e2b8a47a7c') in 0.0130219 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Bat/BatShadow_Die.png
+  artifactKey: Guid(48d1a9356f9acbe4aa408d5b9a954dd1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Bat/BatShadow_Die.png using Guid(48d1a9356f9acbe4aa408d5b9a954dd1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8214b6fcfce6d7097348d1110c6cef36') in 0.0701832 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoJump_SW.anim
+  artifactKey: Guid(06a39e1772a7a9c48a86d24fbeaf31bc) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Wargo/WargoJump_SW.anim using Guid(06a39e1772a7a9c48a86d24fbeaf31bc) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '24632a6284c6c081bf754b6c5d4e617c') in 0.0120096 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue
+  artifactKey: Guid(d3cb411b7488e1046a85c57947a8b9c7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue using Guid(d3cb411b7488e1046a85c57947a8b9c7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd37f04958d1454ca87110b4211f3b567') in 0.0068517 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingIdle_SW.anim
+  artifactKey: Guid(ed12b4e4c0b66fd42b3e5c17f9528d0b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingIdle_SW.anim using Guid(ed12b4e4c0b66fd42b3e5c17f9528d0b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '81d6ebb3b3f9fd3487d61246fb8b31cc') in 0.0228963 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_JumpAttack_NW.anim
+  artifactKey: Guid(aa3c698d4998efb499b20ea0ffe0ada7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Green/SlimeGreen_JumpAttack_NW.anim using Guid(aa3c698d4998efb499b20ea0ffe0ada7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fb38bc1828f87092a5b9cc43d0ea8733') in 0.0500444 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Jump_SW.anim
+  artifactKey: Guid(39dd57ac9a2b03647991235fb1d5f1ac) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Jump_SW.anim using Guid(39dd57ac9a2b03647991235fb1d5f1ac) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '41ac2c699ba18524ee5089f169c3be0c') in 0.0134795 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfWalk.png
+  artifactKey: Guid(8e8aae593c74d704687cdd66aae5bf9f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfWalk.png using Guid(8e8aae593c74d704687cdd66aae5bf9f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '908c0b3557c70d3c443e6556e871c1ba') in 0.076568 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur/MinotaurDmg_NE.anim
+  artifactKey: Guid(abac96a03ac52204eb7017e5522ffced) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Minotaur/MinotaurDmg_NE.anim using Guid(abac96a03ac52204eb7017e5522ffced) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '33fff3f173aa55cea735ea6160d0fdb9') in 0.0110125 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollAttack_NE.anim
+  artifactKey: Guid(d8d94f33ce4a718469ff1ebe0e23d8f6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollAttack_NE.anim using Guid(d8d94f33ce4a718469ff1ebe0e23d8f6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8bbca98a0974c73d725366abd9295bf9') in 0.0081844 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Yeti/Minifantasy_CreaturesYetiAnimations.png
+  artifactKey: Guid(b76e58f4559736647ad95d9b01f1fd36) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Yeti/Minifantasy_CreaturesYetiAnimations.png using Guid(b76e58f4559736647ad95d9b01f1fd36) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3f8123b0ac60502e866c768180dde465') in 0.0197021 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopJump.png
+  artifactKey: Guid(bbca71303f312934e844b820bf5fd5ea) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopJump.png using Guid(bbca71303f312934e844b820bf5fd5ea) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b335b7b3fcd7ebfd16154ae09a2d53b4') in 0.0984709 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkChargedAttack.png
+  artifactKey: Guid(6b043b2984aaac5499e9d92f9db0644b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkChargedAttack.png using Guid(6b043b2984aaac5499e9d92f9db0644b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f2601930a7f76e3fbf58dda43178f73c') in 0.0836158 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Minotaur/Minifantasy_CreaturesShadowMinotaurAttack.png
+  artifactKey: Guid(80f65d0d03f9bf24c97d78f1d7ac0299) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Minotaur/Minifantasy_CreaturesShadowMinotaurAttack.png using Guid(80f65d0d03f9bf24c97d78f1d7ac0299) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a06ce1b188fe3ec05a1d4e98438da128') in 0.1491012 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 34
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop
+  artifactKey: Guid(a679d3cda4e6cf342b93bd660ff009b2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop using Guid(a679d3cda4e6cf342b93bd660ff009b2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '08b8d6dc48f9fe9fe85152b4ffe69986') in 0.0076545 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopAttack.png
+  artifactKey: Guid(8d2a257649b589145a444ff01b5c6552) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Yeti, Troll, Minotaur And Cyclop/Minifantasy_CreaturesShadowTrollCyclopAttack.png using Guid(8d2a257649b589145a444ff01b5c6552) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b46eb68dbd7ceae853ffb6c21c6d8e22') in 0.0548993 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Skeleton/Minifantasy_CreaturesSkeletonAnimations.png
+  artifactKey: Guid(4d4c9be57ded0f340a2d19d1343ea95c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Skeleton/Minifantasy_CreaturesSkeletonAnimations.png using Guid(4d4c9be57ded0f340a2d19d1343ea95c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2a6ba55b66e7d6bf6c54891d7f369db0') in 0.0225871 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Walk_SE.anim
+  artifactKey: Guid(b1787512ea494954da4e6b0bc9ccc078) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Walk_SE.anim using Guid(b1787512ea494954da4e6b0bc9ccc078) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b06c84f43c9a15caa42cd7712da80b27') in 0.0081696 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Blue/BlueSlime_JumpAttack_SW.anim
+  artifactKey: Guid(43d110add0f74c846a2ce53acf0a7ef7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Blue/BlueSlime_JumpAttack_SW.anim using Guid(43d110add0f74c846a2ce53acf0a7ef7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5cf587dabf1c89932cd272cce36392e6') in 0.0083885 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Blue/BlueSlime_JumpAttack_NE.anim
+  artifactKey: Guid(af8a0be6d1115e542b21c0c91dbed665) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Slime/Blue/BlueSlime_JumpAttack_NE.anim using Guid(af8a0be6d1115e542b21c0c91dbed665) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1bb87b27564577fdf946c4002d159067') in 0.0120062 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiAttack_NE.anim
+  artifactKey: Guid(cab2f8330d08a634d9a4c643abd5262d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiAttack_NE.anim using Guid(cab2f8330d08a634d9a4c643abd5262d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd2e8e9626954d9c66c9bd9cdfb043427') in 0.0095135 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Pumpkin_Horror/PumpkinHorror_BaseWalk.png
+  artifactKey: Guid(00b710e254edb6840b5cab10af77cca4) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Pumpkin_Horror/PumpkinHorror_BaseWalk.png using Guid(00b710e254edb6840b5cab10af77cca4) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b6f18299c192abf1cc8c2b80bf7016df') in 0.0442698 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Walk_NE.anim
+  artifactKey: Guid(a36fdb8ec9f40744282a07a15c779388) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Walk_NE.anim using Guid(a36fdb8ec9f40744282a07a15c779388) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a52a8a85364b9019103e106ed2215d6f') in 0.0093349 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinJump_NW.anim
+  artifactKey: Guid(1e50238ce44df5040947ce6a88ae8909) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinJump_NW.anim using Guid(1e50238ce44df5040947ce6a88ae8909) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2977394425184fbb4cbb6b7c16a895df') in 0.0255447 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Minifantasy_CreaturesZombieAnimations.png
+  artifactKey: Guid(3c809f0642ecb8743b1e5659d8861a9a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Minifantasy_CreaturesZombieAnimations.png using Guid(3c809f0642ecb8743b1e5659d8861a9a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'dd0e85bd10c8040433e8a9e3d871d925') in 0.0604323 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Wolf/Wolf_Walk_SE.anim
+  artifactKey: Guid(9f075bb0c14221c47b0e95b2687801cf) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Wolf/Wolf_Walk_SE.anim using Guid(9f075bb0c14221c47b0e95b2687801cf) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '85c7bdeb551784e1d6df85887a8c3f89') in 0.0183453 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Zombie/Zombie_Dmg_NE.anim
+  artifactKey: Guid(005aa207a5c1bbe4c9f8a06af01f246e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Zombie/Zombie_Dmg_NE.anim using Guid(005aa207a5c1bbe4c9f8a06af01f246e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f8fc0a15e753de9d4f67d2f486de2986') in 0.0154546 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonAttack_SW.anim
+  artifactKey: Guid(444d979a150a06f48a25246378157070) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonAttack_SW.anim using Guid(444d979a150a06f48a25246378157070) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6c405f01b036dc3dc8f617409deb2508') in 0.0169822 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Troll/Minifantasy_CreaturesTrollDmg.png
+  artifactKey: Guid(b0466ac87eec1284cb2d6b04cf653b3f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Troll/Minifantasy_CreaturesTrollDmg.png using Guid(b0466ac87eec1284cb2d6b04cf653b3f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '626088ba76459b5b414035c56c9bb325') in 0.080255 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Zombie/Zombie_Walk_SW.anim
+  artifactKey: Guid(74253714bf8706e439761f60696a6053) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Zombie/Zombie_Walk_SW.anim using Guid(74253714bf8706e439761f60696a6053) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '51fdefda71981c559825be8eb7209829') in 0.014398 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Trasgo/Trasgo_Attack.png
+  artifactKey: Guid(17d24234374562c4c9e4a5b08ba91c36) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Trasgo/Trasgo_Attack.png using Guid(17d24234374562c4c9e4a5b08ba91c36) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '39248789fad193b2a60a2507864573cc') in 0.1117176 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000080 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf_Yellow_Beard/Minifantasy_CreaturesDwarfYellowBearSpinDie.png
+  artifactKey: Guid(7dcec8878fc708e438515f3cddbc4e0e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf_Yellow_Beard/Minifantasy_CreaturesDwarfYellowBearSpinDie.png using Guid(7dcec8878fc708e438515f3cddbc4e0e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0e45ba2182927dd834e924e3d603dce1') in 0.1082674 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime/SlimeGreen_Idle.png
+  artifactKey: Guid(5a1d371f1deadc44ebf8c2d7070c81d2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime/SlimeGreen_Idle.png using Guid(5a1d371f1deadc44ebf8c2d7070c81d2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '92551dcf3ea693f6225b1594d8d03931') in 0.1371038 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 35
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonDie.png
+  artifactKey: Guid(2b8f7f6e820299e4f94974459b7ee02a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonDie.png using Guid(2b8f7f6e820299e4f94974459b7ee02a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fd9e4c5c355668c5819e45c32f725c70') in 0.0418775 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_Attack_SE.anim
+  artifactKey: Guid(3e151cbffbaa8aa40902859b4eb9bd00) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_Attack_SE.anim using Guid(3e151cbffbaa8aa40902859b4eb9bd00) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ffda0ec31a23a9dd71919749429df27c') in 0.0143159 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime/SlimeGreen_Die.png
+  artifactKey: Guid(6e5421b12a4209d4189c0f4b09142ac7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime/SlimeGreen_Die.png using Guid(6e5421b12a4209d4189c0f4b09142ac7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f01969640d4db760ac8ee113026d799b') in 0.0503711 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000079 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiJump_NW.anim
+  artifactKey: Guid(df2bb426c9b3d4c49a0184b0fd485ff6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiJump_NW.anim using Guid(df2bb426c9b3d4c49a0184b0fd485ff6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '22958a5e3b1d5af57a9e39247b974839') in 0.0094035 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiWalk_SW.anim
+  artifactKey: Guid(f991a79af246cac4c8037f7b104e4a7e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiWalk_SW.anim using Guid(f991a79af246cac4c8037f7b104e4a7e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'af913a63268d03415f306b78d4d88701') in 0.0092291 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000078 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopDmg_SE.anim
+  artifactKey: Guid(4142b3081c624a5448759941abb355b4) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Cyclop/CyclopDmg_SE.anim using Guid(4142b3081c624a5448759941abb355b4) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '24b145d88a9e93926d568c0c6128a294') in 0.011758 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearWalk_SE.anim
+  artifactKey: Guid(edeae9a3bf79e314fa6ef81a16706a8c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBearWalk_SE.anim using Guid(edeae9a3bf79e314fa6ef81a16706a8c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '795001445ab3e17790b725e1cd332e51') in 0.0110614 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Wargo/Minifantasy_CreaturesWargoDie.png
+  artifactKey: Guid(913822b611c915e4993cd86133280761) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Wargo/Minifantasy_CreaturesWargoDie.png using Guid(913822b611c915e4993cd86133280761) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5ea76f3521be8fc3b7e34fd2211f3d47') in 0.0479015 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 12
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scenes
+  artifactKey: Guid(403bbacc90350c144a6bdffe8bde2bff) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scenes using Guid(403bbacc90350c144a6bdffe8bde2bff) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f20e1b748b19ca9c2227409b8b0a3ad1') in 0.0070625 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonDmg_SW.anim
+  artifactKey: Guid(1fcb073dc3f8d914ba535c4770c4187d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonDmg_SW.anim using Guid(1fcb073dc3f8d914ba535c4770c4187d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '567fb6d11a7911bda80464f4741df12e') in 0.0114809 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters/Evil Snowman.prefab
+  artifactKey: Guid(3418b26c860edee40b68b26fcb4dd125) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Prefabs/Monsters/Evil Snowman.prefab using Guid(3418b26c860edee40b68b26fcb4dd125) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2c2057b137a61bb978dfd06bf23b7b2a') in 0.0093364 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiWalk_NW.anim
+  artifactKey: Guid(9bb14bc9f0f66ba41a70a7324edf119c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Yeti/YetiWalk_NW.anim using Guid(9bb14bc9f0f66ba41a70a7324edf119c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1a34f075918141dfd98c2637d1d16f27') in 0.0088707 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000068 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonWalk_NW.anim
+  artifactKey: Guid(dffb0e5b022ceea42a85200fe8feade1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonWalk_NW.anim using Guid(dffb0e5b022ceea42a85200fe8feade1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '41a1f549e56e2eb50599bb71bd642689') in 0.0108391 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeIdle_NE.anim
+  artifactKey: Guid(7de74449d7d53e542b70756a3352ae58) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeIdle_NE.anim using Guid(7de74449d7d53e542b70756a3352ae58) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2bf9dada8136f0747af35dbe3774b94f') in 0.0110998 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanDmg_NE.anim
+  artifactKey: Guid(24dc64b071aeb624e9cef27a5c629276) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanDmg_NE.anim using Guid(24dc64b071aeb624e9cef27a5c629276) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'cc058a36aff1ab06195817cdd6145212') in 0.0101269 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonPumkinHorrorWalk.png
+  artifactKey: Guid(fa6401566655e34459ccdea70da51422) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonPumkinHorrorWalk.png using Guid(fa6401566655e34459ccdea70da51422) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c49e75cf0e95ea749d024829d1c28f8a') in 0.0447699 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingDmg.png
+  artifactKey: Guid(b8c48157d2c3f7d4c9c3f3bfe69c7f89) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingDmg.png using Guid(b8c48157d2c3f7d4c9c3f3bfe69c7f89) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2ddf889344f5366db732e4c20ea92f4d') in 0.1070581 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Dwarf, Trasgo/Minifantasy_CreaturesShadowDwarWalk.png
+  artifactKey: Guid(636b86e9b9e51c84780943c3b4a8535c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Dwarf, Trasgo/Minifantasy_CreaturesShadowDwarWalk.png using Guid(636b86e9b9e51c84780943c3b4a8535c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a8d7a3d4551f6e5e6eca8211db39d192') in 0.0678948 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Slime/Blue/Minifantasy_CreaturesShadowBlueSlimeJump.png
+  artifactKey: Guid(5b64997ee00ad4448b76949b522f1ffb) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Slime/Blue/Minifantasy_CreaturesShadowBlueSlimeJump.png using Guid(5b64997ee00ad4448b76949b522f1ffb) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '66bfb5998e5aeb412e3784547f60329f') in 0.0797378 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollJump_NW.anim
+  artifactKey: Guid(18185a53a67738e43b58c57dada2a80f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollJump_NW.anim using Guid(18185a53a67738e43b58c57dada2a80f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '32c8d8babb2c090ae5334cb71c1b196f') in 0.0099289 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000072 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Wolf/Wolf_Dmg_SE.anim
+  artifactKey: Guid(b71f6bce1127bcf41ab6b2f858269def) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Beasts/Wolf/Wolf_Dmg_SE.anim using Guid(b71f6bce1127bcf41ab6b2f858269def) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b317677e0ac252f41f9ba7e565e577d5') in 0.008504 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanAnimations.png
+  artifactKey: Guid(e48b8ae4e275bf5499655590880e15d1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanAnimations.png using Guid(e48b8ae4e275bf5499655590880e15d1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '699eec2ded9efe2dccbe163c0340b09b') in 0.0234116 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkIdle.png
+  artifactKey: Guid(f30eb3d321152404ea796cf002dc157a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkIdle.png using Guid(f30eb3d321152404ea796cf002dc157a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '9e49d2becf54d31fa9e4094e0711e216') in 0.3557359 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 67
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBeardIdle_NW.anim
+  artifactKey: Guid(4348866797050684886da3f9c2ca6d6b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Dwarf/Dwarf_Yellow_Beard/DwarfYellowBeardIdle_NW.anim using Guid(4348866797050684886da3f9c2ca6d6b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '08793ff527b05892aab13d6a09add2c7') in 0.0172497 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_Walk_SE.anim
+  artifactKey: Guid(56d154e9dac37574e9a22b0090495be5) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Skeleton/Skeleton_Walk_SE.anim using Guid(56d154e9dac37574e9a22b0090495be5) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f23a60a087f0508b62be4d9ee0ae620c') in 0.0128884 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Wolf/WolfShadow_Die.png
+  artifactKey: Guid(52f905ce436832e42be0cfc799d2deb2) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Wolf/WolfShadow_Die.png using Guid(52f905ce436832e42be0cfc799d2deb2) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0adf6244a612fc38f5bbb14e5d2e08ff') in 0.0630637 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Elf/Minifantasy_CreaturesElfChargedAttack.png
+  artifactKey: Guid(8595480a0b05edb4bb0d868ac2f6cf01) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Elf/Minifantasy_CreaturesElfChargedAttack.png using Guid(8595480a0b05edb4bb0d868ac2f6cf01) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f76eb38e9664dddaf5d205554e64cccf') in 0.1580545 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Idle_NW.anim
+  artifactKey: Guid(72dc003631b50fa43b2ce6f3d69f67d4) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Idle_NW.anim using Guid(72dc003631b50fa43b2ce6f3d69f67d4) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8a5b15e0cbadf4b27b186bbff64f7664') in 0.0109967 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinChargedAttack.anim
+  artifactKey: Guid(36a9733d7fa103b49a0fcce97daa0304) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Goblin/GoblinChargedAttack.anim using Guid(36a9733d7fa103b49a0fcce97daa0304) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c67997fc029856b199f0ebf2296b1fb8') in 0.0078488 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop/Minifantasy_CreaturesCyclopDie.png
+  artifactKey: Guid(8ae875077662c23459c090615993465d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop/Minifantasy_CreaturesCyclopDie.png using Guid(8ae875077662c23459c090615993465d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'cf47af7ad65a07f03fa61f8c76217147') in 0.0857861 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime
+  artifactKey: Guid(ee96050baa32984428a51aafcccbe762) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime using Guid(ee96050baa32984428a51aafcccbe762) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2eff424e35bbec24911ad81efe5a8700') in 0.0064723 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Jump_SW.anim
+  artifactKey: Guid(261c42b664cb44c46844de0a57c14c07) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Trasgo/Trasgo_Jump_SW.anim using Guid(261c42b664cb44c46844de0a57c14c07) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '066741b0d3dc006bdbb16b00ad7b05fa') in 0.0104128 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Wargo
+  artifactKey: Guid(8c42c63a19d05fa4faa78f41d6131139) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Wargo using Guid(8c42c63a19d05fa4faa78f41d6131139) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e2a6831b655f428d18e59d69726d8052') in 0.0070847 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonJump_SW.anim
+  artifactKey: Guid(c8f05c7f716f69240a58f4833b62e8cb) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human_Amazon/AmazonJump_SW.anim using Guid(c8f05c7f716f69240a58f4833b62e8cb) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '71d6fa92d4573118818f0a44c8e3554f') in 0.0113217 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Wildfire/Wildfire_Dmg.png
+  artifactKey: Guid(510ca90be0812fc49b5ea0e3378433a0) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Wildfire/Wildfire_Dmg.png using Guid(510ca90be0812fc49b5ea0e3378433a0) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f66562c0e34474d470261af8cf0764fd') in 0.0269363 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeIdle_NW.anim
+  artifactKey: Guid(50693070e3c50dd48a88c29267327cc6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeIdle_NW.anim using Guid(50693070e3c50dd48a88c29267327cc6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '85cf41431eb3916e2e9fc8a145a68964') in 0.0087531 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Elf
+  artifactKey: Guid(b6dda80589183654f8e80aa0d0598cd7) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Elf using Guid(b6dda80589183654f8e80aa0d0598cd7) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7952e717896b521f716bf31d905981f8') in 0.0064043 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/Troll_AnimatorOverrideController.overrideController
+  artifactKey: Guid(705d81afff437e14da036aa1e6b41807) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/Troll_AnimatorOverrideController.overrideController using Guid(705d81afff437e14da036aa1e6b41807) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3c26efdf8b5850fc2818e9a6876e721c') in 0.0297498 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 63
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonPumkinHorrorAttack.png
+  artifactKey: Guid(96b86be945d0167428926fba62d6c2f5) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Skeleton, Pumkin Horror/Minifantasy_CreaturesShadowSkeletonPumkinHorrorAttack.png using Guid(96b86be945d0167428926fba62d6c2f5) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '23b02eba34396f5f7de967023341847d') in 0.0814691 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 22
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeJumpAttack_SE.anim
+  artifactKey: Guid(fdd03e94089c17848b051fab36660470) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Mother_Slime/Blue/BlueMotherSlimeJumpAttack_SE.anim using Guid(fdd03e94089c17848b051fab36660470) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6b51ac62e7f682d6e1bc9e4115ff47a6') in 0.0102317 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingDmg_NE.anim
+  artifactKey: Guid(30675137de0228040b59e8358352b2b0) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Halfling/HalflingDmg_NE.anim using Guid(30675137de0228040b59e8358352b2b0) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e419200353d6a38d7b03dbbd4443817c') in 0.0078259 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollIdle_NW.anim
+  artifactKey: Guid(edec68d0753492143a96c547d00e813f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Big_Guys/Troll/TrollIdle_NW.anim using Guid(edec68d0753492143a96c547d00e813f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1a81f1e5630b0005728ea97556eda7ba') in 0.0098483 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Jump_NW.anim
+  artifactKey: Guid(b3a2acf086a251440a91cf471fb98758) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Orc/Wild Orc/WildOrc_Jump_NW.anim using Guid(b3a2acf086a251440a91cf471fb98758) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e4e10a1da63ddad4bd6a9f3597b52d3b') in 0.0144246 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000098 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Idle_SW.anim
+  artifactKey: Guid(6d44f0b907409584cbf377ab4599f08d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Monsters/Centaur/Centaur_Idle_SW.anim using Guid(6d44f0b907409584cbf377ab4599f08d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '57c942718914b5d3075dc51e813863b5') in 0.0115255 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: 2025-12-08T02:11:26Z
+[Licensing::Module] License group:
+  Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
+  Product: Unity Personal Version
+  Type: Assigned
+  Expiration: Unlimited
+- Loaded All Assemblies, in  1.610 seconds
+Refreshing native plugins compatible for Editor in 1.58 ms, found 4 plugins.
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.534 seconds
+Domain Reload Profiling: 3139ms
+	BeginReloadAssembly (434ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (21ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (187ms)
+	RebuildCommonClasses (162ms)
+	RebuildNativeTypeToScriptingClass (28ms)
+	initialDomainReloadingComplete (60ms)
+	LoadAllAssembliesAndSetupDomain (921ms)
+		LoadAssemblies (660ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (401ms)
+			TypeCache.Refresh (225ms)
+				TypeCache.ScanAssembly (207ms)
+			BuildScriptInfoCaches (157ms)
+			ResolveRequiredComponents (16ms)
+	FinalizeReload (1534ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1335ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (255ms)
+			ProcessInitializeOnLoadAttributes (916ms)
+			ProcessInitializeOnLoadMethodAttributes (150ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (18ms)
+Refreshing native plugins compatible for Editor in 1.55 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 35 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7560 unused Assets / (7.7 MB). Loaded Objects now: 8294.
+Memory consumption went from 164.3 MB to 156.6 MB.
+Total: 24.002100 ms (FindLiveObjects: 1.104500 ms CreateObjectMapping: 0.646100 ms MarkObjects: 17.244900 ms  DeleteObjects: 5.004800 ms)
+
+Prepare: number of updated asset objects reloaded= 0

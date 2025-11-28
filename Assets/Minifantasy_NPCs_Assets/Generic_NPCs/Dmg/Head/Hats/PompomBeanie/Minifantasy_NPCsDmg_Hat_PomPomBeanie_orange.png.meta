@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 287eddc16018cd3468318c4170d33f51
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1277602953075934491
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_0
+  - first:
+      213: -3301199196099495448
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_1
+  - first:
+      213: -7762075924750883974
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_2
+  - first:
+      213: 5561914405568366617
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_3
+  - first:
+      213: 4678235791717121209
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_4
+  - first:
+      213: -3389129755048454225
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_5
+  - first:
+      213: -4386427153448650002
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_6
+  - first:
+      213: 1711906900096705634
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_7
+  - first:
+      213: -3982307327281802818
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_8
+  - first:
+      213: 96201185729586915
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_9
+  - first:
+      213: 68149624833828525
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_10
+  - first:
+      213: -4600749250430763833
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_11
+  - first:
+      213: 5695799894423801379
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_12
+  - first:
+      213: 3093737723183806800
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_13
+  - first:
+      213: -7807485644932248609
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_14
+  - first:
+      213: -5200764738048464515
+    second: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea3be912ea054ee0800000000000000
+      internalID: -1277602953075934491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e93fa752d8cf22d0800000000000000
+      internalID: -3301199196099495448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a73ac995211974490800000000000000
+      internalID: -7762075924750883974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 918c70ffea3ef2d40800000000000000
+      internalID: 5561914405568366617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bc31dc8aae6ce040800000000000000
+      internalID: 4678235791717121209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa751a4b17467f0d0800000000000000
+      internalID: -3389129755048454225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeab0958eb74023c0800000000000000
+      internalID: -4386427153448650002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 264edcc614ae1c710800000000000000
+      internalID: 1711906900096705634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_8
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb1dee2c5900cb8c0800000000000000
+      internalID: -3982307327281802818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_9
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e6226ef776c55100800000000000000
+      internalID: 96201185729586915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_10
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da6ebc309bd12f000800000000000000
+      internalID: 68149624833828525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_11
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ccfd6bbeead620c0800000000000000
+      internalID: -4600749250430763833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32e86da83db8b0f40800000000000000
+      internalID: 5695799894423801379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 059b892611a2fea20800000000000000
+      internalID: 3093737723183806800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdb0ad8fb2d36a390800000000000000
+      internalID: -7807485644932248609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d796e3c860c23d7b0800000000000000
+      internalID: -5200764738048464515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_0: -1277602953075934491
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_1: -3301199196099495448
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_10: 68149624833828525
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_11: -4600749250430763833
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_12: 5695799894423801379
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_13: 3093737723183806800
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_14: -7807485644932248609
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_15: -5200764738048464515
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_2: -7762075924750883974
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_3: 5561914405568366617
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_4: 4678235791717121209
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_5: -3389129755048454225
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_6: -4386427153448650002
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_7: 1711906900096705634
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_8: -3982307327281802818
+      Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange_9: 96201185729586915
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

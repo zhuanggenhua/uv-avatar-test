@@ -1,0 +1,4809 @@
+fileFormatVersion: 2
+guid: f3d8cab5ca52b2b4393d29b4ebbf12d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1425217001789903460
+    second: BusinessSigns_0
+  - first:
+      213: 4596702669852151943
+    second: BusinessSigns_1
+  - first:
+      213: 1440714639671937766
+    second: BusinessSigns_2
+  - first:
+      213: 7558909101305794831
+    second: BusinessSigns_3
+  - first:
+      213: -3126973631164109158
+    second: BusinessSign_Post_Yellow_Helmets
+  - first:
+      213: -1374764258887406125
+    second: BusinessSign_Post_Yellow_Armours
+  - first:
+      213: 1616575642413087505
+    second: BusinessSign_Post_Yellow_Boots
+  - first:
+      213: 5495112165545357989
+    second: BusinessSign_Post_Yellow_Magic
+  - first:
+      213: -6907877481050388081
+    second: BusinessSign_Post_Yellow_MeleeWeapons
+  - first:
+      213: -5972748129343679632
+    second: BusinessSign_Post_Yellow_RangedWeapons
+  - first:
+      213: -8200115668834113550
+    second: BusinessSign_Post_Yellow_Shields
+  - first:
+      213: -5968509037578021116
+    second: BusinessSign_Post_Yellow_Trinkets
+  - first:
+      213: -3447668545687017363
+    second: BusinessSign_Post_Yellow_Tools_0
+  - first:
+      213: -9069027418802382003
+    second: BusinessSign_Post_Yellow_Tools_1
+  - first:
+      213: 7977460577575663650
+    second: BusinessSign_Post_Yellow_Gems
+  - first:
+      213: 2933576659630883904
+    second: BusinessSign_Post_Yellow_Potions
+  - first:
+      213: -5596523397370648505
+    second: BusinessSign_Post_Blue_Helmets
+  - first:
+      213: -6618390362265282801
+    second: BusinessSign_Post_Blue_Armours
+  - first:
+      213: -8251575534428061946
+    second: BusinessSign_Post_Blue_Boots
+  - first:
+      213: 2206860375901939594
+    second: BusinessSign_Post_Blue_Magic
+  - first:
+      213: 7573311239985843347
+    second: BusinessSign_Post_Blue_MeleeWeapons
+  - first:
+      213: -2417593749505542108
+    second: BusinessSign_Post_Blue_RangedWeapons
+  - first:
+      213: 671936196408016353
+    second: BusinessSign_Post_Blue_Shields
+  - first:
+      213: 9219970232981151180
+    second: BusinessSign_Post_Blue_Trinkets
+  - first:
+      213: -6394644524649568202
+    second: BusinessSign_Post_Blue_Tools_0
+  - first:
+      213: -792943258430641922
+    second: BusinessSign_Post_Blue_Tools_1
+  - first:
+      213: 4502490414346578220
+    second: BusinessSign_Post_Blue_Gems
+  - first:
+      213: -2373467694301078506
+    second: BusinessSign_Post_Blue_Potions
+  - first:
+      213: 2173520623476535126
+    second: BusinessSign_Post_Red_Helmets
+  - first:
+      213: 335826653896092818
+    second: BusinessSign_Post_Red_Armours
+  - first:
+      213: 938211205000112332
+    second: BusinessSign_Post_Red_Boots
+  - first:
+      213: -2043615200232111582
+    second: BusinessSign_Post_Red_Magic
+  - first:
+      213: 2640718691362680414
+    second: BusinessSign_Post_Red_MeleeWeapons
+  - first:
+      213: -3436282582400922138
+    second: BusinessSign_Post_Red_RangedWeapons
+  - first:
+      213: -9221595504120984911
+    second: BusinessSign_Post_Red_Shields
+  - first:
+      213: -6846030565818339900
+    second: BusinessSign_Post_Red_Trinkets
+  - first:
+      213: 1095236086863042084
+    second: BusinessSign_Post_Red_Tools_0
+  - first:
+      213: 8745072280031040116
+    second: BusinessSign_Post_Red_Tools_1
+  - first:
+      213: 1192307998255205827
+    second: BusinessSign_Post_Red_Gems
+  - first:
+      213: -5480519642378054886
+    second: BusinessSign_Post_Red_Potions
+  - first:
+      213: -8663534030157170769
+    second: BusinessSign_Panel_Yellow_Helmets
+  - first:
+      213: 7105586923407439219
+    second: BusinessSign_Panel_Yellow_Armours
+  - first:
+      213: 9164307589101057604
+    second: BusinessSign_Panel_Yellow_Boots
+  - first:
+      213: -6384798952187096687
+    second: BusinessSign_Panel_Yellow_Magic
+  - first:
+      213: -802507602684336234
+    second: BusinessSign_Panel_Yellow_MeleeWeapons
+  - first:
+      213: -8461569630745504953
+    second: BusinessSign_Panel_Yellow_RangedWeapons
+  - first:
+      213: -6928096663185618739
+    second: BusinessSign_Panel_Yellow_Shields
+  - first:
+      213: -6052291779873224990
+    second: BusinessSign_Panel_Yellow_Trinkets
+  - first:
+      213: 6169964783308720670
+    second: BusinessSign_Panel_Yellow_Tools_0
+  - first:
+      213: -2434427058191405474
+    second: BusinessSign_Panel_Yellow_Tools_1
+  - first:
+      213: -6536497174868573310
+    second: BusinessSign_Panel_Yellow_Gems
+  - first:
+      213: -7784460782666777362
+    second: BusinessSign_Panel_Yellow_Potions
+  - first:
+      213: 6585665584799567489
+    second: BusinessSign_Panel_Blue_Helmets
+  - first:
+      213: -61321726426625603
+    second: BusinessSign_Panel_Blue_Armours
+  - first:
+      213: -8974476833250671484
+    second: BusinessSign_Panel_Blue_Boots
+  - first:
+      213: 1594125473163243195
+    second: BusinessSign_Panel_Blue_Magic
+  - first:
+      213: -3320807985484851375
+    second: BusinessSign_Panel_Blue_MeleeWeapons
+  - first:
+      213: 5416218809309100826
+    second: BusinessSign_Panel_Blue_RangedWeapons
+  - first:
+      213: 6002032700279970733
+    second: BusinessSign_Panel_Blue_Shields
+  - first:
+      213: -2669465122601844114
+    second: BusinessSign_Panel_Blue_Trinkets
+  - first:
+      213: 3522948461433065159
+    second: BusinessSign_Panel_Blue_Tools_0
+  - first:
+      213: 6814541956343349203
+    second: BusinessSign_Panel_Blue_Tools_1
+  - first:
+      213: -659888132392391614
+    second: BusinessSign_Panel_Blue_Gems
+  - first:
+      213: -5150231794581644889
+    second: BusinessSign_Panel_Blue_Potions
+  - first:
+      213: -3762608037612431880
+    second: BusinessSign_Panel_Red_Helmets
+  - first:
+      213: -5427352170033835933
+    second: BusinessSign_Panel_Red_Armours
+  - first:
+      213: -4097741263331454712
+    second: BusinessSign_Panel_Red_Boots
+  - first:
+      213: 2705547714645034337
+    second: BusinessSign_Panel_Red_Magic
+  - first:
+      213: -2278032190072504765
+    second: BusinessSign_Panel_Red_MeleeWeapons
+  - first:
+      213: -3187329808559877734
+    second: BusinessSign_Panel_Red_RangedWeapons
+  - first:
+      213: 363982107934301424
+    second: BusinessSign_Panel_Red_Shields
+  - first:
+      213: -2483460407942158495
+    second: BusinessSign_Panel_Red_Trinkets
+  - first:
+      213: -6073383974301094865
+    second: BusinessSign_Panel_Red_Tools_0
+  - first:
+      213: -3835595941022728532
+    second: BusinessSign_Panel_Red_Tools_1
+  - first:
+      213: 9151895637120154320
+    second: BusinessSign_Panel_Red_Gems
+  - first:
+      213: 6538645836657260900
+    second: BusinessSign_Panel_Red_Potions
+  - first:
+      213: 5686390795169116999
+    second: BusinessSign_Nail_Yellow_Helmets
+  - first:
+      213: 10292432595583348
+    second: BusinessSign_Nail_Yellow_Armours
+  - first:
+      213: 3138399553103165248
+    second: BusinessSign_Nail_Yellow_Boots
+  - first:
+      213: 3764093795575486990
+    second: BusinessSign_Nail_Yellow_Magic
+  - first:
+      213: -2584272706252429210
+    second: BusinessSign_Nail_Yellow_MeleeWeapons
+  - first:
+      213: 5177576809831208425
+    second: BusinessSign_Nail_Yellow_RangedWeapons
+  - first:
+      213: -1745700498618466473
+    second: BusinessSign_Nail_Yellow_Shields
+  - first:
+      213: 4742312369237317677
+    second: BusinessSign_Nail_Yellow_Trinkets
+  - first:
+      213: -8477138532319213351
+    second: BusinessSign_Nail_Yellow_Tools_0
+  - first:
+      213: 1637406681655540936
+    second: BusinessSign_Nail_Yellow_Tools_1
+  - first:
+      213: -7013219482295818598
+    second: BusinessSign_Nail_Yellow_Gems
+  - first:
+      213: 4338161678561223975
+    second: BusinessSign_Nail_Yellow_Potions
+  - first:
+      213: 6349461767749037739
+    second: BusinessSign_Nail_Blue_Helmets
+  - first:
+      213: 5003856774193079304
+    second: BusinessSign_Nail_Blue_Armours
+  - first:
+      213: 5682165017793495322
+    second: BusinessSign_Nail_Blue_Boots
+  - first:
+      213: -128661356093916505
+    second: BusinessSign_Nail_Blue_Magic
+  - first:
+      213: 8807654683511674731
+    second: BusinessSign_Nail_Blue_MeleeWeapons
+  - first:
+      213: 8394397331303283192
+    second: BusinessSign_Nail_Blue_RangedWeapons
+  - first:
+      213: -7040266330719673528
+    second: BusinessSign_Nail_Blue_Shields
+  - first:
+      213: -1387844379876755054
+    second: BusinessSign_Nail_Blue_Trinkets
+  - first:
+      213: -4901783403327944103
+    second: BusinessSign_Nail_Blue_Tools_0
+  - first:
+      213: 4119714895325128794
+    second: BusinessSign_Nail_Blue_Tools_1
+  - first:
+      213: 2804070393367321877
+    second: BusinessSign_Nail_Blue_Gems
+  - first:
+      213: -3860900322175979685
+    second: BusinessSign_Nail_Blue_Potions
+  - first:
+      213: -2430811593610499909
+    second: BusinessSign_Nail_Red_Helmets
+  - first:
+      213: 4989657763175838032
+    second: BusinessSign_Nail_Red_Armours
+  - first:
+      213: 8854671770175273625
+    second: BusinessSign_Nail_Red_Boots
+  - first:
+      213: 2968471332987294664
+    second: BusinessSign_Nail_Red_Magic
+  - first:
+      213: -7008628676247490613
+    second: BusinessSign_Nail_Red_MeleeWeapons
+  - first:
+      213: -4485142204275181313
+    second: BusinessSign_Nail_Red_RangedWeapons
+  - first:
+      213: -9035465967917282816
+    second: BusinessSign_Nail_Red_Shields
+  - first:
+      213: -7218428840941319849
+    second: BusinessSign_Nail_Red_Trinkets
+  - first:
+      213: -6355830401099957365
+    second: BusinessSign_Nail_Red_Tools_0
+  - first:
+      213: 2810600022322138464
+    second: BusinessSign_Nail_Red_Tools_1
+  - first:
+      213: 2055568386075853497
+    second: BusinessSign_Nail_Red_Gems
+  - first:
+      213: 2793400797218142606
+    second: BusinessSign_Nail_Red_Potions
+  - first:
+      213: 7403393603667500345
+    second: BusinessSign_RodLeft_Yellow_Helmets
+  - first:
+      213: -5032878832344400064
+    second: BusinessSign_RodLeft_Yellow_Armours
+  - first:
+      213: 3289144814098734050
+    second: BusinessSign_RodLeft_Yellow_Boots
+  - first:
+      213: 3895743793489471948
+    second: BusinessSign_RodLeft_Yellow_Magic
+  - first:
+      213: -2042729497169326956
+    second: BusinessSign_RodLeft_Yellow_MeleeWeapons
+  - first:
+      213: 4985389072309036133
+    second: BusinessSign_RodLeft_Yellow_RangedWeapons
+  - first:
+      213: 2850451191889576474
+    second: BusinessSign_RodLeft_Yellow_Shields
+  - first:
+      213: 4618827989429395533
+    second: BusinessSign_RodLeft_Yellow_Trinkets
+  - first:
+      213: -3133408810019496216
+    second: BusinessSign_RodLeft_Yellow_Tools_0
+  - first:
+      213: 7668991105373191057
+    second: BusinessSign_RodLeft_Yellow_Tools_1
+  - first:
+      213: -1918668223998621996
+    second: BusinessSign_RodLeft_Yellow_Gems
+  - first:
+      213: 8261148715921776142
+    second: BusinessSign_RodLeft_Yellow_Potions
+  - first:
+      213: -3237190484208801166
+    second: BusinessSign_RodLeft_Blue_Helmets
+  - first:
+      213: -5004522407416432722
+    second: BusinessSign_RodLeft_Blue_Armours
+  - first:
+      213: -2007787631233176648
+    second: BusinessSign_RodLeft_Blue_Boots
+  - first:
+      213: 3120257481584085194
+    second: BusinessSign_RodLeft_Blue_Magic
+  - first:
+      213: 3819052402760793418
+    second: BusinessSign_RodLeft_Blue_MeleeWeapons
+  - first:
+      213: -7970974200714535048
+    second: BusinessSign_RodLeft_Blue_RangedWeapons
+  - first:
+      213: -336323335463292151
+    second: BusinessSign_RodLeft_Blue_Shields
+  - first:
+      213: -7368755522431067213
+    second: BusinessSign_RodLeft_Blue_Trinkets
+  - first:
+      213: -5485006457453662352
+    second: BusinessSign_RodLeft_Blue_Tools_0
+  - first:
+      213: -5812238361408277300
+    second: BusinessSign_RodLeft_Blue_Tools_1
+  - first:
+      213: 7556606549199911196
+    second: BusinessSign_RodLeft_Blue_Gems
+  - first:
+      213: -7926663602691013554
+    second: BusinessSign_RodLeft_Blue_Potions
+  - first:
+      213: 3173419912402058238
+    second: BusinessSign_RodLeft_Red_Helmets
+  - first:
+      213: 1877550376749785484
+    second: BusinessSign_RodLeft_Red_Armours
+  - first:
+      213: 9140696190275671540
+    second: BusinessSign_RodLeft_Red_Boots
+  - first:
+      213: -5111635079154101418
+    second: BusinessSign_RodLeft_Red_Magic
+  - first:
+      213: -1852434185987837613
+    second: BusinessSign_RodLeft_Red_MeleeWeapons
+  - first:
+      213: 1996051854906557690
+    second: BusinessSign_RodLeft_Red_RangedWeapons
+  - first:
+      213: 4927898897211877469
+    second: BusinessSign_RodLeft_Red_Shields
+  - first:
+      213: -4351552513100406536
+    second: BusinessSign_RodLeft_Red_Trinkets
+  - first:
+      213: 320036924787556739
+    second: BusinessSign_RodLeft_Red_Tools_0
+  - first:
+      213: 8666765022988136716
+    second: BusinessSign_RodLeft_Red_Tools_1
+  - first:
+      213: -1347992324471990711
+    second: BusinessSign_RodLeft_Red_Gems
+  - first:
+      213: -1523712120672949881
+    second: BusinessSign_RodLeft_Red_Potions
+  - first:
+      213: -8674553209976547545
+    second: BusinessSign_RodRight_Yellow_Helmets
+  - first:
+      213: 6612350274308094098
+    second: BusinessSign_RodRight_Yellow_Armours
+  - first:
+      213: 7921841096758183860
+    second: BusinessSign_RodRight_Yellow_Boots
+  - first:
+      213: -5047527461831235269
+    second: BusinessSign_RodRight_Yellow_Magic
+  - first:
+      213: -1370135610300195114
+    second: BusinessSign_RodRight_Yellow_MeleeWeapons
+  - first:
+      213: -7865332794425150894
+    second: BusinessSign_RodRight_Yellow_RangedWeapons
+  - first:
+      213: -8802047644315426263
+    second: BusinessSign_RodRight_Yellow_Shields
+  - first:
+      213: -527088516512980077
+    second: BusinessSign_RodRight_Yellow_Trinkets
+  - first:
+      213: -4542479889056179617
+    second: BusinessSign_RodRight_Yellow_Tools_0
+  - first:
+      213: 8598296895897311092
+    second: BusinessSign_RodRight_Yellow_Tools_1
+  - first:
+      213: 6571402973160253905
+    second: BusinessSign_RodRight_Yellow_Gems
+  - first:
+      213: 690959672753303398
+    second: BusinessSign_RodRight_Yellow_Potions
+  - first:
+      213: 5337483902574048287
+    second: BusinessSign_RodRight_Blue_Helmets
+  - first:
+      213: 1096836913754317382
+    second: BusinessSign_RodRight_Blue_Armours
+  - first:
+      213: -1570905882761963618
+    second: BusinessSign_RodRight_Blue_Boots
+  - first:
+      213: 9142195617959822721
+    second: BusinessSign_RodRight_Blue_Magic
+  - first:
+      213: 1442710219499368820
+    second: BusinessSign_RodRight_Blue_MeleeWeapons
+  - first:
+      213: 5517668026897274389
+    second: BusinessSign_RodRight_Blue_RangedWeapons
+  - first:
+      213: 5404289194704842050
+    second: BusinessSign_RodRight_Blue_Shields
+  - first:
+      213: 890230276695252520
+    second: BusinessSign_RodRight_Blue_Trinkets
+  - first:
+      213: -1735315889558346091
+    second: BusinessSign_RodRight_Blue_Tools_0
+  - first:
+      213: -5584375603833260635
+    second: BusinessSign_RodRight_Blue_Tools_1
+  - first:
+      213: -1904903253684247126
+    second: BusinessSign_RodRight_Blue_Gems
+  - first:
+      213: 8610875020928233439
+    second: BusinessSign_RodRight_Blue_Potions
+  - first:
+      213: -8366135579728758425
+    second: BusinessSign_RodRight_Red_Helmets
+  - first:
+      213: -1873185994244102958
+    second: BusinessSign_RodRight_Red_Armours
+  - first:
+      213: 8481645119530584323
+    second: BusinessSign_RodRight_Red_Boots
+  - first:
+      213: -1139208271804918599
+    second: BusinessSign_RodRight_Red_Magic
+  - first:
+      213: 1301735067579393100
+    second: BusinessSign_RodRight_Red_MeleeWeapons
+  - first:
+      213: -8042520138586143778
+    second: BusinessSign_RodRight_Red_RangedWeapons
+  - first:
+      213: 4507886466471149022
+    second: BusinessSign_RodRight_Red_Shields
+  - first:
+      213: -2550054018116365912
+    second: BusinessSign_RodRight_Red_Trinkets
+  - first:
+      213: 788494846693755685
+    second: BusinessSign_RodRight_Red_Tools_0
+  - first:
+      213: -5134910508056064801
+    second: BusinessSign_RodRight_Red_Tools_1
+  - first:
+      213: -7642594210386422517
+    second: BusinessSign_RodRight_Red_Gems
+  - first:
+      213: 449912660163522792
+    second: BusinessSign_RodRight_Red_Potions
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Helmets
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9e2374cc02ca94d0800000000000000
+      internalID: -3126973631164109158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Armours
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ddec1bb03bdbece0800000000000000
+      internalID: -1374764258887406125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Boots
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11bb4965bfa3f6610800000000000000
+      internalID: 1616575642413087505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Magic
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a23244766f824c40800000000000000
+      internalID: 5495112165545357989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f89421ec70a4220a0800000000000000
+      internalID: -6907877481050388081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0735799a8398c1da0800000000000000
+      internalID: -5972748129343679632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Shields
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7270ace36533e80800000000000000
+      internalID: -8200115668834113550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 407147027a89b2da0800000000000000
+      internalID: -5968509037578021116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d68a90769bb6720d0800000000000000
+      internalID: -3447668545687017363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4b9104cc97542280800000000000000
+      internalID: -9069027418802382003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Gems
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22874100122a5be60800000000000000
+      internalID: 7977460577575663650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Yellow_Potions
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0440daedd6826b820800000000000000
+      internalID: 2933576659630883904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Helmets
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7486f8a2f972552b0800000000000000
+      internalID: -5596523397370648505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Armours
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f071f400801c624a0800000000000000
+      internalID: -6618390362265282801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Boots
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60f7c1925c38c7d80800000000000000
+      internalID: -8251575534428061946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Magic
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a872586c1d750ae10800000000000000
+      internalID: 2206860375901939594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39c44d8927ec91960800000000000000
+      internalID: 7573311239985843347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42874853b4bf27ed0800000000000000
+      internalID: -2417593749505542108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Shields
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ed70aa1962335900800000000000000
+      internalID: 671936196408016353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd5480d31ae3ff70800000000000000
+      internalID: 9219970232981151180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 638ad536fa8a147a0800000000000000
+      internalID: -6394644524649568202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef86332ce46eef4f0800000000000000
+      internalID: -792943258430641922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Gems
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c29aab73d2f0c7e30800000000000000
+      internalID: 4502490414346578220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Blue_Potions
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61c915b05bfbf0fd0800000000000000
+      internalID: -2373467694301078506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Helmets
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65fed42cd75e92e10800000000000000
+      internalID: 2173520623476535126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Armours
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ca59bff8819a400800000000000000
+      internalID: 335826653896092818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Boots
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc8a25ebe12350d00800000000000000
+      internalID: 938211205000112332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Magic
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 264
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 222839c8dce93a3e0800000000000000
+      internalID: -2043615200232111582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5e286e98a7b5a420800000000000000
+      internalID: 2640718691362680414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ed8120923fdf40d0800000000000000
+      internalID: -3436282582400922138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Shields
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ba87824fbf460080800000000000000
+      internalID: -9221595504120984911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cd6ee2e8730ef0a0800000000000000
+      internalID: -6846030565818339900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42619ae0b6f033f00800000000000000
+      internalID: 1095236086863042084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4729d52c7ecbc5970800000000000000
+      internalID: 8745072280031040116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Gems
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cdcbdaaecdeb8010800000000000000
+      internalID: 1192307998255205827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Post_Red_Potions
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a13518b1c6841f3b0800000000000000
+      internalID: -5480519642378054886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Helmets
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa739f073b1f4c780800000000000000
+      internalID: -8663534030157170769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Armours
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3757c5ae8ad1c9260800000000000000
+      internalID: 7105586923407439219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Boots
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 446f8cc92392e2f70800000000000000
+      internalID: 9164307589101057604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Magic
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1911a9c5e23a467a0800000000000000
+      internalID: -6384798952187096687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6972374569becd4f0800000000000000
+      internalID: -802507602684336234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7435e2d8047729a80800000000000000
+      internalID: -8461569630745504953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Shields
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc8804d9ac47adf90800000000000000
+      internalID: -6928096663185618739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6c3af41b0f10ca0800000000000000
+      internalID: -6052291779873224990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1a49c1d74e10a550800000000000000
+      internalID: 6169964783308720670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ee6ec1d7d273ed0800000000000000
+      internalID: -2434427058191405474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Gems
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2834d988372b945a0800000000000000
+      internalID: -6536497174868573310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Yellow_Potions
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eecff29792a08f390800000000000000
+      internalID: -7784460782666777362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Helmets
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18e4e7ff4fbf46b50800000000000000
+      internalID: 6585665584799567489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Armours
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db9c357f634262ff0800000000000000
+      internalID: -61321726426625603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Boots
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4840f157ed0447380800000000000000
+      internalID: -8974476833250671484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Magic
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbeeb4bfba87f1610800000000000000
+      internalID: 1594125473163243195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15715e94bbe1ae1d0800000000000000
+      internalID: -3320807985484851375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1b78aa8f464a2b40800000000000000
+      internalID: 5416218809309100826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Shields
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dab5776d0f08b4350800000000000000
+      internalID: 6002032700279970733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e62c50b4d9724fad0800000000000000
+      internalID: -2669465122601844114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce0ab5d5f604e030800000000000000
+      internalID: 3522948461433065159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3df37d6edcd129e50800000000000000
+      internalID: 6814541956343349203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Gems
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24c61456d3b97d6f0800000000000000
+      internalID: -659888132392391614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Blue_Potions
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a9d90d4873b688b0800000000000000
+      internalID: -5150231794581644889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Helmets
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f5d419cce788cbc0800000000000000
+      internalID: -3762608037612431880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Armours
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360103ae4fb2ea4b0800000000000000
+      internalID: -5427352170033835933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Boots
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8011ba12806e127c0800000000000000
+      internalID: -4097741263331454712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Magic
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1658946df490c8520800000000000000
+      internalID: 2705547714645034337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34eb2dbeacdc260e0800000000000000
+      internalID: -2278032190072504765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9156c22d6454c3d0800000000000000
+      internalID: -3187329808559877734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Shields
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc95087ccf1d0500800000000000000
+      internalID: 363982107934301424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1676cdabae9f88dd0800000000000000
+      internalID: -2483460407942158495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2cab3b147107bba0800000000000000
+      internalID: -6073383974301094865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caef86140d935cac0800000000000000
+      internalID: -3835595941022728532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Gems
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0da7ef7d790120f70800000000000000
+      internalID: 9151895637120154320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Panel_Red_Potions
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469fa06cebfedba50800000000000000
+      internalID: 6538645836657260900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Helmets
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7433b18ec4e1aee40800000000000000
+      internalID: 5686390795169116999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Armours
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4710cb4b9e0942000800000000000000
+      internalID: 10292432595583348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Boots
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04775fdf3c5dd8b20800000000000000
+      internalID: 3138399553103165248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Magic
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0a57823d5fbc3430800000000000000
+      internalID: 3764093795575486990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 668261d6aa1d22cd0800000000000000
+      internalID: -2584272706252429210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e51a433da27ad740800000000000000
+      internalID: 5177576809831208425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Shields
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75fbf9745a606c7e0800000000000000
+      internalID: -1745700498618466473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d28d45659f310d140800000000000000
+      internalID: 4742312369237317677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d8465d2b672b5a80800000000000000
+      internalID: -8477138532319213351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ccfdec93bc39b610800000000000000
+      internalID: 1637406681655540936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Gems
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a96a8e9d90a0cae90800000000000000
+      internalID: -7013219482295818598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Yellow_Potions
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 725aad4ef0f343c30800000000000000
+      internalID: 4338161678561223975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Helmets
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baeea9d36d1dd1850800000000000000
+      internalID: 6349461767749037739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Armours
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 804e5bc7935417540800000000000000
+      internalID: 5003856774193079304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Boots
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a118bb07afa1bde40800000000000000
+      internalID: 5682165017793495322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Magic
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aab3b5ad27e63ef0800000000000000
+      internalID: -128661356093916505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b67d40b05431b3a70800000000000000
+      internalID: 8807654683511674731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9b1dbb5e3ee7470800000000000000
+      internalID: 8394397331303283192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Shields
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 843af49b213fb4e90800000000000000
+      internalID: -7040266330719673528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2997cedb3e26dbce0800000000000000
+      internalID: -1387844379876755054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a8bb627fd59fbb0800000000000000
+      internalID: -4901783403327944103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a586dbfbeda2c2930800000000000000
+      internalID: 4119714895325128794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Gems
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d59d98a2f0ae620800000000000000
+      internalID: 2804070393367321877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Blue_Potions
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5f6287ec935b6ac0800000000000000
+      internalID: -3860900322175979685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Helmets
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb8e1fe0cb5044ed0800000000000000
+      internalID: -2430811593610499909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Armours
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051bddc9c43de3540800000000000000
+      internalID: 4989657763175838032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Boots
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99af9f79f0d12ea70800000000000000
+      internalID: 8854671770175273625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Magic
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 152
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c353a023f0223920800000000000000
+      internalID: 2968471332987294664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfe6ad2a595cbe90800000000000000
+      internalID: -7008628676247490613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff8b013bde291c1c0800000000000000
+      internalID: -4485142204275181313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Shields
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ac82af2939b9280800000000000000
+      internalID: -9035465967917282816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 759024bc63df2db90800000000000000
+      internalID: -7218428840941319849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8bfec1cced8bc7a0800000000000000
+      internalID: -6355830401099957365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d473044d1410720800000000000000
+      internalID: 2810600022322138464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Gems
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b203976e88d68c10800000000000000
+      internalID: 2055568386075853497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_Nail_Red_Potions
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 120
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e89fa79993724c620800000000000000
+      internalID: 2793400797218142606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Helmets
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93d1007f1432eb660800000000000000
+      internalID: 7403393603667500345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Armours
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f77880e5f972ab0800000000000000
+      internalID: -5032878832344400064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Boots
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eb5c2328c365ad20800000000000000
+      internalID: 3289144814098734050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Magic
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc96fd2f656701630800000000000000
+      internalID: 3895743793489471948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c820d5854c6a3e0800000000000000
+      internalID: -2042729497169326956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 564281292f8af2540800000000000000
+      internalID: 4985389072309036133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Shields
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a12ca26b146de8720800000000000000
+      internalID: 2850451191889576474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d402294b59f591040800000000000000
+      internalID: 4618827989429395533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ee55bee945e384d0800000000000000
+      internalID: -3133408810019496216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19b366d37cabd6a60800000000000000
+      internalID: 7668991105373191057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Gems
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d68bb27a658f55e0800000000000000
+      internalID: -1918668223998621996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Yellow_Potions
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e1139dcfe75a270800000000000000
+      internalID: 8261148715921776142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Helmets
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27aa57ee7603313d0800000000000000
+      internalID: -3237190484208801166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Armours
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea7f573b26d5c8ab0800000000000000
+      internalID: -5004522407416432722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Boots
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb6cef79c7e224e0800000000000000
+      internalID: -2007787631233176648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Magic
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac8039dc5a16d4b20800000000000000
+      internalID: 3120257481584085194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4db8251deffff430800000000000000
+      internalID: 3819052402760793418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87f5b9c4239616190800000000000000
+      internalID: -7970974200714535048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Shields
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 903390455b3255bf0800000000000000
+      internalID: -336323335463292151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bb5cc8c4ebecb990800000000000000
+      internalID: -7368755522431067213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07f20c010b751e3b0800000000000000
+      internalID: -5485006457453662352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc47c5e3108c65fa0800000000000000
+      internalID: -5812238361408277300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Gems
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c197370be957ed860800000000000000
+      internalID: 7556606549199911196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Blue_Potions
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e44859b5375def190800000000000000
+      internalID: -7926663602691013554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Helmets
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb30e9c8904a0c20800000000000000
+      internalID: 3173419912402058238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Armours
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c816216be166e0a10800000000000000
+      internalID: 1877550376749785484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Boots
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f5d52d61c64ade70800000000000000
+      internalID: 9140696190275671540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Magic
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65318956af2df09b0800000000000000
+      internalID: -5111635079154101418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 351b7662ce4da46e0800000000000000
+      internalID: -1852434185987837613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af407f4269663bb10800000000000000
+      internalID: 1996051854906557690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Shields
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d586a5910f9636440800000000000000
+      internalID: 4927898897211877469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f0213b7b0e2c93c0800000000000000
+      internalID: -4351552513100406536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38188f033eff07400800000000000000
+      internalID: 320036924787556739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c01fcf2bed8864870800000000000000
+      internalID: 8666765022988136716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Gems
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 946d4e37f18fa4de0800000000000000
+      internalID: -1347992324471990711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodLeft_Red_Potions
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789e45336efaadae0800000000000000
+      internalID: -1523712120672949881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Helmets
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7279f16b0dbcd9780800000000000000
+      internalID: -8674553209976547545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Armours
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 298379e6a89c3cb50800000000000000
+      internalID: 6612350274308094098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Boots
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b7cc5b718800fd60800000000000000
+      internalID: 7921841096758183860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Magic
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b392583348493f9b0800000000000000
+      internalID: -5047527461831235269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de91f5fbec4cfce0800000000000000
+      internalID: -1370135610300195114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 252fe0cee79b8d290800000000000000
+      internalID: -7865332794425150894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Shields
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 922e3808d48d8d580800000000000000
+      internalID: -8802047644315426263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3936e0079c76fa8f0800000000000000
+      internalID: -527088516512980077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5a5375ab9ed5f0c0800000000000000
+      internalID: -4542479889056179617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4779d499879435770800000000000000
+      internalID: 8598296895897311092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Gems
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d9a923ff20523b50800000000000000
+      internalID: 6571402973160253905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Yellow_Potions
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66fa4985928c69900800000000000000
+      internalID: 690959672753303398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Helmets
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f14ba47845d821a40800000000000000
+      internalID: 5337483902574048287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Armours
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 642acdc9c5fb83f00800000000000000
+      internalID: 1096836913754317382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Boots
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e97d6623c65033ae0800000000000000
+      internalID: -1570905882761963618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Magic
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 185c0a32a7a9fde70800000000000000
+      internalID: 9142195617959822721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 471f5130d49850410800000000000000
+      internalID: 1442710219499368820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5161ebb26d1b29c40800000000000000
+      internalID: 5517668026897274389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Shields
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24d2dd1b364effa40800000000000000
+      internalID: 5404289194704842050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ed7b258bbba5c00800000000000000
+      internalID: 890230276695252520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 596a8cd746beae7e0800000000000000
+      internalID: -1735315889558346091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a53921c9ff4082b0800000000000000
+      internalID: -5584375603833260635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Gems
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa52aa8559c6095e0800000000000000
+      internalID: -1904903253684247126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Blue_Potions
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf26bb8539ff7770800000000000000
+      internalID: 8610875020928233439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Helmets
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 769b283140485eb80800000000000000
+      internalID: -8366135579728758425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Armours
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d4e7d6434b1106e0800000000000000
+      internalID: -1873185994244102958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Boots
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 309cb8c6c4bd4b570800000000000000
+      internalID: 8481645119530584323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Magic
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 40
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b491e1dc18b030f0800000000000000
+      internalID: -1139208271804918599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_MeleeWeapons
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c442db6a521b01210800000000000000
+      internalID: 1301735067579393100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_RangedWeapons
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed3c5a88b8a336090800000000000000
+      internalID: -8042520138586143778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Shields
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eddbdc18bda3f8e30800000000000000
+      internalID: 4507886466471149022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Trinkets
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 24
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a1dd1c91636c9cd0800000000000000
+      internalID: -2550054018116365912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Tools_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b486ca2eb41fa00800000000000000
+      internalID: 788494846693755685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Tools_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdcc5ed49122db8b0800000000000000
+      internalID: -5134910508056064801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Gems
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b05d57fce0d00f590800000000000000
+      internalID: -7642594210386422517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BusinessSign_RodRight_Red_Potions
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e07ff04e296e3600800000000000000
+      internalID: 449912660163522792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BusinessSign_Nail_Blue_Armours: 5003856774193079304
+      BusinessSign_Nail_Blue_Boots: 5682165017793495322
+      BusinessSign_Nail_Blue_Gems: 2804070393367321877
+      BusinessSign_Nail_Blue_Helmets: 6349461767749037739
+      BusinessSign_Nail_Blue_Magic: -128661356093916505
+      BusinessSign_Nail_Blue_MeleeWeapons: 8807654683511674731
+      BusinessSign_Nail_Blue_Potions: -3860900322175979685
+      BusinessSign_Nail_Blue_RangedWeapons: 8394397331303283192
+      BusinessSign_Nail_Blue_Shields: -7040266330719673528
+      BusinessSign_Nail_Blue_Tools_0: -4901783403327944103
+      BusinessSign_Nail_Blue_Tools_1: 4119714895325128794
+      BusinessSign_Nail_Blue_Trinkets: -1387844379876755054
+      BusinessSign_Nail_Red_Armours: 4989657763175838032
+      BusinessSign_Nail_Red_Boots: 8854671770175273625
+      BusinessSign_Nail_Red_Gems: 2055568386075853497
+      BusinessSign_Nail_Red_Helmets: -2430811593610499909
+      BusinessSign_Nail_Red_Magic: 2968471332987294664
+      BusinessSign_Nail_Red_MeleeWeapons: -7008628676247490613
+      BusinessSign_Nail_Red_Potions: 2793400797218142606
+      BusinessSign_Nail_Red_RangedWeapons: -4485142204275181313
+      BusinessSign_Nail_Red_Shields: -9035465967917282816
+      BusinessSign_Nail_Red_Tools_0: -6355830401099957365
+      BusinessSign_Nail_Red_Tools_1: 2810600022322138464
+      BusinessSign_Nail_Red_Trinkets: -7218428840941319849
+      BusinessSign_Nail_Yellow_Armours: 10292432595583348
+      BusinessSign_Nail_Yellow_Boots: 3138399553103165248
+      BusinessSign_Nail_Yellow_Gems: -7013219482295818598
+      BusinessSign_Nail_Yellow_Helmets: 5686390795169116999
+      BusinessSign_Nail_Yellow_Magic: 3764093795575486990
+      BusinessSign_Nail_Yellow_MeleeWeapons: -2584272706252429210
+      BusinessSign_Nail_Yellow_Potions: 4338161678561223975
+      BusinessSign_Nail_Yellow_RangedWeapons: 5177576809831208425
+      BusinessSign_Nail_Yellow_Shields: -1745700498618466473
+      BusinessSign_Nail_Yellow_Tools_0: -8477138532319213351
+      BusinessSign_Nail_Yellow_Tools_1: 1637406681655540936
+      BusinessSign_Nail_Yellow_Trinkets: 4742312369237317677
+      BusinessSign_Panel_Blue_Armours: -61321726426625603
+      BusinessSign_Panel_Blue_Boots: -8974476833250671484
+      BusinessSign_Panel_Blue_Gems: -659888132392391614
+      BusinessSign_Panel_Blue_Helmets: 6585665584799567489
+      BusinessSign_Panel_Blue_Magic: 1594125473163243195
+      BusinessSign_Panel_Blue_MeleeWeapons: -3320807985484851375
+      BusinessSign_Panel_Blue_Potions: -5150231794581644889
+      BusinessSign_Panel_Blue_RangedWeapons: 5416218809309100826
+      BusinessSign_Panel_Blue_Shields: 6002032700279970733
+      BusinessSign_Panel_Blue_Tools_0: 3522948461433065159
+      BusinessSign_Panel_Blue_Tools_1: 6814541956343349203
+      BusinessSign_Panel_Blue_Trinkets: -2669465122601844114
+      BusinessSign_Panel_Red_Armours: -5427352170033835933
+      BusinessSign_Panel_Red_Boots: -4097741263331454712
+      BusinessSign_Panel_Red_Gems: 9151895637120154320
+      BusinessSign_Panel_Red_Helmets: -3762608037612431880
+      BusinessSign_Panel_Red_Magic: 2705547714645034337
+      BusinessSign_Panel_Red_MeleeWeapons: -2278032190072504765
+      BusinessSign_Panel_Red_Potions: 6538645836657260900
+      BusinessSign_Panel_Red_RangedWeapons: -3187329808559877734
+      BusinessSign_Panel_Red_Shields: 363982107934301424
+      BusinessSign_Panel_Red_Tools_0: -6073383974301094865
+      BusinessSign_Panel_Red_Tools_1: -3835595941022728532
+      BusinessSign_Panel_Red_Trinkets: -2483460407942158495
+      BusinessSign_Panel_Yellow_Armours: 7105586923407439219
+      BusinessSign_Panel_Yellow_Boots: 9164307589101057604
+      BusinessSign_Panel_Yellow_Gems: -6536497174868573310
+      BusinessSign_Panel_Yellow_Helmets: -8663534030157170769
+      BusinessSign_Panel_Yellow_Magic: -6384798952187096687
+      BusinessSign_Panel_Yellow_MeleeWeapons: -802507602684336234
+      BusinessSign_Panel_Yellow_Potions: -7784460782666777362
+      BusinessSign_Panel_Yellow_RangedWeapons: -8461569630745504953
+      BusinessSign_Panel_Yellow_Shields: -6928096663185618739
+      BusinessSign_Panel_Yellow_Tools_0: 6169964783308720670
+      BusinessSign_Panel_Yellow_Tools_1: -2434427058191405474
+      BusinessSign_Panel_Yellow_Trinkets: -6052291779873224990
+      BusinessSign_Post_Blue_Armours: -6618390362265282801
+      BusinessSign_Post_Blue_Boots: -8251575534428061946
+      BusinessSign_Post_Blue_Gems: 4502490414346578220
+      BusinessSign_Post_Blue_Helmets: -5596523397370648505
+      BusinessSign_Post_Blue_Magic: 2206860375901939594
+      BusinessSign_Post_Blue_MeleeWeapons: 7573311239985843347
+      BusinessSign_Post_Blue_Potions: -2373467694301078506
+      BusinessSign_Post_Blue_RangedWeapons: -2417593749505542108
+      BusinessSign_Post_Blue_Shields: 671936196408016353
+      BusinessSign_Post_Blue_Tools_0: -6394644524649568202
+      BusinessSign_Post_Blue_Tools_1: -792943258430641922
+      BusinessSign_Post_Blue_Trinkets: 9219970232981151180
+      BusinessSign_Post_Red_Armours: 335826653896092818
+      BusinessSign_Post_Red_Boots: 938211205000112332
+      BusinessSign_Post_Red_Gems: 1192307998255205827
+      BusinessSign_Post_Red_Helmets: 2173520623476535126
+      BusinessSign_Post_Red_Magic: -2043615200232111582
+      BusinessSign_Post_Red_MeleeWeapons: 2640718691362680414
+      BusinessSign_Post_Red_Potions: -5480519642378054886
+      BusinessSign_Post_Red_RangedWeapons: -3436282582400922138
+      BusinessSign_Post_Red_Shields: -9221595504120984911
+      BusinessSign_Post_Red_Tools_0: 1095236086863042084
+      BusinessSign_Post_Red_Tools_1: 8745072280031040116
+      BusinessSign_Post_Red_Trinkets: -6846030565818339900
+      BusinessSign_Post_Yellow_Armours: -1374764258887406125
+      BusinessSign_Post_Yellow_Boots: 1616575642413087505
+      BusinessSign_Post_Yellow_Gems: 7977460577575663650
+      BusinessSign_Post_Yellow_Helmets: -3126973631164109158
+      BusinessSign_Post_Yellow_Magic: 5495112165545357989
+      BusinessSign_Post_Yellow_MeleeWeapons: -6907877481050388081
+      BusinessSign_Post_Yellow_Potions: 2933576659630883904
+      BusinessSign_Post_Yellow_RangedWeapons: -5972748129343679632
+      BusinessSign_Post_Yellow_Shields: -8200115668834113550
+      BusinessSign_Post_Yellow_Tools_0: -3447668545687017363
+      BusinessSign_Post_Yellow_Tools_1: -9069027418802382003
+      BusinessSign_Post_Yellow_Trinkets: -5968509037578021116
+      BusinessSign_RodLeft_Blue_Armours: -5004522407416432722
+      BusinessSign_RodLeft_Blue_Boots: -2007787631233176648
+      BusinessSign_RodLeft_Blue_Gems: 7556606549199911196
+      BusinessSign_RodLeft_Blue_Helmets: -3237190484208801166
+      BusinessSign_RodLeft_Blue_Magic: 3120257481584085194
+      BusinessSign_RodLeft_Blue_MeleeWeapons: 3819052402760793418
+      BusinessSign_RodLeft_Blue_Potions: -7926663602691013554
+      BusinessSign_RodLeft_Blue_RangedWeapons: -7970974200714535048
+      BusinessSign_RodLeft_Blue_Shields: -336323335463292151
+      BusinessSign_RodLeft_Blue_Tools_0: -5485006457453662352
+      BusinessSign_RodLeft_Blue_Tools_1: -5812238361408277300
+      BusinessSign_RodLeft_Blue_Trinkets: -7368755522431067213
+      BusinessSign_RodLeft_Red_Armours: 1877550376749785484
+      BusinessSign_RodLeft_Red_Boots: 9140696190275671540
+      BusinessSign_RodLeft_Red_Gems: -1347992324471990711
+      BusinessSign_RodLeft_Red_Helmets: 3173419912402058238
+      BusinessSign_RodLeft_Red_Magic: -5111635079154101418
+      BusinessSign_RodLeft_Red_MeleeWeapons: -1852434185987837613
+      BusinessSign_RodLeft_Red_Potions: -1523712120672949881
+      BusinessSign_RodLeft_Red_RangedWeapons: 1996051854906557690
+      BusinessSign_RodLeft_Red_Shields: 4927898897211877469
+      BusinessSign_RodLeft_Red_Tools_0: 320036924787556739
+      BusinessSign_RodLeft_Red_Tools_1: 8666765022988136716
+      BusinessSign_RodLeft_Red_Trinkets: -4351552513100406536
+      BusinessSign_RodLeft_Yellow_Armours: -5032878832344400064
+      BusinessSign_RodLeft_Yellow_Boots: 3289144814098734050
+      BusinessSign_RodLeft_Yellow_Gems: -1918668223998621996
+      BusinessSign_RodLeft_Yellow_Helmets: 7403393603667500345
+      BusinessSign_RodLeft_Yellow_Magic: 3895743793489471948
+      BusinessSign_RodLeft_Yellow_MeleeWeapons: -2042729497169326956
+      BusinessSign_RodLeft_Yellow_Potions: 8261148715921776142
+      BusinessSign_RodLeft_Yellow_RangedWeapons: 4985389072309036133
+      BusinessSign_RodLeft_Yellow_Shields: 2850451191889576474
+      BusinessSign_RodLeft_Yellow_Tools_0: -3133408810019496216
+      BusinessSign_RodLeft_Yellow_Tools_1: 7668991105373191057
+      BusinessSign_RodLeft_Yellow_Trinkets: 4618827989429395533
+      BusinessSign_RodRight_Blue_Armours: 1096836913754317382
+      BusinessSign_RodRight_Blue_Boots: -1570905882761963618
+      BusinessSign_RodRight_Blue_Gems: -1904903253684247126
+      BusinessSign_RodRight_Blue_Helmets: 5337483902574048287
+      BusinessSign_RodRight_Blue_Magic: 9142195617959822721
+      BusinessSign_RodRight_Blue_MeleeWeapons: 1442710219499368820
+      BusinessSign_RodRight_Blue_Potions: 8610875020928233439
+      BusinessSign_RodRight_Blue_RangedWeapons: 5517668026897274389
+      BusinessSign_RodRight_Blue_Shields: 5404289194704842050
+      BusinessSign_RodRight_Blue_Tools_0: -1735315889558346091
+      BusinessSign_RodRight_Blue_Tools_1: -5584375603833260635
+      BusinessSign_RodRight_Blue_Trinkets: 890230276695252520
+      BusinessSign_RodRight_Red_Armours: -1873185994244102958
+      BusinessSign_RodRight_Red_Boots: 8481645119530584323
+      BusinessSign_RodRight_Red_Gems: -7642594210386422517
+      BusinessSign_RodRight_Red_Helmets: -8366135579728758425
+      BusinessSign_RodRight_Red_Magic: -1139208271804918599
+      BusinessSign_RodRight_Red_MeleeWeapons: 1301735067579393100
+      BusinessSign_RodRight_Red_Potions: 449912660163522792
+      BusinessSign_RodRight_Red_RangedWeapons: -8042520138586143778
+      BusinessSign_RodRight_Red_Shields: 4507886466471149022
+      BusinessSign_RodRight_Red_Tools_0: 788494846693755685
+      BusinessSign_RodRight_Red_Tools_1: -5134910508056064801
+      BusinessSign_RodRight_Red_Trinkets: -2550054018116365912
+      BusinessSign_RodRight_Yellow_Armours: 6612350274308094098
+      BusinessSign_RodRight_Yellow_Boots: 7921841096758183860
+      BusinessSign_RodRight_Yellow_Gems: 6571402973160253905
+      BusinessSign_RodRight_Yellow_Helmets: -8674553209976547545
+      BusinessSign_RodRight_Yellow_Magic: -5047527461831235269
+      BusinessSign_RodRight_Yellow_MeleeWeapons: -1370135610300195114
+      BusinessSign_RodRight_Yellow_Potions: 690959672753303398
+      BusinessSign_RodRight_Yellow_RangedWeapons: -7865332794425150894
+      BusinessSign_RodRight_Yellow_Shields: -8802047644315426263
+      BusinessSign_RodRight_Yellow_Tools_0: -4542479889056179617
+      BusinessSign_RodRight_Yellow_Tools_1: 8598296895897311092
+      BusinessSign_RodRight_Yellow_Trinkets: -527088516512980077
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

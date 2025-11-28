@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: 0c25bb46476ddbd48a78d6e1c7c3a9d3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2405482616389918694
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_00
+  - first:
+      213: -3400806613968648237
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_00
+  - first:
+      213: -5622399279809030743
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_00
+  - first:
+      213: 519034194228894225
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_00
+  - first:
+      213: -7288364221876429941
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_01
+  - first:
+      213: 6786227358392754779
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_01
+  - first:
+      213: -3318381576112656771
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_01
+  - first:
+      213: -8480892528713783050
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_01
+  - first:
+      213: 1843311821787584184
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_02
+  - first:
+      213: -4062526139366854314
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_02
+  - first:
+      213: -8462098393123274964
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_02
+  - first:
+      213: -9144974856618846268
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_02
+  - first:
+      213: -3995626109036007394
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_03
+  - first:
+      213: 5754592785320198684
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_03
+  - first:
+      213: -2880458988829402377
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_03
+  - first:
+      213: -5140478472000385744
+    second: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_03
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a10a3b02e420e9ed0800000000000000
+      internalID: -2405482616389918694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d789902768edc0d0800000000000000
+      internalID: -3400806613968648237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a5129dc4a939f1b0800000000000000
+      internalID: -5622399279809030743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11a5b4589daf33700800000000000000
+      internalID: 519034194228894225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8b93690b578ada90800000000000000
+      internalID: -7288364221876429941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b52a906d3d58d2e50800000000000000
+      internalID: 6786227358392754779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7eaa9eb98db2f1d0800000000000000
+      internalID: -3318381576112656771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f820c7cd21dd4a80800000000000000
+      internalID: -8480892528713783050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b65debe552c49910800000000000000
+      internalID: 1843311821787584184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 651bc4c10020f97c0800000000000000
+      internalID: -4062526139366854314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2fbb777856909a80800000000000000
+      internalID: -8462098393123274964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c7da5fe1d5861180800000000000000
+      internalID: -9144974856618846268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e10f1ab393fac88c0800000000000000
+      internalID: -3995626109036007394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c12490c26ab6cdf40800000000000000
+      internalID: 5754592785320198684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa1ebc9fcd8608d0800000000000000
+      internalID: -2880458988829402377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03dcfdca01a59a8b0800000000000000
+      internalID: -5140478472000385744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_00: -2405482616389918694
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_01: -7288364221876429941
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_02: 1843311821787584184
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_0_03: -3995626109036007394
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_00: -3400806613968648237
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_01: 6786227358392754779
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_02: -4062526139366854314
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_1_03: 5754592785320198684
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_00: -5622399279809030743
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_01: -3318381576112656771
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_02: -8462098393123274964
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_2_03: -2880458988829402377
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_00: 519034194228894225
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_01: -8480892528713783050
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_02: -9144974856618846268
+      Minifantasy_CreaturesShadowSkeletonPumkinHorrorDmg_3_03: -5140478472000385744
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

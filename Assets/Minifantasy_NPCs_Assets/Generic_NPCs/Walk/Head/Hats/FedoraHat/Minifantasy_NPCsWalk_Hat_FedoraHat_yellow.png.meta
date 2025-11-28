@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 342e55d66470a6e4e9d6b11a649c52b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8093092339085569152
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_0
+  - first:
+      213: -7502138880422984591
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_1
+  - first:
+      213: -1333517978915552764
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_2
+  - first:
+      213: 4161786311470452875
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_3
+  - first:
+      213: -6207411192273565154
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_4
+  - first:
+      213: 8769060957398762657
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_5
+  - first:
+      213: 4102650110564723384
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_6
+  - first:
+      213: -6376328560473116950
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_7
+  - first:
+      213: -714810559274938396
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_8
+  - first:
+      213: 3322573850874561005
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_9
+  - first:
+      213: 3981208908850921153
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_10
+  - first:
+      213: 5488465440652616334
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_11
+  - first:
+      213: 2370535914576196860
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_12
+  - first:
+      213: 2317973121192165133
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_13
+  - first:
+      213: -3721592386942537039
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_14
+  - first:
+      213: -5848376094464618675
+    second: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0839e5a856f8faf80800000000000000
+      internalID: -8093092339085569152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 113
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 174cdb0bf6c03e790800000000000000
+      internalID: -7502138880422984591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 112
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4024425a6746e7de0800000000000000
+      internalID: -1333517978915552764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 113
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b809746a992a1c930800000000000000
+      internalID: 4161786311470452875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 80
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a00cda868dad9a0800000000000000
+      internalID: -6207411192273565154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 81
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a40083fa76f1b970800000000000000
+      internalID: 8769060957398762657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 80
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ba6dede98a8fe830800000000000000
+      internalID: 4102650110564723384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 81
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aee62dd15fab287a0800000000000000
+      internalID: -6376328560473116950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef08b4659b7416f0800000000000000
+      internalID: -714810559274938396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 49
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de1416940572c1e20800000000000000
+      internalID: 3322573850874561005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cefda4c868104730800000000000000
+      internalID: 3981208908850921153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 49
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e826b183d32fa2c40800000000000000
+      internalID: 5488465440652616334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf4be9bcad5d5e020800000000000000
+      internalID: 2370535914576196860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 17
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0fff87c5481b2020800000000000000
+      internalID: 2317973121192165133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 16
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b2fd71217f3a5cc0800000000000000
+      internalID: -3721592386942537039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 17
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4fcc889de466dea0800000000000000
+      internalID: -5848376094464618675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_0: -8093092339085569152
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_1: -7502138880422984591
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_10: 3981208908850921153
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_11: 5488465440652616334
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_12: 2370535914576196860
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_13: 2317973121192165133
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_14: -3721592386942537039
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_15: -5848376094464618675
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_2: -1333517978915552764
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_3: 4161786311470452875
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_4: -6207411192273565154
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_5: 8769060957398762657
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_6: 4102650110564723384
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_7: -6376328560473116950
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_8: -714810559274938396
+      Minifantasy_NPCsWalk_Hat_FedoraHat_yellow_9: 3322573850874561005
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

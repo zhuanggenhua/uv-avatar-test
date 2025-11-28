@@ -1,0 +1,53 @@
+-----------------------------------------------------------
+
+Table of Contents
+1. Placing Objects in the Scene ................ line 14
+2. Prop Variants ............................... line 24
+3. Pivot Points ................................ line 28
+4. Demos ....................................... line 32
+5. Scripts ..................................... line 42
+6. Game Display ................................ line 47
+7. Questions ................................... line 52
+
+-----------------------------------------------------------
+
+1. Placing Objects in the Scene
+	We recommend one of these two options for maintaining crisp pixels while moving objects around the scene:
+		1. Grid Snapping
+			Set Size = 0.125 (1 pixel)
+			You can change this setting in "Edit > Grid and Snap Settings > World Grid > Size."
+		2. Grid and Snap Increment Snap
+			Set Move = 0.125 (1 pixel) or 0.0625 (1/2 pixel)
+			You can change this setting in "Edit > Grid and Snap Settings > Increment Snap > Move."
+			Then hold "ctrl" while moving objects to increment their position based on the move setting.
+
+2. Prop Variants
+	Props that have multiple variations include a script to switch between variants with ease. 
+	To change between prop variants, find the CP1 "Prop" Script component on a prop prefab and use the selection dropdown.
+
+3. Pivot Points
+	The pivot points of all sprites EXCEPT trees are centered.
+	Tree pivot points (and Tree shadows) are set to bottom center. This is to make placement of trees relative to other objects easier.
+
+4. Demos
+	Character Animations Demo
+		- Change the active animation by clicking the buttons on the Animations menu.
+		- For animations with more than one orientation, click the direction arrow buttons to change the animation direction.
+	Props Demo
+		- Use WASD to move the camera.
+		- Use the Reset Camera button to return the Camera to the scene's center. 
+		- Use the OFF and ON buttons to turn animations in the scene to the respective state.
+		- Click the Hide buttons to hide the panels from view, making it easier to view the scene.
+
+5. Scripts
+	None of the scripts included in this pack are necessary to use the basic pack contents.
+
+	- CameraController: used to control the demo camera
+
+6. Game Display
+	The demos were created using a 16:9 Aspect Ratio. 
+	If you have issues with the game screen displaying incorrectly, try setting the display to 16:9 Aspect and the Scale to 1x.
+	Also, try toggling the "Run In Edit Mode" button on the Pixel Perfect Camera component located on the Main Camera gameobject for crisp pixels in the game window while editing.
+
+7. Questions
+	If you have any questions or concerns, contact us at: krishna.palacio@gmail.com

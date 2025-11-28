@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: b42e93b3a8aaca141bc513dbf8a205a2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1999410907550316588
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_00
+  - first:
+      213: 2324403441862984152
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_00
+  - first:
+      213: -2271029924905870563
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_00
+  - first:
+      213: 6828316591438666263
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_01
+  - first:
+      213: 7270362670097371245
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_01
+  - first:
+      213: -7556079281291063410
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_01
+  - first:
+      213: -6951883430267375426
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_02
+  - first:
+      213: 7939410670115237113
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_02
+  - first:
+      213: 6225696285609936659
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_02
+  - first:
+      213: -7316802357167855832
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_03
+  - first:
+      213: -169691358962009053
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_03
+  - first:
+      213: 1622670494016540486
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_03
+  - first:
+      213: 2195184131692681545
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_04
+  - first:
+      213: -5227454483563934226
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_04
+  - first:
+      213: -2815916573413323953
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_04
+  - first:
+      213: 7293235625930250392
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_05
+  - first:
+      213: 1114047283922590221
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_05
+  - first:
+      213: 2052874304956253055
+    second: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_05
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c28f39880a55fbb10800000000000000
+      internalID: 1999410907550316588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d140fa7d90f14020800000000000000
+      internalID: 2324403441862984152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1b14b3d05eab70e0800000000000000
+      internalID: -2271029924905870563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71a9b9e03cd03ce50800000000000000
+      internalID: 6828316591438666263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d601a63145485e460800000000000000
+      internalID: 7270362670097371245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f05ff6de9632790800000000000000
+      internalID: -7556079281291063410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb03df25ad2f58f90800000000000000
+      internalID: -6951883430267375426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fc2a2e80f37e2e60800000000000000
+      internalID: 7939410670115237113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 317cf3f59cd166650800000000000000
+      internalID: 6225696285609936659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827e441b50f757a90800000000000000
+      internalID: -7316802357167855832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32cbd9bab9225adf0800000000000000
+      internalID: -169691358962009053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64f0d5f8732e48610800000000000000
+      internalID: 1622670494016540486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 949dd12565cd67e10800000000000000
+      internalID: 2195184131692681545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed06abe7d95477b0800000000000000
+      internalID: -5227454483563934226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4b409cbbcadbe8d0800000000000000
+      internalID: -2815916573413323953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 898dbca1927c63560800000000000000
+      internalID: 7293235625930250392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0ad13d2a14e57f00800000000000000
+      internalID: 1114047283922590221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f73c173cd464d7c10800000000000000
+      internalID: 2052874304956253055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_00: 1999410907550316588
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_01: 6828316591438666263
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_02: -6951883430267375426
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_03: -7316802357167855832
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_04: 2195184131692681545
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_0_05: 7293235625930250392
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_00: 2324403441862984152
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_01: 7270362670097371245
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_02: 7939410670115237113
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_03: -169691358962009053
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_04: -5227454483563934226
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_1_05: 1114047283922590221
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_00: -2271029924905870563
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_01: -7556079281291063410
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_02: 6225696285609936659
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_03: 1622670494016540486
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_04: -2815916573413323953
+      Minifantasy_CreaturesDwarfYellowBearChargedAttack_2_05: 2052874304956253055
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,897 @@
+fileFormatVersion: 2
+guid: 05adaf89f8f7ea54184bf957979607eb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3307467743147484687
+    second: Mandrake_Pickup_Icon_Ground
+  - first:
+      213: 8955730841050973342
+    second: Mandrake_Node
+  - first:
+      213: 1328264053626705134
+    second: Mushroom_Node
+  - first:
+      213: -4489831892521160636
+    second: Belladonna_Node
+  - first:
+      213: -4680563337093907471
+    second: Mushroom_Pickup_Icon
+  - first:
+      213: 2323830494395718083
+    second: Henbane_Pickup_Icon_Ground
+  - first:
+      213: -8513866105293649151
+    second: Belladonna_Pickup_Icon_Ground
+  - first:
+      213: 6190070436621093130
+    second: Mandrake_Pickup_Icon
+  - first:
+      213: -5953926677268199482
+    second: Henbane_Pickup_Icon
+  - first:
+      213: -4203337797950015301
+    second: Belladonna_Pickup_Icon
+  - first:
+      213: -8710710874333757493
+    second: Poppy_Pickup_Icon
+  - first:
+      213: 8203427599085575539
+    second: Mandrake_Inventory_Icon
+  - first:
+      213: 6728981081477955551
+    second: Mushroom_Inventory_Icon
+  - first:
+      213: -2960687208333238901
+    second: Henbane_Inventory_Icon
+  - first:
+      213: 5770642167645246122
+    second: Belladonna_Inventory_Icon
+  - first:
+      213: 7248706611706167228
+    second: Poppy_Inventory_Icon
+  - first:
+      213: 6859435675234989406
+    second: Mandrake_Refined_Powder_Icon
+  - first:
+      213: 4027456862217215229
+    second: Mushroom_Refined_Powder_Icon
+  - first:
+      213: 3766817469802230347
+    second: Henbane_Refined_Powder_Icon
+  - first:
+      213: 6338331660107078208
+    second: Belladonna_Refined_Powder_Icon
+  - first:
+      213: 926265031772966476
+    second: Poppy_Refined_Powder_Icon
+  - first:
+      213: -8511222469901163748
+    second: Henbane_Node
+  - first:
+      213: -2643093613174859130
+    second: Henbane_Node_Depleted
+  - first:
+      213: 4329058792426970146
+    second: Mushroom_Node_Depleted
+  - first:
+      213: 4989568776391983917
+    second: Mushroom_Pickup_Icon_Ground
+  - first:
+      213: 631552430565115153
+    second: Poppy_Node
+  - first:
+      213: 3499032377040149703
+    second: Poppy_Node_Depleted
+  - first:
+      213: 4318755377861267242
+    second: Belladonna_Node_Depleted
+  - first:
+      213: -772322659893420744
+    second: Poppy_Pickup_Icon_Ground
+  - first:
+      213: 1885079224400132644
+    second: Mandrake_Node_Depleted
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mandrake_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 50
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f991af7c938912d0800000000000000
+      internalID: -3307467743147484687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mandrake_Node
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e948adc10c5294c70800000000000000
+      internalID: 8955730841050973342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Node
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee4175c8e11fe6210800000000000000
+      internalID: 1328264053626705134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Belladonna_Node
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4407e019ea9e0b1c0800000000000000
+      internalID: -4489831892521160636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 41
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbfccf817c4b0fb0800000000000000
+      internalID: -4680563337093907471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Henbane_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 50
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c95da0c587ef3020800000000000000
+      internalID: 2323830494395718083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Belladonna_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 50
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10bcbb8b2eba8d980800000000000000
+      internalID: -8513866105293649151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mandrake_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 41
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a098275044c87e550800000000000000
+      internalID: 6190070436621093130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Henbane_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 41
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c705b67b376f5da0800000000000000
+      internalID: -5953926677268199482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Belladonna_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 41
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb877320b8ebaa5c0800000000000000
+      internalID: -4203337797950015301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poppy_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 41
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf34327c965d1780800000000000000
+      internalID: -8710710874333757493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mandrake_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 24
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37d912010fd68d170800000000000000
+      internalID: 8203427599085575539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 25
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf31d554a4226d50800000000000000
+      internalID: 6728981081477955551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Henbane_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d1140aba689e6d0800000000000000
+      internalID: -2960687208333238901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Belladonna_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa292603a70751050800000000000000
+      internalID: 5770642167645246122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poppy_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 24
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf75cf0244989460800000000000000
+      internalID: 7248706611706167228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mandrake_Refined_Powder_Icon
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 9
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e55f50e576c913f50800000000000000
+      internalID: 6859435675234989406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Refined_Powder_Icon
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 9
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc9aa48da664e730800000000000000
+      internalID: 4027456862217215229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Henbane_Refined_Powder_Icon
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 9
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b423c45088c664430800000000000000
+      internalID: 3766817469802230347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Belladonna_Refined_Powder_Icon
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 9
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04a5b4d101746f750800000000000000
+      internalID: 6338331660107078208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poppy_Refined_Powder_Icon
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 9
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e81ba8321cadc00800000000000000
+      internalID: 926265031772966476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Henbane_Node
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13e73d024012e980800000000000000
+      internalID: -8511222469901163748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Henbane_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68adb9ecc58d15bd0800000000000000
+      internalID: -2643093613174859130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c146e0908e31c30800000000000000
+      internalID: 4329058792426970146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 50
+        width: 6
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d238933cd528e3540800000000000000
+      internalID: 4989568776391983917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poppy_Node
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1154ed8e699b3c800800000000000000
+      internalID: 631552430565115153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poppy_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cc9113886f0f8030800000000000000
+      internalID: 3499032377040149703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Belladonna_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f8a39622d4feb30800000000000000
+      internalID: 4318755377861267242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poppy_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 50
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d511df1a82845f0800000000000000
+      internalID: -772322659893420744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mandrake_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42ab6d72195292a10800000000000000
+      internalID: 1885079224400132644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Belladonna_Inventory_Icon: 5770642167645246122
+      Belladonna_Node: -4489831892521160636
+      Belladonna_Node_Depleted: 4318755377861267242
+      Belladonna_Pickup_Icon: -4203337797950015301
+      Belladonna_Pickup_Icon_Ground: -8513866105293649151
+      Belladonna_Refined_Powder_Icon: 6338331660107078208
+      Henbane_Inventory_Icon: -2960687208333238901
+      Henbane_Node: -8511222469901163748
+      Henbane_Node_Depleted: -2643093613174859130
+      Henbane_Pickup_Icon: -5953926677268199482
+      Henbane_Pickup_Icon_Ground: 2323830494395718083
+      Henbane_Refined_Powder_Icon: 3766817469802230347
+      Mandrake_Inventory_Icon: 8203427599085575539
+      Mandrake_Node: 8955730841050973342
+      Mandrake_Node_Depleted: 1885079224400132644
+      Mandrake_Pickup_Icon: 6190070436621093130
+      Mandrake_Pickup_Icon_Ground: -3307467743147484687
+      Mandrake_Refined_Powder_Icon: 6859435675234989406
+      Mushroom_Inventory_Icon: 6728981081477955551
+      Mushroom_Node: 1328264053626705134
+      Mushroom_Node_Depleted: 4329058792426970146
+      Mushroom_Pickup_Icon: -4680563337093907471
+      Mushroom_Pickup_Icon_Ground: 4989568776391983917
+      Mushroom_Refined_Powder_Icon: 4027456862217215229
+      Poppy_Inventory_Icon: 7248706611706167228
+      Poppy_Node: 631552430565115153
+      Poppy_Node_Depleted: 3499032377040149703
+      Poppy_Pickup_Icon: -8710710874333757493
+      Poppy_Pickup_Icon_Ground: -772322659893420744
+      Poppy_Refined_Powder_Icon: 926265031772966476
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: e0cfff69325689445a16762efdb814c4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8137878237717525545
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_0
+  - first:
+      213: 2957059379375857989
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_1
+  - first:
+      213: -2152486852430768524
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_2
+  - first:
+      213: 857634318858540900
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_3
+  - first:
+      213: -1989338325733532113
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_4
+  - first:
+      213: -803904481287391920
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_5
+  - first:
+      213: -7825135813868107458
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_6
+  - first:
+      213: 5937413645859489584
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_7
+  - first:
+      213: -6557022728917316529
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_8
+  - first:
+      213: -2070072769710585849
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_9
+  - first:
+      213: 7266794451223374079
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_10
+  - first:
+      213: -4561273058051419089
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_11
+  - first:
+      213: -7387445537651120478
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_12
+  - first:
+      213: 2327968474381950171
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_13
+  - first:
+      213: -6065564851485313704
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_14
+  - first:
+      213: -5155927462414152474
+    second: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 924f880142d8fe070800000000000000
+      internalID: 8137878237717525545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 112
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5416f6f96d5990920800000000000000
+      internalID: 2957059379375857989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4765a21bc94d022e0800000000000000
+      internalID: -2152486852430768524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 112
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4675fba7edde6eb00800000000000000
+      internalID: 857634318858540900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2e159c25537464e0800000000000000
+      internalID: -1989338325733532113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 80
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 055358f2225f7d4f0800000000000000
+      internalID: -803904481287391920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e394437cf68876390800000000000000
+      internalID: -7825135813868107458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 80
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 037030ec04ee56250800000000000000
+      internalID: 5937413645859489584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_8
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c88b29196c005a0800000000000000
+      internalID: -6557022728917316529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_9
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 48
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 708013e98cf9543e0800000000000000
+      internalID: -2070072769710585849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_10
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff8e2f06d07d8d460800000000000000
+      internalID: 7266794451223374079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_11
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 48
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f241943025a13b0c0800000000000000
+      internalID: -4561273058051419089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6a2c28c658a7990800000000000000
+      internalID: -7387445537651120478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_13
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 16
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdc18db4efa9e4020800000000000000
+      internalID: 2327968474381950171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8557f1187e8c2dba0800000000000000
+      internalID: -6065564851485313704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_15
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 16
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ec8f1b4a477278b0800000000000000
+      internalID: -5155927462414152474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_0: 8137878237717525545
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_1: 2957059379375857989
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_10: 7266794451223374079
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_11: -4561273058051419089
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_12: -7387445537651120478
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_13: 2327968474381950171
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_14: -6065564851485313704
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_15: -5155927462414152474
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_2: -2152486852430768524
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_3: 857634318858540900
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_4: -1989338325733532113
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_5: -803904481287391920
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_6: -7825135813868107458
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_7: 5937413645859489584
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_8: -6557022728917316529
+      Minifantasy_NPCsWalk_Hat_PomPomBeanie_purple_9: -2070072769710585849
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

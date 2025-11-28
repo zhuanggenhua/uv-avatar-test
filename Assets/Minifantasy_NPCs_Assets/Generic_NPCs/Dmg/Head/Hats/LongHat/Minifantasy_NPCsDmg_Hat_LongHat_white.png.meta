@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 8db75f77208cafa4780e69975b2908c7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5737225750386801118
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_0
+  - first:
+      213: -8642371875280745586
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_1
+  - first:
+      213: 3934220674901218970
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_2
+  - first:
+      213: -2105542270893811789
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_3
+  - first:
+      213: 6995073417906301145
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_4
+  - first:
+      213: -7771057767458646639
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_5
+  - first:
+      213: 8590084106384210327
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_6
+  - first:
+      213: 2492434950270371603
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_7
+  - first:
+      213: -5755949647992983935
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_8
+  - first:
+      213: 8468825897132892801
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_9
+  - first:
+      213: -6391506214938155637
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_10
+  - first:
+      213: -3584064615210136496
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_11
+  - first:
+      213: 82857578531513213
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_12
+  - first:
+      213: 3660510428396487251
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_13
+  - first:
+      213: -3732242782812866218
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_14
+  - first:
+      213: -7740043229386764079
+    second: Minifantasy_NPCsDmg_Hat_LongHat_white_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed977004c68be9f40800000000000000
+      internalID: 5737225750386801118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 112
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8b80159190201880800000000000000
+      internalID: -8642371875280745586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 112
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a961c730cd8299630800000000000000
+      internalID: 3934220674901218970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 112
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b71ec3d57c97c2e0800000000000000
+      internalID: -2105542270893811789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 80
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d8251c463e731160800000000000000
+      internalID: 6995073417906301145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 80
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19556912228a72490800000000000000
+      internalID: -7771057767458646639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 80
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79972c78bfb163770800000000000000
+      internalID: 8590084106384210327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 80
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31742acb168e69220800000000000000
+      internalID: 2492434950270371603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18ee75e9a42ce10b0800000000000000
+      internalID: -5755949647992983935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 48
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1822c3f9840578570800000000000000
+      internalID: 8468825897132892801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b85e8ee06fecc47a0800000000000000
+      internalID: -6391506214938155637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 48
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05c4a5eb838d24ec0800000000000000
+      internalID: -3584064615210136496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73e157578e562100800000000000000
+      internalID: 82857578531513213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3528f2527debcc230800000000000000
+      internalID: 3660510428396487251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6597cea96f8643cc0800000000000000
+      internalID: -3732242782812866218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_LongHat_white_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d01c3ef0b7d59490800000000000000
+      internalID: -7740043229386764079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_Hat_LongHat_white_0: 5737225750386801118
+      Minifantasy_NPCsDmg_Hat_LongHat_white_1: -8642371875280745586
+      Minifantasy_NPCsDmg_Hat_LongHat_white_10: -6391506214938155637
+      Minifantasy_NPCsDmg_Hat_LongHat_white_11: -3584064615210136496
+      Minifantasy_NPCsDmg_Hat_LongHat_white_12: 82857578531513213
+      Minifantasy_NPCsDmg_Hat_LongHat_white_13: 3660510428396487251
+      Minifantasy_NPCsDmg_Hat_LongHat_white_14: -3732242782812866218
+      Minifantasy_NPCsDmg_Hat_LongHat_white_15: -7740043229386764079
+      Minifantasy_NPCsDmg_Hat_LongHat_white_2: 3934220674901218970
+      Minifantasy_NPCsDmg_Hat_LongHat_white_3: -2105542270893811789
+      Minifantasy_NPCsDmg_Hat_LongHat_white_4: 6995073417906301145
+      Minifantasy_NPCsDmg_Hat_LongHat_white_5: -7771057767458646639
+      Minifantasy_NPCsDmg_Hat_LongHat_white_6: 8590084106384210327
+      Minifantasy_NPCsDmg_Hat_LongHat_white_7: 2492434950270371603
+      Minifantasy_NPCsDmg_Hat_LongHat_white_8: -5755949647992983935
+      Minifantasy_NPCsDmg_Hat_LongHat_white_9: 8468825897132892801
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

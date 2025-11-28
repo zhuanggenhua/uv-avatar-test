@@ -1,0 +1,1794 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.2/staging' branch; Version is '6000.2.9f1 (e0c4e791ab71) revision 14730471'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 23777 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+Date: 2025-11-28T01:04:56Z
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao" at "2025-11-28T01:04:56.1411613Z"
+
+COMMAND LINE ARGUMENTS:
+D:\gameObject\develop\Editor\6000.2.9f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+9965
+-licensingIpc
+LicenseClient-zhuagenbao
+-job-worker-count
+7
+-background-job-worker-count
+8
+-gc-helper-count
+1
+-name
+AssetImport
+Successfully changed project path to: C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
+C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [38116]  Target information:
+
+Player connection [38116]  * "[IP] 192.168.2.6 [Port] 0 [Flags] 2 [Guid] 3389120153 [EditorId] 3389120153 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KP4589M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [38116] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [38116] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 7
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 3480, path: "D:/gameObject/develop/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.3+a4e98f1
+  Session Id:              85eb8b1374f4483c8d62fe48a5732a3b
+  Correlation Id:          2b31e98de914352a7463e6f9bde81cdd
+  External correlation Id: 7463094088528106385
+  Machine Id:              K60tJ5c+ydKCg23vUYm+4PjQmTY=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-zhuagenbao" (connect: 0.00s, validation: 0.00s, handshake: 0.06s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao-notifications" at "2025-11-28T01:04:56.2017387Z"
+[Licensing::Module] Licensing Background thread has ended after 0.06s
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 2.27 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.2.9f1 (e0c4e791ab71)
+[Subsystems] Discovering subsystems at path D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4060 Laptop GPU (ID=0x28a0)
+    Vendor:   NVIDIA
+    VRAM:     7957 MB
+    Driver:   32.0.15.7283
+Initialize mono
+Mono path[0] = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/Managed'
+Mono path[1] = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56480
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001458 seconds.
+- Loaded All Assemblies, in  0.612 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.426 seconds
+Domain Reload Profiling: 1036ms
+	BeginReloadAssembly (184ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (42ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (298ms)
+		LoadAssemblies (181ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (293ms)
+			TypeCache.Refresh (290ms)
+				TypeCache.ScanAssembly (267ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (426ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (369ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (58ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (87ms)
+			ProcessInitializeOnLoadAttributes (162ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Import Worker Mode flag is 0x00
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: 2025-12-08T00:41:56Z
+[Licensing::Module] License group:
+  Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
+  Product: Unity Personal Version
+  Type: Assigned
+  Expiration: Unlimited
+- Loaded All Assemblies, in  1.287 seconds
+Refreshing native plugins compatible for Editor in 1.23 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.311 seconds
+Domain Reload Profiling: 2595ms
+	BeginReloadAssembly (186ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (40ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (1006ms)
+		LoadAssemblies (591ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (504ms)
+			TypeCache.Refresh (416ms)
+				TypeCache.ScanAssembly (399ms)
+			BuildScriptInfoCaches (73ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1312ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1090ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (9ms)
+			BeforeProcessingInitializeOnLoad (314ms)
+			ProcessInitializeOnLoadAttributes (588ms)
+			ProcessInitializeOnLoadMethodAttributes (172ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (8ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Refreshing native plugins compatible for Editor in 5.66 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 36 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7541 unused Assets / (7.7 MB). Loaded Objects now: 8216.
+Memory consumption went from 160.3 MB to 152.5 MB.
+Total: 20.679600 ms (FindLiveObjects: 1.624800 ms CreateObjectMapping: 1.838000 ms MarkObjects: 9.884100 ms  DeleteObjects: 7.330800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 5689.704270 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_orange.png
+  artifactKey: Guid(5f2754694f2fc7343ac23bd270930805) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_orange.png using Guid(5f2754694f2fc7343ac23bd270930805) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4a6058038a5d66e157d8fa2c224ea720') in 0.1535199 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Minotaur/Minifantasy_CreaturesMinotaurAttack.png
+  artifactKey: Guid(07a61d8a8b457aa47813c51a333516b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Minotaur/Minifantasy_CreaturesMinotaurAttack.png using Guid(07a61d8a8b457aa47813c51a333516b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cc29702019e9621e1dff6ff3e349c664') in 0.1145158 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 34
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinWalk.png
+  artifactKey: Guid(9927284a6829a5b43ab73c5f568d6125) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinWalk.png using Guid(9927284a6829a5b43ab73c5f568d6125) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7d8dd8f602bba8ba251e721821f5d253') in 0.0685975 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_blue.png
+  artifactKey: Guid(4ccb02df7e3d9a1429ca5f1a07e3cb92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_blue.png using Guid(4ccb02df7e3d9a1429ca5f1a07e3cb92) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8480dfe9382947b3361bf2b1af67dc74') in 0.014315 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Hood/Minifantasy_NPCsDmg_Hat_Hood_turquoise.png
+  artifactKey: Guid(05c8c5203b0c1e24f89076482784c0ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Hood/Minifantasy_NPCsDmg_Hat_Hood_turquoise.png using Guid(05c8c5203b0c1e24f89076482784c0ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6958c75956e4fc7e53f37eb2f160e7cf') in 0.0490834 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_blue.png
+  artifactKey: Guid(6fc6db703a8c7014fb0ec40a88d9a466) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_blue.png using Guid(6fc6db703a8c7014fb0ec40a88d9a466) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6f54dc499a6a002470bb546bd73eedcf') in 0.0579997 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/ShoulderPads/Minifantasy_NPCsIdle_ShoulderPads_yellow.png
+  artifactKey: Guid(57ec9ffaf77d84b44b5b0aa7bc887d08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/ShoulderPads/Minifantasy_NPCsIdle_ShoulderPads_yellow.png using Guid(57ec9ffaf77d84b44b5b0aa7bc887d08) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c480b8cf7a9972d8e685f4394ff1ab76') in 0.0126403 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Trousers/Minifantasy_NPCsWalk_Trousers_white.png
+  artifactKey: Guid(1bc8632dc57cb484e837072a8b62e670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Trousers/Minifantasy_NPCsWalk_Trousers_white.png using Guid(1bc8632dc57cb484e837072a8b62e670) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'da31d370fb7f9e79c5c1f5cfa2c5b704') in 0.013882 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000703 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/ShoulderPads/Minifantasy_NPCsWalk_ShoulderPads_yellow.png
+  artifactKey: Guid(9df7ddf0a77e26948af6dca04d7040a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/ShoulderPads/Minifantasy_NPCsWalk_ShoulderPads_yellow.png using Guid(9df7ddf0a77e26948af6dca04d7040a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3520ea36079e158b13630c606b97ae80') in 0.0113818 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Dwarf, Trasgo/Minifantasy_CreaturesShadowDwarfIdle.png
+  artifactKey: Guid(d6d554225a09cc544b7b91ac955e00c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Dwarf, Trasgo/Minifantasy_CreaturesShadowDwarfIdle.png using Guid(d6d554225a09cc544b7b91ac955e00c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dd9b789284495d41c5f22f0886ccfc77') in 0.1883132 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 66
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Jeweller/GIFs/Minifantasy_NPCsJewellerDie.gif
+  artifactKey: Guid(c53fec154597e6c46b2b34f9f195f23c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Jeweller/GIFs/Minifantasy_NPCsJewellerDie.gif using Guid(c53fec154597e6c46b2b34f9f195f23c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3c5e5f9ed43f62b165dbff74e5f88433') in 0.0195319 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_red.png
+  artifactKey: Guid(0ae493bed10fce44b9500d5f6ec5e613) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_red.png using Guid(0ae493bed10fce44b9500d5f6ec5e613) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e1f819c1f3835aee80c83fe260b3c25d') in 0.0143152 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingIdle.png
+  artifactKey: Guid(86ea2d790d91025439ab529afbdd2bc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingIdle.png using Guid(86ea2d790d91025439ab529afbdd2bc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '33c3fdd5d080c2a1cbce04ec3b0c1dea') in 0.183183 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 67
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_black.png
+  artifactKey: Guid(dc5b7915071ce2c43b330b84c130f727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_black.png using Guid(dc5b7915071ce2c43b330b84c130f727) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '449c9b15bb0a446d30fa23151ed8c221') in 0.0132788 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_blackleather.png
+  artifactKey: Guid(795e43ef3ea82bb4ea40cee400ff655e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_blackleather.png using Guid(795e43ef3ea82bb4ea40cee400ff655e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '66aa84f0baf92956c286e04b950f8c86') in 0.0523767 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/LongBeard/Minifantasy_NPCsWalk_FacialHair_LongBeard_red.png
+  artifactKey: Guid(20aa8e3a7c46cf84db55f2b492e499ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/LongBeard/Minifantasy_NPCsWalk_FacialHair_LongBeard_red.png using Guid(20aa8e3a7c46cf84db55f2b492e499ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '570ba0f8b0fd9ef2761d00e45ec48a7f') in 0.0189285 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Centaur/Minifantasy_CreaturesShadowCentaurIdle.png
+  artifactKey: Guid(62f2a55230ed750489e94dd84c4cd656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Centaur/Minifantasy_CreaturesShadowCentaurIdle.png using Guid(62f2a55230ed750489e94dd84c4cd656) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7212c102c1e784e74cc6377978e60f6f') in 0.1650805 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 66
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinAttack.png
+  artifactKey: Guid(f8a8d7514dc6d964da8fb1b112c91f28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Goblin/Minifantasy_CreaturesGoblinAttack.png using Guid(f8a8d7514dc6d964da8fb1b112c91f28) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '25e48b65ce47bc3783a8c92b70782ac2') in 0.04878 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000085 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_grey.png
+  artifactKey: Guid(4d0d14cef238681488f6125dd0b8aa37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_grey.png using Guid(4d0d14cef238681488f6125dd0b8aa37) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '404019fd5576bc4a521bf2c959a509ed') in 0.0550404 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_whiteleather.png
+  artifactKey: Guid(1393a7e6ac3ddbc498cd28f73dc6c026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_whiteleather.png using Guid(1393a7e6ac3ddbc498cd28f73dc6c026) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6013d313c0c795f3b9c47666fee6d40d') in 0.0588747 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Bubble/Minifantasy_NPCsDmg_HumanHair_Bubble_blonde.png
+  artifactKey: Guid(36413500b66c8c349b4bb600a84bb767) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Bubble/Minifantasy_NPCsDmg_HumanHair_Bubble_blonde.png using Guid(36413500b66c8c349b4bb600a84bb767) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cb003f3b8868eff760ab372038b6bd79') in 0.054339 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Long/Minifantasy_NPCsDmg_HumanHair_Long_pink.png
+  artifactKey: Guid(b70f66a8de2b9274bbb3bab427e86fd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Long/Minifantasy_NPCsDmg_HumanHair_Long_pink.png using Guid(b70f66a8de2b9274bbb3bab427e86fd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '791752c213761eb8f8f1546107488ab9') in 0.0579 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Mother Slime/Blue/Minifantasy_CreaturesShadowBlueMotherSlimeDie.png
+  artifactKey: Guid(ae78b5ac5149c6b46a295fbe9d3c659c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Mother Slime/Blue/Minifantasy_CreaturesShadowBlueMotherSlimeDie.png using Guid(ae78b5ac5149c6b46a295fbe9d3c659c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00dd9d86458c6d2e09e8e43dad7423e4') in 0.0452311 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Slime/Blue/Minifantasy_CreaturesShadowBlueSlimeDmg.png
+  artifactKey: Guid(3152269d906f5b0498ff623b197797f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Slime/Blue/Minifantasy_CreaturesShadowBlueSlimeDmg.png using Guid(3152269d906f5b0498ff623b197797f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bfa311d101a93a92d32a547f11f2f517') in 0.0535441 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Strap/Minifantasy_NPCsWalk_FacialHair_ChinStrap_brown.png
+  artifactKey: Guid(3a20b64f047a7e04ca181b4dee2e3c2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Strap/Minifantasy_NPCsWalk_FacialHair_ChinStrap_brown.png using Guid(3a20b64f047a7e04ca181b4dee2e3c2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ca84c6bbad19f20620c87bdec4551521') in 0.0159035 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Jeweller/Minifantasy_NPCsJewellerWorking.png
+  artifactKey: Guid(6452f4aa15ffc0444ac246fc5cb5b7c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Jeweller/Minifantasy_NPCsJewellerWorking.png using Guid(6452f4aa15ffc0444ac246fc5cb5b7c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a84c7019f1110142d122f88ef77b3ef3') in 0.0572978 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Elf/Minifantasy_CreaturesElfWalk.png
+  artifactKey: Guid(edb35abdd1bb3cd47bc9fae26d64b9de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Elf/Minifantasy_CreaturesElfWalk.png using Guid(edb35abdd1bb3cd47bc9fae26d64b9de) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '09752bd5c977954051ea7d3019ee4621') in 0.0561791 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_turquoise.png
+  artifactKey: Guid(ae96a218d594b5841b745782bfec0898) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_turquoise.png using Guid(ae96a218d594b5841b745782bfec0898) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4dc575e6eb5b75eb8a90a28a14a12c35') in 0.0108856 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Bandana/Minifantasy_NPCsDmg_Hat_Bandana_turquoise.png
+  artifactKey: Guid(65cd1556b729da142802dc70a29c6976) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Bandana/Minifantasy_NPCsDmg_Hat_Bandana_turquoise.png using Guid(65cd1556b729da142802dc70a29c6976) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a216f5b1b9511a293afca16c38dc34f0') in 0.0137119 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shoes/Minifantasy_NPCsWalk_Shoes_black.png
+  artifactKey: Guid(093edc14df6bf52468ea06a81d8b1730) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shoes/Minifantasy_NPCsWalk_Shoes_black.png using Guid(093edc14df6bf52468ea06a81d8b1730) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '36bc61109a597d90c82ec00b3c10443d') in 0.0111329 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf_Yellow_Beard/Minifantasy_CreaturesDwarfYellowBearJump.png
+  artifactKey: Guid(5de9b2ab761347c4c84cd87dcc4a596a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf_Yellow_Beard/Minifantasy_CreaturesDwarfYellowBearJump.png using Guid(5de9b2ab761347c4c84cd87dcc4a596a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4546ad566b5b4e8435996ce4adc2f1db') in 0.0469106 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Elf/Minifantasy_CreaturesElfChargedAttack.png
+  artifactKey: Guid(8595480a0b05edb4bb0d868ac2f6cf01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Elf/Minifantasy_CreaturesElfChargedAttack.png using Guid(8595480a0b05edb4bb0d868ac2f6cf01) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e70a745efc1c92216b1ab67c9ec76170') in 0.0581338 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Zombie_Idle.png
+  artifactKey: Guid(cc7582958d489594ca70feb1e858eff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Zombie_Idle.png using Guid(cc7582958d489594ca70feb1e858eff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'caf1e2d540a53018259176861317ae9f') in 0.0545698 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 22
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/PompomBeanie/Minifantasy_NPCsDmg_Hat_PomPomBeanie_purple.png
+  artifactKey: Guid(d818063e180aabd4ea9b6bc64e7c70ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/PompomBeanie/Minifantasy_NPCsDmg_Hat_PomPomBeanie_purple.png using Guid(d818063e180aabd4ea9b6bc64e7c70ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '04e4ba01c38489ad8a18c68a7204db84') in 0.0514912 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000062 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Tailor/GIFs/Minifantasy_NPCsTailorWalk.gif
+  artifactKey: Guid(e3289936764284247b200150de4b2687) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Tailor/GIFs/Minifantasy_NPCsTailorWalk.gif using Guid(e3289936764284247b200150de4b2687) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2ec9af25f1b5c1d0d6b4346940f0c6b2') in 0.0182699 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_white.png
+  artifactKey: Guid(530072af2bba18d4793dd65fb883edcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_white.png using Guid(530072af2bba18d4793dd65fb883edcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '40c064fe7dd34f414821f2012a2843b2') in 0.011565 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime/SlimeGreen_JumpAttack.png
+  artifactKey: Guid(014438251ee11de4ca189aaa88fa790a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Green_Slime/SlimeGreen_JumpAttack.png using Guid(014438251ee11de4ca189aaa88fa790a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8b064e0036d7ed63a8a37b0fc8e91f92') in 0.0468658 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_white.png
+  artifactKey: Guid(16d41f0a18d18d5469b918e88564f132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_white.png using Guid(16d41f0a18d18d5469b918e88564f132) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '874b840a4d4972c547dc998cc61dffe3') in 0.0149552 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Bubble/Minifantasy_NPCsDmg_HumanHair_Bubble_pink.png
+  artifactKey: Guid(7e2e1fda4dbfaa74a861607fdcbea6eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Bubble/Minifantasy_NPCsDmg_HumanHair_Bubble_pink.png using Guid(7e2e1fda4dbfaa74a861607fdcbea6eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b0a2b91b3dcfd0fd6a11c0d93c4665bc') in 0.0520846 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Blouses/Minifantasy_NPCsWalk_Blouse_turquoise.png
+  artifactKey: Guid(f07444d15a244f744a41de21fc76266b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Blouses/Minifantasy_NPCsWalk_Blouse_turquoise.png using Guid(f07444d15a244f744a41de21fc76266b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5777dbc071ae7f7a8aa60b902a1c8e35') in 0.0125896 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Slime/Blue/Minifantasy_CreaturesShadowBlueSlimeIdle.png
+  artifactKey: Guid(800332718040ed74da3bee29bb5e7fc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/_Shadows/Slime/Blue/Minifantasy_CreaturesShadowBlueSlimeIdle.png using Guid(800332718040ed74da3bee29bb5e7fc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '61dfa789f6122910c7d66a4044163491') in 0.0969247 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 34
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shirt/Minifantasy_NPCsWalk_Shirt_green.png
+  artifactKey: Guid(f45e6c46794181a4aa0b6ad6b7499716) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shirt/Minifantasy_NPCsWalk_Shirt_green.png using Guid(f45e6c46794181a4aa0b6ad6b7499716) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bb7a68e607e829e17a8a7a8a78ea31a9') in 0.0186433 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Die.png
+  artifactKey: Guid(d95f6e4ae566e3e43a4c2f155a988166) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Die.png using Guid(d95f6e4ae566e3e43a4c2f155a988166) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b4c8e22b8a060e1c99204e5d0d5922c') in 0.0503789 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/FedoraHat/Minifantasy_NPCsDmg_Hat_FedoraHat_turquoise.png
+  artifactKey: Guid(b196957f013ccf14f92068a7b98e7fd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/FedoraHat/Minifantasy_NPCsDmg_Hat_FedoraHat_turquoise.png using Guid(b196957f013ccf14f92068a7b98e7fd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '42aadd925db49c2e77ad9ecf20cd0138') in 0.0637553 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/_Characters/Orc/Minifantasy_NPCsWalk_Orc_darkgreenskin.png
+  artifactKey: Guid(ff3e7a669405bf54b80be7c1c5a4a28c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/_Characters/Orc/Minifantasy_NPCsWalk_Orc_darkgreenskin.png using Guid(ff3e7a669405bf54b80be7c1c5a4a28c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b769cb9f8b41925ebf63a0886b9c2a36') in 0.0575403 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Jump.png
+  artifactKey: Guid(575b5a188dbf3d14a9f86e4ed1b64e96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Jump.png using Guid(575b5a188dbf3d14a9f86e4ed1b64e96) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1a32f020464197f306db5f7ad14d1d70') in 0.0502484 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_red.png
+  artifactKey: Guid(b035d5b06989cef4d9f55996f0cb2cf1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_red.png using Guid(b035d5b06989cef4d9f55996f0cb2cf1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4e81810f2b66428f13cb387ce4a8acc9') in 0.012993 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop/Minifantasy_CreaturesCyclopAnimations.png
+  artifactKey: Guid(b09b1ae2e2a52c24c851fb698af0a662) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop/Minifantasy_CreaturesCyclopAnimations.png using Guid(b09b1ae2e2a52c24c851fb698af0a662) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f1afbfa7e7ed2bd729da79cd6dba5a30') in 0.0189586 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Trasgo/Trasgo_Dmg.png
+  artifactKey: Guid(fa62965e52cf45b45bbff3d5ca5db035) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Trasgo/Trasgo_Dmg.png using Guid(fa62965e52cf45b45bbff3d5ca5db035) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6c22f798de2af30ff4d3156307d09bff') in 0.0581841 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop/Minifantasy_CreaturesCyclopDie.png
+  artifactKey: Guid(8ae875077662c23459c090615993465d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Cyclop/Minifantasy_CreaturesCyclopDie.png using Guid(8ae875077662c23459c090615993465d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5b22389d29a6ea01983af2fd27d632bd') in 0.0425388 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Bold/Minifantasy_NPCsDmg_HumanHair_Bold_black.png
+  artifactKey: Guid(9f47dcc57d10205468e4a5926427c0f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hairstyles/Bold/Minifantasy_NPCsDmg_HumanHair_Bold_black.png using Guid(9f47dcc57d10205468e4a5926427c0f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7363bab2736c37ebcea91efc8eb16019') in 0.0115818 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeIdle.png
+  artifactKey: Guid(ce926a2dc220c784bbbedc15a3520103) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeIdle.png using Guid(ce926a2dc220c784bbbedc15a3520103) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '343284f0e3d9743143a1eba68ab6c9c7') in 0.0827932 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 35
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkChargedAttack.png
+  artifactKey: Guid(6b043b2984aaac5499e9d92f9db0644b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkChargedAttack.png using Guid(6b043b2984aaac5499e9d92f9db0644b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '62c5f6b92d95fb2cb237cba23a3549e5') in 0.0491777 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shirt/Minifantasy_NPCsWalk_Shirt_black.png
+  artifactKey: Guid(f278c2283f2c6314e822b7d9acfd1c0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shirt/Minifantasy_NPCsWalk_Shirt_black.png using Guid(f278c2283f2c6314e822b7d9acfd1c0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c5aa06909153b0dedc18d63a6d663359') in 0.0124298 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Mother Slime/Blue/Minifantasy_CreaturesShadowBlueMotherSlimeDmg.png
+  artifactKey: Guid(0b5cd9f22f4639441a6d7ee6e55581b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/_Shadows/Mother Slime/Blue/Minifantasy_CreaturesShadowBlueMotherSlimeDmg.png using Guid(0b5cd9f22f4639441a6d7ee6e55581b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4a4a9b1edd172466c01814e4997ea8e5') in 0.0550335 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Doublets/Minifantasy_NPCsWalk_Doublet_whiteleather.png
+  artifactKey: Guid(3fd982f35fc4463419276672f9bbab81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Doublets/Minifantasy_NPCsWalk_Doublet_whiteleather.png using Guid(3fd982f35fc4463419276672f9bbab81) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b3505d52cd5044decc0eb65c0081a6c5') in 0.0130851 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/_Characters/Human/Minifantasy_NPCsDmg_Human_whiteskin.png
+  artifactKey: Guid(1f1c7b21379ad3e469a69eb3b3e46ff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/_Characters/Human/Minifantasy_NPCsDmg_Human_whiteskin.png using Guid(1f1c7b21379ad3e469a69eb3b3e46ff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7859dc9e6b05da742767e801ced8d29a') in 0.0559681 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/PompomBeanie/Minifantasy_NPCsDmg_Hat_PomPomBeanie_lime.png
+  artifactKey: Guid(3fd6921e103a9814fa732c181a4301f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/PompomBeanie/Minifantasy_NPCsDmg_Hat_PomPomBeanie_lime.png using Guid(3fd6921e103a9814fa732c181a4301f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1c07b47e2a74291ff91d5a2616448349') in 0.040185 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Blouses/Minifantasy_NPCsWalk_Blouse_white.png
+  artifactKey: Guid(25cd7995352388e46a213c9ec3c12798) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Blouses/Minifantasy_NPCsWalk_Blouse_white.png using Guid(25cd7995352388e46a213c9ec3c12798) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f7f3fb21da7852d3652c1ac8e287d90f') in 0.0107576 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Minotaur/Minifantasy_CreaturesMinotaurWalk.png
+  artifactKey: Guid(d1307799192b5034c8e4522b880ab7f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Minotaur/Minifantasy_CreaturesMinotaurWalk.png using Guid(d1307799192b5034c8e4522b880ab7f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8119ad4f54ba9aac6d1b646fda168cce') in 0.065415 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_orange.png
+  artifactKey: Guid(03001baf54ed17141915ff0cc306da02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_orange.png using Guid(03001baf54ed17141915ff0cc306da02) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dd6f2c49637250c41a01a1fa0db22842') in 0.0506794 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkAnimations.png
+  artifactKey: Guid(22dbe3d79e3079844b063f869c6b45be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Townsfolk/Minifantasy_CreaturesHumanTownsfolkAnimations.png using Guid(22dbe3d79e3079844b063f869c6b45be) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e64ec621002dfaff5e9e583807d1c83a') in 0.0139547 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Orc/Minifantasy_CreaturesOrcAnimations.png
+  artifactKey: Guid(229de242d9e91fd4d85c5a53eb260ca3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Orc/Minifantasy_CreaturesOrcAnimations.png using Guid(229de242d9e91fd4d85c5a53eb260ca3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0710d231f526da7d8aca1058349c006b') in 0.0163714 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Togas/Minifantasy_NPCsIdle_Toga_lime.png
+  artifactKey: Guid(1c34f6dc6f3ad5b4f849a5badf4533a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Togas/Minifantasy_NPCsIdle_Toga_lime.png using Guid(1c34f6dc6f3ad5b4f849a5badf4533a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b75737ed2207e31178db004d28c3a820') in 0.0091213 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_brown.png
+  artifactKey: Guid(56d9bf34167c1ae4698f517cf1c94f04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_brown.png using Guid(56d9bf34167c1ae4698f517cf1c94f04) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '843b1e075a11e0f1155986b0f623ce00') in 0.0155974 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/CowboyHat/Minifantasy_NPCsDmg_Hat_CowboyHat_turquoise.png
+  artifactKey: Guid(f046802fc4b87b04894c23f9b4b74925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/CowboyHat/Minifantasy_NPCsDmg_Hat_CowboyHat_turquoise.png using Guid(f046802fc4b87b04894c23f9b4b74925) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '543b3e4bf1a959d672f7b2c098448f29') in 0.0453494 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Attack.png
+  artifactKey: Guid(70b00ad80a2d8fc4c86a2097080679f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Orc/Wild Orc/WildOrc_Attack.png using Guid(70b00ad80a2d8fc4c86a2097080679f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '787aca72bbe9f2f5a31d3b00b9ccbeb0') in 0.0463574 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Skeleton/Skeleton_Dmg.png
+  artifactKey: Guid(b2e6097ecae997e40b8c0aa4a3eed13c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Skeleton/Skeleton_Dmg.png using Guid(b2e6097ecae997e40b8c0aa4a3eed13c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ed8eb8ae0810c7c766ef0f1001f23f3d') in 0.0483439 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/_Characters/Orc/Minifantasy_NPCsWalk_Orc_greenskin.png
+  artifactKey: Guid(760786e65d4bfa341af4b76e8b0af915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/_Characters/Orc/Minifantasy_NPCsWalk_Orc_greenskin.png using Guid(760786e65d4bfa341af4b76e8b0af915) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dfc9686460ca2aeb2b76de14eb4873eb') in 0.0597898 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Hairstyles/Short/Minifantasy_NPCsWalk_HumanHair_Short _blue.png
+  artifactKey: Guid(265522a143ba9c54788f018c89098272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Hairstyles/Short/Minifantasy_NPCsWalk_HumanHair_Short _blue.png using Guid(265522a143ba9c54788f018c89098272) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '68807eb1b2a6faa1cdf0e4dae288731d') in 0.0522479 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Human, Elf, Orc, Goblin, Halfling/Minifantasy_CreaturesShadowHumanoidAttack.png
+  artifactKey: Guid(25eb48f18dbe1a3469eb5c74312b4b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Human, Elf, Orc, Goblin, Halfling/Minifantasy_CreaturesShadowHumanoidAttack.png using Guid(25eb48f18dbe1a3469eb5c74312b4b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8ee51ce5bd849c2318ac118272db5314') in 0.0515895 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Zombie_Die.png
+  artifactKey: Guid(c0f27a7a89a3da34eac97ea7f677b227) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Zombie/Zombie_Die.png using Guid(c0f27a7a89a3da34eac97ea7f677b227) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8ab72585670601a4e6d0e121f244c809') in 0.0343554 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Hood/Minifantasy_NPCsDmg_Hat_Hood_lime.png
+  artifactKey: Guid(768e04461b16fe04086f55c5cd5599de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Hood/Minifantasy_NPCsDmg_Hat_Hood_lime.png using Guid(768e04461b16fe04086f55c5cd5599de) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '17b925b27e1645b96d986116c899dc91') in 0.0521919 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Amazon/Minifantasy_CreaturesAmazonIdle.png
+  artifactKey: Guid(ce977cdff80b5684e92a11e50e90d685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human_Amazon/Minifantasy_CreaturesAmazonIdle.png using Guid(ce977cdff80b5684e92a11e50e90d685) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9d5b9f737ce53bc2093ed5b458b7bb4e') in 0.165369 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 67
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_turquoise.png
+  artifactKey: Guid(dcc4f8f185e3d3d4ebe841ba6061120f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_turquoise.png using Guid(dcc4f8f185e3d3d4ebe841ba6061120f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd95f17995f3190e692d8852168974570') in 0.0455082 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/CowboyHat/Minifantasy_NPCsDmg_Hat_CowboyHat_grey.png
+  artifactKey: Guid(a18b715dcf2d62f46bdc984ec8ced596) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/CowboyHat/Minifantasy_NPCsDmg_Hat_CowboyHat_grey.png using Guid(a18b715dcf2d62f46bdc984ec8ced596) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '002f84f2759bcfd853dbe77568d94b41') in 0.0611568 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Blue _Slime/BlueSlime_JumpAttack.png
+  artifactKey: Guid(2fcd8f82a288d674b9bf51101349f40b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Slime/Blue _Slime/BlueSlime_JumpAttack.png using Guid(2fcd8f82a288d674b9bf51101349f40b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fae6ead7c4a00d873f3586a62305222d') in 0.0522433 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingJump.png
+  artifactKey: Guid(b5a2e63796f75d94e927bbf4fb9971af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingJump.png using Guid(b5a2e63796f75d94e927bbf4fb9971af) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd10582a3f2b4bb982cae6ca0a9aa43fe') in 0.0478165 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Goatee/Minifantasy_NPCsWalk_FacialHair_Goatee_red.png
+  artifactKey: Guid(0d3f477ccbdff3f4ba8f743f3eb8f69a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Goatee/Minifantasy_NPCsWalk_FacialHair_Goatee_red.png using Guid(0d3f477ccbdff3f4ba8f743f3eb8f69a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9fc29426b342120bf4bb7ea71ae78e5b') in 0.0164126 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Tailor/Minifantasy_NPCsTailorWalk.png
+  artifactKey: Guid(b640ece0c5d92a14e82eeef0f1b4a8dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Tailor/Minifantasy_NPCsTailorWalk.png using Guid(b640ece0c5d92a14e82eeef0f1b4a8dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '55370cc44f825eef27a9d625ae9480f7') in 0.0627599 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/PompomBeanie/Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange.png
+  artifactKey: Guid(287eddc16018cd3468318c4170d33f51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/PompomBeanie/Minifantasy_NPCsDmg_Hat_PomPomBeanie_orange.png using Guid(287eddc16018cd3468318c4170d33f51) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5f00494cec84781c2491afb9f147218d') in 0.0486997 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Hairstyles/Short/Minifantasy_NPCsWalk_HumanHair_Short _pink.png
+  artifactKey: Guid(6c585744b75ba0141b5c8aa3abd6131e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Hairstyles/Short/Minifantasy_NPCsWalk_HumanHair_Short _pink.png using Guid(6c585744b75ba0141b5c8aa3abd6131e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '015edccb89e1b6aff0ed4ec74409c271') in 0.0497419 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000079 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shoes/Minifantasy_NPCsWalk_Shoes_green.png
+  artifactKey: Guid(7faf434594c672440a45e9b9e661d849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shoes/Minifantasy_NPCsWalk_Shoes_green.png using Guid(7faf434594c672440a45e9b9e661d849) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9490ddf2448e7f31bb224b90fdb2a211') in 0.0148248 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Dwarf, Trasgo/Minifantasy_CreaturesShadowDwarfAttack.png
+  artifactKey: Guid(fe3096dfa4613564aba79483274ff16e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/_Shadows/Dwarf, Trasgo/Minifantasy_CreaturesShadowDwarfAttack.png using Guid(fe3096dfa4613564aba79483274ff16e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0b3dbb029da13258abb6d84d3d1ba1ef') in 0.0476505 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_grey.png
+  artifactKey: Guid(b0a2935b60871924aa2c1e66e04d729e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_grey.png using Guid(b0a2935b60871924aa2c1e66e04d729e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ecc544434ab484e111c9efa360d3543a') in 0.0604879 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_brownleather.png
+  artifactKey: Guid(42011e1f62c11574897cebb3c24bf7d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_brownleather.png using Guid(42011e1f62c11574897cebb3c24bf7d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c2b2afdcf346bc1f65f841ad5894eb27') in 0.0223203 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_purple.png
+  artifactKey: Guid(1159fc7dc18a6e34e8bbd30ee6c7921c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Curtain/Minifantasy_NPCsWalk_FacialHair_ChinCurtain_purple.png using Guid(1159fc7dc18a6e34e8bbd30ee6c7921c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3668ade7e54a40dcea721ca7defcf996') in 0.0116304 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeDmg.png
+  artifactKey: Guid(8ba8a02f0a1abe54c848e74f968d48d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Blue_Mother_Slime/Minifantasy_CreaturesBlueMotherSlimeDmg.png using Guid(8ba8a02f0a1abe54c848e74f968d48d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0c4c7dffcc7ccb6bc8c59d163b900505') in 0.045323 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_magenta.png
+  artifactKey: Guid(2f51258ed9cb7c04b93f1ba6c31334ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Trousers/Minifantasy_NPCsIdle_Trousers_magenta.png using Guid(2f51258ed9cb7c04b93f1ba6c31334ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f144e80abf370ced7e7d99385b2fb6b3') in 0.013212 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_blackleather.png
+  artifactKey: Guid(22dea54f9787c634ea21367130ac421e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_blackleather.png using Guid(22dea54f9787c634ea21367130ac421e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4fb4da6c91e611ed564c43c5c736b449') in 0.0106782 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Jeweller/Minifantasy_NPCsJewellerDie.png
+  artifactKey: Guid(2f54ef5b3658e1e4982a45d36be266b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Jeweller/Minifantasy_NPCsJewellerDie.png using Guid(2f54ef5b3658e1e4982a45d36be266b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a595e409fa6935f07bc229fdc0bb4fde') in 0.0378483 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 12
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_orange.png
+  artifactKey: Guid(3023b8310d601dc4aaabc1b1d789d9ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/LongHat/Minifantasy_NPCsDmg_Hat_LongHat_orange.png using Guid(3023b8310d601dc4aaabc1b1d789d9ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2901c8e673d94db7ce3ac4d6a4427889') in 0.0459914 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Togas/Minifantasy_NPCsIdle_Toga_orange.png
+  artifactKey: Guid(fed2e90f3921a9b4a93fbc452c07812a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Idle/Body/Togas/Minifantasy_NPCsIdle_Toga_orange.png using Guid(fed2e90f3921a9b4a93fbc452c07812a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '86828fc2e5e8b7e626a521faf5914241') in 0.011423 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shoes/Minifantasy_NPCsWalk_Shoes_purple.png
+  artifactKey: Guid(517a3850787f7fb4dbaf0f18c4050e99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shoes/Minifantasy_NPCsWalk_Shoes_purple.png using Guid(517a3850787f7fb4dbaf0f18c4050e99) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '992dee54f1c3f29a5f7b6ffcdceab22e') in 0.0110042 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/CowboyHat/Minifantasy_NPCsDmg_Hat_CowboyHat_purple.png
+  artifactKey: Guid(206598c5b095d334cae802043ff26007) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/CowboyHat/Minifantasy_NPCsDmg_Hat_CowboyHat_purple.png using Guid(206598c5b095d334cae802043ff26007) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5767773e5cf3f3f93c285579fc53be7d') in 0.0474295 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Hood/Minifantasy_NPCsDmg_Hat_Hood_blue.png
+  artifactKey: Guid(56d83f1b687cfbf4aa935d206ba99ea6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/Hood/Minifantasy_NPCsDmg_Hat_Hood_blue.png using Guid(56d83f1b687cfbf4aa935d206ba99ea6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '36aa95a98d858fee30e93db21906a13e') in 0.0775041 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/LongBeard/Minifantasy_NPCsWalk_FacialHair_LongBeard_purple.png
+  artifactKey: Guid(1ce0321f297587140bcd114f7a7a721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/LongBeard/Minifantasy_NPCsWalk_FacialHair_LongBeard_purple.png using Guid(1ce0321f297587140bcd114f7a7a721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '11dfe86831f1630a691cc7f25fbcba7f') in 0.0116289 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Tailor/Minifantasy_NPCsTailorIdle.png
+  artifactKey: Guid(bc2f077554cf2464281ceb122deb93e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Premade_NPCs/Tailor/Minifantasy_NPCsTailorIdle.png using Guid(bc2f077554cf2464281ceb122deb93e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cd368baa554a79a452798c544a0af91d') in 0.1728387 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 66
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Hairstyles/Toupee/Minifantasy_NPCsWalk_HumanHair_Toupee_pink.png
+  artifactKey: Guid(e854c662ca5e3654abd194924be41904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Hairstyles/Toupee/Minifantasy_NPCsWalk_HumanHair_Toupee_pink.png using Guid(e854c662ca5e3654abd194924be41904) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b1a00c9f11c539f241f6b30b96ff5367') in 0.052567 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_brownleather.png
+  artifactKey: Guid(4043923be54cb5848b4ab4798408c681) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Jacket/Minifantasy_NPCsWalk_Jacket_brownleather.png using Guid(4043923be54cb5848b4ab4798408c681) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b8230de071c95483b768fb65cb9b1e2') in 0.0100497 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/ShoulderPads/Minifantasy_NPCsWalk_ShoulderPads_lime.png
+  artifactKey: Guid(471df25ef1b52a048869c3dc89d8e8b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/ShoulderPads/Minifantasy_NPCsWalk_ShoulderPads_lime.png using Guid(471df25ef1b52a048869c3dc89d8e8b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3b289dca224973b8c03ebcb3dd83e82c') in 0.0121773 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shirt/Minifantasy_NPCsWalk_Shirt_magenta.png
+  artifactKey: Guid(44e2929737571e14c9cff0f7891ff59b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Shirt/Minifantasy_NPCsWalk_Shirt_magenta.png using Guid(44e2929737571e14c9cff0f7891ff59b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ad8c5e77c3ee0ad5e5e22a649d1f2a1e') in 0.0124462 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/ShoulderPads/Minifantasy_NPCsWalk_ShoulderPads_blackleather.png
+  artifactKey: Guid(8e1cfb2fb3c06e54caabbab6f0d7158c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/ShoulderPads/Minifantasy_NPCsWalk_ShoulderPads_blackleather.png using Guid(8e1cfb2fb3c06e54caabbab6f0d7158c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f53f93a25be016068303d1601f1e0ec8') in 0.010683 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Green_Mother_Slime/Minifantasy_CreaturesMotherSlimeGreenIdle.png
+  artifactKey: Guid(3e5b70e94679dd6488a2bd5ce4014442) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Big_Guys/Mother_Slime/Green_Mother_Slime/Minifantasy_CreaturesMotherSlimeGreenIdle.png using Guid(3e5b70e94679dd6488a2bd5ce4014442) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'be425136fc24942abb2d6a3ea5eceac3') in 0.0794404 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 35
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Strap/Minifantasy_NPCsWalk_FacialHair_ChinStrap_white.png
+  artifactKey: Guid(ce82403930b77a846a3936155a5a2e7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Head/Facial_Hair/Chin_Strap/Minifantasy_NPCsWalk_FacialHair_ChinStrap_white.png using Guid(ce82403930b77a846a3936155a5a2e7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ae30c5b4a59a37a4d1e53078ba34c597') in 0.0121782 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_blackleather.png
+  artifactKey: Guid(a3e3f2cb8b35d75449b4f9f853b34574) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Dmg/Head/Hats/TrapperHat/Minifantasy_NPCsDmg_Hat_TrapperHat_blackleather.png using Guid(a3e3f2cb8b35d75449b4f9f853b34574) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bac6b7c3033c09acfda6a89f1e8a49af') in 0.0472493 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingAnimations.png
+  artifactKey: Guid(6f3d8cff424912646adf4264a39457e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Halfling/Minifantasy_CreaturesHalflingAnimations.png using Guid(6f3d8cff424912646adf4264a39457e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '10643e034e2a96c7d6e343d59c173874') in 0.013168 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Togas/Minifantasy_NPCsWalk_Toga_grey.png
+  artifactKey: Guid(73bf827d48c960b44b801e333246093b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Minifantasy_NPCs_Assets/Generic_NPCs/Walk/Body/Togas/Minifantasy_NPCsWalk_Toga_grey.png using Guid(73bf827d48c960b44b801e333246093b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '94484960e880e83c7ea7695bf5c25bbc') in 0.0116048 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Bat/BatShadow_Die.png
+  artifactKey: Guid(48d1a9356f9acbe4aa408d5b9a954dd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Beasts/_Shadows/Bat/BatShadow_Die.png using Guid(48d1a9356f9acbe4aa408d5b9a954dd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e154f0643efe2df0ad50447ab775da60') in 0.0296192 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Centaur/Centaur_Jump.png
+  artifactKey: Guid(99495b6a4ab441a40add7fbf49a26cea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Monsters/Centaur/Centaur_Jump.png using Guid(99495b6a4ab441a40add7fbf49a26cea) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0773ed374a76b7ebbdce1c5681e8655c') in 0.0416818 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: 2025-12-08T00:41:56Z
+[Licensing::Module] License group:
+  Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
+  Product: Unity Personal Version
+  Type: Assigned
+  Expiration: Unlimited
+- Loaded All Assemblies, in  1.635 seconds
+Refreshing native plugins compatible for Editor in 1.86 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.882 seconds
+Domain Reload Profiling: 2521ms
+	BeginReloadAssembly (577ms)
+		ExecutionOrderSort (1ms)
+		DisableScriptedObjects (96ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (1ms)
+		CreateAndSetChildDomain (206ms)
+	RebuildCommonClasses (41ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (41ms)
+	LoadAllAssembliesAndSetupDomain (968ms)
+		LoadAssemblies (761ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (339ms)
+			TypeCache.Refresh (23ms)
+				TypeCache.ScanAssembly (1ms)
+			BuildScriptInfoCaches (292ms)
+			ResolveRequiredComponents (15ms)
+	FinalizeReload (883ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (723ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (184ms)
+			ProcessInitializeOnLoadAttributes (440ms)
+			ProcessInitializeOnLoadMethodAttributes (85ms)
+			AfterProcessingInitializeOnLoad (6ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+Refreshing native plugins compatible for Editor in 2.66 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 35 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7539 unused Assets / (8.3 MB). Loaded Objects now: 8290.
+Memory consumption went from 162.3 MB to 154.0 MB.
+Total: 25.832600 ms (FindLiveObjects: 2.381500 ms CreateObjectMapping: 1.991400 ms MarkObjects: 13.067200 ms  DeleteObjects: 8.389200 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 3.04 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 35 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7529 unused Assets / (8.5 MB). Loaded Objects now: 8290.
+Memory consumption went from 162.4 MB to 154.0 MB.
+Total: 31.366200 ms (FindLiveObjects: 1.802800 ms CreateObjectMapping: 1.817900 ms MarkObjects: 19.589600 ms  DeleteObjects: 8.153500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 2541.051721 seconds.
+  path: Packages/com.unity.ide.visualstudio/Editor/com.unity.ide.visualstudio.asmdef
+  artifactKey: Guid(b93f844d45cfcc44fa2b0eed5c9ec6bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ide.visualstudio/Editor/com.unity.ide.visualstudio.asmdef using Guid(b93f844d45cfcc44fa2b0eed5c9ec6bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c3b4243fd97d5493d0f6ed1e423c62b4') in 0.0795143 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Packages/com.unity.collections/Unity.Collections.BurstCompatibilityGen/Unity.Collections.BurstCompatibilityGen.asmdef
+  artifactKey: Guid(4f5c0c83dfd6a0743834baba2b4de79e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collections/Unity.Collections.BurstCompatibilityGen/Unity.Collections.BurstCompatibilityGen.asmdef using Guid(4f5c0c83dfd6a0743834baba2b4de79e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '58cd6e64f633c92b91ca97d819818586') in 0.0007872 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Packages/com.unity.ugui/Editor/TMP/Unity.TextMeshPro.Editor.asmdef
+  artifactKey: Guid(6546d7765b4165b40850b3667f981c26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ugui/Editor/TMP/Unity.TextMeshPro.Editor.asmdef using Guid(6546d7765b4165b40850b3667f981c26) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '75194df1f925b7b2536ad085f4cab655') in 0.0008289 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.timeline/Editor/Unity.Timeline.Editor.asmdef
+  artifactKey: Guid(02f771204943f4a40949438e873e3eff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.timeline/Editor/Unity.Timeline.Editor.asmdef using Guid(02f771204943f4a40949438e873e3eff) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '46ca2d8097a9d5cd2f189f8e833f2a65') in 0.0006581 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.mathematics/Unity.Mathematics.Editor/Unity.Mathematics.Editor.asmdef
+  artifactKey: Guid(329b4ccd385744985bf3f83cfd77dfe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.mathematics/Unity.Mathematics.Editor/Unity.Mathematics.Editor.asmdef using Guid(329b4ccd385744985bf3f83cfd77dfe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b7c0036566b66d2e4baac1bb2e2583e2') in 0.0007092 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.ugui/Tests/Editor/TMP/Unity.TextMeshPro.Editor.Tests.asmdef
+  artifactKey: Guid(656e461844099ae43a609ff6109b0877) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ugui/Tests/Editor/TMP/Unity.TextMeshPro.Editor.Tests.asmdef using Guid(656e461844099ae43a609ff6109b0877) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c5d3094b5acb6e3ad6315080fdba4da7') in 0.0005769 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.universal/ShaderLibrary/Unity.RenderPipelines.Universal.ShaderLibrary.asmdef
+  artifactKey: Guid(ab67fb10353d84448ac887a7367cbda8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/ShaderLibrary/Unity.RenderPipelines.Universal.ShaderLibrary.asmdef using Guid(ab67fb10353d84448ac887a7367cbda8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3f1c932e0054091f67a972cc9ce26926') in 0.000763 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.addressables/Tests/Editor/Unity.Addressables.Editor.Tests.asmdef
+  artifactKey: Guid(f0c774e7dbab37641808f75bcc438e4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.addressables/Tests/Editor/Unity.Addressables.Editor.Tests.asmdef using Guid(f0c774e7dbab37641808f75bcc438e4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '47da8d63c8823d139fc6a7114981c7b1') in 0.0006919 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.2d.sprite/Tests/Editor/Unity.2D.Sprite.Package.EditorTests.asmdef
+  artifactKey: Guid(52648b72c7bef2040bf0cfa8dd0f74da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.sprite/Tests/Editor/Unity.2D.Sprite.Package.EditorTests.asmdef using Guid(52648b72c7bef2040bf0cfa8dd0f74da) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '276ebce5062bc75119b94831c281184f') in 0.0006808 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Entities/Unity.PlasticSCM.Editor.Entities.asmdef
+  artifactKey: Guid(c24d342672367b243aff1910ea83a56d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Entities/Unity.PlasticSCM.Editor.Entities.asmdef using Guid(c24d342672367b243aff1910ea83a56d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4d4e13451581481ae7d94098234f8a19') in 0.0006596 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Packages/com.unity.scriptablebuildpipeline/Tests/Editor/Unity.ScriptableBuildPipeline.Editor.Tests.asmdef
+  artifactKey: Guid(0244ca4987514734a84f74195d54113d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.scriptablebuildpipeline/Tests/Editor/Unity.ScriptableBuildPipeline.Editor.Tests.asmdef using Guid(0244ca4987514734a84f74195d54113d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2136653fc775c34db61f8c1265b22f5d') in 0.0007353 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.2d.common/Editor/InternalBridge/InternalBridgeDef.asmdef
+  artifactKey: Guid(ce6baade223984afda3f24c7fca12584) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.common/Editor/InternalBridge/InternalBridgeDef.asmdef using Guid(ce6baade223984afda3f24c7fca12584) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '113db3b670286fd6f7c0bbbcdd71ac36') in 0.0007576 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.2d.spriteshape/Tests/Editor/Unity.2D.SpriteShape.EditorTests.asmdef
+  artifactKey: Guid(03bfc083748b8452197dde3b8ea7f575) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.spriteshape/Tests/Editor/Unity.2D.SpriteShape.EditorTests.asmdef using Guid(03bfc083748b8452197dde3b8ea7f575) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c4bd7c86641292567acafe12884cd240') in 0.0009438 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Runtime/Unity.RenderPipelines.Universal.Runtime.asmdef
+  artifactKey: Guid(15fc0a57446b3144c949da3e2b9737a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Runtime/Unity.RenderPipelines.Universal.Runtime.asmdef using Guid(15fc0a57446b3144c949da3e2b9737a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5a743d1102b8f9cb44ffe1d16e3e1431') in 0.0007225 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.multiplayer.center/Common/Unity.Multiplayer.Center.Common.asmdef
+  artifactKey: Guid(84abd2ab34a74600a33a3bb9d72859fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.multiplayer.center/Common/Unity.Multiplayer.Center.Common.asmdef using Guid(84abd2ab34a74600a33a3bb9d72859fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5d8f63996509c71a632148b9c65fa042') in 0.0007762 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Packages/com.unity.collections/Unity.Collections.PerformanceTests/Unity.Collections.PerformanceTests.asmdef
+  artifactKey: Guid(64222b0d0713a412f92762e2fccd795a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collections/Unity.Collections.PerformanceTests/Unity.Collections.PerformanceTests.asmdef using Guid(64222b0d0713a412f92762e2fccd795a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '33f4ae5e2c4660aebabaacf752f2d8e7') in 0.00085 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.2d.aseprite/Editor/Common/Unity.2D.Aseprite.Common.asmdef
+  artifactKey: Guid(cafadeef5bfa1499992661a7b64e12fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.aseprite/Editor/Common/Unity.2D.Aseprite.Common.asmdef using Guid(cafadeef5bfa1499992661a7b64e12fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '04a5b197e438c5937700d84af0aef3b5') in 0.000869 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.2d.tilemap.extras/Editor/Unity.2D.Tilemap.Extras.Editor.asmdef
+  artifactKey: Guid(cbdf09464b6b87745be748a67e5a21a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.tilemap.extras/Editor/Unity.2D.Tilemap.Extras.Editor.asmdef using Guid(cbdf09464b6b87745be748a67e5a21a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '36aef45f90a0b58641bdb82f52d6c030') in 0.0006982 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Plugins/UniTask/Editor/UniTask.Editor.asmdef
+  artifactKey: Guid(4129704b5a1a13841ba16f230bf24a57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/UniTask/Editor/UniTask.Editor.asmdef using Guid(4129704b5a1a13841ba16f230bf24a57) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd16e8ff75ec48e18f8682836578bacb0') in 0.0010148 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.render-pipelines.core/ShaderLibrary/Unity.RenderPipelines.Core.ShaderLibrary.asmdef
+  artifactKey: Guid(46a67ded66a63de48b9329c593fc08de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.core/ShaderLibrary/Unity.RenderPipelines.Core.ShaderLibrary.asmdef using Guid(46a67ded66a63de48b9329c593fc08de) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fb243041cbc7bcc19b5506be711ac06b') in 0.000626 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.2d.psdimporter/Editor/Unity.2D.Psdimporter.Editor.asmdef
+  artifactKey: Guid(bcb706ca0f6dd48449aa27a93faa899c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.psdimporter/Editor/Unity.2D.Psdimporter.Editor.asmdef using Guid(bcb706ca0f6dd48449aa27a93faa899c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '93609aaae5d04a4993296b40030c385e') in 0.0007583 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Packages/com.unity.visualscripting/Editor/VisualScripting.Core/Unity.VisualScripting.Core.Editor.asmdef
+  artifactKey: Guid(54cb1906aeb4e4264bc1d2aa3818a43f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.visualscripting/Editor/VisualScripting.Core/Unity.VisualScripting.Core.Editor.asmdef using Guid(54cb1906aeb4e4264bc1d2aa3818a43f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '24bde8dce306b5deb626402019c9bd0e') in 0.0008301 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.collections/Unity.Collections.Tests.Playmode/Unity.Collections.Tests.Playmode.asmdef
+  artifactKey: Guid(5e96082520aa86a458e400b89afe93a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collections/Unity.Collections.Tests.Playmode/Unity.Collections.Tests.Playmode.asmdef using Guid(5e96082520aa86a458e400b89afe93a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2e8d13a5d453e14f08f9330ac1c014fe') in 0.0010384 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.inputsystem/InputSystem/Unity.InputSystem.asmdef
+  artifactKey: Guid(75469ad4d38634e559750d17036d5f7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.inputsystem/InputSystem/Unity.InputSystem.asmdef using Guid(75469ad4d38634e559750d17036d5f7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f5f6bf2949c98632dcf4753ffa45bf68') in 0.0007125 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.ugui/Runtime/UGUI/UnityEngine.UI.asmdef
+  artifactKey: Guid(2bafac87e7f4b9b418d9448d219b01ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ugui/Runtime/UGUI/UnityEngine.UI.asmdef using Guid(2bafac87e7f4b9b418d9448d219b01ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '76bfb72580125e2a5648c42d980995d0') in 0.0007925 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.burst/Editor/Unity.Burst.Editor.asmdef
+  artifactKey: Guid(b75d3cd3037d383a8d1e2f9a26d73d8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.burst/Editor/Unity.Burst.Editor.asmdef using Guid(b75d3cd3037d383a8d1e2f9a26d73d8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1d92bcd3c8d526b41571b25524a21a87') in 0.0007627 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.addressables/Editor/Unity.Addressables.Editor.asmdef
+  artifactKey: Guid(69448af7b92c7f342b298e06a37122aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.addressables/Editor/Unity.Addressables.Editor.asmdef using Guid(69448af7b92c7f342b298e06a37122aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b5607619aefda5b51779ab759842524') in 0.0007363 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Packages/com.unity.render-pipelines.core/Editor/Unity.RenderPipelines.Core.Editor.asmdef
+  artifactKey: Guid(3eae0364be2026648bf74846acb8a731) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.core/Editor/Unity.RenderPipelines.Core.Editor.asmdef using Guid(3eae0364be2026648bf74846acb8a731) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b457d33d53ccc5cf091f632c9243f43') in 0.0008574 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Plugins/UniTask/Runtime/External/Addressables/UniTask.Addressables.asmdef
+  artifactKey: Guid(593a5b492d29ac6448b1ebf7f035ef33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/UniTask/Runtime/External/Addressables/UniTask.Addressables.asmdef using Guid(593a5b492d29ac6448b1ebf7f035ef33) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5dc2f1a5ee3e17397effef667b19281b') in 0.0008073 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Packages/com.unity.ugui/Runtime/TMP/Unity.TextMeshPro.asmdef
+  artifactKey: Guid(6055be8ebefd69e48b49212b09b47b2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ugui/Runtime/TMP/Unity.TextMeshPro.asmdef using Guid(6055be8ebefd69e48b49212b09b47b2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5c6c875a2a420a4b66d94cfc94200ab4') in 0.0008312 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.collections/Unity.Collections.CodeGen/Unity.Collections.CodeGen.asmdef
+  artifactKey: Guid(8baa6eabecd47164e94a1eb92b18f394) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collections/Unity.Collections.CodeGen/Unity.Collections.CodeGen.asmdef using Guid(8baa6eabecd47164e94a1eb92b18f394) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '03ae63c54e4532751928d2fd23dba49f') in 0.0008247 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.2d.common/Runtime/InternalBridge/InternalBridgeDef.asmdef
+  artifactKey: Guid(e4b228dab700203488a7c7d474a25838) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.common/Runtime/InternalBridge/InternalBridgeDef.asmdef using Guid(e4b228dab700203488a7c7d474a25838) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4569955d45fd011d2333a4541aeaf308') in 0.0008214 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Packages/com.unity.mathematics/Tests/Unity.Mathematics.Tests.asmdef
+  artifactKey: Guid(904d80dccad704a3f95e42bd0ad5d960) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.mathematics/Tests/Unity.Mathematics.Tests.asmdef using Guid(904d80dccad704a3f95e42bd0ad5d960) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4c91f16d61a4ff5e25b9d638823ff0eb') in 0.0012221 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.collections/Unity.Collections.Editor/Unity.Collections.Editor.asmdef
+  artifactKey: Guid(c668b7a00ffe56a498ddb1fc9f96f4e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collections/Unity.Collections.Editor/Unity.Collections.Editor.asmdef using Guid(c668b7a00ffe56a498ddb1fc9f96f4e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '587cce15fb70cea21b1576e6391da553') in 0.0008405 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.ugui/Tests/Editor/UGUI/UnityEditor.UI.EditorTests.asmdef
+  artifactKey: Guid(7c04f0dfa9243c04681a55d90d3ff3fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ugui/Tests/Editor/UGUI/UnityEditor.UI.EditorTests.asmdef using Guid(7c04f0dfa9243c04681a55d90d3ff3fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3b74ca4e117f0db155ff43c74297a7a1') in 0.0008642 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.test-framework.performance/Editor/Unity.PerformanceTesting.Editor.asmdef
+  artifactKey: Guid(9f843d4b38153f04b9cee0502d568525) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.test-framework.performance/Editor/Unity.PerformanceTesting.Editor.asmdef using Guid(9f843d4b38153f04b9cee0502d568525) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6dddc00e7d5e6487346bdf239583bdde') in 0.000637 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.inputsystem/Tests/TestFixture/Unity.InputSystem.TestFramework.asmdef
+  artifactKey: Guid(dc04f38471c3a459fb4d31124ee9127d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.inputsystem/Tests/TestFixture/Unity.InputSystem.TestFramework.asmdef using Guid(dc04f38471c3a459fb4d31124ee9127d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ead929ac73966a244c0aa63f0b3b1f64') in 0.000721 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.rendering.light-transport/Tests/Editor/Unity.Rendering.LightTransport.Editor.Tests.asmdef
+  artifactKey: Guid(e5e50a3b09629a04481c55f78926a9cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.rendering.light-transport/Tests/Editor/Unity.Rendering.LightTransport.Editor.Tests.asmdef using Guid(e5e50a3b09629a04481c55f78926a9cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '48585703eaf7fe6040dce9cbcdfc2939') in 0.0007031 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Packages/com.unity.2d.tilemap.extras/Runtime/Unity.2D.Tilemap.Extras.asmdef
+  artifactKey: Guid(613783dc1674e844b87788ea74ede0f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.tilemap.extras/Runtime/Unity.2D.Tilemap.Extras.asmdef using Guid(613783dc1674e844b87788ea74ede0f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4dfb0f6a5d6c8a3e7cd7c2fe5d62f64d') in 0.0006007 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.burst/Unity.Burst.CodeGen/Unity.Burst.CodeGen.asmdef
+  artifactKey: Guid(9c6dda6c7922c624cb7ea9a7f1c7d54a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.burst/Unity.Burst.CodeGen/Unity.Burst.CodeGen.asmdef using Guid(9c6dda6c7922c624cb7ea9a7f1c7d54a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0aa1c17e98fc2062a185f5e568871417') in 0.0008513 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.shadergraph/ShaderGraphLibrary/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.asmdef
+  artifactKey: Guid(de1079f91ae5b43499b7c7e4f1269884) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/ShaderGraphLibrary/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.asmdef using Guid(de1079f91ae5b43499b7c7e4f1269884) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7d5e539c34dd84f27e2c2b88599596d3') in 0.000649 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/Converter/PPv2/PPv2ToURPConvertersDefinition.asmdef
+  artifactKey: Guid(3fa284cf2189b184e8d506b83da68377) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/Converter/PPv2/PPv2ToURPConvertersDefinition.asmdef using Guid(3fa284cf2189b184e8d506b83da68377) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6607f1742d424671d4c121f3279b9b74') in 0.0007492 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.2d.common/Path/Editor/Unity.2D.Common.Path.Editor.asmdef
+  artifactKey: Guid(24bbfa70f4a5840c3ab7da95e6835815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.common/Path/Editor/Unity.2D.Common.Path.Editor.asmdef using Guid(24bbfa70f4a5840c3ab7da95e6835815) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '329f40da4cac8e4b24be014d10de2daa') in 0.0006951 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.profiling.core/Runtime/Unity.Profiling.Core.asmdef
+  artifactKey: Guid(b46779583a009f04ba9f5f31d0e7e6ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.profiling.core/Runtime/Unity.Profiling.Core.asmdef using Guid(b46779583a009f04ba9f5f31d0e7e6ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a6e97b512921683c86942e9c9f9dbf22') in 0.00077 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.visualscripting/Runtime/VisualScripting.State/Unity.VisualScripting.State.asmdef
+  artifactKey: Guid(315d634a9ac6d460a9515f5a56be6311) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.visualscripting/Runtime/VisualScripting.State/Unity.VisualScripting.State.asmdef using Guid(315d634a9ac6d460a9515f5a56be6311) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b1e418ede8d82d00afc19fc3dde12f0b') in 0.0007328 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Packages/com.unity.visualscripting/Editor/VisualScripting.State/Unity.VisualScripting.State.Editor.asmdef
+  artifactKey: Guid(f10496e9d78b943308af5e7e9e4543c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.visualscripting/Editor/VisualScripting.State/Unity.VisualScripting.State.Editor.asmdef using Guid(f10496e9d78b943308af5e7e9e4543c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '79ebebe846cfe7f37a8f86d10bac9469') in 0.0008406 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.burst/Runtime/Unity.Burst.asmdef
+  artifactKey: Guid(2665a8d13d1b3f18800f46e256720795) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.burst/Runtime/Unity.Burst.asmdef using Guid(2665a8d13d1b3f18800f46e256720795) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '47044b5a9c8f4bee889ec6849011b91f') in 0.0006189 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Packages/com.unity.test-framework/UnityEditor.TestRunner/UnityEditor.TestRunner.asmdef
+  artifactKey: Guid(0acc523941302664db1f4e527237feb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.test-framework/UnityEditor.TestRunner/UnityEditor.TestRunner.asmdef using Guid(0acc523941302664db1f4e527237feb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2888b02ab9bdace68ee25465fc0e9e6a') in 0.0008332 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.visualscripting/Editor/VisualScripting.Shared/Unity.VisualScripting.Shared.Editor.asmdef
+  artifactKey: Guid(8461334e883c84d819a008a46143a5ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.visualscripting/Editor/VisualScripting.Shared/Unity.VisualScripting.Shared.Editor.asmdef using Guid(8461334e883c84d819a008a46143a5ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fe2fc3eeb28751300f0c30f7510e5cfc') in 0.0009245 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Tests/Runtime/Unity.RenderPipelines.Universal.Runtime.Tests.asmdef
+  artifactKey: Guid(bc3b0daec27db604caf7fec37e54bf6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Tests/Runtime/Unity.RenderPipelines.Universal.Runtime.Tests.asmdef using Guid(bc3b0daec27db604caf7fec37e54bf6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bb74f5c6430d4d97998782d0c24d0caf') in 0.0007942 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Packages/com.unity.shadergraph/Tests/Editor/Unity.ShaderGraph.Editor.Tests.asmdef
+  artifactKey: Guid(bf9b048907d0a604eab6a5552630c26d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Tests/Editor/Unity.ShaderGraph.Editor.Tests.asmdef using Guid(bf9b048907d0a604eab6a5552630c26d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6cfb112863be2ab8a6c26a4c245309f5') in 0.0008019 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Tests/Editor/Unity.RenderPipelines.Universal.Editor.Tests.asmdef
+  artifactKey: Guid(36d514892e55d4340b470c29fcab8b44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Tests/Editor/Unity.RenderPipelines.Universal.Editor.Tests.asmdef using Guid(36d514892e55d4340b470c29fcab8b44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '093c68250d874a2cc8c97d85d4c7684a') in 0.0009772 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.scriptablebuildpipeline/Runtime/Unity.ScriptableBuildPipeline.asmdef
+  artifactKey: Guid(5c1ff9bd975acec488150743d53a93ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.scriptablebuildpipeline/Runtime/Unity.ScriptableBuildPipeline.asmdef using Guid(5c1ff9bd975acec488150743d53a93ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '93c84f7af11f4c4d40eb2fda845eb5a3') in 0.0009505 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Packages/com.unity.render-pipelines.universal-config/Runtime/Unity.RenderPipelines.Universal.Config.Runtime.asmdef
+  artifactKey: Guid(86bc95e6fdb13ff43aa04316542905ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal-config/Runtime/Unity.RenderPipelines.Universal.Config.Runtime.asmdef using Guid(86bc95e6fdb13ff43aa04316542905ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c23495233fbd79da96a8c7befd577c5b') in 0.0006724 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.ugui/Editor/UGUI/UnityEditor.UI.asmdef
+  artifactKey: Guid(343deaaf83e0cee4ca978e7df0b80d21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.ugui/Editor/UGUI/UnityEditor.UI.asmdef using Guid(343deaaf83e0cee4ca978e7df0b80d21) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2a6e05975fc44bdbfe9f60387ec160b2') in 0.0007835 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.2d.animation/Runtime/Unity.2D.Animation.Runtime.asmdef
+  artifactKey: Guid(41524c21c95e5fe4dbc5b48bd21995a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Runtime/Unity.2D.Animation.Runtime.asmdef using Guid(41524c21c95e5fe4dbc5b48bd21995a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '66989148090a298bb6cb49fa59d0a4c1') in 0.0008809 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.test-framework/UnityEngine.TestRunner/UnityEngine.TestRunner.asmdef
+  artifactKey: Guid(27619889b8ba8c24980f49ee34dbb44a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.test-framework/UnityEngine.TestRunner/UnityEngine.TestRunner.asmdef using Guid(27619889b8ba8c24980f49ee34dbb44a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '55ada476611a17fc51e7285a57017bcd') in 0.0009424 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.2d.animation/Tests/Editor/Unity.2D.Animation.EditorTests.asmdef
+  artifactKey: Guid(ba283300490772f4f8d1f69efcb7c60f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Tests/Editor/Unity.2D.Animation.EditorTests.asmdef using Guid(ba283300490772f4f8d1f69efcb7c60f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bf4924e9d343c8a8d6a0ee4d41af82ef') in 0.0008162 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Packages/com.unity.2d.tilemap/Editor/Unity.2D.Tilemap.Editor.asmdef
+  artifactKey: Guid(3a9781db4804a9945b9883f3a7c46d45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.tilemap/Editor/Unity.2D.Tilemap.Editor.asmdef using Guid(3a9781db4804a9945b9883f3a7c46d45) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5ed3b3e170d73a74c0d147754b332724') in 0.0007249 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.inputsystem/DocCodeSamples.Tests/DocCodeSamples.asmdef
+  artifactKey: Guid(41b01d3964f844d8b43923c18b3a9a6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.inputsystem/DocCodeSamples.Tests/DocCodeSamples.asmdef using Guid(41b01d3964f844d8b43923c18b3a9a6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '83ab9fce91f939933d98e7f2d61db811') in 0.0009847 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Packages/com.unity.visualscripting/Editor/SettingsProvider/Unity.VisualScripting.SettingsProvider.Editor.asmdef
+  artifactKey: Guid(2aa54ddaa48744e1caddee916e39805e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.visualscripting/Editor/SettingsProvider/Unity.VisualScripting.SettingsProvider.Editor.asmdef using Guid(2aa54ddaa48744e1caddee916e39805e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '173aaf4c6e3cfb21e27cde65d59b0f71') in 0.0007915 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.searcher/Editor/Unity.Searcher.Editor.asmdef
+  artifactKey: Guid(4988cf9794f41d64c884876ab6574b89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.searcher/Editor/Unity.Searcher.Editor.asmdef using Guid(4988cf9794f41d64c884876ab6574b89) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2072c9e3a8363936deca3ba0da98c174') in 0.0008289 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Packages/com.unity.addressables/Tests/Runtime/Unity.Addressables.Runtime.Tests.asmdef
+  artifactKey: Guid(536993f12b814234a8f1d38fa0a1f35c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.addressables/Tests/Runtime/Unity.Addressables.Runtime.Tests.asmdef using Guid(536993f12b814234a8f1d38fa0a1f35c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e4fc419e8b97020a4df5eab45261b21f') in 0.0011248 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.rendering.light-transport/Editor/Unity.Rendering.LightTransport.Editor.asmdef
+  artifactKey: Guid(085cb502223da8f46931abfa47535112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.rendering.light-transport/Editor/Unity.Rendering.LightTransport.Editor.asmdef using Guid(085cb502223da8f46931abfa47535112) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3e54b5f701502db2634aea429d114493') in 0.0008848 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: 2025-12-08T00:41:56Z
+[Licensing::Module] License group:
+  Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
+  Product: Unity Personal Version
+  Type: Assigned
+  Expiration: Unlimited
+- Loaded All Assemblies, in  0.854 seconds
+Refreshing native plugins compatible for Editor in 1.36 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.804 seconds
+Domain Reload Profiling: 1657ms
+	BeginReloadAssembly (221ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (12ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (61ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (29ms)
+	LoadAllAssembliesAndSetupDomain (559ms)
+		LoadAssemblies (449ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (207ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (182ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (804ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (649ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (204ms)
+			ProcessInitializeOnLoadAttributes (372ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+Refreshing native plugins compatible for Editor in 2.29 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 35 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7539 unused Assets / (8.8 MB). Loaded Objects now: 8296.
+Memory consumption went from 162.3 MB to 153.5 MB.
+Total: 19.927200 ms (FindLiveObjects: 1.839400 ms CreateObjectMapping: 1.823000 ms MarkObjects: 7.819500 ms  DeleteObjects: 8.444000 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 240.500336 seconds.
+  path: Assets/Scripts/EquipmentSystem/Editor/RegionMarkerWindow.cs
+  artifactKey: Guid(1b43b07aed1b709418b9bc768ac8507b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Editor/RegionMarkerWindow.cs using Guid(1b43b07aed1b709418b9bc768ac8507b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f0c3a247052a3771b9651e05cf1b3be8') in 0.1858183 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Scripts/test/spritetest.cs
+  artifactKey: Guid(ca61bb4bc7cc12e46928effd70a0122d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/test/spritetest.cs using Guid(ca61bb4bc7cc12e46928effd70a0122d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '008cde3c8bb33e61e0902341ae32d4a6') in 0.0072325 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/Data/CharacterFrameData.asset
+  artifactKey: Guid(b379aeb18909bff4d9f7a65aa1bd04fd) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/CharacterFrameData.asset using Guid(b379aeb18909bff4d9f7a65aa1bd04fd) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7e583ceb14a2eb3314a6670797de1095') in 0.0425203 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Scripts/EquipmentSystem/Runtime/CharacterEquipmentController.cs
+  artifactKey: Guid(88036b08a5f4b7946a9ffa68e5dcd296) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Runtime/CharacterEquipmentController.cs using Guid(88036b08a5f4b7946a9ffa68e5dcd296) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6b4d8467e17dc27688cda1c0e907d268') in 0.0073974 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/generate
+  artifactKey: Guid(a57c1dc6e461bce4991128a9f045e72b) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/generate using Guid(a57c1dc6e461bce4991128a9f045e72b) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ef6f6763f41f989edf45616f7c997211') in 0.0045161 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Scripts/EquipmentSystem/Data/EquipmentData.cs
+  artifactKey: Guid(a74340105d53c6d4e96c80db64c93b00) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Data/EquipmentData.cs using Guid(a74340105d53c6d4e96c80db64c93b00) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7e3a4c1cd7c6e59834fdc67ac1856f53') in 0.0081779 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

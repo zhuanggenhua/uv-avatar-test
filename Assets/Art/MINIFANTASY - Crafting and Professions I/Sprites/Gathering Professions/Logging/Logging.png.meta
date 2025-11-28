@@ -1,0 +1,770 @@
+fileFormatVersion: 2
+guid: 2d45fe0ae29ef3a47995e74c45a713c2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9128409162972235919
+    second: Oak_Node
+  - first:
+      213: -6050867778655576574
+    second: Hickory_Node
+  - first:
+      213: -2244724618274334730
+    second: Pine_Node
+  - first:
+      213: 7685799599153601443
+    second: Willow_Node
+  - first:
+      213: 6954102335353057258
+    second: Birch_Node
+  - first:
+      213: 7264172356549365758
+    second: Oak_Node_Depleted
+  - first:
+      213: -7324847645652456261
+    second: Hickory_Node_Depleted
+  - first:
+      213: 6844983114634547245
+    second: Pine_Node_Depleted
+  - first:
+      213: 3033325700299472022
+    second: Logging_8
+  - first:
+      213: 8562164311752578019
+    second: Willow_Node_Depleted
+  - first:
+      213: -8145862016513354656
+    second: Birch_Node_Depleted
+  - first:
+      213: 6958306759673768327
+    second: Oak_Pickup_Icon
+  - first:
+      213: 7551275837554459716
+    second: Hickory_Pickup_Icon
+  - first:
+      213: 5580059937893509023
+    second: Pine_Pickup_Icon
+  - first:
+      213: -7854202449078132083
+    second: Willow_Pickup_Icon
+  - first:
+      213: 7140918235218113015
+    second: Birch_Pickup_Icon
+  - first:
+      213: -8914817249724082256
+    second: Oak_Inventory_Icon
+  - first:
+      213: 6925862104937429927
+    second: Hickory_Inventory_Icon
+  - first:
+      213: 7622655633568244803
+    second: Pine_Inventory_Icon
+  - first:
+      213: 7925894447652341653
+    second: Willow_Inventory_Icon
+  - first:
+      213: -7373887811069935586
+    second: Birch_Inventory_Icon
+  - first:
+      213: 5144153759215434860
+    second: Oak_Plank_Icon
+  - first:
+      213: 1561385222418051702
+    second: Hickory_Plank_Icon
+  - first:
+      213: -3830502841604124549
+    second: Pine_Plank_Icon
+  - first:
+      213: 390313503898587899
+    second: Willow_Plank_Icon
+  - first:
+      213: 1804228314830613660
+    second: Birch_Plank_Icon
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Oak_Node
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 88
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1777e9c0b30615180800000000000000
+      internalID: -9128409162972235919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hickory_Node
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 88
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20e906e60dff60ca0800000000000000
+      internalID: -6050867778655576574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine_Node
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 88
+        width: 32
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f71f2d4ad229d0e0800000000000000
+      internalID: -2244724618274334730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Willow_Node
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 88
+        width: 56
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3abd36aa30279aa60800000000000000
+      internalID: 7685799599153601443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Birch_Node
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 88
+        width: 32
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aefee66ca3fe18060800000000000000
+      internalID: 6954102335353057258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oak_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 56
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff465365468fc460800000000000000
+      internalID: 7264172356549365758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hickory_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 56
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbc670fffd9e85a90800000000000000
+      internalID: -7324847645652456261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 56
+        width: 16
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20d65160e34efe50800000000000000
+      internalID: 6844983114634547245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Willow_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 56
+        width: 28
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e31a86c31be2d670800000000000000
+      internalID: 8562164311752578019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Birch_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 56
+        width: 16
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064df5497a514fe80800000000000000
+      internalID: -8145862016513354656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oak_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789ed88912fd09060800000000000000
+      internalID: 6958306759673768327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hickory_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4448c6aad558bc860800000000000000
+      internalID: 7551275837554459716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f97e787f2fa507d40800000000000000
+      internalID: 5580059937893509023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Willow_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d82e1b46c74400390800000000000000
+      internalID: -7854202449078132083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Birch_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f1f84cfc43a91360800000000000000
+      internalID: 7140918235218113015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oak_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b7dba0b1f4384480800000000000000
+      internalID: -8914817249724082256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hickory_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ab7220c3ea9d1060800000000000000
+      internalID: 6925862104937429927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34427f389ec19c960800000000000000
+      internalID: 7622655633568244803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Willow_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5970f87c10f6efd60800000000000000
+      internalID: 7925894447652341653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Birch_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e100897ba10baa990800000000000000
+      internalID: -7373887811069935586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oak_Plank_Icon
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6cb600d694b36740800000000000000
+      internalID: 5144153759215434860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hickory_Plank_Icon
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672b5c356972ba510800000000000000
+      internalID: 1561385222418051702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine_Plank_Icon
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b70df0fd5f157dac0800000000000000
+      internalID: -3830502841604124549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Willow_Plank_Icon
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf2d9e6501caa6500800000000000000
+      internalID: 390313503898587899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Birch_Plank_Icon
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c2e27d718e90910800000000000000
+      internalID: 1804228314830613660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Birch_Inventory_Icon: -7373887811069935586
+      Birch_Node: 6954102335353057258
+      Birch_Node_Depleted: -8145862016513354656
+      Birch_Pickup_Icon: 7140918235218113015
+      Birch_Plank_Icon: 1804228314830613660
+      Hickory_Inventory_Icon: 6925862104937429927
+      Hickory_Node: -6050867778655576574
+      Hickory_Node_Depleted: -7324847645652456261
+      Hickory_Pickup_Icon: 7551275837554459716
+      Hickory_Plank_Icon: 1561385222418051702
+      Oak_Inventory_Icon: -8914817249724082256
+      Oak_Node: -9128409162972235919
+      Oak_Node_Depleted: 7264172356549365758
+      Oak_Pickup_Icon: 6958306759673768327
+      Oak_Plank_Icon: 5144153759215434860
+      Pine_Inventory_Icon: 7622655633568244803
+      Pine_Node: -2244724618274334730
+      Pine_Node_Depleted: 6844983114634547245
+      Pine_Pickup_Icon: 5580059937893509023
+      Pine_Plank_Icon: -3830502841604124549
+      Willow_Inventory_Icon: 7925894447652341653
+      Willow_Node: 7685799599153601443
+      Willow_Node_Depleted: 8562164311752578019
+      Willow_Pickup_Icon: -7854202449078132083
+      Willow_Plank_Icon: 390313503898587899
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

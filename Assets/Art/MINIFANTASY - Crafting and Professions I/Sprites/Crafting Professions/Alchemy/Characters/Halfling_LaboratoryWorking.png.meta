@@ -1,0 +1,436 @@
+fileFormatVersion: 2
+guid: ea3eb950de74a1241941e115e5fb3825
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4902330165591292199
+    second: LaboratoryWorking_halfling_0_00
+  - first:
+      213: 3059138438572663147
+    second: LaboratoryWorking_halfling_0_01
+  - first:
+      213: -8095332507177471141
+    second: LaboratoryWorking_halfling_0_02
+  - first:
+      213: -600782907498742354
+    second: LaboratoryWorking_halfling_0_03
+  - first:
+      213: -392188192363184629
+    second: LaboratoryWorking_halfling_0_04
+  - first:
+      213: -5968000846381207147
+    second: LaboratoryWorking_halfling_0_05
+  - first:
+      213: -3017141543477157650
+    second: LaboratoryWorking_halfling_0_06
+  - first:
+      213: 8828729283050278484
+    second: LaboratoryWorking_halfling_0_07
+  - first:
+      213: 8937989961471603218
+    second: LaboratoryWorking_halfling_0_08
+  - first:
+      213: 4008433675638740640
+    second: LaboratoryWorking_halfling_0_09
+  - first:
+      213: -8417955987190152267
+    second: LaboratoryWorking_halfling_0_10
+  - first:
+      213: -5897613366803762476
+    second: Halfling_LaboratoryWorking_0_00
+  - first:
+      213: 2682470213373498888
+    second: Halfling_LaboratoryWorking_0_01
+  - first:
+      213: 2135794855075631895
+    second: Halfling_LaboratoryWorking_0_02
+  - first:
+      213: 2660387261435816214
+    second: Halfling_LaboratoryWorking_0_03
+  - first:
+      213: -3388179513655694579
+    second: Halfling_LaboratoryWorking_0_04
+  - first:
+      213: -6622949665112885534
+    second: Halfling_LaboratoryWorking_0_05
+  - first:
+      213: -8763191600827707730
+    second: Halfling_LaboratoryWorking_0_06
+  - first:
+      213: -6533867290504761269
+    second: Halfling_LaboratoryWorking_0_07
+  - first:
+      213: -8832997954866360878
+    second: Halfling_LaboratoryWorking_0_08
+  - first:
+      213: 2500056896394163970
+    second: Halfling_LaboratoryWorking_0_09
+  - first:
+      213: -581427113125061611
+    second: Halfling_LaboratoryWorking_0_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d2f019c3e7772ea0800000000000000
+      internalID: -5897613366803762476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80691bc527c0a3520800000000000000
+      internalID: 2682470213373498888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 713d3e1da1ed3ad10800000000000000
+      internalID: 2135794855075631895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6192bd27e189be420800000000000000
+      internalID: 2660387261435816214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0beb450fa4caf0d0800000000000000
+      internalID: -3388179513655694579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e677a59e5e8614a0800000000000000
+      internalID: -6622949665112885534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_06
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eae4afd1ba3e26680800000000000000
+      internalID: -8763191600827707730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_07
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b407be3315a0355a0800000000000000
+      internalID: -6533867290504761269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_08
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd4076c823ea6580800000000000000
+      internalID: -8832997954866360878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_09
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207f6db508cf1b220800000000000000
+      internalID: 2500056896394163970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halfling_LaboratoryWorking_0_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c56630f1b5ee7f0800000000000000
+      internalID: -581427113125061611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Halfling_LaboratoryWorking_0_00: -5897613366803762476
+      Halfling_LaboratoryWorking_0_01: 2682470213373498888
+      Halfling_LaboratoryWorking_0_02: 2135794855075631895
+      Halfling_LaboratoryWorking_0_03: 2660387261435816214
+      Halfling_LaboratoryWorking_0_04: -3388179513655694579
+      Halfling_LaboratoryWorking_0_05: -6622949665112885534
+      Halfling_LaboratoryWorking_0_06: -8763191600827707730
+      Halfling_LaboratoryWorking_0_07: -6533867290504761269
+      Halfling_LaboratoryWorking_0_08: -8832997954866360878
+      Halfling_LaboratoryWorking_0_09: 2500056896394163970
+      Halfling_LaboratoryWorking_0_10: -581427113125061611
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

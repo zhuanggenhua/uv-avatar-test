@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: a18b715dcf2d62f46bdc984ec8ced596
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8487673496779532331
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_0
+  - first:
+      213: 4784102877423976393
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_1
+  - first:
+      213: -334115490362655982
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_2
+  - first:
+      213: 7637655022288016445
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_3
+  - first:
+      213: -160850782110458837
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_4
+  - first:
+      213: 9209033147015565508
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_5
+  - first:
+      213: 5760478951479054619
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_6
+  - first:
+      213: -9005645188209894726
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_7
+  - first:
+      213: -4338782515071630938
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_8
+  - first:
+      213: -205367629025903301
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_9
+  - first:
+      213: -1977114687396332605
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_10
+  - first:
+      213: 2203529374321249612
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_11
+  - first:
+      213: -5874323294713148972
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_12
+  - first:
+      213: 4850431207477583935
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_13
+  - first:
+      213: 3953388584851708873
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_14
+  - first:
+      213: -5644673034578389327
+    second: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28aa0163164ac570800000000000000
+      internalID: 8487673496779532331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 112
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cfb7c1483c846240800000000000000
+      internalID: 4784102877423976393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 112
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21b7af25bbbfc5bf0800000000000000
+      internalID: -334115490362655982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 112
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d349478d6c66ef960800000000000000
+      internalID: 7637655022288016445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 80
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2c567ed01b84cdf0800000000000000
+      internalID: -160850782110458837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 80
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c019ac0bde0dcf70800000000000000
+      internalID: 9209033147015565508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 80
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b111607061551ff40800000000000000
+      internalID: 5760478951479054619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 80
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aba1b8f4a65850380800000000000000
+      internalID: -9005645188209894726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a1ca775a4c89c3c0800000000000000
+      internalID: -4338782515071630938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 48
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3dfb8fba33662df0800000000000000
+      internalID: -205367629025903301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cbb881caa0ef84e0800000000000000
+      internalID: -1977114687396332605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 48
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4d8e888a42849e10800000000000000
+      internalID: 2203529374321249612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d902d246163a7ea0800000000000000
+      internalID: -5874323294713148972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f30ab290c71305340800000000000000
+      internalID: 4850431207477583935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb9b23d8f14dd630800000000000000
+      internalID: 3953388584851708873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_Hat_CowboyHat_grey_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b69ab428c71aa1b0800000000000000
+      internalID: -5644673034578389327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_0: 8487673496779532331
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_1: 4784102877423976393
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_10: -1977114687396332605
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_11: 2203529374321249612
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_12: -5874323294713148972
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_13: 4850431207477583935
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_14: 3953388584851708873
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_15: -5644673034578389327
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_2: -334115490362655982
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_3: 7637655022288016445
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_4: -160850782110458837
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_5: 9209033147015565508
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_6: 5760478951479054619
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_7: -9005645188209894726
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_8: -4338782515071630938
+      Minifantasy_NPCsDmg_Hat_CowboyHat_grey_9: -205367629025903301
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

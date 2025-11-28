@@ -1,0 +1,924 @@
+fileFormatVersion: 2
+guid: 4fc357101af23374a8eb9f3da4ac0cb5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5382937629354013851
+    second: FibresPlants_0_00
+  - first:
+      213: 460448219542715673
+    second: FibresPlants_1_00
+  - first:
+      213: -7630657695621949914
+    second: FibresPlants_2_00
+  - first:
+      213: -1906715472117770833
+    second: FibresPlants_0_01
+  - first:
+      213: -2769772625046328039
+    second: FibresPlants_1_01
+  - first:
+      213: -153190176808631980
+    second: FibresPlants_2_01
+  - first:
+      213: -3597789618568108589
+    second: FibresPlants_0_02
+  - first:
+      213: -4639176035667556057
+    second: FibresPlants_1_02
+  - first:
+      213: 8561049715077688394
+    second: FibresPlants_2_02
+  - first:
+      213: -6891075195272615439
+    second: Linen_Node_Depleted
+  - first:
+      213: -5815246032041381606
+    second: Cotton_Node
+  - first:
+      213: 4873737732595628237
+    second: Cotton_Node_Depleted
+  - first:
+      213: 8816661998902290768
+    second: Hemp_Node
+  - first:
+      213: 4620496071344011406
+    second: Hemp_Node_Depleted
+  - first:
+      213: 5397158636466489055
+    second: Ramie_Node
+  - first:
+      213: -7314850434355618438
+    second: Ramie_Node_Depleted
+  - first:
+      213: 7932937243030643992
+    second: Agave_Node_Depleted
+  - first:
+      213: 2419372133987349925
+    second: Linen_Pickup_Icon_Ground
+  - first:
+      213: 7105645272858368317
+    second: Agave_Pickup_Icon_Ground
+  - first:
+      213: 6379946825919702588
+    second: Linen_Pickup_Icon
+  - first:
+      213: -6428896347814377715
+    second: Agave_Pickup_Icon
+  - first:
+      213: 5632417038280708127
+    second: Linen_Inventory_Icon
+  - first:
+      213: -2627357137003801938
+    second: Cotton_Inventory_Icon
+  - first:
+      213: -559206804920424008
+    second: Hemp_Inventory_Icon
+  - first:
+      213: -4689216609555229339
+    second: Ramie_Inventory_Icon
+  - first:
+      213: -9196703832916061892
+    second: Agave_Inventory_Icon
+  - first:
+      213: -2234905297518855527
+    second: Linen_Refined_Thread_Icon
+  - first:
+      213: -300083067126747151
+    second: Cotton_Refined_Thread_Icon
+  - first:
+      213: -1241165369828702863
+    second: Hemp_Refined_Thread_Icon
+  - first:
+      213: 6894277068327029909
+    second: Ramie_Refined_Thread_Icon
+  - first:
+      213: -386128588122997803
+    second: Agave_Refined_Thread_Icon
+  - first:
+      213: 4236171066065855756
+    second: Cotton_Pickup_Icon
+  - first:
+      213: 586489459575596924
+    second: Hemp_Pickup_Icon
+  - first:
+      213: 6220786728643601387
+    second: Ramie_Pickup_Icon
+  - first:
+      213: -6850495689005483169
+    second: Linen_Node
+  - first:
+      213: 8246512654924476832
+    second: Cotton_Pickup_Icon_Ground
+  - first:
+      213: -6536422830008135904
+    second: Hemp_Pickup_Icon_Ground
+  - first:
+      213: -1557333624948297236
+    second: Ramie_Pickup_Icon_Ground
+  - first:
+      213: -6395417317517066415
+    second: Agave_Node
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Linen_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f92541de9bfd50a0800000000000000
+      internalID: -6891075195272615439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cotton_Node
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a117caa5b881c4fa0800000000000000
+      internalID: -5815246032041381606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cotton_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc8b7c745aef2a340800000000000000
+      internalID: 4873737732595628237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hemp_Node
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 059a14510631b5a70800000000000000
+      internalID: 8816661998902290768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hemp_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e883c8a42bc4f1040800000000000000
+      internalID: 4620496071344011406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ramie_Node
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd6440b3f2f86ea40800000000000000
+      internalID: 5397158636466489055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ramie_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7d1f13294e6c7a90800000000000000
+      internalID: -7314850434355618438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agave_Node_Depleted
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 815ee4c5464771e60800000000000000
+      internalID: 7932937243030643992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Linen_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 49
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a57bc13326539120800000000000000
+      internalID: 2419372133987349925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agave_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 50
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3918a47ab25c9260800000000000000
+      internalID: 7105645272858368317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Linen_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 40
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3623d4f5df1a8850800000000000000
+      internalID: 6379946825919702588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agave_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 41
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d07c7ba55d8f7c6a0800000000000000
+      internalID: -6428896347814377715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Linen_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f105499547d5a2e40800000000000000
+      internalID: 5632417038280708127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cotton_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea21dceaa90c98bd0800000000000000
+      internalID: -2627357137003801938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hemp_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 24
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b9acbcaf5c4d38f0800000000000000
+      internalID: -559206804920424008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ramie_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5655990965e8ceeb0800000000000000
+      internalID: -4689216609555229339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agave_Inventory_Icon
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c319096179ebe5080800000000000000
+      internalID: -9196703832916061892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Linen_Refined_Thread_Icon
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99affb219750cf0e0800000000000000
+      internalID: -2234905297518855527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cotton_Refined_Thread_Icon
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ffecc45a04e5dbf0800000000000000
+      internalID: -300083067126747151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hemp_Refined_Thread_Icon
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17508df0cae76cee0800000000000000
+      internalID: -1241165369828702863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ramie_Refined_Thread_Icon
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59c01c857746daf50800000000000000
+      internalID: 6894277068327029909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agave_Refined_Thread_Icon
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5db3e4b481234aaf0800000000000000
+      internalID: -386128588122997803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cotton_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 42
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c05a4a0f327e9ca30800000000000000
+      internalID: 4236171066065855756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hemp_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 41
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c77a38e5e01a32800800000000000000
+      internalID: 586489459575596924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ramie_Pickup_Icon
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 41
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be32440129ca45650800000000000000
+      internalID: 6220786728643601387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Linen_Node
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5bbb7167762ee0a0800000000000000
+      internalID: -6850495689005483169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cotton_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 51
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a17988519f717270800000000000000
+      internalID: 8246512654924476832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hemp_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 50
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f8c9b4116f945a0800000000000000
+      internalID: -6536422830008135904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ramie_Pickup_Icon_Ground
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 50
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce17f28b15d336ae0800000000000000
+      internalID: -1557333624948297236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agave_Node
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15f730785d9ee37a0800000000000000
+      internalID: -6395417317517066415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Agave_Inventory_Icon: -9196703832916061892
+      Agave_Node: -6395417317517066415
+      Agave_Node_Depleted: 7932937243030643992
+      Agave_Pickup_Icon: -6428896347814377715
+      Agave_Pickup_Icon_Ground: 7105645272858368317
+      Agave_Refined_Thread_Icon: -386128588122997803
+      Cotton_Inventory_Icon: -2627357137003801938
+      Cotton_Node: -5815246032041381606
+      Cotton_Node_Depleted: 4873737732595628237
+      Cotton_Pickup_Icon: 4236171066065855756
+      Cotton_Pickup_Icon_Ground: 8246512654924476832
+      Cotton_Refined_Thread_Icon: -300083067126747151
+      Hemp_Inventory_Icon: -559206804920424008
+      Hemp_Node: 8816661998902290768
+      Hemp_Node_Depleted: 4620496071344011406
+      Hemp_Pickup_Icon: 586489459575596924
+      Hemp_Pickup_Icon_Ground: -6536422830008135904
+      Hemp_Refined_Thread_Icon: -1241165369828702863
+      Linen_Inventory_Icon: 5632417038280708127
+      Linen_Node: -6850495689005483169
+      Linen_Node_Depleted: -6891075195272615439
+      Linen_Pickup_Icon: 6379946825919702588
+      Linen_Pickup_Icon_Ground: 2419372133987349925
+      Linen_Refined_Thread_Icon: -2234905297518855527
+      Ramie_Inventory_Icon: -4689216609555229339
+      Ramie_Node: 5397158636466489055
+      Ramie_Node_Depleted: -7314850434355618438
+      Ramie_Pickup_Icon: 6220786728643601387
+      Ramie_Pickup_Icon_Ground: -1557333624948297236
+      Ramie_Refined_Thread_Icon: 6894277068327029909
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

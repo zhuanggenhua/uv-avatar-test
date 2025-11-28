@@ -1,0 +1,436 @@
+fileFormatVersion: 2
+guid: e9d9bb8c23e577b44923ffa8a4ca4e01
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9018109374910257756
+    second: LaboratoryWorking_dwarf_0_00
+  - first:
+      213: -8485229663135497903
+    second: LaboratoryWorking_dwarf_0_01
+  - first:
+      213: -3308274331495426870
+    second: LaboratoryWorking_dwarf_0_02
+  - first:
+      213: -7681087028504436771
+    second: LaboratoryWorking_dwarf_0_03
+  - first:
+      213: -5312154279484517491
+    second: LaboratoryWorking_dwarf_0_04
+  - first:
+      213: 6186763274316860803
+    second: LaboratoryWorking_dwarf_0_05
+  - first:
+      213: 8382024580866206792
+    second: LaboratoryWorking_dwarf_0_06
+  - first:
+      213: 3904375151891955079
+    second: LaboratoryWorking_dwarf_0_07
+  - first:
+      213: 3190219558025956424
+    second: LaboratoryWorking_dwarf_0_08
+  - first:
+      213: 6210016700364732582
+    second: LaboratoryWorking_dwarf_0_09
+  - first:
+      213: 2964851121334159247
+    second: LaboratoryWorking_dwarf_0_10
+  - first:
+      213: 4581442404986677929
+    second: Dwarf_LaboratoryWorking_0_00
+  - first:
+      213: 2138760215994689226
+    second: Dwarf_LaboratoryWorking_0_01
+  - first:
+      213: 2067797177539620225
+    second: Dwarf_LaboratoryWorking_0_02
+  - first:
+      213: -871015143794398884
+    second: Dwarf_LaboratoryWorking_0_03
+  - first:
+      213: -4149534032144673416
+    second: Dwarf_LaboratoryWorking_0_04
+  - first:
+      213: 6345129534141286277
+    second: Dwarf_LaboratoryWorking_0_05
+  - first:
+      213: -5630813473062132498
+    second: Dwarf_LaboratoryWorking_0_06
+  - first:
+      213: 8929955889874823929
+    second: Dwarf_LaboratoryWorking_0_07
+  - first:
+      213: 6226041587643610224
+    second: Dwarf_LaboratoryWorking_0_08
+  - first:
+      213: -2382193614661229402
+    second: Dwarf_LaboratoryWorking_0_09
+  - first:
+      213: 2955138357840351371
+    second: Dwarf_LaboratoryWorking_0_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aa6424089d849f30800000000000000
+      internalID: 4581442404986677929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac6e916b5176ead10800000000000000
+      internalID: 2138760215994689226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18dedcac39a42bc10800000000000000
+      internalID: 2067797177539620225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c592620775889e3f0800000000000000
+      internalID: -871015143794398884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8755f9e68c4e966c0800000000000000
+      internalID: -4149534032144673416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587c45081bd6e0850800000000000000
+      internalID: 6345129534141286277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_06
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee4e5a5caf45bd1b0800000000000000
+      internalID: -5630813473062132498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_07
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fa65e3a1939deb70800000000000000
+      internalID: 8929955889874823929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_08
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0747e4446d7576650800000000000000
+      internalID: 6226041587643610224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_09
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a4e9e3678fb0fed0800000000000000
+      internalID: -2382193614661229402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dwarf_LaboratoryWorking_0_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b809431fda2c20920800000000000000
+      internalID: 2955138357840351371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Dwarf_LaboratoryWorking_0_00: 4581442404986677929
+      Dwarf_LaboratoryWorking_0_01: 2138760215994689226
+      Dwarf_LaboratoryWorking_0_02: 2067797177539620225
+      Dwarf_LaboratoryWorking_0_03: -871015143794398884
+      Dwarf_LaboratoryWorking_0_04: -4149534032144673416
+      Dwarf_LaboratoryWorking_0_05: 6345129534141286277
+      Dwarf_LaboratoryWorking_0_06: -5630813473062132498
+      Dwarf_LaboratoryWorking_0_07: 8929955889874823929
+      Dwarf_LaboratoryWorking_0_08: 6226041587643610224
+      Dwarf_LaboratoryWorking_0_09: -2382193614661229402
+      Dwarf_LaboratoryWorking_0_10: 2955138357840351371
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

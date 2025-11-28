@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Willow_AnimatorOverrideController
+  m_Controller: {fileID: 9100000, guid: 967749b2b6aead24081c6e7588273e24, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6aa7b9a22149ef94ea9345c1ff8f7c92, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0389a078759f1c945a1d6caae8285bdb, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 139e0d0518887de47a29aada56f408c8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dab85b662fe831b4f9828319391997cb, type: 2}

@@ -1,0 +1,21 @@
+Display Settings
+    The Demo - Animated Creatures scene uses 16:9 aspect ratio.
+
+Scripts
+    The script titled "Creatures_ShadowSwitch" is used for turning off a creature prefab's shadow in the editor.
+    Attach the script to the prefab of your choice and use the checkbox to turn the prefab's shadow off and on.
+
+Prefabs
+    All creature prefabs are configured in the following format:
+        Empty Parent
+            -> Model: contains the SpriteRenderer and Animator components for the creature.
+                -> Shadow: contains the SpriteRenderer and Animator components for the creature's shadow.
+
+Animations
+    All creature animations animate both the creature model and creature shadow within one animation.
+
+Animator Controllers and Animator Override Controllers
+    Creature animator controllers are grouped together based on common animations. Most creatures will have an Animator Override Controller.
+    For example, the standard slimes and mother slimes all have the same 4 animations. 
+        There is a single animator controller called "Slime_AnimatorController" that acts as a base animator controller for each Slime.
+        Each Slime has their own Animator Override Controller that overrides the animations on the base Animator controller.

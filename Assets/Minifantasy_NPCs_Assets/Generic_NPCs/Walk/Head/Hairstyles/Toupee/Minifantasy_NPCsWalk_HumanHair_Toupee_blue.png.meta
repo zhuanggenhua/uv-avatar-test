@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: a2a45b264ac12464893f06b88e2d67a8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2277937159038664972
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_0
+  - first:
+      213: 3368891584273237005
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_1
+  - first:
+      213: -2435314434788940454
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_2
+  - first:
+      213: -8846688869134649529
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_3
+  - first:
+      213: 5031744462391382482
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_4
+  - first:
+      213: 8780787250652520971
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_5
+  - first:
+      213: 4366347095805980760
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_6
+  - first:
+      213: 4363683564533551316
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_7
+  - first:
+      213: 637583554537616506
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_8
+  - first:
+      213: -1350739354957429265
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_9
+  - first:
+      213: -2676007871785508526
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_10
+  - first:
+      213: 8712490920256836098
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_11
+  - first:
+      213: 6172177581809042257
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_12
+  - first:
+      213: -1829914958585836266
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_13
+  - first:
+      213: -3115136397689465617
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_14
+  - first:
+      213: -8962910453295413952
+    second: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 112
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c018921f6cbdc9f10800000000000000
+      internalID: 2277937159038664972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 113
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d04c867fb05b0ce20800000000000000
+      internalID: 3368891584273237005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 112
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a552606ac66043ed0800000000000000
+      internalID: -2435314434788940454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 113
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 747b3d4685f3a3580800000000000000
+      internalID: -8846688869134649529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 80
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d19061ede854d540800000000000000
+      internalID: 5031744462391382482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 81
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b022c6b5b7f9bd970800000000000000
+      internalID: 8780787250652520971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_6
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 80
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 850f29bbc81689c30800000000000000
+      internalID: 4366347095805980760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_7
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 81
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d09b38051bee8c30800000000000000
+      internalID: 4363683564533551316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 48
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7478d26dd629d800800000000000000
+      internalID: 637583554537616506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 49
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe54f9396b5314de0800000000000000
+      internalID: -1350739354957429265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_10
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 48
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251631ac409ecdad0800000000000000
+      internalID: -2676007871785508526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 49
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20299bac45cf8e870800000000000000
+      internalID: 8712490920256836098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 16
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1538b5e1fcaf7a550800000000000000
+      internalID: 6172177581809042257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_13
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 17
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d415c5a06da96e0800000000000000
+      internalID: -1829914958585836266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_14
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 16
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe454d473ffc4c4d0800000000000000
+      internalID: -3115136397689465617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_HumanHair_Toupee_blue_15
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 17
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04501b52e685d9380800000000000000
+      internalID: -8962910453295413952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_0: 2277937159038664972
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_1: 3368891584273237005
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_10: -2676007871785508526
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_11: 8712490920256836098
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_12: 6172177581809042257
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_13: -1829914958585836266
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_14: -3115136397689465617
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_15: -8962910453295413952
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_2: -2435314434788940454
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_3: -8846688869134649529
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_4: 5031744462391382482
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_5: 8780787250652520971
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_6: 4366347095805980760
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_7: 4363683564533551316
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_8: 637583554537616506
+      Minifantasy_NPCsWalk_HumanHair_Toupee_blue_9: -1350739354957429265
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

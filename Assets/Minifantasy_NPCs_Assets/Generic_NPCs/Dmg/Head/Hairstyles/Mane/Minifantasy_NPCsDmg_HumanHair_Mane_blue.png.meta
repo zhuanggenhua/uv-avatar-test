@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 7bcd98d19817dda40900442d9a86f1a8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -73109125684853349
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_0
+  - first:
+      213: 7971765652005551271
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_1
+  - first:
+      213: 6167584948461389991
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_2
+  - first:
+      213: -1307500534894289523
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_3
+  - first:
+      213: -2678721557736018159
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_4
+  - first:
+      213: -2320834668021169158
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_5
+  - first:
+      213: 8124676562327976173
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_6
+  - first:
+      213: 4530667322905483181
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_7
+  - first:
+      213: -2424392176868851249
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_8
+  - first:
+      213: -5864621893955828886
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_9
+  - first:
+      213: -2218267043855651988
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_10
+  - first:
+      213: 9052392556089726931
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_11
+  - first:
+      213: -5241438179269672060
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_12
+  - first:
+      213: -8029055067769589949
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_13
+  - first:
+      213: -999921863370837401
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_14
+  - first:
+      213: 2429001171503494391
+    second: Minifantasy_NPCsDmg_HumanHair_Mane_blue_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 110
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9507b533a34cfef0800000000000000
+      internalID: -73109125684853349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 110
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ac7370df9661ae60800000000000000
+      internalID: 7971765652005551271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 110
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a8461755d9a79550800000000000000
+      internalID: 6167584948461389991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 110
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8d1ef1e033dadde0800000000000000
+      internalID: -1307500534894289523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 78
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11fa6fa8fe443dad0800000000000000
+      internalID: -2678721557736018159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 78
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af3cf2e6a2dbacfd0800000000000000
+      internalID: -2320834668021169158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 78
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de8308c7946a0c070800000000000000
+      internalID: 8124676562327976173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 78
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da75049fce920ee30800000000000000
+      internalID: 4530667322905483181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc10f7df824da5ed0800000000000000
+      internalID: -2424392176868851249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a63c8c4a57dac9ea0800000000000000
+      internalID: -5864621893955828886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6b270260e12731e0800000000000000
+      internalID: -2218267043855651988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d75e11711f80ad70800000000000000
+      internalID: 9052392556089726931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 14
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 483067c0fbba247b0800000000000000
+      internalID: -5241438179269672060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 14
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34f2b83a4f0139090800000000000000
+      internalID: -8029055067769589949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 14
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76272a2fc509f12f0800000000000000
+      internalID: -999921863370837401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Mane_blue_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 14
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f4397232bb85b120800000000000000
+      internalID: 2429001171503494391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_0: -73109125684853349
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_1: 7971765652005551271
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_10: -2218267043855651988
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_11: 9052392556089726931
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_12: -5241438179269672060
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_13: -8029055067769589949
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_14: -999921863370837401
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_15: 2429001171503494391
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_2: 6167584948461389991
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_3: -1307500534894289523
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_4: -2678721557736018159
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_5: -2320834668021169158
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_6: 8124676562327976173
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_7: 4530667322905483181
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_8: -2424392176868851249
+      Minifantasy_NPCsDmg_HumanHair_Mane_blue_9: -5864621893955828886
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

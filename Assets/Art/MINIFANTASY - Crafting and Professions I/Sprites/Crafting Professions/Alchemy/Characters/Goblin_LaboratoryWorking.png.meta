@@ -1,0 +1,436 @@
+fileFormatVersion: 2
+guid: 60b97f227356fe84188bba8109b461c5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5941239883793820026
+    second: LaboratoryWorking_goblin_0_00
+  - first:
+      213: 5333263059457509636
+    second: LaboratoryWorking_goblin_0_01
+  - first:
+      213: -6032298385598358414
+    second: LaboratoryWorking_goblin_0_02
+  - first:
+      213: 5334077318232424826
+    second: LaboratoryWorking_goblin_0_03
+  - first:
+      213: -5061587671447227435
+    second: LaboratoryWorking_goblin_0_04
+  - first:
+      213: -4584039440940463824
+    second: LaboratoryWorking_goblin_0_05
+  - first:
+      213: -7325605876327165329
+    second: LaboratoryWorking_goblin_0_06
+  - first:
+      213: -1930138903776080371
+    second: LaboratoryWorking_goblin_0_07
+  - first:
+      213: 8930946215027371126
+    second: LaboratoryWorking_goblin_0_08
+  - first:
+      213: 5258228579841483037
+    second: LaboratoryWorking_goblin_0_09
+  - first:
+      213: 4538663673432570125
+    second: LaboratoryWorking_goblin_0_10
+  - first:
+      213: -2314057917024932660
+    second: Goblin_LaboratoryWorking_0_00
+  - first:
+      213: -9070638771273255492
+    second: Goblin_LaboratoryWorking_0_01
+  - first:
+      213: 2369317208805302506
+    second: Goblin_LaboratoryWorking_0_02
+  - first:
+      213: 8274544159383534064
+    second: Goblin_LaboratoryWorking_0_03
+  - first:
+      213: -8489293920942795240
+    second: Goblin_LaboratoryWorking_0_04
+  - first:
+      213: -7038967828733728341
+    second: Goblin_LaboratoryWorking_0_05
+  - first:
+      213: -2285714653651588302
+    second: Goblin_LaboratoryWorking_0_06
+  - first:
+      213: -5991110739256400214
+    second: Goblin_LaboratoryWorking_0_07
+  - first:
+      213: -2221251557056859961
+    second: Goblin_LaboratoryWorking_0_08
+  - first:
+      213: -8738294990460879286
+    second: Goblin_LaboratoryWorking_0_09
+  - first:
+      213: -8577102518721948029
+    second: Goblin_LaboratoryWorking_0_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccc6c0ab590d2efd0800000000000000
+      internalID: -2314057917024932660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb53f58881e9e1280800000000000000
+      internalID: -9070638771273255492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae06f0fb27181e020800000000000000
+      internalID: 2369317208805302506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f9b652921615d270800000000000000
+      internalID: 8274544159383534064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_04
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81652583828ff2a80800000000000000
+      internalID: -8489293920942795240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_05
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba96ce6cd00905e90800000000000000
+      internalID: -7038967828733728341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_06
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b213bf1a28740e0800000000000000
+      internalID: -2285714653651588302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_07
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa62890668c4bdca0800000000000000
+      internalID: -5991110739256400214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_08
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c0b7d04a778c21e0800000000000000
+      internalID: -2221251557056859961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_09
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4ef00fe0075bb680800000000000000
+      internalID: -8738294990460879286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_LaboratoryWorking_0_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3865871e3b208f880800000000000000
+      internalID: -8577102518721948029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Goblin_LaboratoryWorking_0_00: -2314057917024932660
+      Goblin_LaboratoryWorking_0_01: -9070638771273255492
+      Goblin_LaboratoryWorking_0_02: 2369317208805302506
+      Goblin_LaboratoryWorking_0_03: 8274544159383534064
+      Goblin_LaboratoryWorking_0_04: -8489293920942795240
+      Goblin_LaboratoryWorking_0_05: -7038967828733728341
+      Goblin_LaboratoryWorking_0_06: -2285714653651588302
+      Goblin_LaboratoryWorking_0_07: -5991110739256400214
+      Goblin_LaboratoryWorking_0_08: -2221251557056859961
+      Goblin_LaboratoryWorking_0_09: -8738294990460879286
+      Goblin_LaboratoryWorking_0_10: -8577102518721948029
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: dffac2d86f77576438856fd80f62eb37
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7705559751924113103
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_0
+  - first:
+      213: -8525155503597959317
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_1
+  - first:
+      213: 8638828580051248240
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_2
+  - first:
+      213: 4069505350416782125
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_3
+  - first:
+      213: 9126771886128415201
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_4
+  - first:
+      213: 5740503172224509559
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_5
+  - first:
+      213: 6565239474555324228
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_6
+  - first:
+      213: 4048145292735653124
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_7
+  - first:
+      213: 5859235848645963996
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_8
+  - first:
+      213: 6143352163893224779
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_9
+  - first:
+      213: -7569153092262638752
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_10
+  - first:
+      213: -2401973020739555478
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_11
+  - first:
+      213: -8260525457563223216
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_12
+  - first:
+      213: -5681067842982273011
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_13
+  - first:
+      213: 7358486397020942938
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_14
+  - first:
+      213: 1198019041848261581
+    second: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 131240f3b3a501590800000000000000
+      internalID: -7705559751924113103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b67c319dc3090b980800000000000000
+      internalID: -8525155503597959317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0746275b2d843e770800000000000000
+      internalID: 8638828580051248240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 111
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d23d4271e89c97830800000000000000
+      internalID: 4069505350416782125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e1c4babcaec8ae70800000000000000
+      internalID: 9126771886128415201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 776e17c783d5aaf40800000000000000
+      internalID: 5740503172224509559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_6
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4470e3a948a6c1b50800000000000000
+      internalID: 6565239474555324228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_7
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 79
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 405adac12b6ed2830800000000000000
+      internalID: 4048145292735653124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd0f6c5f5ff205150800000000000000
+      internalID: 5859235848645963996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b45abf28e32914550800000000000000
+      internalID: 6143352163893224779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06bc22d9d57f4f690800000000000000
+      internalID: -7569153092262638752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 47
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6f2fba834a7aaed0800000000000000
+      internalID: -2401973020739555478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05b7fdbccd7bc5d80800000000000000
+      internalID: -8260525457563223216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_13
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d00a52a75eac821b0800000000000000
+      internalID: -5681067842982273011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_14
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a523af224689e1660800000000000000
+      internalID: 7358486397020942938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsDmg_HumanHair_Bubble_blue_15
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 15
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcbf48f98f730a010800000000000000
+      internalID: 1198019041848261581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_0: -7705559751924113103
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_1: -8525155503597959317
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_10: -7569153092262638752
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_11: -2401973020739555478
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_12: -8260525457563223216
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_13: -5681067842982273011
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_14: 7358486397020942938
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_15: 1198019041848261581
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_2: 8638828580051248240
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_3: 4069505350416782125
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_4: 9126771886128415201
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_5: 5740503172224509559
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_6: 6565239474555324228
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_7: 4048145292735653124
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_8: 5859235848645963996
+      Minifantasy_NPCsDmg_HumanHair_Bubble_blue_9: 6143352163893224779
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

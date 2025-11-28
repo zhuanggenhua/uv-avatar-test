@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: fdfd13f21186211459ffe20d046d8ea1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8955473999394113002
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_0
+  - first:
+      213: 3451208655804255759
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_1
+  - first:
+      213: 5516676106509863193
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_2
+  - first:
+      213: 2739492065004343778
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_3
+  - first:
+      213: -3412848912998470780
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_4
+  - first:
+      213: -424476201618692667
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_5
+  - first:
+      213: -9019993858330915437
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_6
+  - first:
+      213: 6132067023642069295
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_7
+  - first:
+      213: 2367648824804947158
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_8
+  - first:
+      213: -877613700127867116
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_9
+  - first:
+      213: 6652079130266793433
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_10
+  - first:
+      213: 4656882730070405791
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_11
+  - first:
+      213: 815257062103009639
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_12
+  - first:
+      213: 6324657769964253746
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_13
+  - first:
+      213: 2602856293678960408
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_14
+  - first:
+      213: 7061017232291315044
+    second: Minifantasy_NPCsWalk_Hat_RangerHat_black_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 113
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61afdde78d3c7b380800000000000000
+      internalID: -8955473999394113002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 114
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e47f6bcf725ef20800000000000000
+      internalID: 3451208655804255759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 113
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 919c765b0bb2f8c40800000000000000
+      internalID: 5516676106509863193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 114
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e1d597c481a40620800000000000000
+      internalID: 2739492065004343778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 81
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48be5a4eeff13a0d0800000000000000
+      internalID: -3412848912998470780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 82
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c529e2c425fb1af0800000000000000
+      internalID: -424476201618692667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_6
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 81
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39d0bf5306b82d280800000000000000
+      internalID: -9019993858330915437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_7
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 82
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f29821b087a791550800000000000000
+      internalID: 6132067023642069295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d4be53df049bd020800000000000000
+      internalID: 2367648824804947158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 49
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41fbcd15df612d3f0800000000000000
+      internalID: -877613700127867116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 48
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d5775989bee05c50800000000000000
+      internalID: 6652079130266793433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 49
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f927f767b2290a040800000000000000
+      internalID: 4656882730070405791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 16
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76947438aff505b00800000000000000
+      internalID: 815257062103009639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_13
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 17
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23232a87bb2b5c750800000000000000
+      internalID: 6324657769964253746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_14
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 16
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81fcf1232043f1420800000000000000
+      internalID: 2602856293678960408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_NPCsWalk_Hat_RangerHat_black_15
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 17
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46db2ab03c5cdf160800000000000000
+      internalID: 7061017232291315044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_0: -8955473999394113002
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_1: 3451208655804255759
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_10: 6652079130266793433
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_11: 4656882730070405791
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_12: 815257062103009639
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_13: 6324657769964253746
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_14: 2602856293678960408
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_15: 7061017232291315044
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_2: 5516676106509863193
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_3: 2739492065004343778
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_4: -3412848912998470780
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_5: -424476201618692667
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_6: -9019993858330915437
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_7: 6132067023642069295
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_8: 2367648824804947158
+      Minifantasy_NPCsWalk_Hat_RangerHat_black_9: -877613700127867116
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
