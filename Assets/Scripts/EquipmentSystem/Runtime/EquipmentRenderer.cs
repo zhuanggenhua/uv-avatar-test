@@ -18,15 +18,19 @@ namespace EquipmentSystem.Runtime
         [Header("数据")]
         public CharacterFrameData frameData;
         public string currentAnimation = "Idle";
-        public int rowIndex = 0;  // 行索引（方向）
         
         [Header("装备")]
         public List<EquipmentData> equipments = new List<EquipmentData>();
         
         SpriteRenderer _charRenderer;
         Dictionary<EquipmentData, SpriteRenderer> _equipRenderers = new Dictionary<EquipmentData, SpriteRenderer>();
+        
+        // 帧同步
+        Sprite _lastSprite;
         int _frameIndex;
+        int _rowIndex;
         FrameData _cachedFrame;
+        AnimationData _currentAnimData;
         
         // 装备叠加纹理（CPU生成）
         Texture2D _equipOverlayTex;
@@ -42,9 +46,19 @@ namespace EquipmentSystem.Runtime
         void Start()
         {
             foreach (var e in equipments)
-                if (e.type == EquipmentType.Accessory)
+                if (e != null && e.type == EquipmentType.Accessory)
                     CreateRenderer(e);
             Refresh();
+        }
+        
+        void LateUpdate()
+        {
+            // 自动同步 Sprite 变化
+            if (_charRenderer.sprite != _lastSprite)
+            {
+                _lastSprite = _charRenderer.sprite;
+                SyncFromSprite();
+            }
         }
         
         void OnDestroy()
@@ -57,15 +71,6 @@ namespace EquipmentSystem.Runtime
         
         void InitOverlay()
         {
-            // 创建叠加纹理（与帧尺寸相同）
-            int w = frameData != null ? frameData.frameSize.x : 32;
-            int h = frameData != null ? frameData.frameSize.y : 32;
-            _equipOverlayTex = new Texture2D(w, h, TextureFormat.RGBA32, false)
-            {
-                filterMode = FilterMode.Point,
-                wrapMode = TextureWrapMode.Clamp
-            };
-            
             // 加载Shader
             var shader = Shader.Find("EquipmentSystem/EquipmentOverlay");
             if (shader != null)
@@ -73,27 +78,64 @@ namespace EquipmentSystem.Runtime
                 _overlayMaterial = new Material(shader);
                 _charRenderer.material = _overlayMaterial;
             }
+            
+            // 初始化叠加纹理
+            EnsureOverlayTexture();
         }
         
-        public void SetFrame(int index)
+        void EnsureOverlayTexture()
         {
-            _frameIndex = index;
-            Refresh();
-        }
-        
-        public void SetRow(int row)
-        {
-            rowIndex = row;
-            Refresh();
+            // 获取当前动画的帧尺寸
+            int w = 32, h = 32;
+            if (_currentAnimData != null)
+            {
+                w = _currentAnimData.frameSize.x;
+                h = _currentAnimData.frameSize.y;
+            }
+            
+            // 检查是否需要重建纹理
+            if (_equipOverlayTex != null && _equipOverlayTex.width == w && _equipOverlayTex.height == h)
+                return;
+            
+            if (_equipOverlayTex != null)
+                Destroy(_equipOverlayTex);
+            
+            _equipOverlayTex = new Texture2D(w, h, TextureFormat.RGBA32, false)
+            {
+                filterMode = FilterMode.Point,
+                wrapMode = TextureWrapMode.Clamp
+            };
         }
         
         /// <summary>
-        /// 设置动画
+        /// 从 Sprite 的 rect 位置同步帧索引和行索引
+        /// 注: 运行时从 Sprite 的 rect 位置计算，使用当前动画的帧尺寸配置
         /// </summary>
-        public void SetAnimation(string animName)
+        void SyncFromSprite()
         {
-            currentAnimation = animName;
-            Refresh();
+            if (_lastSprite == null || frameData == null) return;
+            
+            // 获取当前动画配置
+            _currentAnimData = frameData.GetAnimation(currentAnimation);
+            if (_currentAnimData == null) return;
+            
+            // 确保叠加纹理尺寸正确
+            EnsureOverlayTexture();
+            
+            // 从 Sprite 的 rect 位置计算帧索引和行索引
+            var rect = _lastSprite.rect;
+            int frameW = _currentAnimData.frameSize.x;
+            int frameH = _currentAnimData.frameSize.y;
+            
+            if (frameW > 0 && frameH > 0)
+            {
+                // 根据 Sprite 在贴图中的位置计算
+                _frameIndex = Mathf.FloorToInt(rect.x / frameW);
+                // Unity Sprite 的 Y 是从底部计算的，需要转换
+                int textureHeight = _lastSprite.texture.height;
+                _rowIndex = Mathf.FloorToInt((textureHeight - rect.y - rect.height) / frameH);
+                Refresh();
+            }
         }
         
         public void Equip(EquipmentData equip)
@@ -134,13 +176,14 @@ namespace EquipmentSystem.Runtime
         {
             if (frameData == null) return;
             
-            _cachedFrame = frameData.GetFrameData(currentAnimation, rowIndex, _frameIndex);
+            _cachedFrame = frameData.GetFrameData(currentAnimation, _rowIndex, _frameIndex);
             
-            // 获取当前动画的武器隐藏配置
-            var animData = frameData.animations.Find(a => 
-                string.Equals(a.animationName, currentAnimation, System.StringComparison.OrdinalIgnoreCase));
-            bool hideLeftWeapon = animData?.hideLeftWeapon ?? false;
-            bool hideRightWeapon = animData?.hideRightWeapon ?? false;
+            // 获取当前动画配置
+            if (_currentAnimData == null)
+                _currentAnimData = frameData.GetAnimation(currentAnimation);
+            
+            bool hideLeftWeapon = _currentAnimData?.hideLeftWeapon ?? false;
+            bool hideRightWeapon = _currentAnimData?.hideRightWeapon ?? false;
             
             // 清除叠加纹理
             ClearOverlayTexture();
@@ -190,7 +233,7 @@ namespace EquipmentSystem.Runtime
         /// </summary>
         void RenderAccessory(EquipmentData equip, SpriteRenderer sr, bool hideLeftWeapon, bool hideRightWeapon)
         {
-            var facingDir = CharacterFrameData.GetFacingDirection((CharacterFacing)rowIndex);
+            var facingDir = CharacterFrameData.GetFacingDirection((CharacterFacing)_rowIndex);
             sr.sprite = equip.GetSprite(facingDir);
             
             if (_cachedFrame == null)
@@ -220,20 +263,37 @@ namespace EquipmentSystem.Runtime
             
             sr.enabled = true;
             
+            // 计算位置 - 直接用像素坐标，不依赖 pivot
+            // 角色锚点和装备锚点都是编辑器坐标系（左上角原点，Y向下）
+            // 最终位置 = 角色锚点 - 装备锚点
+            
+            float ppu = _charRenderer.sprite != null ? _charRenderer.sprite.pixelsPerUnit : 16f;
+            int charH = _currentAnimData?.frameSize.y ?? 32;
+            float equipW = sr.sprite != null ? sr.sprite.rect.width : 0;
+            float equipH = sr.sprite != null ? sr.sprite.rect.height : 0;
+            
+            // 装备自身锚点
+            float equipAnchorX = equip.selfAnchor.x;
+            float equipAnchorY = equip.selfAnchor.y;
+            
+            // 翻转时镜像装备锚点 X
+            if (anchor.flipX && equipW > 0)
+            {
+                equipAnchorX = equipW - 1 - equip.selfAnchor.x;
+            }
+            
+            // 像素偏移（编辑器坐标系）
+            float deltaX = anchor.position.x - equipAnchorX;
+            float deltaY = anchor.position.y - equipAnchorY;
+            
+            // 转换到 Unity 坐标（Y 取反）
+            float posX = deltaX / ppu;
+            float posY = -deltaY / ppu;
+            
+            sr.transform.localPosition = new Vector3(posX, posY, 0);
+            
             // 翻转
             sr.flipX = anchor.flipX;
-            
-            // 计算位置
-            float ppu = _charRenderer.sprite != null ? _charRenderer.sprite.pixelsPerUnit : 16f;
-            float offsetX = anchor.flipX 
-                ? -(equip.selfAnchor.x - (sr.sprite != null ? sr.sprite.rect.width : 0) + equip.selfAnchor.x)
-                : -equip.selfAnchor.x;
-            Vector3 pos = new Vector3(
-                (anchor.position.x + offsetX) / ppu,
-                -(anchor.position.y - equip.selfAnchor.y) / ppu,
-                0
-            );
-            sr.transform.localPosition = pos;
             
             // 旋转
             sr.transform.localRotation = Quaternion.Euler(0, 0, anchor.GetRotationAngle());
@@ -262,7 +322,7 @@ namespace EquipmentSystem.Runtime
             if (torsoRegion == null || torsoRegion.pixels.Count == 0) return;
             
             // 获取服装贴图 (2x3)
-            var facingDir = CharacterFrameData.GetFacingDirection((CharacterFacing)rowIndex);
+            var facingDir = CharacterFrameData.GetFacingDirection((CharacterFacing)_rowIndex);
             var clothingSprite = equip.GetSprite(facingDir);
             if (clothingSprite == null || clothingSprite.texture == null) return;
             

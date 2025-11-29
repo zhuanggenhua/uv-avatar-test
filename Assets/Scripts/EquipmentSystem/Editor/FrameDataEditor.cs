@@ -121,8 +121,6 @@ namespace EquipmentSystem.Editor
             GUILayout.Space(10);
             GUILayout.Label("数据", EditorStyles.boldLabel);
             
-            _sprite = (Texture2D)EditorGUILayout.ObjectField("Spritesheet", _sprite, typeof(Texture2D), false);
-            
             EditorGUI.BeginChangeCheck();
             _data = (CharacterFrameData)EditorGUILayout.ObjectField("帧数据", _data, typeof(CharacterFrameData), false);
             if (EditorGUI.EndChangeCheck() && _data != null)
@@ -131,57 +129,90 @@ namespace EquipmentSystem.Editor
         
         void DrawConfigSection()
         {
-            GUILayout.Space(10);
-            GUILayout.Label("配置", EditorStyles.boldLabel);
+            if (_data == null || string.IsNullOrEmpty(_animName)) return;
             
+            var anim = _data.GetOrCreateAnimation(_animName);
+            
+            GUILayout.Space(10);
+            GUILayout.Label("当前动画配置", EditorStyles.boldLabel);
+            
+            EditorGUI.BeginChangeCheck();
+            
+            // Spritesheet
+            anim.spritesheet = (Texture2D)EditorGUILayout.ObjectField("Spritesheet", anim.spritesheet, typeof(Texture2D), false);
+            
+            // 帧配置
             EditorGUILayout.BeginHorizontal();
-            _frameSize = EditorGUILayout.Vector2IntField("帧尺寸", _frameSize);
+            anim.frameSize = EditorGUILayout.Vector2IntField("帧尺寸", anim.frameSize);
             if (GUILayout.Button("自动", GUILayout.Width(40)))
                 AutoDetectFrameConfig();
             EditorGUILayout.EndHorizontal();
             
-            _framesPerRow = EditorGUILayout.IntField("每行帧数", _framesPerRow);
-            _rowCount = EditorGUILayout.IntField("行数", _rowCount);
+            anim.framesPerRow = EditorGUILayout.IntField("每行帧数", anim.framesPerRow);
+            anim.rowCount = EditorGUILayout.IntField("行数", anim.rowCount);
             
-            if (_data != null)
+            if (EditorGUI.EndChangeCheck())
             {
-                _data.frameSize = _frameSize;
-                _data.framesPerRow = _framesPerRow;
-                _data.rowCount = _rowCount;
+                SyncFromAnimation(anim);
+                EditorUtility.SetDirty(_data);
             }
         }
         
         void DrawAnimationSection()
         {
             GUILayout.Space(10);
-            GUILayout.Label("动画来源", EditorStyles.boldLabel);
+            GUILayout.Label("动画", EditorStyles.boldLabel);
             
+            // 从 Animator 导入动画名称
             EditorGUI.BeginChangeCheck();
-            _animatorController = (AnimatorController)EditorGUILayout.ObjectField("Animator", _animatorController, typeof(AnimatorController), false);
-            if (EditorGUI.EndChangeCheck())
-                RefreshAnimationNames();
+            _animatorController = (AnimatorController)EditorGUILayout.ObjectField("从Animator导入", _animatorController, typeof(AnimatorController), false);
+            if (EditorGUI.EndChangeCheck() && _animatorController != null)
+                ImportAnimationsFromAnimator();
             
-            if (_data != null && _data.animationNames.Count > 0)
+            if (_data != null)
             {
-                var names = _data.animationNames.ToArray();
-                _animIndex = Mathf.Clamp(_animIndex, 0, names.Length - 1);
-                EditorGUI.BeginChangeCheck();
-                _animIndex = EditorGUILayout.Popup("动画", _animIndex, names);
-                if (EditorGUI.EndChangeCheck())
-                    SwitchAnimation(names[_animIndex]);
+                var names = _data.GetAnimationNames();
+                if (names.Count > 0)
+                {
+                    _animIndex = Mathf.Clamp(_animIndex, 0, names.Count - 1);
+                    EditorGUI.BeginChangeCheck();
+                    _animIndex = EditorGUILayout.Popup("动画", _animIndex, names.ToArray());
+                    if (EditorGUI.EndChangeCheck())
+                        SwitchAnimation(names[_animIndex]);
+                    
+                    // 动画名称编辑
+                    var anim = _data.GetOrCreateAnimation(_animName);
+                    EditorGUI.BeginChangeCheck();
+                    string newName = EditorGUILayout.TextField("名称", anim.animationName);
+                    if (EditorGUI.EndChangeCheck() && newName != anim.animationName)
+                    {
+                        // 检查名称是否已存在
+                        if (!string.IsNullOrEmpty(newName) && !names.Contains(newName))
+                        {
+                            Undo.RecordObject(_data, "Rename Animation");
+                            anim.animationName = newName;
+                            _animName = newName;
+                            EditorUtility.SetDirty(_data);
+                        }
+                    }
+                    
+                    // 武器隐藏配置
+                    EditorGUI.BeginChangeCheck();
+                    EditorGUILayout.BeginHorizontal();
+                    anim.hideLeftWeapon = EditorGUILayout.ToggleLeft("隐藏左手武器", anim.hideLeftWeapon, GUILayout.Width(100));
+                    anim.hideRightWeapon = EditorGUILayout.ToggleLeft("隐藏右手武器", anim.hideRightWeapon, GUILayout.Width(100));
+                    EditorGUILayout.EndHorizontal();
+                    if (EditorGUI.EndChangeCheck())
+                        EditorUtility.SetDirty(_data);
+                }
                 
-                var anim = _data.GetOrCreateAnimation(_animName);
-                EditorGUI.BeginChangeCheck();
+                // 添加/删除动画按钮
                 EditorGUILayout.BeginHorizontal();
-                anim.hideLeftWeapon = EditorGUILayout.ToggleLeft("隐藏左手武器", anim.hideLeftWeapon, GUILayout.Width(100));
-                anim.hideRightWeapon = EditorGUILayout.ToggleLeft("隐藏右手武器", anim.hideRightWeapon, GUILayout.Width(100));
+                if (GUILayout.Button("+", GUILayout.Width(25)))
+                    AddNewAnimation();
+                if (names.Count > 0 && GUILayout.Button("-", GUILayout.Width(25)))
+                    RemoveCurrentAnimation();
                 EditorGUILayout.EndHorizontal();
-                if (EditorGUI.EndChangeCheck())
-                    EditorUtility.SetDirty(_data);
-            }
-            else
-            {
-                _animName = EditorGUILayout.TextField("动画名称", _animName);
             }
         }
         
@@ -193,7 +224,8 @@ namespace EquipmentSystem.Editor
             // 行选择
             EditorGUILayout.BeginHorizontal();
             EditorGUI.BeginChangeCheck();
-            int newRow = EditorGUILayout.IntSlider("行", _row, 0, _rowCount - 1);
+            int maxRow = Mathf.Max(1, _rowCount) - 1;
+            int newRow = EditorGUILayout.IntSlider("行", _row, 0, maxRow);
             if (EditorGUI.EndChangeCheck() && newRow != _row)
                 SwitchRow(newRow);
             if (_row < 4)
@@ -205,14 +237,15 @@ namespace EquipmentSystem.Editor
             
             // 帧选择
             EditorGUILayout.BeginHorizontal();
+            int maxFrame = Mathf.Max(1, _framesPerRow) - 1;
             if (GUILayout.Button("◀", GUILayout.Width(30)))
                 SwitchFrame(Mathf.Max(0, _frame - 1));
             EditorGUI.BeginChangeCheck();
-            int newFrame = EditorGUILayout.IntSlider(_frame, 0, _framesPerRow - 1);
+            int newFrame = EditorGUILayout.IntSlider(_frame, 0, maxFrame);
             if (EditorGUI.EndChangeCheck() && newFrame != _frame)
                 SwitchFrame(newFrame);
             if (GUILayout.Button("▶", GUILayout.Width(30)))
-                SwitchFrame(Mathf.Min(_framesPerRow - 1, _frame + 1));
+                SwitchFrame(Mathf.Min(maxFrame, _frame + 1));
             EditorGUILayout.EndHorizontal();
         }
         
@@ -742,24 +775,46 @@ namespace EquipmentSystem.Editor
         {
             if (_data == null) return;
             
-            _sprite = _data.spritesheet;
-            _frameSize = _data.frameSize;
-            _framesPerRow = _data.framesPerRow;
-            _rowCount = _data.rowCount;
-            
-            if (_data.animationNames.Count > 0)
+            var names = _data.GetAnimationNames();
+            if (names.Count > 0)
             {
                 _animIndex = 0;
-                _animName = _data.animationNames[0];
+                _animName = names[0];
+                var anim = _data.GetAnimation(_animName);
+                if (anim != null)
+                    SyncFromAnimation(anim);
             }
             
             LoadFrameData();
+        }
+        
+        void SyncFromAnimation(AnimationData anim)
+        {
+            if (anim == null) return;
+            
+            _sprite = anim.spritesheet;
+            _frameSize = anim.frameSize;
+            _framesPerRow = anim.framesPerRow;
+            _rowCount = anim.rowCount;
+            
+            // 确保帧和行索引在有效范围内
+            _frame = Mathf.Clamp(_frame, 0, Mathf.Max(0, _framesPerRow - 1));
+            _row = Mathf.Clamp(_row, 0, Mathf.Max(0, _rowCount - 1));
         }
         
         void SwitchAnimation(string newAnim)
         {
             SaveIfDirty();
             _animName = newAnim;
+            
+            // 切换动画时同步配置
+            if (_data != null)
+            {
+                var anim = _data.GetAnimation(_animName);
+                if (anim != null)
+                    SyncFromAnimation(anim);
+            }
+            
             LoadFrameData();
         }
         
@@ -780,47 +835,128 @@ namespace EquipmentSystem.Editor
         
         void AutoDetectFrameConfig()
         {
-            if (_sprite == null || _frameSize.x <= 0 || _frameSize.y <= 0) return;
+            if (_data == null || string.IsNullOrEmpty(_animName)) return;
+            
+            var anim = _data.GetOrCreateAnimation(_animName);
+            if (anim.spritesheet == null || anim.frameSize.x <= 0 || anim.frameSize.y <= 0) return;
             
             // 根据帧尺寸计算行数和每行帧数
-            _framesPerRow = Mathf.Max(1, _sprite.width / _frameSize.x);
-            _rowCount = Mathf.Max(1, _sprite.height / _frameSize.y);
+            anim.framesPerRow = Mathf.Max(1, anim.spritesheet.width / anim.frameSize.x);
+            anim.rowCount = Mathf.Max(1, anim.spritesheet.height / anim.frameSize.y);
             
-            // 同步到数据
-            if (_data != null)
+            SyncFromAnimation(anim);
+            EditorUtility.SetDirty(_data);
+            Repaint();
+        }
+        
+        void ImportAnimationsFromAnimator()
+        {
+            if (_data == null || _animatorController == null) return;
+            
+            Undo.RecordObject(_data, "Import Animations From Animator");
+            
+            var existingNames = _data.GetAnimationNames();
+            int added = 0;
+            
+            foreach (var layer in _animatorController.layers)
             {
-                _data.frameSize = _frameSize;
-                _data.framesPerRow = _framesPerRow;
-                _data.rowCount = _rowCount;
-                _data.spritesheet = _sprite;
+                foreach (var state in layer.stateMachine.states)
+                {
+                    string name = state.state.name;
+                    if (!existingNames.Contains(name))
+                    {
+                        _data.GetOrCreateAnimation(name);
+                        added++;
+                    }
+                }
+            }
+            
+            if (added > 0)
+            {
+                Debug.Log($"导入了 {added} 个新动画");
                 EditorUtility.SetDirty(_data);
+            }
+            
+            // 选中第一个动画
+            var names = _data.GetAnimationNames();
+            if (names.Count > 0)
+            {
+                _animIndex = 0;
+                _animName = names[0];
+                var anim = _data.GetAnimation(_animName);
+                if (anim != null)
+                    SyncFromAnimation(anim);
             }
             
             Repaint();
         }
         
-        void RefreshAnimationNames()
+        void AddNewAnimation()
         {
             if (_data == null) return;
             
-            Undo.RecordObject(_data, "Refresh Animation Names");
-            _data.animationNames.Clear();
+            Undo.RecordObject(_data, "Add Animation");
             
-            if (_animatorController != null)
+            string baseName = "NewAnimation";
+            var existingNames = _data.GetAnimationNames();
+            string newName = baseName;
+            int i = 1;
+            while (existingNames.Contains(newName))
+                newName = baseName + i++;
+            
+            var newAnim = _data.GetOrCreateAnimation(newName);
+            
+            // 复制当前动画的配置作为默认值
+            if (!string.IsNullOrEmpty(_animName))
             {
-                foreach (var layer in _animatorController.layers)
-                    foreach (var state in layer.stateMachine.states)
-                        if (!_data.animationNames.Contains(state.state.name))
-                            _data.animationNames.Add(state.state.name);
+                var current = _data.GetAnimation(_animName);
+                if (current != null)
+                {
+                    newAnim.spritesheet = current.spritesheet;
+                    newAnim.frameSize = current.frameSize;
+                    newAnim.framesPerRow = current.framesPerRow;
+                    newAnim.rowCount = current.rowCount;
+                }
             }
             
-            if (_data.animationNames.Count == 0)
-                _data.animationNames.AddRange(new[] { "Idle", "Walk", "Run", "Attack" });
-            
-            _animIndex = 0;
-            _animName = _data.animationNames[0];
+            _animName = newName;
+            _animIndex = _data.GetAnimationNames().IndexOf(newName);
+            SyncFromAnimation(newAnim);
             
             EditorUtility.SetDirty(_data);
+            Repaint();
+        }
+        
+        void RemoveCurrentAnimation()
+        {
+            if (_data == null || string.IsNullOrEmpty(_animName)) return;
+            
+            var anim = _data.GetAnimation(_animName);
+            if (anim == null) return;
+            
+            if (!EditorUtility.DisplayDialog("删除动画", $"确定要删除动画 '{_animName}' 吗？", "删除", "取消"))
+                return;
+            
+            Undo.RecordObject(_data, "Remove Animation");
+            _data.animations.Remove(anim);
+            
+            var names = _data.GetAnimationNames();
+            if (names.Count > 0)
+            {
+                _animIndex = 0;
+                _animName = names[0];
+                var newAnim = _data.GetAnimation(_animName);
+                if (newAnim != null)
+                    SyncFromAnimation(newAnim);
+            }
+            else
+            {
+                _animName = "";
+                _animIndex = 0;
+            }
+            
+            EditorUtility.SetDirty(_data);
+            LoadFrameData();
             Repaint();
         }
         

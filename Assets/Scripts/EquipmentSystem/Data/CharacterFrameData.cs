@@ -201,6 +201,12 @@ namespace EquipmentSystem.Data
     {
         public string animationName;  // 动画名称（从Animator或SpriteLibrary获取）
         
+        [Header("Spritesheet 配置")]
+        public Texture2D spritesheet;
+        public Vector2Int frameSize = new Vector2Int(32, 32);
+        public int framesPerRow = 8;
+        public int rowCount = 4;
+        
         [Header("武器显示配置")]
         public bool hideLeftWeapon;   // 隐藏左手武器
         public bool hideRightWeapon;  // 隐藏右手武器
@@ -270,28 +276,27 @@ namespace EquipmentSystem.Data
     [CreateAssetMenu(fileName = "CharacterFrameData", menuName = "Equipment System/Character Frame Data")]
     public class CharacterFrameData : ScriptableObject
     {
-        [Header("Spritesheet")]
-        public Texture2D spritesheet;
-        public Vector2Int frameSize = new Vector2Int(32, 32);
-        public int framesPerRow = 8;
-        public int rowCount = 4;
-        
         [Header("检测配置")]
         public DetectConfig detectConfig = new DetectConfig();
         
-        [Header("动画名称列表 (从Animator或SpriteLibrary获取)")]
-        public List<string> animationNames = new List<string>();
-        
-        [Header("动画")]
+        [Header("动画列表")]
         public List<AnimationData> animations = new List<AnimationData>();
+        
+        /// <summary>
+        /// 获取动画数据
+        /// </summary>
+        public AnimationData GetAnimation(string animName)
+        {
+            return animations.Find(x => 
+                string.Equals(x.animationName, animName, System.StringComparison.OrdinalIgnoreCase));
+        }
         
         /// <summary>
         /// 获取帧数据
         /// </summary>
         public FrameData GetFrameData(string animName, int rowIndex, int frame)
         {
-            var a = animations.Find(x => 
-                string.Equals(x.animationName, animName, System.StringComparison.OrdinalIgnoreCase));
+            var a = GetAnimation(animName);
             if (a == null) return null;
             return a.GetFrame(frame, rowIndex);
         }
@@ -301,14 +306,25 @@ namespace EquipmentSystem.Data
         /// </summary>
         public AnimationData GetOrCreateAnimation(string animName)
         {
-            var a = animations.Find(x => 
-                string.Equals(x.animationName, animName, System.StringComparison.OrdinalIgnoreCase));
+            var a = GetAnimation(animName);
             if (a == null)
             {
                 a = new AnimationData { animationName = animName };
                 animations.Add(a);
             }
             return a;
+        }
+        
+        /// <summary>
+        /// 获取所有动画名称
+        /// </summary>
+        public List<string> GetAnimationNames()
+        {
+            var names = new List<string>();
+            foreach (var a in animations)
+                if (!string.IsNullOrEmpty(a.animationName))
+                    names.Add(a.animationName);
+            return names;
         }
         
         public static FacingDirection GetFacingDirection(CharacterFacing f)
