@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using EquipmentSystem.Data;
@@ -8,7 +9,8 @@ using UnityEditor.Animations;
 
 using UnityEngine;
 
-using BodyPart = EquipmentSystem.Data.BodyPart;
+// 使用别名避免与 UnityEditor.BodyPart 冲突
+using CharacterBodyPart = EquipmentSystem.Data.CharacterBodyPart;
 
 namespace EquipmentSystem.Editor
 {
@@ -26,7 +28,7 @@ namespace EquipmentSystem.Editor
         string _animName = "Idle";
         int _animIndex, _row, _frame;
         TabMode _tab = TabMode.BodyPaint;
-        BodyPart _currentPart = BodyPart.Torso;
+        CharacterBodyPart _currentPart = CharacterBodyPart.Torso;
         AnchorType _anchorType = AnchorType.Head;
         PartDirection _anchorDir = PartDirection.Down;
         bool _anchorFlipX;
@@ -44,8 +46,8 @@ namespace EquipmentSystem.Editor
         Vector2 _canvasOffset;
         
         // 编辑缓存
-        Dictionary<BodyPart, HashSet<Vector2Int>> _partPixels = new Dictionary<BodyPart, HashSet<Vector2Int>>();
-        Dictionary<BodyPart, PartDirection> _partDirections = new Dictionary<BodyPart, PartDirection>();
+        Dictionary<CharacterBodyPart, HashSet<Vector2Int>> _partPixels = new Dictionary<CharacterBodyPart, HashSet<Vector2Int>>();
+        Dictionary<CharacterBodyPart, PartDirection> _partDirections = new Dictionary<CharacterBodyPart, PartDirection>();
         HashSet<Vector2Int> _deadPixels = new HashSet<Vector2Int>();
         List<AnchorPoint> _anchors = new List<AnchorPoint>();
         
@@ -298,20 +300,20 @@ namespace EquipmentSystem.Editor
             GUILayout.Label("选择部位", EditorStyles.boldLabel);
             
             EditorGUILayout.BeginHorizontal();
-            DrawPartButton(BodyPart.Head, "头部", new Color(0.2f, 0.9f, 0.2f));
-            DrawPartButton(BodyPart.Torso, "身体", new Color(0.2f, 0.7f, 0.2f));
+            DrawPartButton(CharacterBodyPart.Head, "头部", new Color(0.2f, 0.9f, 0.2f));
+            DrawPartButton(CharacterBodyPart.Torso, "身体", new Color(0.2f, 0.7f, 0.2f));
             GUI.backgroundColor = Color.white;
             EditorGUILayout.EndHorizontal();
             
             EditorGUILayout.BeginHorizontal();
-            DrawPartButton(BodyPart.LeftHand, "左手", new Color(1.0f, 0.8f, 0.0f));
-            DrawPartButton(BodyPart.RightHand, "右手", new Color(1.0f, 0.5f, 0.0f));
+            DrawPartButton(CharacterBodyPart.LeftHand, "左手", new Color(1.0f, 0.8f, 0.0f));
+            DrawPartButton(CharacterBodyPart.RightHand, "右手", new Color(1.0f, 0.5f, 0.0f));
             GUI.backgroundColor = Color.white;
             EditorGUILayout.EndHorizontal();
             
             EditorGUILayout.BeginHorizontal();
-            DrawPartButton(BodyPart.LeftFoot, "左脚", new Color(0.3f, 0.5f, 1.0f));
-            DrawPartButton(BodyPart.RightFoot, "右脚", new Color(0.8f, 0.2f, 0.8f));
+            DrawPartButton(CharacterBodyPart.LeftFoot, "左脚", new Color(0.3f, 0.5f, 1.0f));
+            DrawPartButton(CharacterBodyPart.RightFoot, "右脚", new Color(0.8f, 0.2f, 0.8f));
             GUI.backgroundColor = Color.white;
             EditorGUILayout.EndHorizontal();
             
@@ -439,9 +441,34 @@ namespace EquipmentSystem.Editor
             GUILayout.Label("批量操作", EditorStyles.boldLabel);
             if (GUILayout.Button("🔍 自动检测全部帧部位"))
                 AutoDetectAllFrames();
+            
+            GUILayout.Space(5);
+            GUILayout.Label("GPU 换装", EditorStyles.boldLabel);
+            
+            // 显示当前 UV Map 状态
+            if (_data != null && !string.IsNullOrEmpty(_animName))
+            {
+                var anim = _data.GetAnimation(_animName);
+                if (anim != null)
+                {
+                    bool hasUVMap = anim.uvMapTexture != null;
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("UV Map:", GUILayout.Width(60));
+                    GUI.color = hasUVMap ? Color.green : Color.yellow;
+                    EditorGUILayout.LabelField(hasUVMap ? "✓ 已生成" : "✗ 未生成");
+                    GUI.color = Color.white;
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+            
+            if (GUILayout.Button("💾 生成当前动画 UV Map"))
+                GenerateUVMapForCurrentAnimation();
+            
+            if (GUILayout.Button("💾 生成所有动画 UV Map"))
+                GenerateAllUVMaps();
         }
         
-        void DrawPartButton(BodyPart part, string label, Color color)
+        void DrawPartButton(CharacterBodyPart part, string label, Color color)
         {
             GUI.backgroundColor = _currentPart == part ? color : Color.white;
             if (GUILayout.Button(label)) _currentPart = part;
@@ -502,16 +529,19 @@ namespace EquipmentSystem.Editor
             }
         }
         
-        Color GetPartColor(BodyPart part)
+        /// <summary>
+        /// 获取部位绘制颜色 - 仅用于编辑器显示，与 UV Map 无关
+        /// </summary>
+        Color GetPartColor(CharacterBodyPart part)
         {
             switch (part)
             {
-                case BodyPart.Head:      return new Color(0.2f, 0.9f, 0.2f, 0.6f);
-                case BodyPart.Torso:     return new Color(0.2f, 0.7f, 0.2f, 0.6f);
-                case BodyPart.LeftHand:  return new Color(1.0f, 0.8f, 0.0f, 0.7f);
-                case BodyPart.RightHand: return new Color(1.0f, 0.5f, 0.0f, 0.7f);
-                case BodyPart.LeftFoot:  return new Color(0.3f, 0.5f, 1.0f, 0.7f);
-                case BodyPart.RightFoot: return new Color(0.8f, 0.2f, 0.8f, 0.7f);
+                case CharacterBodyPart.Head:      return new Color(0.2f, 0.8f, 0.8f, 0.6f);  // 青色
+                case CharacterBodyPart.Torso:     return new Color(0.3f, 0.5f, 0.9f, 0.6f);  // 蓝色
+                case CharacterBodyPart.LeftHand:  return new Color(0.9f, 0.9f, 0.2f, 0.6f);  // 黄色
+                case CharacterBodyPart.RightHand: return new Color(0.9f, 0.6f, 0.2f, 0.6f);  // 橙色
+                case CharacterBodyPart.LeftFoot:  return new Color(0.6f, 0.3f, 0.9f, 0.6f);  // 紫色
+                case CharacterBodyPart.RightFoot: return new Color(0.9f, 0.3f, 0.6f, 0.6f);  // 粉色
                 default: return new Color(0.5f, 0.5f, 0.5f, 0.5f);
             }
         }
@@ -1050,46 +1080,46 @@ namespace EquipmentSystem.Editor
             }
             
             // 头部
-            _partPixels[BodyPart.Head] = new HashSet<Vector2Int>();
+            _partPixels[CharacterBodyPart.Head] = new HashSet<Vector2Int>();
             for (int dy = 0; dy < 3; dy++)
                 for (int dx = 0; dx < 4; dx++)
                 {
                     int px = p.firstPixel.x + dx, py = p.firstPixel.y + dy;
                     if (px < _frameSize.x && py < _frameSize.y)
-                        _partPixels[BodyPart.Head].Add(new Vector2Int(px, py));
+                        _partPixels[CharacterBodyPart.Head].Add(new Vector2Int(px, py));
                 }
             
             // 身体
             if (p.torsoStart.HasValue)
             {
-                _partPixels[BodyPart.Torso] = new HashSet<Vector2Int>();
+                _partPixels[CharacterBodyPart.Torso] = new HashSet<Vector2Int>();
                 for (int dy = 0; dy < 2; dy++)
                     for (int dx = 0; dx < 3; dx++)
                     {
                         int px = p.torsoStart.Value.x + dx, py = p.torsoStart.Value.y + dy;
                         if (px < _frameSize.x && py < _frameSize.y)
-                            _partPixels[BodyPart.Torso].Add(new Vector2Int(px, py));
+                            _partPixels[CharacterBodyPart.Torso].Add(new Vector2Int(px, py));
                     }
             }
             
             // 手脚
-            DetectLimb(p, BodyPart.LeftHand, p.GetLeftHandColor());
-            DetectLimb(p, BodyPart.RightHand, p.GetRightHandColor());
-            DetectLimb(p, BodyPart.LeftFoot, p.GetLeftFootColor());
-            DetectLimb(p, BodyPart.RightFoot, p.GetRightFootColor());
+            DetectLimb(p, CharacterBodyPart.LeftHand, p.GetLeftHandColor());
+            DetectLimb(p, CharacterBodyPart.RightHand, p.GetRightHandColor());
+            DetectLimb(p, CharacterBodyPart.LeftFoot, p.GetLeftFootColor());
+            DetectLimb(p, CharacterBodyPart.RightFoot, p.GetRightFootColor());
             
             // 锚点
             SetOrUpdateAnchor(AnchorType.Head, p.firstPixel, PartDirection.Down);
-            if (_partPixels.ContainsKey(BodyPart.LeftHand) && _partPixels[BodyPart.LeftHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[BodyPart.LeftHand].First(), PartDirection.Down);
-            if (_partPixels.ContainsKey(BodyPart.RightHand) && _partPixels[BodyPart.RightHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[BodyPart.RightHand].First(), PartDirection.Down);
+            if (_partPixels.ContainsKey(CharacterBodyPart.LeftHand) && _partPixels[CharacterBodyPart.LeftHand].Count > 0)
+                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First(), PartDirection.Down);
+            if (_partPixels.ContainsKey(CharacterBodyPart.RightHand) && _partPixels[CharacterBodyPart.RightHand].Count > 0)
+                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[CharacterBodyPart.RightHand].First(), PartDirection.Down);
             
             MarkDirty();
             Repaint();
         }
         
-        void AutoDetectPart(BodyPart targetPart)
+        void AutoDetectPart(CharacterBodyPart targetPart)
         {
             var p = GetDetectParams();
             if (p == null)
@@ -1101,10 +1131,10 @@ namespace EquipmentSystem.Editor
             Color32 color;
             switch (targetPart)
             {
-                case BodyPart.LeftHand: color = p.GetLeftHandColor(); break;
-                case BodyPart.RightHand: color = p.GetRightHandColor(); break;
-                case BodyPart.LeftFoot: color = p.GetLeftFootColor(); break;
-                case BodyPart.RightFoot: color = p.GetRightFootColor(); break;
+                case CharacterBodyPart.LeftHand: color = p.GetLeftHandColor(); break;
+                case CharacterBodyPart.RightHand: color = p.GetRightHandColor(); break;
+                case CharacterBodyPart.LeftFoot: color = p.GetLeftFootColor(); break;
+                case CharacterBodyPart.RightFoot: color = p.GetRightFootColor(); break;
                 default: return;
             }
             
@@ -1113,9 +1143,9 @@ namespace EquipmentSystem.Editor
             if (_partPixels.ContainsKey(targetPart) && _partPixels[targetPart].Count > 0)
             {
                 var pos = _partPixels[targetPart].First();
-                if (targetPart == BodyPart.LeftHand)
+                if (targetPart == CharacterBodyPart.LeftHand)
                     SetOrUpdateAnchor(AnchorType.LeftWeapon, pos, PartDirection.Down);
-                else if (targetPart == BodyPart.RightHand)
+                else if (targetPart == CharacterBodyPart.RightHand)
                     SetOrUpdateAnchor(AnchorType.RightWeapon, pos, PartDirection.Down);
             }
             
@@ -1123,10 +1153,10 @@ namespace EquipmentSystem.Editor
             Repaint();
         }
         
-        void DetectLimb(DetectParams p, BodyPart part, Color32 color)
+        void DetectLimb(DetectParams p, CharacterBodyPart part, Color32 color)
         {
-            bool isHand = part == BodyPart.LeftHand || part == BodyPart.RightHand;
-            bool isLeft = part == BodyPart.LeftHand || part == BodyPart.LeftFoot;
+            bool isHand = part == CharacterBodyPart.LeftHand || part == CharacterBodyPart.RightHand;
+            bool isLeft = part == CharacterBodyPart.LeftHand || part == CharacterBodyPart.LeftFoot;
             
             int xMin, xMax, yMin, yMax;
             bool leftToRight;
@@ -1264,6 +1294,231 @@ namespace EquipmentSystem.Editor
                 return default;
             
             return pixels[gy * _sprite.width + gx];
+        }
+        
+        #endregion
+        
+        #region UV Map 生成
+        
+        // Body Part ID 常量 (对应 Shader 中的定义)
+        // 这些值也用于 GetPartColor() 的 B 通道，保证绘制颜色和 UV Map 颜色一致
+        const float ID_NONE = 0f;
+        const float ID_HEAD = 0.1f;       // 头部 - 面部装饰
+        const float ID_TORSO = 0.2f;      // 躯干 - 服装
+        const float ID_LEFTHAND = 0.4f;   // 左手 - 手套
+        const float ID_RIGHTHAND = 0.5f;  // 右手 - 手套
+        const float ID_LEFTFOOT = 0.6f;   // 左脚 - 鞋子
+        const float ID_RIGHTFOOT = 0.7f;  // 右脚 - 鞋子
+        
+        void GenerateUVMapForCurrentAnimation()
+        {
+            if (_data == null || string.IsNullOrEmpty(_animName))
+            {
+                Debug.LogWarning("[UV Map] 请先选择 CharacterFrameData 和动画");
+                return;
+            }
+            
+            var anim = _data.GetAnimation(_animName);
+            GenerateUVMapForAnimation(anim);
+            AssetDatabase.Refresh();
+        }
+        
+        void GenerateAllUVMaps()
+        {
+            if (_data == null)
+            {
+                Debug.LogWarning("[UV Map] 请先选择 CharacterFrameData");
+                return;
+            }
+            
+            int count = 0;
+            foreach (var anim in _data.animations)
+            {
+                if (GenerateUVMapForAnimation(anim))
+                    count++;
+            }
+            
+            AssetDatabase.Refresh();
+            Debug.Log($"[UV Map] 已生成 {count} 个动画的 UV Map");
+        }
+        
+        bool GenerateUVMapForAnimation(AnimationData anim)
+        {
+            if (anim == null || anim.spritesheet == null)
+            {
+                Debug.LogWarning($"[UV Map] 动画 {anim?.animationName ?? "null"} 没有 spritesheet");
+                return false;
+            }
+            
+            var tex = GenerateUVMapTexture(anim);
+            if (tex == null) return false;
+            
+            // 保存到 spritesheet 同目录
+            string spritesheetPath = AssetDatabase.GetAssetPath(anim.spritesheet);
+            string directory = Path.GetDirectoryName(spritesheetPath);
+            string fileName = Path.GetFileNameWithoutExtension(spritesheetPath) + "_UVMap.png";
+            string savePath = Path.Combine(directory, fileName);
+            
+            // 保存 PNG
+            byte[] pngData = tex.EncodeToPNG();
+            File.WriteAllBytes(savePath, pngData);
+            DestroyImmediate(tex);
+            
+            AssetDatabase.ImportAsset(savePath);
+            
+            // 设置贴图导入配置
+            var importer = AssetImporter.GetAtPath(savePath) as TextureImporter;
+            if (importer != null)
+            {
+                importer.textureType = TextureImporterType.Default;
+                importer.sRGBTexture = false; // 线性空间，保证数值精确
+                importer.filterMode = FilterMode.Point;
+                importer.textureCompression = TextureImporterCompression.Uncompressed;
+                importer.mipmapEnabled = false;
+                importer.SaveAndReimport();
+            }
+            
+            // 加载生成的贴图并赋值给 AnimationData
+            var uvMapTex = AssetDatabase.LoadAssetAtPath<Texture2D>(savePath);
+            if (uvMapTex != null)
+            {
+                anim.uvMapTexture = uvMapTex;
+                EditorUtility.SetDirty(_data);
+                AssetDatabase.SaveAssets();
+            }
+            
+            Debug.Log($"[UV Map] 已生成: {savePath}");
+            return true;
+        }
+        
+        Texture2D GenerateUVMapTexture(AnimationData anim)
+        {
+            if (anim.spritesheet == null) return null;
+            
+            int width = anim.spritesheet.width;
+            int height = anim.spritesheet.height;
+            
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Point;
+            
+            // 默认值：B=0 (非换装区域), A=1 (非死区)
+            var defaultColor = new Color(0, 0, ID_NONE, 1);
+            var pixels = new Color[width * height];
+            for (int i = 0; i < pixels.Length; i++)
+                pixels[i] = defaultColor;
+            
+            int frameW = anim.frameSize.x;
+            int frameH = anim.frameSize.y;
+            
+            foreach (var frame in anim.frames)
+            {
+                // 计算帧在 spritesheet 中的偏移
+                int frameOffsetX = frame.frameIndex * frameW;
+                int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
+                
+                // 处理 Head (面部装饰) - 与 Torso 类似，用 UV 映射
+                ProcessRegionWithUVForUVMap(frame, CharacterBodyPart.Head, ID_HEAD, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                
+                // 处理 Torso (服装)
+                ProcessRegionWithUVForUVMap(frame, CharacterBodyPart.Torso, ID_TORSO, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                
+                // 处理手脚 (纯颜色，不需要 UV)
+                ProcessBodyPartForUVMap(frame, CharacterBodyPart.LeftHand, ID_LEFTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                ProcessBodyPartForUVMap(frame, CharacterBodyPart.RightHand, ID_RIGHTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                ProcessBodyPartForUVMap(frame, CharacterBodyPart.LeftFoot, ID_LEFTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                ProcessBodyPartForUVMap(frame, CharacterBodyPart.RightFoot, ID_RIGHTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+            }
+            
+            tex.SetPixels(pixels);
+            tex.Apply();
+            return tex;
+        }
+        
+        /// <summary>
+        /// 处理带 UV 映射的区域 (Head, Torso)
+        /// 这些部位需要用 UV 坐标映射到装饰贴图
+        /// </summary>
+        void ProcessRegionWithUVForUVMap(FrameData frame, CharacterBodyPart part, float partID,
+                                         Color[] pixels, int texWidth, int texHeight,
+                                         int frameOffsetX, int frameOffsetY, int frameH)
+        {
+            var region = frame.GetRegion(part);
+            if (region == null || region.pixels.Count == 0) return;
+            
+            // 计算区域的 bounding box
+            int minX = int.MaxValue, maxX = int.MinValue;
+            int minY = int.MaxValue, maxY = int.MinValue;
+            
+            foreach (var px in region.pixels)
+            {
+                minX = Mathf.Min(minX, px.position.x);
+                maxX = Mathf.Max(maxX, px.position.x);
+                minY = Mathf.Min(minY, px.position.y);
+                maxY = Mathf.Max(maxY, px.position.y);
+            }
+            
+            int regionW = maxX - minX + 1;
+            int regionH = maxY - minY + 1;
+            
+            foreach (var px in region.pixels)
+            {
+                // 计算相对位置 (0~1)
+                float relX = regionW > 1 ? (float)(px.position.x - minX) / (regionW - 1) : 0.5f;
+                float relY = regionH > 1 ? (float)(px.position.y - minY) / (regionH - 1) : 0.5f;
+                
+                // 根据 PartDirection 旋转得到 UV
+                var (texU, texV) = ApplyUVRotation(relX, relY, region.direction);
+                
+                // 死区检查
+                bool isDead = frame.IsInDeadZone(px.position);
+                
+                // 计算在整张贴图中的位置
+                int globalX = frameOffsetX + px.position.x;
+                int globalY = frameOffsetY + (frameH - 1 - px.position.y);
+                
+                if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
+                {
+                    // R=U, G=V, B=部位ID, A=死区标记
+                    pixels[globalY * texWidth + globalX] = new Color(texU, texV, partID, isDead ? 0f : 1f);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 处理纯颜色部位 (LeftHand, RightHand, LeftFoot, RightFoot)
+        /// 这些部位不需要 UV 映射，只需要部位 ID
+        /// </summary>
+        void ProcessBodyPartForUVMap(FrameData frame, CharacterBodyPart part, float partID,
+                                     Color[] pixels, int texWidth, int texHeight,
+                                     int frameOffsetX, int frameOffsetY, int frameH)
+        {
+            var region = frame.GetRegion(part);
+            if (region == null || region.pixels.Count == 0) return;
+            
+            foreach (var px in region.pixels)
+            {
+                bool isDead = frame.IsInDeadZone(px.position);
+                
+                int globalX = frameOffsetX + px.position.x;
+                int globalY = frameOffsetY + (frameH - 1 - px.position.y);
+                
+                if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
+                {
+                    // R/G 无意义(手脚不需要UV), B=部位ID, A=死区标记
+                    pixels[globalY * texWidth + globalX] = new Color(0, 0, partID, isDead ? 0f : 1f);
+                }
+            }
+        }
+        
+        (float u, float v) ApplyUVRotation(float relX, float relY, PartDirection dir)
+        {
+            switch (dir)
+            {
+                case PartDirection.Left:  return (relY, 1f - relX);
+                case PartDirection.Right: return (1f - relY, relX);
+                case PartDirection.Up:    return (1f - relX, 1f - relY);
+                default:                  return (relX, relY);
+            }
         }
         
         #endregion

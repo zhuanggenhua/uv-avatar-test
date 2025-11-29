@@ -99,14 +99,17 @@ namespace EquipmentSystem.Runtime
             float x = Screen.width - panelWidth - panelMargin;
             float y = (Screen.height - panelHeight) / 2f;
             
+            // 收集所有下拉框位置
+            var dropdownRects = new List<(EquipmentType type, Rect rect, string[] options)>();
+            
             // 背景
             GUI.Box(new Rect(x - 10, y - 10, panelWidth + 20, panelHeight + 20), "", GetBoxStyle());
             
             GUI.Label(new Rect(x, y, panelWidth, 30), "装备预览", GetTitleStyle());
             y += 35;
             
-            // 收集所有下拉框位置，以便后绘制展开的列表
-            var dropdownRects = new List<(EquipmentType type, Rect rect, string[] options)>();
+            // 如果有下拉框打开，禁用其他控件
+            bool hasOpenDropdown = _openDropdown != null;
             
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
             {
@@ -116,9 +119,9 @@ namespace EquipmentSystem.Runtime
                 // 标签
                 GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), GetTypeName(type), GetLabelStyle());
                 
-                // 下拉框选项 - 使用文件名
+                // 下拉框选项
                 var options = new List<string> { "(无)" };
-                options.AddRange(list.Select(e => e.name));  // 使用文件名
+                options.AddRange(list.Select(e => e.name));
                 
                 Rect dropRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
                 dropdownRects.Add((type, dropRect, options.ToArray()));
@@ -126,6 +129,9 @@ namespace EquipmentSystem.Runtime
                 // 绘制下拉框按钮
                 int selected = _selectedIndex[type];
                 string label = selected >= 0 && selected < options.Count ? options[selected] : "(无)";
+                
+                // 当有下拉框打开时，只有当前打开的那个可以点击
+                GUI.enabled = !hasOpenDropdown || _openDropdown == type;
                 
                 if (GUI.Button(dropRect, label, GetDropdownStyle()))
                 {
@@ -141,12 +147,14 @@ namespace EquipmentSystem.Runtime
             y += 5;
             
             // 全部卸下按钮
+            GUI.enabled = !hasOpenDropdown;
             if (GUI.Button(new Rect(x, y, panelWidth, 30), "卸下全部", GetButtonStyle()))
             {
                 UnequipAll();
             }
+            GUI.enabled = true;
             
-            // 最后绘制展开的下拉列表（在最上层）
+            // 最后绘制展开的下拉列表
             if (_openDropdown != null)
             {
                 foreach (var (type, rect, options) in dropdownRects)
@@ -296,18 +304,19 @@ namespace EquipmentSystem.Runtime
             float itemHeight = 24f;
             float listHeight = options.Length * itemHeight;
             
-            // 向上展开
-            Rect listRect = new Rect(buttonRect.x, buttonRect.y - listHeight, buttonRect.width, listHeight);
+            // 向下展开
+            Rect listRect = new Rect(buttonRect.x, buttonRect.y + buttonRect.height, buttonRect.width, listHeight);
             
-            // 确保不超出屏幕顶部
-            if (listRect.y < 0)
+            // 确保不超出屏幕底部
+            if (listRect.yMax > Screen.height)
             {
-                listRect.y = buttonRect.y + buttonRect.height;  // 改为向下展开
+                listRect.y = buttonRect.y - listHeight;
             }
             
             // 背景
             GUI.Box(listRect, "", GetBoxStyle());
             
+            int result = selected;
             for (int i = 0; i < options.Length; i++)
             {
                 Rect itemRect = new Rect(listRect.x, listRect.y + i * itemHeight, listRect.width, itemHeight);
@@ -330,18 +339,21 @@ namespace EquipmentSystem.Runtime
                 
                 if (GUI.Button(itemRect, options[i], GetListItemStyle(i == selected)))
                 {
-                    return i;
+                    result = i;
                 }
             }
             
-            // 点击其他地方关闭
-            if (Event.current.type == EventType.MouseDown && !listRect.Contains(Event.current.mousePosition))
+            // 点击列表外部关闭
+            if (Event.current.type == EventType.MouseDown)
             {
-                _openDropdown = null;
-                Event.current.Use();
+                if (!listRect.Contains(Event.current.mousePosition) && 
+                    !buttonRect.Contains(Event.current.mousePosition))
+                {
+                    _openDropdown = null;
+                }
             }
             
-            return selected;
+            return result;
         }
     }
 }

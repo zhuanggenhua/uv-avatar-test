@@ -91,16 +91,15 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 服装配置: 只需要贴图 (2x3像素映射)
+        /// 服装配置: 只需要正面贴图
         /// </summary>
         void DrawClothingFields()
         {
-            EditorGUILayout.LabelField("贴图 (2×3像素)", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_frontSprite, new GUIContent("正面贴图"));
-            EditorGUILayout.PropertyField(_backSprite, new GUIContent("背面贴图"));
+            EditorGUILayout.LabelField("贴图", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_frontSprite, new GUIContent("服装贴图"));
             
             EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox("服装贴图会映射到躯干区域的标记像素上", MessageType.Info);
+            EditorGUILayout.HelpBox("服装贴图会映射到躯干区域的标记像素上\n服装不区分正面背面", MessageType.Info);
         }
         
         /// <summary>

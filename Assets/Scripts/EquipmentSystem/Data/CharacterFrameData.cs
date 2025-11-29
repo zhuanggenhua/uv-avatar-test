@@ -61,7 +61,7 @@ namespace EquipmentSystem.Data
     /// <summary>
     /// 身体部位类型
     /// </summary>
-    public enum BodyPart
+    public enum CharacterBodyPart
     {
         Head,       // 头部 4x3
         Torso,      // 身体 2x3 (衣服映射)
@@ -77,7 +77,7 @@ namespace EquipmentSystem.Data
     [Serializable]
     public class BodyPartPixel
     {
-        public BodyPart part;
+        public CharacterBodyPart part;
         public Vector2Int position;
         public Color32 color;  // 原始颜色（用于匹配）
     }
@@ -90,7 +90,7 @@ namespace EquipmentSystem.Data
     [Serializable]
     public class BodyPartRegion
     {
-        public BodyPart part;
+        public CharacterBodyPart part;
         public PartDirection direction;  // 区域朝向（躺下时改变）
         public List<BodyPartPixel> pixels = new List<BodyPartPixel>();
         
@@ -156,7 +156,7 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 获取指定部位区域
         /// </summary>
-        public BodyPartRegion GetRegion(BodyPart part)
+        public BodyPartRegion GetRegion(CharacterBodyPart part)
         {
             return bodyRegions.Find(r => r.part == part);
         }
@@ -164,7 +164,7 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 获取或创建部位区域
         /// </summary>
-        public BodyPartRegion GetOrCreateRegion(BodyPart part, PartDirection defaultDir = PartDirection.Down)
+        public BodyPartRegion GetOrCreateRegion(CharacterBodyPart part, PartDirection defaultDir = PartDirection.Down)
         {
             var r = GetRegion(part);
             if (r == null)
@@ -178,7 +178,7 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 检查部位是否可见（有涂色像素）
         /// </summary>
-        public bool IsPartVisible(BodyPart part)
+        public bool IsPartVisible(CharacterBodyPart part)
         {
             var r = GetRegion(part);
             return r != null && r.pixels.Count > 0;
@@ -187,7 +187,7 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 获取单像素部位的位置（手/脚），没有则返回null
         /// </summary>
-        public BodyPartPixel GetSinglePixelPart(BodyPart part)
+        public BodyPartPixel GetSinglePixelPart(CharacterBodyPart part)
         {
             var r = GetRegion(part);
             return r?.pixels.Count > 0 ? r.pixels[0] : null;
@@ -210,6 +210,10 @@ namespace EquipmentSystem.Data
         [Header("武器显示配置")]
         public bool hideLeftWeapon;   // 隐藏左手武器
         public bool hideRightWeapon;  // 隐藏右手武器
+        
+        [Header("GPU 换装")]
+        [Tooltip("由 UV Map Generator 生成的 UV/ID 贴图")]
+        public Texture2D uvMapTexture;
         
         public List<FrameData> frames = new List<FrameData>();
         

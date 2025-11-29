@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992a1667bac02fc4f903843a8453ef1f, type: 3}
   m_Name: Minifantasy_CreaturesHumanWalk_FrameData
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.CharacterFrameData
-  spritesheet: {fileID: 2800000, guid: e85e5167d1ce52440bb46cc98af5f571, type: 3}
-  frameSize: {x: 32, y: 32}
-  framesPerRow: 16
-  rowCount: 4
   detectConfig:
     leftHandColor:
       serializedVersion: 2
@@ -30,17 +26,15 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4288332782
     outlineThreshold: 30
-  animationNames:
-  - Attack
-  - Hit
-  - Idle
-  - HumanJump_NE
-  - HumanSoulDie_SE
-  - Walk
   animations:
   - animationName: Attack
+    spritesheet: {fileID: 0}
+    frameSize: {x: 32, y: 32}
+    framesPerRow: 8
+    rowCount: 4
     hideLeftWeapon: 0
     hideRightWeapon: 0
+    uvMapTexture: {fileID: 0}
     frames:
     - frameIndex: 0
       rowIndex: 0
@@ -55,8 +49,13 @@ MonoBehaviour:
       deadZone:
         pixels: []
   - animationName: Idle
+    spritesheet: {fileID: 2800000, guid: e85e5167d1ce52440bb46cc98af5f571, type: 3}
+    frameSize: {x: 32, y: 32}
+    framesPerRow: 16
+    rowCount: 4
     hideLeftWeapon: 0
     hideRightWeapon: 0
+    uvMapTexture: {fileID: 2800000, guid: f8080bc3e77544b4692424862a4cad30, type: 3}
     frames:
     - frameIndex: 0
       rowIndex: 0
@@ -64,12 +63,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -207,12 +209,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -350,12 +355,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -493,12 +501,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -636,12 +647,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -779,12 +793,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -922,12 +939,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1065,12 +1085,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1206,14 +1229,17 @@ MonoBehaviour:
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 13, y: 13}
+        position: {x: 16, y: 13}
         direction: 0
+        flipX: 1
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1349,14 +1375,17 @@ MonoBehaviour:
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 13, y: 13}
+        position: {x: 16, y: 13}
         direction: 0
+        flipX: 1
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1492,14 +1521,17 @@ MonoBehaviour:
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 13, y: 13}
+        position: {x: 16, y: 13}
         direction: 0
+        flipX: 1
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1637,12 +1669,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1780,12 +1815,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -1923,12 +1961,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2066,12 +2107,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2209,12 +2253,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2352,6 +2399,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2473,6 +2521,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2594,6 +2643,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2715,6 +2765,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2836,6 +2887,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -2957,6 +3009,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3078,6 +3131,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3199,6 +3253,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3320,6 +3375,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 15, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3441,6 +3497,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 15, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3562,6 +3619,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 15, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3683,6 +3741,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3804,6 +3863,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -3925,6 +3985,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4046,6 +4107,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4167,6 +4229,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4288,6 +4351,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4409,6 +4473,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4530,6 +4595,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4651,6 +4717,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4772,6 +4839,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -4893,6 +4961,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5014,6 +5083,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5135,6 +5205,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5256,6 +5327,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 13, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5377,6 +5449,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 13, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5498,6 +5571,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 13, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5619,6 +5693,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5740,6 +5815,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5861,6 +5937,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -5982,6 +6059,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6103,6 +6181,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6224,12 +6303,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6367,12 +6449,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6510,12 +6595,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6653,12 +6741,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6796,12 +6887,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -6939,12 +7033,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7082,12 +7179,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7225,12 +7325,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7368,12 +7471,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 15, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7511,12 +7617,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 15, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7654,12 +7763,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 15, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7797,12 +7909,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -7940,12 +8055,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8083,12 +8201,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8226,12 +8347,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8369,12 +8493,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8507,8 +8634,13 @@ MonoBehaviour:
       deadZone:
         pixels: []
   - animationName: Walk
+    spritesheet: {fileID: 2800000, guid: 4c22395747f62d84e8c7c5e2ac027e1a, type: 3}
+    frameSize: {x: 32, y: 32}
+    framesPerRow: 4
+    rowCount: 4
     hideLeftWeapon: 0
     hideRightWeapon: 0
+    uvMapTexture: {fileID: 2800000, guid: 6904eb8bc39694244ba2ad047a3ecfdc, type: 3}
     frames:
     - frameIndex: 0
       rowIndex: 0
@@ -8516,12 +8648,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8659,9 +8794,11 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 14, y: 15}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8791,12 +8928,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 17, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 13, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -8934,9 +9074,11 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 16, y: 15}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9066,6 +9208,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9187,9 +9330,11 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 17, y: 16}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9311,6 +9456,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9432,9 +9578,11 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 17, y: 15}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9564,6 +9712,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9685,6 +9834,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9798,6 +9948,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -9919,6 +10070,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -10032,12 +10184,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -10175,6 +10330,7 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -10288,12 +10444,15 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 13}
         direction: 0
+        flipX: 0
       - type: 1
         position: {x: 14, y: 17}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 18, y: 17}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -10431,9 +10590,11 @@ MonoBehaviour:
       - type: 0
         position: {x: 14, y: 12}
         direction: 0
+        flipX: 0
       - type: 2
         position: {x: 17, y: 16}
         direction: 0
+        flipX: 0
       bodyRegions:
       - part: 0
         direction: 0
@@ -10549,3 +10710,30 @@ MonoBehaviour:
             rgba: 4286950605
       deadZone:
         pixels: []
+  - animationName: Hit
+    spritesheet: {fileID: 0}
+    frameSize: {x: 32, y: 32}
+    framesPerRow: 8
+    rowCount: 4
+    hideLeftWeapon: 0
+    hideRightWeapon: 0
+    uvMapTexture: {fileID: 0}
+    frames: []
+  - animationName: HumanJump_NE
+    spritesheet: {fileID: 0}
+    frameSize: {x: 32, y: 32}
+    framesPerRow: 8
+    rowCount: 4
+    hideLeftWeapon: 0
+    hideRightWeapon: 0
+    uvMapTexture: {fileID: 0}
+    frames: []
+  - animationName: HumanSoulDie_SE
+    spritesheet: {fileID: 0}
+    frameSize: {x: 32, y: 32}
+    framesPerRow: 8
+    rowCount: 4
+    hideLeftWeapon: 0
+    hideRightWeapon: 0
+    uvMapTexture: {fileID: 0}
+    frames: []

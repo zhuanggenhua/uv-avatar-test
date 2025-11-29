@@ -7,10 +7,11 @@ namespace EquipmentSystem.Data
     /// </summary>
     public enum EquipmentType
     {
-        Accessory,  // 挂件（头盔、武器）- 用锚点定位
-        Clothing,   // 服装（衣服）- 2x3像素映射到身体
-        Gloves,     // 手套 - 颜色替换左右手像素
-        Shoes       // 鞋子 - 颜色替换左右脚像素
+        Accessory,    // 挂件（头盔、武器）- 用锚点定位
+        Clothing,     // 服装（衣服）- UV 映射到躯干
+        FacialDecor,  // 面部装饰（刀疑、文身等）- UV 映射到头部
+        Gloves,       // 手套 - 颜色替换左右手像素
+        Shoes         // 鞋子 - 颜色替换左右脚像素
     }
 
     /// <summary>
