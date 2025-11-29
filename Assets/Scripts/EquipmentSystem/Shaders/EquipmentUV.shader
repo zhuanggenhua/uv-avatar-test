@@ -1,33 +1,44 @@
+// 双层 UV Map 换装系统
+// 身体层: 衣服/手套/鞋子 (BodyUVMap)
+// 头部层: 头盔/胡子/头发 (HeadUVMap) - 渲染在身体层之上
 Shader "EquipmentSystem/EquipmentUV"
 {
     Properties
     {
         _MainTex ("Base Sprite", 2D) = "white" {}
-        _UVMapTex ("UV/ID Map", 2D) = "black" {}
-        _ClothTex ("Clothing Texture", 2D) = "white" {}
-        _HeadTex ("Head/Facial Decor Texture", 2D) = "white" {}
         
-        // Sprite 在 spritesheet 中的 UV 范围 (x=minU, y=minV, z=maxU, w=maxV)
-        _SpriteRect ("Sprite UV Rect", Vector) = (0, 0, 1, 1)
+        [Header(Dual UV Maps)]
+        _BodyUVMap ("Body UV Map (躯干+手+脚)", 2D) = "black" {}
+        _HeadUVMap ("Head UV Map (扩展头部)", 2D) = "black" {}
         
-        // 手套颜色
+        [Header(Body Layer Textures)]
+        _ClothTex ("Clothing Texture (衣服)", 2D) = "white" {}
+        
+        [Header(Head Layer Textures)]
+        _HeadTex ("Head Texture (头盔/胡子/头发)", 2D) = "white" {}
+        
+        [Header(Glove Colors)]
         [HDR] _LeftHandColor ("Left Hand Color", Color) = (0.6, 0.4, 0.2, 1)
         [HDR] _RightHandColor ("Right Hand Color", Color) = (0.6, 0.4, 0.2, 1)
         
-        // 鞋子颜色
+        [Header(Shoe Colors)]
         [HDR] _LeftFootColor ("Left Foot Color", Color) = (0.3, 0.2, 0.1, 1)
         [HDR] _RightFootColor ("Right Foot Color", Color) = (0.3, 0.2, 0.1, 1)
         
-        // 是否启用各装备层
-        _EnableHead ("Enable Head/Facial Decor", Float) = 0
+        [Header(Enable Layers)]
+        _EnableHead ("Enable Head Layer", Float) = 0
         _EnableCloth ("Enable Clothing", Float) = 0
         _EnableGloves ("Enable Gloves", Float) = 0
         _EnableShoes ("Enable Shoes", Float) = 0
         
-        // 调试模式: 1=显示 UV Map 原始颜色, 2=显示部位 ID
+        [Header(Debug)]
+        // 调试模式: 0=关闭, 1=显示身体层区域, 2=显示头部层区域, 3=显示UV采样
         _DebugMode ("Debug Mode", Float) = 0
         
         _Color ("Tint", Color) = (1,1,1,1)
+        
+        // 兼容旧属性 (已废弃)
+        [HideInInspector] _UVMapTex ("[Deprecated] UV Map", 2D) = "black" {}
     }
     
     SubShader
@@ -62,16 +73,19 @@ Shader "EquipmentSystem/EquipmentUV"
             {
                 float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                float2 uvRaw : TEXCOORD1;  // 原始顶点 UV
                 float4 color : COLOR;
             };
             
             sampler2D _MainTex;
-            sampler2D _UVMapTex;
+            sampler2D _BodyUVMap;
+            sampler2D _HeadUVMap;
             sampler2D _ClothTex;
             sampler2D _HeadTex;
             float4 _MainTex_ST;
-            float4 _ClothTex_TexelSize;
-            float4 _SpriteRect; // x=minU, y=minV, z=maxU, w=maxV
+            
+            // 兼容旧属性
+            sampler2D _UVMapTex;
             
             fixed4 _LeftHandColor;
             fixed4 _RightHandColor;
@@ -113,93 +127,115 @@ Shader "EquipmentSystem/EquipmentUV"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                // 对于 Sprite，直接使用原始 UV
+                o.uv = v.uv;
+                o.uvRaw = v.uv;  // 保存原始 UV 用于计算
                 o.color = v.color * _Color;
                 return o;
             }
             
             fixed4 frag(v2f i) : SV_Target
             {
-                // 采样原图
                 fixed4 baseColor = tex2D(_MainTex, i.uv);
                 
-                // Unity SpriteRenderer 的 UV 已经是 spritesheet 上的实际坐标
-                // UV Map 和 spritesheet 尺寸一致，所以直接用 i.uv 采样
-                fixed4 uvMap = tex2D(_UVMapTex, i.uv);
+                // 采样双层 UV Map
+                fixed4 bodyUV = tex2D(_BodyUVMap, i.uv);
+                fixed4 headUV = tex2D(_HeadUVMap, i.uv);
                 
-                // 调试模式
+                float bodyPartID = bodyUV.b;
+                float headPartID = headUV.b;
+                
+                // 调试模式 1: 显示身体层区域
                 if (_DebugMode > 0.5 && _DebugMode < 1.5)
                 {
-                    // 模式 1: 显示 UV 坐标 (红=U, 绿=V)
-                    return fixed4(i.uv.x, i.uv.y, 0, baseColor.a);
-                }
-                if (_DebugMode > 1.5 && _DebugMode < 2.5)
-                {
-                    // 模式 2: 显示 UV Map 原始颜色
-                    return fixed4(uvMap.rgb, baseColor.a);
-                }
-                if (_DebugMode > 2.5)
-                {
-                    // 模式 3: 显示部位 ID (不同部位不同颜色)
-                    float id = uvMap.b;
-                    fixed4 debugColor = fixed4(0, 0, 0, baseColor.a);
-                    if (id > 0.05 && id < 0.15) debugColor.rgb = fixed3(0, 1, 1);      // Head - 青色
-                    else if (id > 0.15 && id < 0.3) debugColor.rgb = fixed3(0, 0, 1);  // Torso - 蓝色
-                    else if (id > 0.35 && id < 0.45) debugColor.rgb = fixed3(1, 1, 0); // LeftHand - 黄色
-                    else if (id > 0.45 && id < 0.55) debugColor.rgb = fixed3(1, 0.5, 0); // RightHand - 橙色
-                    else if (id > 0.55 && id < 0.65) debugColor.rgb = fixed3(0.5, 0, 1); // LeftFoot - 紫色
-                    else if (id > 0.65 && id < 0.75) debugColor.rgb = fixed3(1, 0, 0.5); // RightFoot - 粉色
+                    fixed4 debugColor = baseColor;
+                    debugColor.a = baseColor.a;
+                    if (IsPartID(bodyPartID, ID_TORSO))      debugColor.rgb = fixed3(0.3, 0.5, 0.9); // 蓝色
+                    else if (IsPartID(bodyPartID, ID_LEFTHAND))  debugColor.rgb = fixed3(0.9, 0.9, 0.2); // 黄色
+                    else if (IsPartID(bodyPartID, ID_RIGHTHAND)) debugColor.rgb = fixed3(0.9, 0.6, 0.2); // 橙色
+                    else if (IsPartID(bodyPartID, ID_LEFTFOOT))  debugColor.rgb = fixed3(0.6, 0.3, 0.9); // 紫色
+                    else if (IsPartID(bodyPartID, ID_RIGHTFOOT)) debugColor.rgb = fixed3(0.9, 0.3, 0.6); // 粉色
                     return debugColor;
                 }
                 
-                float bodyPartID = uvMap.b;
-                float mask = uvMap.a;
-                
-                // 如果是死区(mask=0)或非换装区域(ID=0)，直接返回原图
-                if (mask < 0.5 || bodyPartID < 0.05)
+                // 调试模式 2: 显示头部层区域
+                if (_DebugMode > 1.5 && _DebugMode < 2.5)
                 {
-                    return baseColor * i.color;
+                    fixed4 debugColor = baseColor;
+                    debugColor.a = baseColor.a;
+                    if (IsPartID(headPartID, ID_HEAD)) debugColor.rgb = fixed3(0.2, 0.8, 0.8); // 青色
+                    return debugColor;
+                }
+                
+                // 调试模式 3: 显示 UV 采样结果
+                if (_DebugMode > 2.5 && _DebugMode < 3.5)
+                {
+                    if (IsPartID(bodyPartID, ID_TORSO))
+                    {
+                        float2 clothUVCoord = float2(bodyUV.r, bodyUV.g);
+                        fixed4 clothColor = tex2D(_ClothTex, clothUVCoord);
+                        return fixed4(clothColor.rgb, baseColor.a);
+                    }
+                    if (IsPartID(headPartID, ID_HEAD))
+                    {
+                        float2 headUVCoord = float2(headUV.r, headUV.g);
+                        fixed4 headColor = tex2D(_HeadTex, headUVCoord);
+                        return fixed4(headColor.rgb, baseColor.a);
+                    }
+                    return fixed4(0, 0, 0, baseColor.a);
                 }
                 
                 fixed4 finalColor = baseColor;
                 
-                // Head - 面部装饰 (刀疑、文身等)
-                if (IsPartID(bodyPartID, ID_HEAD) && _EnableHead > 0.5)
+                // ============ 第一层: 身体层 ============
+                float bodyMask = bodyUV.a;
+                
+                if (bodyMask > 0.5 && bodyPartID > 0.05)
                 {
-                    fixed4 headColor = tex2D(_HeadTex, float2(uvMap.r, uvMap.g));
+                    // Torso - 服装
+                    if (IsPartID(bodyPartID, ID_TORSO) && _EnableCloth > 0.5)
+                    {
+                        float2 clothUVCoord = float2(bodyUV.r, bodyUV.g);
+                        fixed4 clothColor = tex2D(_ClothTex, clothUVCoord);
+                        if (clothColor.a > 0.01)
+                        {
+                            finalColor.rgb = clothColor.rgb;
+                        }
+                    }
+                    // LeftHand - 左手套
+                    else if (IsPartID(bodyPartID, ID_LEFTHAND) && _EnableGloves > 0.5)
+                    {
+                        finalColor.rgb = _LeftHandColor.rgb;
+                    }
+                    // RightHand - 右手套
+                    else if (IsPartID(bodyPartID, ID_RIGHTHAND) && _EnableGloves > 0.5)
+                    {
+                        finalColor.rgb = _RightHandColor.rgb;
+                    }
+                    // LeftFoot - 左鞋
+                    else if (IsPartID(bodyPartID, ID_LEFTFOOT) && _EnableShoes > 0.5)
+                    {
+                        finalColor.rgb = _LeftFootColor.rgb;
+                    }
+                    // RightFoot - 右鞋
+                    else if (IsPartID(bodyPartID, ID_RIGHTFOOT) && _EnableShoes > 0.5)
+                    {
+                        finalColor.rgb = _RightFootColor.rgb;
+                    }
+                }
+                
+                // ============ 第二层: 头部层 (覆盖在身体层上) ============
+                float headMask = headUV.a;
+                
+                if (headMask > 0.5 && IsPartID(headPartID, ID_HEAD) && _EnableHead > 0.5)
+                {
+                    float2 headUVCoord = float2(headUV.r, headUV.g);
+                    fixed4 headColor = tex2D(_HeadTex, headUVCoord);
                     if (headColor.a > 0.01)
                     {
-                        finalColor.rgb = headColor.rgb;
+                        // 头部层覆盖身体层
+                        finalColor.rgb = lerp(finalColor.rgb, headColor.rgb, headColor.a);
                     }
-                }
-                // Torso - 服装
-                else if (IsPartID(bodyPartID, ID_TORSO) && _EnableCloth > 0.5)
-                {
-                    fixed4 clothColor = tex2D(_ClothTex, float2(uvMap.r, uvMap.g));
-                    if (clothColor.a > 0.01)
-                    {
-                        finalColor.rgb = clothColor.rgb;
-                    }
-                }
-                // LeftHand - 左手套
-                else if (IsPartID(bodyPartID, ID_LEFTHAND) && _EnableGloves > 0.5)
-                {
-                    finalColor.rgb = _LeftHandColor.rgb;
-                }
-                // RightHand - 右手套
-                else if (IsPartID(bodyPartID, ID_RIGHTHAND) && _EnableGloves > 0.5)
-                {
-                    finalColor.rgb = _RightHandColor.rgb;
-                }
-                // LeftFoot - 左鞋
-                else if (IsPartID(bodyPartID, ID_LEFTFOOT) && _EnableShoes > 0.5)
-                {
-                    finalColor.rgb = _LeftFootColor.rgb;
-                }
-                // RightFoot - 右鞋
-                else if (IsPartID(bodyPartID, ID_RIGHTFOOT) && _EnableShoes > 0.5)
-                {
-                    finalColor.rgb = _RightFootColor.rgb;
                 }
                 
                 return finalColor * i.color;
@@ -208,6 +244,5 @@ Shader "EquipmentSystem/EquipmentUV"
         }
     }
     
-    // 回退到旧 Shader
-    Fallback "EquipmentSystem/EquipmentOverlay"
+    Fallback "Sprites/Default"
 }

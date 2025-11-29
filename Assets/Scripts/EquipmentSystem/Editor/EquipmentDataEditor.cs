@@ -13,8 +13,12 @@ namespace EquipmentSystem.Editor
     {
         SerializedProperty _equipmentId;
         SerializedProperty _type;
-        SerializedProperty _frontSprite;
-        SerializedProperty _backSprite;
+        SerializedProperty _layer;
+        // 4方向贴图
+        SerializedProperty _spriteSE;
+        SerializedProperty _spriteSW;
+        SerializedProperty _spriteNE;
+        SerializedProperty _spriteNW;
         SerializedProperty _anchorType;
         SerializedProperty _selfAnchor;
         SerializedProperty _leftColor;
@@ -25,8 +29,11 @@ namespace EquipmentSystem.Editor
         {
             _equipmentId = serializedObject.FindProperty("equipmentId");
             _type = serializedObject.FindProperty("type");
-            _frontSprite = serializedObject.FindProperty("frontSprite");
-            _backSprite = serializedObject.FindProperty("backSprite");
+            _layer = serializedObject.FindProperty("layer");
+            _spriteSE = serializedObject.FindProperty("spriteSE");
+            _spriteSW = serializedObject.FindProperty("spriteSW");
+            _spriteNE = serializedObject.FindProperty("spriteNE");
+            _spriteNW = serializedObject.FindProperty("spriteNW");
             _anchorType = serializedObject.FindProperty("anchorType");
             _selfAnchor = serializedObject.FindProperty("selfAnchor");
             _leftColor = serializedObject.FindProperty("leftColor");
@@ -71,10 +78,13 @@ namespace EquipmentSystem.Editor
         /// </summary>
         void DrawAccessoryFields()
         {
-            // 贴图
-            EditorGUILayout.LabelField("贴图", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_frontSprite, new GUIContent("正面贴图"));
-            EditorGUILayout.PropertyField(_backSprite, new GUIContent("背面贴图"));
+            // 4方向贴图
+            EditorGUILayout.LabelField("贴图 (4方向)", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_spriteSE, new GUIContent("SE 东南 (必填)"));
+            EditorGUILayout.PropertyField(_spriteSW, new GUIContent("SW 西南"));
+            EditorGUILayout.PropertyField(_spriteNE, new GUIContent("NE 东北"));
+            EditorGUILayout.PropertyField(_spriteNW, new GUIContent("NW 西北"));
+            EditorGUILayout.HelpBox("只填 SE 时，其他方向会自动回退到 SE", MessageType.Info);
             
             EditorGUILayout.Space(10);
             
@@ -91,15 +101,23 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 服装配置: 只需要正面贴图
+        /// 服装配置: 4方向贴图
         /// </summary>
         void DrawClothingFields()
         {
-            EditorGUILayout.LabelField("贴图", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_frontSprite, new GUIContent("服装贴图"));
+            EditorGUILayout.LabelField("层级", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_layer, new GUIContent("装备层", "Body=身体层(衣服), Head=头部层(头盔/胡子/头发)"));
             
             EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox("服装贴图会映射到躯干区域的标记像素上\n服装不区分正面背面", MessageType.Info);
+            
+            EditorGUILayout.LabelField("贴图 (4方向)", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_spriteSE, new GUIContent("SE 东南 (必填)"));
+            EditorGUILayout.PropertyField(_spriteSW, new GUIContent("SW 西南"));
+            EditorGUILayout.PropertyField(_spriteNE, new GUIContent("NE 东北"));
+            EditorGUILayout.PropertyField(_spriteNW, new GUIContent("NW 西北"));
+            
+            EditorGUILayout.Space(5);
+            EditorGUILayout.HelpBox("服装贴图会通过 UV Map 映射到角色\n只填 SE 时，其他方向会自动回退到 SE", MessageType.Info);
         }
         
         /// <summary>

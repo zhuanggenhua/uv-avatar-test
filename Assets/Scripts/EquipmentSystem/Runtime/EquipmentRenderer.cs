@@ -19,7 +19,6 @@ namespace EquipmentSystem.Runtime
     {
         [Header("数据")]
         public CharacterFrameData frameData;
-        public string currentAnimation = "Idle";
         
         [Header("装备")]
         public List<EquipmentData> equipments = new List<EquipmentData>();
@@ -27,6 +26,18 @@ namespace EquipmentSystem.Runtime
         [Header("调试")]
         [Tooltip("如果 Shader.Find 失败，可以手动指定 Shader")]
         public Shader overrideShader;
+        
+        [Header("运行时状态 (只读)")]
+        [SerializeField] string _debugCurrentAnim = "";
+        [SerializeField] string _debugAnimatorState = "";
+        [SerializeField] bool _debugHasBodyUVMap = false;
+        [SerializeField] bool _debugHasHeadUVMap = false;
+        [SerializeField] bool _debugHasClothTex = false;
+        [SerializeField] bool _debugHasHeadTex = false;
+        
+        // 动画同步
+        Animator _animator;
+        string _currentAnimName;
         
         SpriteRenderer _charRenderer;
         Dictionary<EquipmentData, SpriteRenderer> _equipRenderers = new Dictionary<EquipmentData, SpriteRenderer>();
@@ -41,11 +52,14 @@ namespace EquipmentSystem.Runtime
         // GPU 换装材质
         Material _gpuMaterial;
         
-        // Shader 属性 ID
-        static readonly int UVMapTexProp = Shader.PropertyToID("_UVMapTex");
+        // Shader 属性 ID - 双层 UV Map
+        static readonly int BodyUVMapProp = Shader.PropertyToID("_BodyUVMap");
+        static readonly int HeadUVMapProp = Shader.PropertyToID("_HeadUVMap");
         static readonly int ClothTexProp = Shader.PropertyToID("_ClothTex");
         static readonly int HeadTexProp = Shader.PropertyToID("_HeadTex");
         static readonly int SpriteRectProp = Shader.PropertyToID("_SpriteRect");
+        // 兼容旧属性
+        static readonly int UVMapTexProp = Shader.PropertyToID("_UVMapTex");
         static readonly int LeftHandColorProp = Shader.PropertyToID("_LeftHandColor");
         static readonly int RightHandColorProp = Shader.PropertyToID("_RightHandColor");
         static readonly int LeftFootColorProp = Shader.PropertyToID("_LeftFootColor");
@@ -58,6 +72,7 @@ namespace EquipmentSystem.Runtime
         void Awake()
         {
             _charRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponentInChildren<Animator>();
             InitMaterial();
         }
         
@@ -71,12 +86,97 @@ namespace EquipmentSystem.Runtime
         
         void LateUpdate()
         {
+            // 同步动画名称
+            SyncAnimationName();
+            
             // 自动同步 Sprite 变化
             if (_charRenderer.sprite != _lastSprite)
             {
                 _lastSprite = _charRenderer.sprite;
                 SyncFromSprite();
             }
+        }
+        
+        // 动画关键字列表 - 用于匹配 Animator Bool 参数
+        static readonly string[] AnimKeywords = { "Idle", "Walk", "Run", "Attack", "Hurt", "Die", "Jump", "Fall" };
+        
+        /// <summary>
+        /// 从 Animator Bool 参数同步当前动画名称
+        /// CTR_AnimateCreature 使用 SetBool("Idle", true) 等方式切换动画
+        /// </summary>
+        void SyncAnimationName()
+        {
+            if (_animator == null || frameData == null) return;
+            
+            // 从 Animator 的 Bool 参数找到当前激活的动画
+            string activeParam = null;
+            foreach (var keyword in AnimKeywords)
+            {
+                // 检查 Animator 是否有这个 Bool 参数且为 true
+                try
+                {
+                    if (_animator.GetBool(keyword))
+                    {
+                        activeParam = keyword;
+                        break;
+                    }
+                }
+                catch { } // 参数不存在时会抛异常，忽略
+            }
+            
+            _debugAnimatorState = activeParam ?? "(none)";
+            
+            // 如果没找到激活的参数，默认用 Idle 或第一个动画
+            if (string.IsNullOrEmpty(activeParam))
+            {
+                activeParam = "Idle";
+            }
+            
+            // 在 frameData 中找到包含该关键字的动画
+            string newAnimName = FindAnimationByKeyword(activeParam);
+            
+            if (!string.IsNullOrEmpty(newAnimName) && newAnimName != _currentAnimName)
+            {
+                _currentAnimName = newAnimName;
+                _currentAnimData = frameData.GetAnimation(_currentAnimName);
+                _debugCurrentAnim = _currentAnimName;
+                
+                if (_currentAnimData != null)
+                {
+                    Debug.Log($"[EquipmentRenderer] 动画同步: {activeParam} -> {_currentAnimName}");
+                    UpdateUVMapTexture();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 根据关键字在 frameData 中找到对应的动画
+        /// </summary>
+        string FindAnimationByKeyword(string keyword)
+        {
+            if (frameData == null) return null;
+            
+            string keywordLower = keyword.ToLowerInvariant();
+            
+            // 先尝试精确匹配
+            foreach (var anim in frameData.animations)
+            {
+                if (string.Equals(anim.animationName, keyword, System.StringComparison.OrdinalIgnoreCase))
+                    return anim.animationName;
+            }
+            
+            // 再尝试包含匹配
+            foreach (var anim in frameData.animations)
+            {
+                if (anim.animationName.ToLowerInvariant().Contains(keywordLower))
+                    return anim.animationName;
+            }
+            
+            // 默认返回第一个
+            if (frameData.animations.Count > 0)
+                return frameData.animations[0].animationName;
+            
+            return null;
         }
         
         void OnDestroy()
@@ -109,11 +209,7 @@ namespace EquipmentSystem.Runtime
         /// </summary>
         void SyncFromSprite()
         {
-            if (_lastSprite == null || frameData == null) return;
-            
-            // 获取当前动画配置
-            _currentAnimData = frameData.GetAnimation(currentAnimation);
-            if (_currentAnimData == null) return;
+            if (_lastSprite == null || frameData == null || _currentAnimData == null) return;
             
             // 从 Sprite 的 rect 位置计算帧索引和行索引
             var rect = _lastSprite.rect;
@@ -176,15 +272,15 @@ namespace EquipmentSystem.Runtime
                 return;
             }
             
-            _cachedFrame = frameData.GetFrameData(currentAnimation, _rowIndex, _frameIndex);
+            _cachedFrame = frameData.GetFrameData(_currentAnimName, _rowIndex, _frameIndex);
             
             // 获取当前动画配置
             if (_currentAnimData == null)
-                _currentAnimData = frameData.GetAnimation(currentAnimation);
+                _currentAnimData = frameData.GetAnimation(_currentAnimName);
             
             if (_currentAnimData == null)
             {
-                Debug.LogWarning($"[EquipmentRenderer] 找不到动画: {currentAnimation}");
+                // 静默失败，等待动画同步
                 return;
             }
             
@@ -230,15 +326,26 @@ namespace EquipmentSystem.Runtime
         {
             if (_gpuMaterial == null || _currentAnimData == null) return;
             
-            if (_currentAnimData.uvMapTexture != null)
+            // 双层 UV Map
+            _debugHasBodyUVMap = _currentAnimData.bodyUVMap != null;
+            _debugHasHeadUVMap = _currentAnimData.headUVMap != null;
+            
+            // 设置身体层 UV Map
+            if (_currentAnimData.bodyUVMap != null)
             {
-                _gpuMaterial.SetTexture(UVMapTexProp, _currentAnimData.uvMapTexture);
-                Debug.Log($"[EquipmentRenderer] UV Map 已设置: {_currentAnimData.uvMapTexture.name}");
+                _gpuMaterial.SetTexture(BodyUVMapProp, _currentAnimData.bodyUVMap);
+                Debug.Log($"[EquipmentRenderer] 身体层 UV Map: {_currentAnimData.bodyUVMap.name}");
             }
             else
             {
-                Debug.LogWarning($"[EquipmentRenderer] 动画 '{currentAnimation}' 没有 UV Map 贴图！" +
-                    "请在 Frame Editor 中生成 UV Map");
+                Debug.LogWarning($"[EquipmentRenderer] 动画 '{_currentAnimName}' 没有身体层 UV Map");
+            }
+            
+            // 设置头部层 UV Map
+            if (_currentAnimData.headUVMap != null)
+            {
+                _gpuMaterial.SetTexture(HeadUVMapProp, _currentAnimData.headUVMap);
+                Debug.Log($"[EquipmentRenderer] 头部层 UV Map: {_currentAnimData.headUVMap.name}");
             }
             
             // 设置当前帧在 spritesheet 中的 UV 范围
@@ -275,36 +382,46 @@ namespace EquipmentSystem.Runtime
         }
         
         /// <summary>
-        /// GPU 方式设置服装 - 只需设置贴图和启用标志
+        /// GPU 方式设置服装 - 根据方向选择贴图
         /// </summary>
         void SetClothingGPU(EquipmentData equip)
         {
             if (_gpuMaterial == null) return;
             
-            var clothingSprite = equip.frontSprite;
+            // 根据当前方向获取对应贴图
+            var clothingSprite = equip.GetSpriteByRow(_rowIndex);
             if (clothingSprite == null || clothingSprite.texture == null)
             {
-                Debug.LogWarning($"[EquipmentRenderer] 服装 {equip.name} 没有 frontSprite");
+                Debug.LogWarning($"[EquipmentRenderer] 服装 {equip.name} 没有方向 {_rowIndex} 的贴图");
+                _debugHasClothTex = false;
                 return;
             }
             
             _gpuMaterial.SetTexture(ClothTexProp, clothingSprite.texture);
             _gpuMaterial.SetFloat(EnableClothProp, 1);
-            Debug.Log($"[EquipmentRenderer] 服装已启用: {equip.name}, 贴图: {clothingSprite.texture.name}");
+            _debugHasClothTex = true;
+            Debug.Log($"[EquipmentRenderer] 服装已启用: {equip.name}, 方向: {(CharacterFacing)_rowIndex}");
         }
         
         /// <summary>
-        /// GPU 方式设置面部装饰 - 类似服装，但映射到头部
+        /// GPU 方式设置头部装饰 (头盔/胡子/头发) - 根据方向选择贴图
         /// </summary>
         void SetFacialDecorGPU(EquipmentData equip)
         {
             if (_gpuMaterial == null) return;
             
-            var headSprite = equip.frontSprite;
-            if (headSprite == null || headSprite.texture == null) return;
+            // 根据当前方向获取对应贴图
+            var headSprite = equip.GetSpriteByRow(_rowIndex);
+            if (headSprite == null || headSprite.texture == null)
+            {
+                _debugHasHeadTex = false;
+                return;
+            }
             
             _gpuMaterial.SetTexture(HeadTexProp, headSprite.texture);
             _gpuMaterial.SetFloat(EnableHeadProp, 1);
+            _debugHasHeadTex = true;
+            Debug.Log($"[EquipmentRenderer] 头部装饰已启用: {equip.name}, 方向: {(CharacterFacing)_rowIndex}");
         }
         
         /// <summary>
@@ -333,12 +450,12 @@ namespace EquipmentSystem.Runtime
         }
         
         /// <summary>
-        /// 渲染挂件 - 用锚点定位
+        /// 渲染挂件 - 用锚点定位，根据方向选择贴图
         /// </summary>
         void RenderAccessory(EquipmentData equip, SpriteRenderer sr, bool hideLeftWeapon, bool hideRightWeapon)
         {
-            var facingDir = CharacterFrameData.GetFacingDirection((CharacterFacing)_rowIndex);
-            sr.sprite = equip.GetSprite(facingDir);
+            // 根据当前方向获取对应贴图
+            sr.sprite = equip.GetSpriteByRow(_rowIndex);
             
             if (_cachedFrame == null)
             {

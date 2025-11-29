@@ -20,18 +20,15 @@ namespace EquipmentSystem.Data
     
     #endregion
 
-    #region 锚点 - 挂件用（头盔、武器等不形变的）
+    #region 锚点 - 武器挂点
     
     /// <summary>
-    /// 锚点类型
+    /// 锚点类型 - 只保留武器
     /// </summary>
     public enum AnchorType
     {
-        Head,           // 头部（头盔、帽子）
         LeftWeapon,     // 左手武器
-        RightWeapon,    // 右手武器
-        Back,           // 背部（披风、翅膀）
-        Effect          // 特效点
+        RightWeapon     // 右手武器
     }
     
     [Serializable]
@@ -80,33 +77,40 @@ namespace EquipmentSystem.Data
         public CharacterBodyPart part;
         public Vector2Int position;
         public Color32 color;  // 原始颜色（用于匹配）
+        
+        /// <summary>
+        /// UV 索引：对应模板中的第几个像素
+        /// -1 表示未分配，使用时会回退到相对坐标映射
+        /// </summary>
+        public int uvIndex = -1;
     }
     
     /// <summary>
-    /// 部位区域（带方向，用于服装旋转映射）
-    /// 正常站立 direction=Down, 躺下 direction=Left/Right
-    /// Shader根据方向旋转衣服贴图的映射
+    /// 部位区域
     /// </summary>
     [Serializable]
     public class BodyPartRegion
     {
         public CharacterBodyPart part;
-        public PartDirection direction;  // 区域朝向（躺下时改变）
         public List<BodyPartPixel> pixels = new List<BodyPartPixel>();
         
         /// <summary>
-        /// 获取旋转角度（供Shader使用）
-        /// Down=0°, Up=180°, Left=90°, Right=-90°
+        /// 获取区域的包围盒
         /// </summary>
-        public float GetRotationAngle()
+        public RectInt GetBounds()
         {
-            switch (direction)
+            if (pixels.Count == 0) return new RectInt(0, 0, 0, 0);
+            
+            int minX = int.MaxValue, maxX = int.MinValue;
+            int minY = int.MaxValue, maxY = int.MinValue;
+            foreach (var px in pixels)
             {
-                case PartDirection.Up: return 180f;
-                case PartDirection.Left: return 90f;
-                case PartDirection.Right: return -90f;
-                default: return 0f;
+                minX = Mathf.Min(minX, px.position.x);
+                maxX = Mathf.Max(maxX, px.position.x);
+                minY = Mathf.Min(minY, px.position.y);
+                maxY = Mathf.Max(maxY, px.position.y);
             }
+            return new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
         }
     }
 
@@ -164,12 +168,12 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 获取或创建部位区域
         /// </summary>
-        public BodyPartRegion GetOrCreateRegion(CharacterBodyPart part, PartDirection defaultDir = PartDirection.Down)
+        public BodyPartRegion GetOrCreateRegion(CharacterBodyPart part)
         {
             var r = GetRegion(part);
             if (r == null)
             {
-                r = new BodyPartRegion { part = part, direction = defaultDir };
+                r = new BodyPartRegion { part = part };
                 bodyRegions.Add(r);
             }
             return r;
@@ -211,9 +215,11 @@ namespace EquipmentSystem.Data
         public bool hideLeftWeapon;   // 隐藏左手武器
         public bool hideRightWeapon;  // 隐藏右手武器
         
-        [Header("GPU 换装")]
-        [Tooltip("由 UV Map Generator 生成的 UV/ID 贴图")]
-        public Texture2D uvMapTexture;
+        [Header("GPU 换装 - 双层 UV Map")]
+        [Tooltip("身体层 UV Map (衣服、手套、鞋子)")]
+        public Texture2D bodyUVMap;
+        [Tooltip("头部层 UV Map (头盔、胡子、头发)")]
+        public Texture2D headUVMap;
         
         public List<FrameData> frames = new List<FrameData>();
         
@@ -280,6 +286,20 @@ namespace EquipmentSystem.Data
     [CreateAssetMenu(fileName = "CharacterFrameData", menuName = "Equipment System/Character Frame Data")]
     public class CharacterFrameData : ScriptableObject
     {
+        [Header("装备模板")]
+        [Tooltip("身体层模板 (衣服、手套、鞋子)")]
+        public EquipmentTemplate bodyTemplate;
+        [Tooltip("头部层模板 (头盔、胡子、头发)")]
+        public EquipmentTemplate headTemplate;
+        
+        [Header("头部区域扩展配置")]
+        [Tooltip("头部区域向上扩展的像素数")]
+        public int headExpandUp = 5;
+        [Tooltip("头部区域向左右扩展的像素数")]
+        public int headExpandSide = 2;
+        [Tooltip("头部区域向下扩展的像素数 (会排除与身体/手脚重叠的像素)")]
+        public int headExpandDown = 2;
+        
         [Header("检测配置")]
         public DetectConfig detectConfig = new DetectConfig();
         

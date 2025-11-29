@@ -15,6 +15,15 @@ namespace EquipmentSystem.Data
     }
 
     /// <summary>
+    /// 装备层类型 - 决定使用哪个 UV Map
+    /// </summary>
+    public enum EquipmentLayer
+    {
+        Body,   // 身体层: 衣服、手套、鞋子
+        Head    // 头部层: 头盔、胡子、头发
+    }
+    
+    /// <summary>
     /// 装备数据
     /// </summary>
     [CreateAssetMenu(fileName = "EquipmentData", menuName = "Equipment System/Equipment Data")]
@@ -24,9 +33,19 @@ namespace EquipmentSystem.Data
         public string equipmentId;
         public EquipmentType type;
         
-        [Header("贴图 (挂件/服装用)")]
-        public Sprite frontSprite;
-        public Sprite backSprite;
+        [Header("层级")]
+        [Tooltip("装备所属层级，决定使用 Body UV Map 还是 Head UV Map")]
+        public EquipmentLayer layer = EquipmentLayer.Body;
+        
+        [Header("贴图 - 4方向 (SE/SW/NE/NW)")]
+        [Tooltip("东南方向 (必填，其他方向为空时回退到此)")]
+        public Sprite spriteSE;
+        [Tooltip("西南方向 (可选)")]
+        public Sprite spriteSW;
+        [Tooltip("东北方向 (可选)")]
+        public Sprite spriteNE;
+        [Tooltip("西北方向 (可选)")]
+        public Sprite spriteNW;
         
         [Header("挂件设置 (Accessory)")]
         [Tooltip("锚点类型")]
@@ -43,11 +62,46 @@ namespace EquipmentSystem.Data
         [Header("渲染")]
         public int sortingOffset = 1;
         
+        /// <summary>
+        /// 根据方向获取对应的 Sprite
+        /// </summary>
+        public Sprite GetSprite(CharacterFacing facing)
+        {
+            Sprite result = null;
+            switch (facing)
+            {
+                case CharacterFacing.SouthEast:
+                    result = spriteSE;
+                    break;
+                case CharacterFacing.SouthWest:
+                    result = spriteSW;
+                    break;
+                case CharacterFacing.NorthEast:
+                    result = spriteNE;
+                    break;
+                case CharacterFacing.NorthWest:
+                    result = spriteNW;
+                    break;
+            }
+            // 回退到 SE
+            return result != null ? result : spriteSE;
+        }
+        
+        /// <summary>
+        /// 根据行索引获取对应的 Sprite (0=SE, 1=SW, 2=NE, 3=NW)
+        /// </summary>
+        public Sprite GetSpriteByRow(int rowIndex)
+        {
+            return GetSprite((CharacterFacing)rowIndex);
+        }
+        
+        // 保留旧接口以兼容
+        [System.Obsolete("使用 GetSprite(CharacterFacing) 代替")]
         public Sprite GetSprite(FacingDirection dir)
         {
-            if (dir == FacingDirection.Back && backSprite != null)
-                return backSprite;
-            return frontSprite;
+            if (dir == FacingDirection.Back)
+                return spriteNE != null ? spriteNE : spriteSE;
+            return spriteSE;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace EquipmentSystem.Editor
         int _animIndex, _row, _frame;
         TabMode _tab = TabMode.BodyPaint;
         CharacterBodyPart _currentPart = CharacterBodyPart.Torso;
-        AnchorType _anchorType = AnchorType.Head;
+        AnchorType _anchorType = AnchorType.LeftWeapon;
         PartDirection _anchorDir = PartDirection.Down;
         bool _anchorFlipX;
         bool _showSkinColors;
@@ -47,7 +47,7 @@ namespace EquipmentSystem.Editor
         
         // 编辑缓存
         Dictionary<CharacterBodyPart, HashSet<Vector2Int>> _partPixels = new Dictionary<CharacterBodyPart, HashSet<Vector2Int>>();
-        Dictionary<CharacterBodyPart, PartDirection> _partDirections = new Dictionary<CharacterBodyPart, PartDirection>();
+        Dictionary<CharacterBodyPart, Dictionary<Vector2Int, int>> _partUVIndices = new Dictionary<CharacterBodyPart, Dictionary<Vector2Int, int>>();
         HashSet<Vector2Int> _deadPixels = new HashSet<Vector2Int>();
         List<AnchorPoint> _anchors = new List<AnchorPoint>();
         
@@ -321,9 +321,6 @@ namespace EquipmentSystem.Editor
             
             EditorGUILayout.BeginVertical("helpbox");
             GUILayout.Label($"当前: {_currentPart}", EditorStyles.boldLabel);
-            if (!_partDirections.ContainsKey(_currentPart))
-                _partDirections[_currentPart] = PartDirection.Down;
-            _partDirections[_currentPart] = (PartDirection)EditorGUILayout.EnumPopup("方向", _partDirections[_currentPart]);
             int count = _partPixels.ContainsKey(_currentPart) ? _partPixels[_currentPart].Count : 0;
             EditorGUILayout.LabelField($"已涂: {count} 像素");
             EditorGUILayout.EndVertical();
@@ -445,27 +442,28 @@ namespace EquipmentSystem.Editor
             GUILayout.Space(5);
             GUILayout.Label("GPU 换装", EditorStyles.boldLabel);
             
-            // 显示当前 UV Map 状态
+            // 显示当前 UV Map 状态（双层）
             if (_data != null && !string.IsNullOrEmpty(_animName))
             {
                 var anim = _data.GetAnimation(_animName);
                 if (anim != null)
                 {
-                    bool hasUVMap = anim.uvMapTexture != null;
-                    EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("UV Map:", GUILayout.Width(60));
-                    GUI.color = hasUVMap ? Color.green : Color.yellow;
-                    EditorGUILayout.LabelField(hasUVMap ? "✓ 已生成" : "✗ 未生成");
+                    bool hasBodyUV = anim.bodyUVMap != null;
+                    bool hasHeadUV = anim.headUVMap != null;
+                    GUI.color = (hasBodyUV && hasHeadUV) ? Color.green : Color.yellow;
+                    string status = hasBodyUV && hasHeadUV ? "✓ 双层 UV Map 已设置" :
+                                   hasBodyUV ? "○ 仅身体层" :
+                                   hasHeadUV ? "○ 仅头部层" : "✗ 未设置 UV Map";
+                    EditorGUILayout.LabelField(status);
                     GUI.color = Color.white;
-                    EditorGUILayout.EndHorizontal();
                 }
             }
             
-            if (GUILayout.Button("💾 生成当前动画 UV Map"))
-                GenerateUVMapForCurrentAnimation();
+            if (GUILayout.Button("💾 生成当前动画 UV Map (双层)"))
+                GenerateDualUVMapsForCurrentAnimation();
             
-            if (GUILayout.Button("💾 生成所有动画 UV Map"))
-                GenerateAllUVMaps();
+            if (GUILayout.Button("💾 生成所有动画 UV Map (双层)"))
+                GenerateAllDualUVMaps();
         }
         
         void DrawPartButton(CharacterBodyPart part, string label, Color color)
@@ -735,11 +733,12 @@ namespace EquipmentSystem.Editor
                 {
                     if (kv.Value.Count == 0) continue;
                     
-                    var region = new BodyPartRegion
-                    {
-                        part = kv.Key,
-                        direction = _partDirections.ContainsKey(kv.Key) ? _partDirections[kv.Key] : PartDirection.Down
-                    };
+                    var region = new BodyPartRegion { part = kv.Key };
+                    
+                    // 获取 UV 索引字典
+                    Dictionary<Vector2Int, int> uvIndices = null;
+                    if (_partUVIndices.ContainsKey(kv.Key))
+                        uvIndices = _partUVIndices[kv.Key];
                     
                     foreach (var pos in kv.Value)
                     {
@@ -752,7 +751,8 @@ namespace EquipmentSystem.Editor
                             {
                                 part = kv.Key,
                                 position = pos,
-                                color = pixels[gy * _sprite.width + gx]
+                                color = pixels[gy * _sprite.width + gx],
+                                uvIndex = uvIndices != null && uvIndices.ContainsKey(pos) ? uvIndices[pos] : -1
                             });
                         }
                     }
@@ -772,7 +772,7 @@ namespace EquipmentSystem.Editor
         {
             _anchors.Clear();
             _partPixels.Clear();
-            _partDirections.Clear();
+            _partUVIndices.Clear();
             _deadPixels.Clear();
             _isDirty = false;
             
@@ -789,10 +789,14 @@ namespace EquipmentSystem.Editor
             
             foreach (var region in frame.bodyRegions)
             {
-                _partDirections[region.part] = region.direction;
                 _partPixels[region.part] = new HashSet<Vector2Int>();
+                _partUVIndices[region.part] = new Dictionary<Vector2Int, int>();
                 foreach (var px in region.pixels)
+                {
                     _partPixels[region.part].Add(px.position);
+                    if (px.uvIndex >= 0)
+                        _partUVIndices[region.part][px.position] = px.uvIndex;
+                }
             }
             
             foreach (var p in frame.deadZone.pixels)
@@ -1108,8 +1112,7 @@ namespace EquipmentSystem.Editor
             DetectLimb(p, CharacterBodyPart.LeftFoot, p.GetLeftFootColor());
             DetectLimb(p, CharacterBodyPart.RightFoot, p.GetRightFootColor());
             
-            // 锚点
-            SetOrUpdateAnchor(AnchorType.Head, p.firstPixel, PartDirection.Down);
+            // 锚点 (只设置武器锚点，头部现在用UV Map制)
             if (_partPixels.ContainsKey(CharacterBodyPart.LeftHand) && _partPixels[CharacterBodyPart.LeftHand].Count > 0)
                 SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First(), PartDirection.Down);
             if (_partPixels.ContainsKey(CharacterBodyPart.RightHand) && _partPixels[CharacterBodyPart.RightHand].Count > 0)
@@ -1211,7 +1214,7 @@ namespace EquipmentSystem.Editor
                     
                     // 重置缓存，确保每帧独立检测
                     _partPixels.Clear();
-                    _partDirections.Clear();
+                    _partUVIndices.Clear();
                     _anchors.Clear();
                     _deadPixels.Clear();
                     
@@ -1298,19 +1301,18 @@ namespace EquipmentSystem.Editor
         
         #endregion
         
-        #region UV Map 生成
+        #region UV Map 生成 (双层)
         
         // Body Part ID 常量 (对应 Shader 中的定义)
-        // 这些值也用于 GetPartColor() 的 B 通道，保证绘制颜色和 UV Map 颜色一致
         const float ID_NONE = 0f;
-        const float ID_HEAD = 0.1f;       // 头部 - 面部装饰
+        const float ID_HEAD = 0.1f;       // 头部 - 头盔/胡子/头发
         const float ID_TORSO = 0.2f;      // 躯干 - 服装
         const float ID_LEFTHAND = 0.4f;   // 左手 - 手套
         const float ID_RIGHTHAND = 0.5f;  // 右手 - 手套
         const float ID_LEFTFOOT = 0.6f;   // 左脚 - 鞋子
         const float ID_RIGHTFOOT = 0.7f;  // 右脚 - 鞋子
         
-        void GenerateUVMapForCurrentAnimation()
+        void GenerateDualUVMapsForCurrentAnimation()
         {
             if (_data == null || string.IsNullOrEmpty(_animName))
             {
@@ -1319,11 +1321,11 @@ namespace EquipmentSystem.Editor
             }
             
             var anim = _data.GetAnimation(_animName);
-            GenerateUVMapForAnimation(anim);
+            GenerateDualUVMapsForAnimation(anim);
             AssetDatabase.Refresh();
         }
         
-        void GenerateAllUVMaps()
+        void GenerateAllDualUVMaps()
         {
             if (_data == null)
             {
@@ -1334,15 +1336,15 @@ namespace EquipmentSystem.Editor
             int count = 0;
             foreach (var anim in _data.animations)
             {
-                if (GenerateUVMapForAnimation(anim))
+                if (GenerateDualUVMapsForAnimation(anim))
                     count++;
             }
             
             AssetDatabase.Refresh();
-            Debug.Log($"[UV Map] 已生成 {count} 个动画的 UV Map");
+            Debug.Log($"[UV Map] 已生成 {count} 个动画的双层 UV Map");
         }
         
-        bool GenerateUVMapForAnimation(AnimationData anim)
+        bool GenerateDualUVMapsForAnimation(AnimationData anim)
         {
             if (anim == null || anim.spritesheet == null)
             {
@@ -1350,48 +1352,69 @@ namespace EquipmentSystem.Editor
                 return false;
             }
             
-            var tex = GenerateUVMapTexture(anim);
-            if (tex == null) return false;
-            
-            // 保存到 spritesheet 同目录
             string spritesheetPath = AssetDatabase.GetAssetPath(anim.spritesheet);
             string directory = Path.GetDirectoryName(spritesheetPath);
-            string fileName = Path.GetFileNameWithoutExtension(spritesheetPath) + "_UVMap.png";
-            string savePath = Path.Combine(directory, fileName);
+            string baseName = Path.GetFileNameWithoutExtension(spritesheetPath);
             
-            // 保存 PNG
+            // 生成身体层 UV Map
+            var bodyTex = GenerateBodyUVMapTexture(anim);
+            if (bodyTex != null)
+            {
+                string bodyPath = Path.Combine(directory, baseName + "_BodyUV.png");
+                SaveUVMapTexture(bodyTex, bodyPath);
+                DestroyImmediate(bodyTex);
+                
+                var loadedTex = AssetDatabase.LoadAssetAtPath<Texture2D>(bodyPath);
+                if (loadedTex != null)
+                {
+                    anim.bodyUVMap = loadedTex;
+                    Debug.Log($"[UV Map] 身体层: {bodyPath}");
+                }
+            }
+            
+            // 生成头部层 UV Map
+            var headTex = GenerateHeadUVMapTexture(anim);
+            if (headTex != null)
+            {
+                string headPath = Path.Combine(directory, baseName + "_HeadUV.png");
+                SaveUVMapTexture(headTex, headPath);
+                DestroyImmediate(headTex);
+                
+                var loadedTex = AssetDatabase.LoadAssetAtPath<Texture2D>(headPath);
+                if (loadedTex != null)
+                {
+                    anim.headUVMap = loadedTex;
+                    Debug.Log($"[UV Map] 头部层: {headPath}");
+                }
+            }
+            
+            EditorUtility.SetDirty(_data);
+            AssetDatabase.SaveAssets();
+            return true;
+        }
+        
+        void SaveUVMapTexture(Texture2D tex, string path)
+        {
             byte[] pngData = tex.EncodeToPNG();
-            File.WriteAllBytes(savePath, pngData);
-            DestroyImmediate(tex);
+            File.WriteAllBytes(path, pngData);
+            AssetDatabase.ImportAsset(path);
             
-            AssetDatabase.ImportAsset(savePath);
-            
-            // 设置贴图导入配置
-            var importer = AssetImporter.GetAtPath(savePath) as TextureImporter;
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
             if (importer != null)
             {
                 importer.textureType = TextureImporterType.Default;
-                importer.sRGBTexture = false; // 线性空间，保证数值精确
+                importer.sRGBTexture = false;
                 importer.filterMode = FilterMode.Point;
                 importer.textureCompression = TextureImporterCompression.Uncompressed;
                 importer.mipmapEnabled = false;
                 importer.SaveAndReimport();
             }
-            
-            // 加载生成的贴图并赋值给 AnimationData
-            var uvMapTex = AssetDatabase.LoadAssetAtPath<Texture2D>(savePath);
-            if (uvMapTex != null)
-            {
-                anim.uvMapTexture = uvMapTex;
-                EditorUtility.SetDirty(_data);
-                AssetDatabase.SaveAssets();
-            }
-            
-            Debug.Log($"[UV Map] 已生成: {savePath}");
-            return true;
         }
         
-        Texture2D GenerateUVMapTexture(AnimationData anim)
+        /// <summary>
+        /// 生成身体层 UV Map: 躯干 + 手 + 脚
+        /// </summary>
+        Texture2D GenerateBodyUVMapTexture(AnimationData anim)
         {
             if (anim.spritesheet == null) return null;
             
@@ -1401,7 +1424,6 @@ namespace EquipmentSystem.Editor
             var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
             
-            // 默认值：B=0 (非换装区域), A=1 (非死区)
             var defaultColor = new Color(0, 0, ID_NONE, 1);
             var pixels = new Color[width * height];
             for (int i = 0; i < pixels.Length; i++)
@@ -1412,17 +1434,13 @@ namespace EquipmentSystem.Editor
             
             foreach (var frame in anim.frames)
             {
-                // 计算帧在 spritesheet 中的偏移
                 int frameOffsetX = frame.frameIndex * frameW;
                 int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
                 
-                // 处理 Head (面部装饰) - 与 Torso 类似，用 UV 映射
-                ProcessRegionWithUVForUVMap(frame, CharacterBodyPart.Head, ID_HEAD, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                // 躯干
+                ProcessRegionForUVMap(frame, CharacterBodyPart.Torso, ID_TORSO, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
                 
-                // 处理 Torso (服装)
-                ProcessRegionWithUVForUVMap(frame, CharacterBodyPart.Torso, ID_TORSO, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
-                
-                // 处理手脚 (纯颜色，不需要 UV)
+                // 手脚
                 ProcessBodyPartForUVMap(frame, CharacterBodyPart.LeftHand, ID_LEFTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
                 ProcessBodyPartForUVMap(frame, CharacterBodyPart.RightHand, ID_RIGHTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
                 ProcessBodyPartForUVMap(frame, CharacterBodyPart.LeftFoot, ID_LEFTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
@@ -1435,59 +1453,168 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 处理带 UV 映射的区域 (Head, Torso)
-        /// 这些部位需要用 UV 坐标映射到装饰贴图
+        /// 生成头部层 UV Map: 头部 + 扩展区域
         /// </summary>
-        void ProcessRegionWithUVForUVMap(FrameData frame, CharacterBodyPart part, float partID,
-                                         Color[] pixels, int texWidth, int texHeight,
-                                         int frameOffsetX, int frameOffsetY, int frameH)
+        Texture2D GenerateHeadUVMapTexture(AnimationData anim)
         {
-            var region = frame.GetRegion(part);
-            if (region == null || region.pixels.Count == 0) return;
+            if (anim.spritesheet == null) return null;
             
-            // 计算区域的 bounding box
-            int minX = int.MaxValue, maxX = int.MinValue;
-            int minY = int.MaxValue, maxY = int.MinValue;
+            int width = anim.spritesheet.width;
+            int height = anim.spritesheet.height;
             
-            foreach (var px in region.pixels)
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Point;
+            
+            var defaultColor = new Color(0, 0, ID_NONE, 1);
+            var pixels = new Color[width * height];
+            for (int i = 0; i < pixels.Length; i++)
+                pixels[i] = defaultColor;
+            
+            int frameW = anim.frameSize.x;
+            int frameH = anim.frameSize.y;
+            
+            foreach (var frame in anim.frames)
             {
-                minX = Mathf.Min(minX, px.position.x);
-                maxX = Mathf.Max(maxX, px.position.x);
-                minY = Mathf.Min(minY, px.position.y);
-                maxY = Mathf.Max(maxY, px.position.y);
+                int frameOffsetX = frame.frameIndex * frameW;
+                int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
+                
+                // 头部区域 + 扩展
+                ProcessHeadRegionWithExpansion(frame, anim, ID_HEAD, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
             }
             
-            int regionW = maxX - minX + 1;
-            int regionH = maxY - minY + 1;
+            tex.SetPixels(pixels);
+            tex.Apply();
+            return tex;
+        }
+        
+        /// <summary>
+        /// 处理头部区域，并根据配置扩展
+        /// </summary>
+        void ProcessHeadRegionWithExpansion(FrameData frame, AnimationData anim, float partID,
+                                            Color[] pixels, int texWidth, int texHeight,
+                                            int frameOffsetX, int frameOffsetY, int frameH)
+        {
+            var headRegion = frame.GetRegion(CharacterBodyPart.Head);
+            if (headRegion == null || headRegion.pixels.Count == 0) return;
             
-            foreach (var px in region.pixels)
+            // 获取头部包围盒
+            var bounds = headRegion.GetBounds();
+            
+            // 扩展配置
+            int expandUp = _data.headExpandUp;
+            int expandSide = _data.headExpandSide;
+            int expandDown = _data.headExpandDown;
+            
+            // 计算扩展后的范围
+            int minX = Mathf.Max(0, bounds.x - expandSide);
+            int maxX = Mathf.Min(anim.frameSize.x - 1, bounds.xMax - 1 + expandSide);
+            int minY = Mathf.Max(0, bounds.y - expandUp);
+            int maxY = Mathf.Min(anim.frameSize.y - 1, bounds.yMax - 1 + expandDown);
+            
+            // 收集身体层占用的像素
+            HashSet<Vector2Int> bodyOccupied = new HashSet<Vector2Int>();
+            CollectBodyOccupiedPixels(frame, bodyOccupied);
+            
+            // 生成扩展区域的像素列表
+            List<Vector2Int> expandedPixels = new List<Vector2Int>();
+            for (int y = minY; y <= maxY; y++)
             {
-                // 计算相对位置 (0~1)
-                float relX = regionW > 1 ? (float)(px.position.x - minX) / (regionW - 1) : 0.5f;
-                float relY = regionH > 1 ? (float)(px.position.y - minY) / (regionH - 1) : 0.5f;
+                for (int x = minX; x <= maxX; x++)
+                {
+                    var pos = new Vector2Int(x, y);
+                    if (!bodyOccupied.Contains(pos))
+                        expandedPixels.Add(pos);
+                }
+            }
+            
+            // 处理扩展后的头部区域
+            ProcessExpandedHeadRegion(expandedPixels, frame.rowIndex, partID, pixels, texWidth, texHeight, frameOffsetX, frameOffsetY, frameH, frame.deadZone);
+        }
+        
+        void CollectBodyOccupiedPixels(FrameData frame, HashSet<Vector2Int> occupied)
+        {
+            var parts = new[] { CharacterBodyPart.Torso, CharacterBodyPart.LeftHand, CharacterBodyPart.RightHand,
+                               CharacterBodyPart.LeftFoot, CharacterBodyPart.RightFoot };
+            foreach (var part in parts)
+            {
+                var region = frame.GetRegion(part);
+                if (region != null)
+                {
+                    foreach (var px in region.pixels)
+                        occupied.Add(px.position);
+                }
+            }
+        }
+        
+        void ProcessExpandedHeadRegion(List<Vector2Int> expandedPixels, int rowIndex, float partID,
+                                       Color[] pixels, int texWidth, int texHeight,
+                                       int frameOffsetX, int frameOffsetY, int frameH,
+                                       DeadZoneMark deadZone)
+        {
+            if (expandedPixels.Count == 0) return;
+            
+            // 计算扩展区域的包围盒
+            int minX = int.MaxValue, maxX = int.MinValue;
+            int minY = int.MaxValue, maxY = int.MinValue;
+            foreach (var p in expandedPixels)
+            {
+                minX = Mathf.Min(minX, p.x);
+                maxX = Mathf.Max(maxX, p.x);
+                minY = Mathf.Min(minY, p.y);
+                maxY = Mathf.Max(maxY, p.y);
+            }
+            int charW = maxX - minX + 1;
+            int charH = maxY - minY + 1;
+            
+            foreach (var pos in expandedPixels)
+            {
+                // 计算相对位置
+                float relX = charW > 1 ? (float)(pos.x - minX) / (charW - 1) : 0.5f;
+                float relY = charH > 1 ? (float)(pos.y - minY) / (charH - 1) : 0.5f;
                 
-                // 根据 PartDirection 旋转得到 UV
-                var (texU, texV) = ApplyUVRotation(relX, relY, region.direction);
+                float texU = relX;
+                float texV = relY;
                 
-                // 死区检查
-                bool isDead = frame.IsInDeadZone(px.position);
+                bool isDead = deadZone != null && deadZone.Contains(pos);
                 
-                // 计算在整张贴图中的位置
-                int globalX = frameOffsetX + px.position.x;
-                int globalY = frameOffsetY + (frameH - 1 - px.position.y);
+                int globalX = frameOffsetX + pos.x;
+                int globalY = frameOffsetY + (frameH - 1 - pos.y);
                 
                 if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
                 {
-                    // R=U, G=V, B=部位ID, A=死区标记
                     pixels[globalY * texWidth + globalX] = new Color(texU, texV, partID, isDead ? 0f : 1f);
                 }
             }
         }
         
-        /// <summary>
-        /// 处理纯颜色部位 (LeftHand, RightHand, LeftFoot, RightFoot)
-        /// 这些部位不需要 UV 映射，只需要部位 ID
-        /// </summary>
+        void ProcessRegionForUVMap(FrameData frame, CharacterBodyPart part, float partID,
+                                   Color[] pixels, int texWidth, int texHeight,
+                                   int frameOffsetX, int frameOffsetY, int frameH)
+        {
+            var region = frame.GetRegion(part);
+            if (region == null || region.pixels.Count == 0) return;
+            
+            var bounds = region.GetBounds();
+            int regionW = bounds.width;
+            int regionH = bounds.height;
+            
+            foreach (var px in region.pixels)
+            {
+                float relX = regionW > 1 ? (float)(px.position.x - bounds.x) / (regionW - 1) : 0.5f;
+                float relY = regionH > 1 ? (float)(px.position.y - bounds.y) / (regionH - 1) : 0.5f;
+                
+                bool isDead = frame.IsInDeadZone(px.position);
+                
+                int globalX = frameOffsetX + px.position.x;
+                int globalY = frameOffsetY + (frameH - 1 - px.position.y);
+                
+                if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
+                {
+                    pixels[globalY * texWidth + globalX] = new Color(relX, relY, partID, isDead ? 0f : 1f);
+                }
+            }
+        }
+        
         void ProcessBodyPartForUVMap(FrameData frame, CharacterBodyPart part, float partID,
                                      Color[] pixels, int texWidth, int texHeight,
                                      int frameOffsetX, int frameOffsetY, int frameH)
@@ -1504,20 +1631,8 @@ namespace EquipmentSystem.Editor
                 
                 if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
                 {
-                    // R/G 无意义(手脚不需要UV), B=部位ID, A=死区标记
                     pixels[globalY * texWidth + globalX] = new Color(0, 0, partID, isDead ? 0f : 1f);
                 }
-            }
-        }
-        
-        (float u, float v) ApplyUVRotation(float relX, float relY, PartDirection dir)
-        {
-            switch (dir)
-            {
-                case PartDirection.Left:  return (relY, 1f - relX);
-                case PartDirection.Right: return (1f - relY, relX);
-                case PartDirection.Up:    return (1f - relX, 1f - relY);
-                default:                  return (relX, relY);
             }
         }
         
