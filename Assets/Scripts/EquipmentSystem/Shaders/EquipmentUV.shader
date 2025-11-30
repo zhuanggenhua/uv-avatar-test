@@ -1,6 +1,6 @@
-// 双层 UV Map 换装系统
-// 身体层: 衣服/手套/鞋子 (BodyUVMap)
-// 头部层: 头盔/胡子/头发 (HeadUVMap) - 渲染在身体层之上
+// Dual UV Map Equipment System
+// Body Layer: Clothing/Gloves/Shoes (BodyUVMap)
+// Head Layer: Hair->Beard->Helmet (HeadUVMap) - Three layers rendered on top of body
 Shader "EquipmentSystem/EquipmentUV"
 {
     Properties
@@ -8,14 +8,16 @@ Shader "EquipmentSystem/EquipmentUV"
         _MainTex ("Base Sprite", 2D) = "white" {}
         
         [Header(Dual UV Maps)]
-        _BodyUVMap ("Body UV Map (躯干+手+脚)", 2D) = "black" {}
-        _HeadUVMap ("Head UV Map (扩展头部)", 2D) = "black" {}
+        _BodyUVMap ("Body UV Map", 2D) = "black" {}
+        _HeadUVMap ("Head UV Map", 2D) = "black" {}
         
         [Header(Body Layer Textures)]
-        _ClothTex ("Clothing Texture (衣服)", 2D) = "white" {}
+        _ClothTex ("Clothing Texture", 2D) = "white" {}
         
         [Header(Head Layer Textures)]
-        _HeadTex ("Head Texture (头盔/胡子/头发)", 2D) = "white" {}
+        _HairTex ("Hair Texture", 2D) = "white" {}
+        _BeardTex ("Beard Texture", 2D) = "white" {}
+        _HelmetTex ("Helmet Texture", 2D) = "white" {}
         
         [Header(Glove Colors)]
         [HDR] _LeftHandColor ("Left Hand Color", Color) = (0.6, 0.4, 0.2, 1)
@@ -26,19 +28,23 @@ Shader "EquipmentSystem/EquipmentUV"
         [HDR] _RightFootColor ("Right Foot Color", Color) = (0.3, 0.2, 0.1, 1)
         
         [Header(Enable Layers)]
-        _EnableHead ("Enable Head Layer", Float) = 0
+        _EnableHair ("Enable Hair", Float) = 0
+        _EnableBeard ("Enable Beard", Float) = 0
+        _EnableHelmet ("Enable Helmet", Float) = 0
         _EnableCloth ("Enable Clothing", Float) = 0
         _EnableGloves ("Enable Gloves", Float) = 0
         _EnableShoes ("Enable Shoes", Float) = 0
         
         [Header(Debug)]
-        // 调试模式: 0=关闭, 1=显示身体层区域, 2=显示头部层区域, 3=显示UV采样
+        // Debug Mode: 0=Off, 1=Body regions, 2=Head regions, 3=UV sampling
         _DebugMode ("Debug Mode", Float) = 0
         
         _Color ("Tint", Color) = (1,1,1,1)
         
-        // 兼容旧属性 (已废弃)
-        [HideInInspector] _UVMapTex ("[Deprecated] UV Map", 2D) = "black" {}
+        // Legacy properties (deprecated)
+        [HideInInspector] _UVMapTex ("UV Map", 2D) = "black" {}
+        [HideInInspector] _HeadTex ("Head Texture", 2D) = "white" {}
+        [HideInInspector] _EnableHead ("Enable Head", Float) = 0
     }
     
     SubShader
@@ -81,17 +87,45 @@ Shader "EquipmentSystem/EquipmentUV"
             sampler2D _BodyUVMap;
             sampler2D _HeadUVMap;
             sampler2D _ClothTex;
-            sampler2D _HeadTex;
+            sampler2D _HairTex;
+            sampler2D _BeardTex;
+            sampler2D _HelmetTex;
             float4 _MainTex_ST;
             
-            // 兼容旧属性
+            // ============================================================
+            // Sprite Rect for each equipment texture (minU, minV, maxU, maxV)
+            // ============================================================
+            // IMPORTANT: Unity Sprite.texture returns the ENTIRE source texture!
+            // - If sprite is cut from spritesheet, texture is the whole sheet
+            // - If sprite uses Sprite Atlas, texture is the packed atlas
+            // - If sprite is standalone, texture is just that image (rect = 0,0,1,1)
+            //
+            // Therefore, we MUST use sprite.rect to calculate correct UV coordinates.
+            // The C# code passes these rects, and we use TransformUV() to convert
+            // 0-1 UV coordinates to the actual sprite region in the texture.
+            // ============================================================
+            float4 _ClothRect;   // Clothing sprite rect in its texture
+            float4 _HairRect;    // Hair sprite rect in its texture
+            float4 _BeardRect;   // Beard sprite rect in its texture
+            float4 _HelmetRect;  // Helmet sprite rect in its texture
+            
+            // 当前帧在“UVMap所用spritesheet”中的矩形（规范化UV）
+            // 用于将顶点 UV (0-1, sprite 局部) 转成 UVMap 纹理空间下的实际 UV
+            // 确保 UV Map 采样与动画帧对齐，而不受 SpriteAtlas 坐标系影响
+            float4 _UVMapFrameRect;  // (minU, minV, maxU, maxV)
+            
+            // Legacy properties
             sampler2D _UVMapTex;
+            sampler2D _HeadTex;
             
             fixed4 _LeftHandColor;
             fixed4 _RightHandColor;
             fixed4 _LeftFootColor;
             fixed4 _RightFootColor;
             
+            float _EnableHair;
+            float _EnableBeard;
+            float _EnableHelmet;
             float _EnableHead;
             float _EnableCloth;
             float _EnableGloves;
@@ -99,6 +133,27 @@ Shader "EquipmentSystem/EquipmentUV"
             float _DebugMode;
             
             fixed4 _Color;
+            
+            // Transform 0-1 UV to actual sprite rect UV in the texture
+            // This is ESSENTIAL for sprites cut from spritesheet or packed in atlas!
+            // 
+            // rect: (minU, minV, maxU, maxV) - the sprite's region in texture UV space
+            // uv: 0-1 coordinates within the sprite (from UV Map)
+            // returns: actual UV coordinates to sample the texture
+            //
+            // Example: sprite at rect (0.25, 0.5, 0.5, 0.75) in a 512x512 texture
+            //   Input uv (0,0) -> output (0.25, 0.5)  = bottom-left of sprite
+            //   Input uv (1,1) -> output (0.5, 0.75)  = top-right of sprite
+            float2 TransformUV(float2 uv, float4 rect)
+            {
+                return float2(
+                    lerp(rect.x, rect.z, uv.x),
+                    lerp(rect.y, rect.w, uv.y)
+                );
+            }
+            
+            // Pixel-art: treat alpha > cutoff as solid
+            static const float CUTOFF = 0.5;
             
             // Body Part ID 定义 (对应 B 通道值)
             // 0.0        = 非换装区域
@@ -134,17 +189,101 @@ Shader "EquipmentSystem/EquipmentUV"
                 return o;
             }
             
+            // ------------------------------------------------------------
+            // Split body/head composition into two helpers so they can be toggled independently
+            // ------------------------------------------------------------
+            fixed4 ApplyBodyLayers(fixed4 baseColor, fixed4 bodyUV)
+            {
+                fixed4 color = baseColor;
+                float bodyPartID = bodyUV.b;
+
+                if (IsPartID(bodyPartID, ID_TORSO) && _EnableCloth > 0.5)
+                {
+                    float2 clothUVCoord = TransformUV(bodyUV.rg, _ClothRect);
+                    fixed4 clothColor = tex2D(_ClothTex, clothUVCoord);
+                    color.rgb = clothColor.rgb;
+                }
+                else if (IsPartID(bodyPartID, ID_LEFTHAND) && _EnableGloves > 0.5)
+                {
+                    color.rgb = _LeftHandColor.rgb;
+                }
+                else if (IsPartID(bodyPartID, ID_RIGHTHAND) && _EnableGloves > 0.5)
+                {
+                    color.rgb = _RightHandColor.rgb;
+                }
+                else if (IsPartID(bodyPartID, ID_LEFTFOOT) && _EnableShoes > 0.5)
+                {
+                    color.rgb = _LeftFootColor.rgb;
+                }
+                else if (IsPartID(bodyPartID, ID_RIGHTFOOT) && _EnableShoes > 0.5)
+                {
+                    color.rgb = _RightFootColor.rgb;
+                }
+
+                return color;
+            }
+
+            // Head layers: Hair (bottom) -> Beard (middle) -> Helmet (top)
+            // Hard overlay: no color blending. Any hit writes RGB and lifts final alpha.
+            void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, out float headLayerAlpha)
+            {
+                headLayerAlpha = 0;
+                if (!IsPartID(headPartID, ID_HEAD)) return;
+
+                // Helmet (top). If hit, override and early-out.
+                if (_EnableHelmet > 0.5)
+                {
+                    float2 uv = TransformUV(baseHeadUV, _HelmetRect);
+                    fixed4 c = tex2D(_HelmetTex, uv);
+                    if (c.a > CUTOFF)
+                    {
+                        ioColor.rgb = c.rgb;
+                        headLayerAlpha = 1.0;
+                        return;
+                    }
+                }
+
+                // Beard (middle)
+                bool wrote = false;
+                if (_EnableBeard > 0.5)
+                {
+                    float2 uv = TransformUV(baseHeadUV, _BeardRect);
+                    fixed4 c = tex2D(_BeardTex, uv);
+                    if (c.a > CUTOFF)
+                    {
+                        ioColor.rgb = c.rgb;
+                        headLayerAlpha = 1.0;
+                        wrote = true;
+                    }
+                }
+
+                // Hair (bottom) - only if beard didn't write
+                if (!wrote && _EnableHair > 0.5)
+                {
+                    float2 uv = TransformUV(baseHeadUV, _HairRect);
+                    fixed4 c = tex2D(_HairTex, uv);
+                    if (c.a > CUTOFF)
+                    {
+                        ioColor.rgb = c.rgb;
+                        headLayerAlpha = 1.0;
+                    }
+                }
+            }
+
             fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 baseColor = tex2D(_MainTex, i.uv);
-                
-                // 采样双层 UV Map
-                fixed4 bodyUV = tex2D(_BodyUVMap, i.uv);
-                fixed4 headUV = tex2D(_HeadUVMap, i.uv);
-                
+
+                // Sample UV maps directly with sprite UVs.
+                // SpriteRenderer already outputs UVs in the sprite's texture space,
+                // which matches the UVMap layout when the spritesheet is used at runtime.
+                float2 uvFrame = i.uv;
+                fixed4 bodyUV = tex2D(_BodyUVMap, uvFrame);
+                fixed4 headUV = tex2D(_HeadUVMap, uvFrame);
+
                 float bodyPartID = bodyUV.b;
                 float headPartID = headUV.b;
-                
+
                 // 调试模式 1: 显示身体层区域
                 if (_DebugMode > 0.5 && _DebugMode < 1.5)
                 {
@@ -157,7 +296,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     else if (IsPartID(bodyPartID, ID_RIGHTFOOT)) debugColor.rgb = fixed3(0.9, 0.3, 0.6); // 粉色
                     return debugColor;
                 }
-                
+
                 // 调试模式 2: 显示头部层区域
                 if (_DebugMode > 1.5 && _DebugMode < 2.5)
                 {
@@ -166,78 +305,68 @@ Shader "EquipmentSystem/EquipmentUV"
                     if (IsPartID(headPartID, ID_HEAD)) debugColor.rgb = fixed3(0.2, 0.8, 0.8); // 青色
                     return debugColor;
                 }
-                
-                // 调试模式 3: 显示 UV 采样结果
+
+                // Debug mode 3: Show sampling result (both layers)
                 if (_DebugMode > 2.5 && _DebugMode < 3.5)
                 {
                     if (IsPartID(bodyPartID, ID_TORSO))
                     {
-                        float2 clothUVCoord = float2(bodyUV.r, bodyUV.g);
+                        float2 clothUVCoord = TransformUV(bodyUV.rg, _ClothRect);
                         fixed4 clothColor = tex2D(_ClothTex, clothUVCoord);
-                        return fixed4(clothColor.rgb, baseColor.a);
+                        return fixed4(clothColor.rgb, 1);
                     }
                     if (IsPartID(headPartID, ID_HEAD))
                     {
-                        float2 headUVCoord = float2(headUV.r, headUV.g);
-                        fixed4 headColor = tex2D(_HeadTex, headUVCoord);
-                        return fixed4(headColor.rgb, baseColor.a);
+                        float2 helmetUV = TransformUV(headUV.rg, _HelmetRect);
+                        fixed4 helmetColor = tex2D(_HelmetTex, helmetUV);
+                        return fixed4(helmetColor.rgb, 1);
                     }
                     return fixed4(0, 0, 0, baseColor.a);
                 }
-                
+
+                // Debug mode 4: Show raw UV values from head UV map (R=U, G=V as colors)
+                if (_DebugMode > 3.5 && _DebugMode < 4.5)
+                {
+                    if (IsPartID(headPartID, ID_HEAD))
+                    {
+                        return fixed4(headUV.r, headUV.g, 0, 1);
+                    }
+                    return fixed4(0, 0, 0, baseColor.a);
+                }
+
+                // Debug mode 5: Show raw vertex UV (i.uv) as colors
+                if (_DebugMode > 4.5 && _DebugMode < 5.5)
+                {
+                    return fixed4(i.uv.x, i.uv.y, 0, baseColor.a);
+                }
+
+                // Debug mode 6: Show helmet sampling directly
+                if (_DebugMode > 5.5 && _DebugMode < 6.5)
+                {
+                    if (IsPartID(headPartID, ID_HEAD))
+                    {
+                        float2 helmetUV = TransformUV(headUV.rg, _HelmetRect);
+                        fixed4 helmetColor = tex2D(_HelmetTex, helmetUV);
+                        return fixed4(helmetColor.rgb, 1);
+                    }
+                    return fixed4(1, 0, 0, 1);
+                }
+
                 fixed4 finalColor = baseColor;
-                
-                // ============ 第一层: 身体层 ============
-                float bodyMask = bodyUV.a;
-                
-                if (bodyMask > 0.5 && bodyPartID > 0.05)
+
+                // Body: isolated method
+                finalColor = ApplyBodyLayers(finalColor, bodyUV);
+
+                // Head: isolated method
+                float headLayerAlpha;
+                ApplyHeadLayers(headUV.rg, headPartID, finalColor, headLayerAlpha);
+
+                // In expanded areas (baseColor.a = 0), use head layer alpha
+                if (IsPartID(headPartID, ID_HEAD))
                 {
-                    // Torso - 服装
-                    if (IsPartID(bodyPartID, ID_TORSO) && _EnableCloth > 0.5)
-                    {
-                        float2 clothUVCoord = float2(bodyUV.r, bodyUV.g);
-                        fixed4 clothColor = tex2D(_ClothTex, clothUVCoord);
-                        if (clothColor.a > 0.01)
-                        {
-                            finalColor.rgb = clothColor.rgb;
-                        }
-                    }
-                    // LeftHand - 左手套
-                    else if (IsPartID(bodyPartID, ID_LEFTHAND) && _EnableGloves > 0.5)
-                    {
-                        finalColor.rgb = _LeftHandColor.rgb;
-                    }
-                    // RightHand - 右手套
-                    else if (IsPartID(bodyPartID, ID_RIGHTHAND) && _EnableGloves > 0.5)
-                    {
-                        finalColor.rgb = _RightHandColor.rgb;
-                    }
-                    // LeftFoot - 左鞋
-                    else if (IsPartID(bodyPartID, ID_LEFTFOOT) && _EnableShoes > 0.5)
-                    {
-                        finalColor.rgb = _LeftFootColor.rgb;
-                    }
-                    // RightFoot - 右鞋
-                    else if (IsPartID(bodyPartID, ID_RIGHTFOOT) && _EnableShoes > 0.5)
-                    {
-                        finalColor.rgb = _RightFootColor.rgb;
-                    }
+                    finalColor.a = max(finalColor.a, headLayerAlpha);
                 }
-                
-                // ============ 第二层: 头部层 (覆盖在身体层上) ============
-                float headMask = headUV.a;
-                
-                if (headMask > 0.5 && IsPartID(headPartID, ID_HEAD) && _EnableHead > 0.5)
-                {
-                    float2 headUVCoord = float2(headUV.r, headUV.g);
-                    fixed4 headColor = tex2D(_HeadTex, headUVCoord);
-                    if (headColor.a > 0.01)
-                    {
-                        // 头部层覆盖身体层
-                        finalColor.rgb = lerp(finalColor.rgb, headColor.rgb, headColor.a);
-                    }
-                }
-                
+
                 return finalColor * i.color;
             }
             ENDCG

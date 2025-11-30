@@ -20,7 +20,6 @@ namespace EquipmentSystem.Editor
         SerializedProperty _spriteNW;
         SerializedProperty _anchorType;
         SerializedProperty _selfAnchor;
-        SerializedProperty _sortingOffset;
         SerializedProperty _leftColor;
         SerializedProperty _rightColor;
         
@@ -35,7 +34,6 @@ namespace EquipmentSystem.Editor
             _spriteNW = serializedObject.FindProperty("spriteNW");
             _anchorType = serializedObject.FindProperty("anchorType");
             _selfAnchor = serializedObject.FindProperty("selfAnchor");
-            _sortingOffset = serializedObject.FindProperty("sortingOffset");
             _leftColor = serializedObject.FindProperty("leftColor");
             _rightColor = serializedObject.FindProperty("rightColor");
         }
@@ -61,8 +59,8 @@ namespace EquipmentSystem.Editor
                 case EquipmentType.Clothing:
                     DrawClothingFields();
                     break;
-                case EquipmentType.HeadGear:
-                    DrawHeadGearFields();
+                case EquipmentType.Helmet:
+                    DrawHelmetFields();
                     break;
                 case EquipmentType.Gloves:
                     DrawGlovesFields();
@@ -87,7 +85,6 @@ namespace EquipmentSystem.Editor
             EditorGUILayout.LabelField("挂点设置", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_anchorType, new GUIContent("挂点类型", "左手或右手"));
             EditorGUILayout.PropertyField(_selfAnchor, new GUIContent("装备锚点", "装备自身的锚点位置 (像素坐标)"));
-            EditorGUILayout.PropertyField(_sortingOffset, new GUIContent("排序偏移", "相对角色的渲染层级偏移"));
         }
         
         /// <summary>
@@ -95,29 +92,15 @@ namespace EquipmentSystem.Editor
         /// </summary>
         void DrawClothingFields()
         {
-            EditorGUILayout.LabelField("贴图 (4方向)", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_spriteSE, new GUIContent("SE 东南 (必填)"));
-            EditorGUILayout.PropertyField(_spriteSW, new GUIContent("SW 西南"));
-            EditorGUILayout.PropertyField(_spriteNE, new GUIContent("NE 东北"));
-            EditorGUILayout.PropertyField(_spriteNW, new GUIContent("NW 西北"));
-            
-            EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox("服装通过 Body UV Map 映射到角色躯干", MessageType.Info);
+            DrawDirectionalSprites("服装通过 Body UV Map 映射到角色躯干");
         }
         
         /// <summary>
-        /// 头部装饰: 4方向贴图 (Head 层)
+        /// 头盔: 4方向贴图 (Head 层，覆盖在头发/胡子之上)
         /// </summary>
-        void DrawHeadGearFields()
+        void DrawHelmetFields()
         {
-            EditorGUILayout.LabelField("贴图 (4方向)", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_spriteSE, new GUIContent("SE 东南 (必填)"));
-            EditorGUILayout.PropertyField(_spriteSW, new GUIContent("SW 西南"));
-            EditorGUILayout.PropertyField(_spriteNE, new GUIContent("NE 东北"));
-            EditorGUILayout.PropertyField(_spriteNW, new GUIContent("NW 西北"));
-            
-            EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox("头部装饰通过 Head UV Map 映射到角色头部\n包括头盔、胡子、头发等", MessageType.Info);
+            DrawDirectionalSprites("头盔通过 Head UV Map 映射到角色头部\n渲染在头发/胡子之上");
         }
         
         /// <summary>
@@ -125,12 +108,7 @@ namespace EquipmentSystem.Editor
         /// </summary>
         void DrawGlovesFields()
         {
-            EditorGUILayout.LabelField("颜色", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_leftColor, new GUIContent("左手颜色"));
-            EditorGUILayout.PropertyField(_rightColor, new GUIContent("右手颜色"));
-            
-            EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox("手套替换角色手部像素的颜色", MessageType.Info);
+            DrawLeftRightColors("左手颜色", "右手颜色", "手套替换角色手部像素的颜色");
         }
         
         /// <summary>
@@ -138,12 +116,35 @@ namespace EquipmentSystem.Editor
         /// </summary>
         void DrawShoesFields()
         {
-            EditorGUILayout.LabelField("颜色", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_leftColor, new GUIContent("左脚颜色"));
-            EditorGUILayout.PropertyField(_rightColor, new GUIContent("右脚颜色"));
+            DrawLeftRightColors("左脚颜色", "右脚颜色", "鞋子替换角色脚部像素的颜色");
+        }
+        
+        /// <summary>
+        /// 绘制 4 方向贴图字段 (通用)
+        /// </summary>
+        void DrawDirectionalSprites(string helpText)
+        {
+            EditorGUILayout.LabelField("贴图 (4方向)", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_spriteSE, new GUIContent("SE 东南 (必填)"));
+            EditorGUILayout.PropertyField(_spriteSW, new GUIContent("SW 西南"));
+            EditorGUILayout.PropertyField(_spriteNE, new GUIContent("NE 东北"));
+            EditorGUILayout.PropertyField(_spriteNW, new GUIContent("NW 西北"));
             
             EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox("鞋子替换角色脚部像素的颜色", MessageType.Info);
+            EditorGUILayout.HelpBox(helpText, MessageType.Info);
+        }
+        
+        /// <summary>
+        /// 绘制左右颜色字段 (通用)
+        /// </summary>
+        void DrawLeftRightColors(string leftLabel, string rightLabel, string helpText)
+        {
+            EditorGUILayout.LabelField("颜色", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_leftColor, new GUIContent(leftLabel));
+            EditorGUILayout.PropertyField(_rightColor, new GUIContent(rightLabel));
+            
+            EditorGUILayout.Space(5);
+            EditorGUILayout.HelpBox(helpText, MessageType.Info);
         }
     }
 }

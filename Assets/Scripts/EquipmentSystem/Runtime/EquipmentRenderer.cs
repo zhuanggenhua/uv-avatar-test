@@ -8,7 +8,9 @@ namespace EquipmentSystem.Runtime
     /// 装备渲染器 (GPU 版本)
     /// - 武器(Weapon): 用锚点定位
     /// - 服装(Clothing): GPU UV 重映射到躯干 (Body 层)
-    /// - 头部装饰(HeadGear): GPU UV 重映射到头部 (Head 层)
+    /// - 头部层: 头发 -> 胡子 -> 头盔 (三层叠加渲染)
+    ///   - 头发/胡子: 来自 CharacterAppearance (捷人时选择)
+    ///   - 头盔: 来自 EquipmentData (Helmet 类型)
     /// - 手套(Gloves): GPU 颜色参数
     /// - 鞋子(Shoes): GPU 颜色参数
     /// 
@@ -19,6 +21,10 @@ namespace EquipmentSystem.Runtime
     {
         [Header("数据")]
         public CharacterFrameData frameData;
+        
+        [Header("角色外观 (捷人)")]
+        [Tooltip("角色外观数据，包含头发、胡子等捷人时选择的外观")]
+        public CharacterAppearance appearance;
         
         [Header("装备")]
         public List<EquipmentData> equipments = new List<EquipmentData>();
@@ -33,7 +39,9 @@ namespace EquipmentSystem.Runtime
         [SerializeField] bool _debugHasBodyUVMap = false;
         [SerializeField] bool _debugHasHeadUVMap = false;
         [SerializeField] bool _debugHasClothTex = false;
-        [SerializeField] bool _debugHasHeadTex = false;
+        [SerializeField] bool _debugHasHairTex = false;
+        [SerializeField] bool _debugHasBeardTex = false;
+        [SerializeField] bool _debugHasHelmetTex = false;
         
         // 动画同步
         Animator _animator;
@@ -56,15 +64,25 @@ namespace EquipmentSystem.Runtime
         static readonly int BodyUVMapProp = Shader.PropertyToID("_BodyUVMap");
         static readonly int HeadUVMapProp = Shader.PropertyToID("_HeadUVMap");
         static readonly int ClothTexProp = Shader.PropertyToID("_ClothTex");
-        static readonly int HeadTexProp = Shader.PropertyToID("_HeadTex");
-        static readonly int SpriteRectProp = Shader.PropertyToID("_SpriteRect");
-        // 兼容旧属性
-        static readonly int UVMapTexProp = Shader.PropertyToID("_UVMapTex");
+        // 头部三层贴图
+        static readonly int HairTexProp = Shader.PropertyToID("_HairTex");
+        static readonly int BeardTexProp = Shader.PropertyToID("_BeardTex");
+        static readonly int HelmetTexProp = Shader.PropertyToID("_HelmetTex");
+        static readonly int UVMapFrameRectProp = Shader.PropertyToID("_UVMapFrameRect");
+        // 装备贴图的 Sprite Rect (UV 偏移和缩放)
+        static readonly int ClothRectProp = Shader.PropertyToID("_ClothRect");
+        static readonly int HairRectProp = Shader.PropertyToID("_HairRect");
+        static readonly int BeardRectProp = Shader.PropertyToID("_BeardRect");
+        static readonly int HelmetRectProp = Shader.PropertyToID("_HelmetRect");
+        // 颜色属性
         static readonly int LeftHandColorProp = Shader.PropertyToID("_LeftHandColor");
         static readonly int RightHandColorProp = Shader.PropertyToID("_RightHandColor");
         static readonly int LeftFootColorProp = Shader.PropertyToID("_LeftFootColor");
         static readonly int RightFootColorProp = Shader.PropertyToID("_RightFootColor");
-        static readonly int EnableHeadProp = Shader.PropertyToID("_EnableHead");
+        // 启用开关
+        static readonly int EnableHairProp = Shader.PropertyToID("_EnableHair");
+        static readonly int EnableBeardProp = Shader.PropertyToID("_EnableBeard");
+        static readonly int EnableHelmetProp = Shader.PropertyToID("_EnableHelmet");
         static readonly int EnableClothProp = Shader.PropertyToID("_EnableCloth");
         static readonly int EnableGlovesProp = Shader.PropertyToID("_EnableGloves");
         static readonly int EnableShoesProp = Shader.PropertyToID("_EnableShoes");
@@ -293,6 +311,9 @@ namespace EquipmentSystem.Runtime
             // 重置装备状态
             ResetEquipmentState();
             
+            // 应用角色外观 (头发/胡子 - 来自捏人数据)
+            SetAppearanceGPU();
+            
             // 处理所有装备
             foreach (var equip in equipments)
             {
@@ -309,8 +330,8 @@ namespace EquipmentSystem.Runtime
                     case EquipmentType.Clothing:
                         SetClothingGPU(equip);
                         break;
-                    case EquipmentType.HeadGear:
-                        SetHeadGearGPU(equip);
+                    case EquipmentType.Helmet:
+                        SetHelmetGPU(equip);
                         break;
                     case EquipmentType.Gloves:
                         SetGlovesGPU(equip);
@@ -348,26 +369,38 @@ namespace EquipmentSystem.Runtime
                 Debug.Log($"[EquipmentRenderer] 头部层 UV Map: {_currentAnimData.headUVMap.name}");
             }
             
-            // 设置当前帧在 spritesheet 中的 UV 范围
-            UpdateSpriteRect();
+            // 设置当前帧在 UVMap(动画spritesheet)中的 UV 范围（用于采样UV Map）
+            UpdateUVMapFrameRect();
         }
         
-        void UpdateSpriteRect()
+        // 计算当前帧在“UVMap使用的spritesheet”中的UV矩形（与UVMap贴图同坐标系）
+        void UpdateUVMapFrameRect()
         {
-            if (_gpuMaterial == null || _lastSprite == null) return;
-            
-            var tex = _lastSprite.texture;
-            if (tex == null) return;
-            
-            var rect = _lastSprite.rect;
-            
-            // 计算当前帧在 spritesheet 中的 UV 范围
-            float minU = rect.x / tex.width;
-            float minV = rect.y / tex.height;
-            float maxU = (rect.x + rect.width) / tex.width;
-            float maxV = (rect.y + rect.height) / tex.height;
-            
-            _gpuMaterial.SetVector(SpriteRectProp, new Vector4(minU, minV, maxU, maxV));
+            if (_gpuMaterial == null || _currentAnimData == null) return;
+
+            // 以 headUV 或 bodyUV 的尺寸为基准，避免与 SpriteAtlas 混淆
+            var uvMapTex = _currentAnimData.headUVMap != null ? _currentAnimData.headUVMap : _currentAnimData.bodyUVMap;
+            var sheet = uvMapTex != null ? uvMapTex : _currentAnimData.spritesheet;
+            if (sheet == null)
+            {
+                Debug.LogWarning("[EquipmentRenderer] 无法计算 _UVMapFrameRect：缺少 UVMap 或 spritesheet");
+                return;
+            }
+
+            int texW = sheet.width;
+            int texH = sheet.height;
+            int frameW = _currentAnimData.frameSize.x;
+            int frameH = _currentAnimData.frameSize.y;
+
+            // 注意：纹理UV原点在左下角，行号从上到下需要转换
+            float minU = (float)(_frameIndex * frameW) / texW;
+            float maxU = (float)((_frameIndex + 1) * frameW) / texW;
+            float minV = (float)(texH - (_rowIndex + 1) * frameH) / texH;
+            float maxV = (float)(texH - _rowIndex * frameH) / texH;
+
+            var rect = new Vector4(minU, minV, maxU, maxV);
+            _gpuMaterial.SetVector(UVMapFrameRectProp, rect);
+            Debug.Log($"[EquipmentRenderer] _UVMapFrameRect: ({minU:F3}, {minV:F3}, {maxU:F3}, {maxV:F3}), Frame={_frameIndex}, Row={_rowIndex}, UVMapTex={sheet.width}x{sheet.height}");
         }
         
         void ResetEquipmentState()
@@ -375,20 +408,54 @@ namespace EquipmentSystem.Runtime
             if (_gpuMaterial == null) return;
             
             // 重置所有装备层为禁用
-            _gpuMaterial.SetFloat(EnableHeadProp, 0);
+            _gpuMaterial.SetFloat(EnableHairProp, 0);
+            _gpuMaterial.SetFloat(EnableBeardProp, 0);
+            _gpuMaterial.SetFloat(EnableHelmetProp, 0);
             _gpuMaterial.SetFloat(EnableClothProp, 0);
             _gpuMaterial.SetFloat(EnableGlovesProp, 0);
             _gpuMaterial.SetFloat(EnableShoesProp, 0);
+            
+            _debugHasHairTex = false;
+            _debugHasBeardTex = false;
+            _debugHasHelmetTex = false;
+        }
+        
+        /// <summary>
+        /// 计算 Sprite 在其 Texture 中的 UV Rect (minU, minV, maxU, maxV)
+        /// 
+        /// 重要: Unity 中 Sprite.texture 返回的是整张原始贴图，而不是切片后的小图！
+        /// - 如果 sprite 是从 spritesheet 切出的，texture 指向整张大图
+        /// - 如果 sprite 是单独的图片，texture 就是这张图片本身
+        /// - 如果使用了 Sprite Atlas 打包，texture 指向打包后的图集
+        /// 
+        /// 因此，在 Shader 中采样时必须使用 sprite.rect 计算正确的 UV 范围，
+        /// 而不能直接用 0-1 的 UV 采样整张 texture。
+        /// </summary>
+        Vector4 GetSpriteUVRect(Sprite sprite)
+        {
+            if (sprite == null || sprite.texture == null)
+                return new Vector4(0, 0, 1, 1);  // 默认全图
+            
+            var tex = sprite.texture;
+            var rect = sprite.rect;
+            
+            float minU = rect.x / tex.width;
+            float minV = rect.y / tex.height;
+            float maxU = (rect.x + rect.width) / tex.width;
+            float maxV = (rect.y + rect.height) / tex.height;
+            
+            return new Vector4(minU, minV, maxU, maxV);
         }
         
         /// <summary>
         /// GPU 方式设置服装 - 根据方向选择贴图
+        /// 
+        /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
         /// </summary>
         void SetClothingGPU(EquipmentData equip)
         {
             if (_gpuMaterial == null) return;
             
-            // 根据当前方向获取对应贴图
             var clothingSprite = equip.GetSpriteByRow(_rowIndex);
             if (clothingSprite == null || clothingSprite.texture == null)
             {
@@ -397,31 +464,77 @@ namespace EquipmentSystem.Runtime
                 return;
             }
             
+            // 重要: 同时传递 texture 和 sprite rect，Shader 中用 TransformUV() 转换 UV
             _gpuMaterial.SetTexture(ClothTexProp, clothingSprite.texture);
+            _gpuMaterial.SetVector(ClothRectProp, GetSpriteUVRect(clothingSprite));
             _gpuMaterial.SetFloat(EnableClothProp, 1);
             _debugHasClothTex = true;
-            Debug.Log($"[EquipmentRenderer] 服装已启用: {equip.name}, 方向: {(CharacterFacing)_rowIndex}");
         }
         
         /// <summary>
-        /// GPU 方式设置头部装饰 (头盔/胡子/头发) - 根据方向选择贴图
+        /// GPU 方式设置头盔 - 根据方向选择贴图
+        /// 
+        /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
         /// </summary>
-        void SetHeadGearGPU(EquipmentData equip)
+        void SetHelmetGPU(EquipmentData equip)
         {
             if (_gpuMaterial == null) return;
             
-            // 根据当前方向获取对应贴图
-            var headSprite = equip.GetSpriteByRow(_rowIndex);
-            if (headSprite == null || headSprite.texture == null)
+            var helmetSprite = equip.GetSpriteByRow(_rowIndex);
+            if (helmetSprite == null || helmetSprite.texture == null)
             {
-                _debugHasHeadTex = false;
+                Debug.LogWarning($"[EquipmentRenderer] 头盔 {equip.name} 没有方向 {_rowIndex} 的贴图");
+                _debugHasHelmetTex = false;
                 return;
             }
             
-            _gpuMaterial.SetTexture(HeadTexProp, headSprite.texture);
-            _gpuMaterial.SetFloat(EnableHeadProp, 1);
-            _debugHasHeadTex = true;
-            Debug.Log($"[EquipmentRenderer] 头部装饰已启用: {equip.name}, 方向: {(CharacterFacing)_rowIndex}");
+            // 重要: 同时传递 texture 和 sprite rect，Shader 中用 TransformUV() 转换 UV
+            var helmetRect = GetSpriteUVRect(helmetSprite);
+            _gpuMaterial.SetTexture(HelmetTexProp, helmetSprite.texture);
+            _gpuMaterial.SetVector(HelmetRectProp, helmetRect);
+            _gpuMaterial.SetFloat(EnableHelmetProp, 1);
+            _debugHasHelmetTex = true;
+            
+            // 调试: 输出头盔的 sprite rect 信息
+            Debug.Log($"[EquipmentRenderer] 头盔 Rect: ({helmetRect.x:F3}, {helmetRect.y:F3}, {helmetRect.z:F3}, {helmetRect.w:F3}), " +
+                      $"Sprite尺寸: {helmetSprite.rect.width}x{helmetSprite.rect.height}, " +
+                      $"Texture尺寸: {helmetSprite.texture.width}x{helmetSprite.texture.height}");
+        }
+        
+        /// <summary>
+        /// GPU 方式设置角色外观 (头发/胡子) - 来自 CharacterAppearance
+        /// 
+        /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
+        /// </summary>
+        void SetAppearanceGPU()
+        {
+            if (_gpuMaterial == null || appearance == null) return;
+            
+            // 设置头发 - 同时传递 texture 和 sprite rect
+            if (appearance.HasHair)
+            {
+                var hairSprite = appearance.GetHairByRow(_rowIndex);
+                if (hairSprite != null && hairSprite.texture != null)
+                {
+                    _gpuMaterial.SetTexture(HairTexProp, hairSprite.texture);
+                    _gpuMaterial.SetVector(HairRectProp, GetSpriteUVRect(hairSprite));
+                    _gpuMaterial.SetFloat(EnableHairProp, 1);
+                    _debugHasHairTex = true;
+                }
+            }
+            
+            // 设置胡子 - 同时传递 texture 和 sprite rect
+            if (appearance.HasBeard)
+            {
+                var beardSprite = appearance.GetBeardByRow(_rowIndex);
+                if (beardSprite != null && beardSprite.texture != null)
+                {
+                    _gpuMaterial.SetTexture(BeardTexProp, beardSprite.texture);
+                    _gpuMaterial.SetVector(BeardRectProp, GetSpriteUVRect(beardSprite));
+                    _gpuMaterial.SetFloat(EnableBeardProp, 1);
+                    _debugHasBeardTex = true;
+                }
+            }
         }
         
         /// <summary>
@@ -451,10 +564,14 @@ namespace EquipmentSystem.Runtime
         
         /// <summary>
         /// 渲染武器 - 用锚点定位，根据方向选择贴图
+        /// 
+        /// 注意: 武器使用 SpriteRenderer 渲染，直接赋值 sprite 即可。
+        /// SpriteRenderer 会自动处理 sprite.rect，不需要手动计算 UV。
+        /// 这与 GPU 换装不同，GPU 换装需要手动传递 rect 给 Shader。
         /// </summary>
         void RenderWeapon(EquipmentData equip, SpriteRenderer sr, bool hideLeftWeapon, bool hideRightWeapon)
         {
-            // 根据当前方向获取对应贴图
+            // 武器用 SpriteRenderer 渲染，直接赋值 sprite（自动处理 rect）
             sr.sprite = equip.GetSpriteByRow(_rowIndex);
             
             if (_cachedFrame == null)

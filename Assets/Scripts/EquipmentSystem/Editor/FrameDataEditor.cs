@@ -1511,24 +1511,20 @@ namespace EquipmentSystem.Editor
             int minY = Mathf.Max(0, bounds.y - expandUp);
             int maxY = Mathf.Min(anim.frameSize.y - 1, bounds.yMax - 1 + expandDown);
             
-            // 收集身体层占用的像素
-            HashSet<Vector2Int> bodyOccupied = new HashSet<Vector2Int>();
-            CollectBodyOccupiedPixels(frame, bodyOccupied);
-            
             // 生成扩展区域的像素列表
+            // 注意：包含身体像素，这样头盔可以覆盖衣服
+            // Head Layer 在 Shader 中最后渲染，会覆盖 Body Layer
             List<Vector2Int> expandedPixels = new List<Vector2Int>();
             for (int y = minY; y <= maxY; y++)
             {
                 for (int x = minX; x <= maxX; x++)
                 {
-                    var pos = new Vector2Int(x, y);
-                    if (!bodyOccupied.Contains(pos))
-                        expandedPixels.Add(pos);
+                    expandedPixels.Add(new Vector2Int(x, y));
                 }
             }
             
             // 处理扩展后的头部区域
-            ProcessExpandedHeadRegion(expandedPixels, frame.rowIndex, partID, pixels, texWidth, texHeight, frameOffsetX, frameOffsetY, frameH, frame.deadZone);
+            ProcessExpandedHeadRegion(expandedPixels, partID, pixels, texWidth, texHeight, frameOffsetX, frameOffsetY, frameH, frame.deadZone);
         }
         
         void CollectBodyOccupiedPixels(FrameData frame, HashSet<Vector2Int> occupied)
@@ -1546,34 +1542,33 @@ namespace EquipmentSystem.Editor
             }
         }
         
-        void ProcessExpandedHeadRegion(List<Vector2Int> expandedPixels, int rowIndex, float partID,
+        /// <summary>
+        /// 处理扩展后的头部区域
+        /// 
+        /// 头盔 UV 系统设计说明:
+        /// - 头盔贴图和角色帧是位置对齐的（都是 32x32，头盔画在对应角色头部的位置）
+        /// - 因此 UV 应该是帧内绝对坐标: UV = (pos.x / (frameW-1), pos.y / (frameH-1))
+        /// - 这样帧中位置 (x, y) 会直接采样头盔贴图的 (x, y) 位置
+        /// 
+        /// 这与衣服系统不同！衣服系统是把躯干区域映射到 (0,0)->(1,1)，
+        /// 因为衣服贴图只包含躯干部分，而头盔贴图是整帧大小且位置对齐的。
+        /// </summary>
+        void ProcessExpandedHeadRegion(List<Vector2Int> expandedPixels, float partID,
                                        Color[] pixels, int texWidth, int texHeight,
                                        int frameOffsetX, int frameOffsetY, int frameH,
                                        DeadZoneMark deadZone)
         {
             if (expandedPixels.Count == 0) return;
             
-            // 计算扩展区域的包围盒
-            int minX = int.MaxValue, maxX = int.MinValue;
-            int minY = int.MaxValue, maxY = int.MinValue;
-            foreach (var p in expandedPixels)
-            {
-                minX = Mathf.Min(minX, p.x);
-                maxX = Mathf.Max(maxX, p.x);
-                minY = Mathf.Min(minY, p.y);
-                maxY = Mathf.Max(maxY, p.y);
-            }
-            int charW = maxX - minX + 1;
-            int charH = maxY - minY + 1;
+            // 帧尺寸（假设正方形，通常是 32x32）
+            int frameW = frameH;
             
             foreach (var pos in expandedPixels)
             {
-                // 计算相对位置
-                float relX = charW > 1 ? (float)(pos.x - minX) / (charW - 1) : 0.5f;
-                float relY = charH > 1 ? (float)(pos.y - minY) / (charH - 1) : 0.5f;
-                
-                float texU = relX;
-                float texV = relY;
+                // 帧内绝对坐标作为 UV
+                // 这样头盔贴图与角色帧位置对齐，头部移动时会采样头盔贴图的不同位置
+                float texU = frameW > 1 ? (float)pos.x / (frameW - 1) : 0.5f;
+                float texV = frameH > 1 ? (float)pos.y / (frameH - 1) : 0.5f;
                 
                 bool isDead = deadZone != null && deadZone.Contains(pos);
                 

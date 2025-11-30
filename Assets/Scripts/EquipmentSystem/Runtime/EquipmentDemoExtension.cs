@@ -210,7 +210,7 @@ namespace EquipmentSystem.Runtime
             {
                 case EquipmentType.Weapon: return "武器";
                 case EquipmentType.Clothing: return "服装";
-                case EquipmentType.HeadGear: return "头部装饰";
+                case EquipmentType.Helmet: return "头盔";
                 case EquipmentType.Gloves: return "手套";
                 case EquipmentType.Shoes: return "鞋子";
                 default: return type.ToString();
