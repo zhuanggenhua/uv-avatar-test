@@ -23,7 +23,7 @@ namespace EquipmentSystem.Data
     #region 锚点 - 武器挂点
     
     /// <summary>
-    /// 锚点类型 - 只保留武器
+    /// 锚点类型 - 只用于武器
     /// </summary>
     public enum AnchorType
     {
@@ -286,12 +286,6 @@ namespace EquipmentSystem.Data
     [CreateAssetMenu(fileName = "CharacterFrameData", menuName = "Equipment System/Character Frame Data")]
     public class CharacterFrameData : ScriptableObject
     {
-        [Header("装备模板")]
-        [Tooltip("身体层模板 (衣服、手套、鞋子)")]
-        public EquipmentTemplate bodyTemplate;
-        [Tooltip("头部层模板 (头盔、胡子、头发)")]
-        public EquipmentTemplate headTemplate;
-        
         [Header("头部区域扩展配置")]
         [Tooltip("头部区域向上扩展的像素数")]
         public int headExpandUp = 5;

@@ -208,8 +208,9 @@ namespace EquipmentSystem.Runtime
         {
             switch (type)
             {
-                case EquipmentType.Accessory: return "挂件";
+                case EquipmentType.Weapon: return "武器";
                 case EquipmentType.Clothing: return "服装";
+                case EquipmentType.HeadGear: return "头部装饰";
                 case EquipmentType.Gloves: return "手套";
                 case EquipmentType.Shoes: return "鞋子";
                 default: return type.ToString();

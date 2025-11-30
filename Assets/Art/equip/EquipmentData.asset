@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.EquipmentData
   equipmentId: 1
   type: 0
-  frontSprite: {fileID: -1056212280995978058, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
-  backSprite: {fileID: 6926673489593099480, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
+  spriteSE: {fileID: 0}
+  spriteSW: {fileID: 0}
+  spriteNE: {fileID: 0}
+  spriteNW: {fileID: 0}
   anchorType: 0
   selfAnchor: {x: 14, y: 13}
   leftColor:

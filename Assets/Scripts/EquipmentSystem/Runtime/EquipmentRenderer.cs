@@ -6,9 +6,9 @@ namespace EquipmentSystem.Runtime
 {
     /// <summary>
     /// 装备渲染器 (GPU 版本)
-    /// - 挂件(Accessory): 用锚点定位
-    /// - 服装(Clothing): GPU UV 重映射到躯干
-    /// - 面部装饰(FacialDecor): GPU UV 重映射到头部
+    /// - 武器(Weapon): 用锚点定位
+    /// - 服装(Clothing): GPU UV 重映射到躯干 (Body 层)
+    /// - 头部装饰(HeadGear): GPU UV 重映射到头部 (Head 层)
     /// - 手套(Gloves): GPU 颜色参数
     /// - 鞋子(Shoes): GPU 颜色参数
     /// 
@@ -79,8 +79,8 @@ namespace EquipmentSystem.Runtime
         void Start()
         {
             foreach (var e in equipments)
-                if (e != null && e.type == EquipmentType.Accessory)
-                    CreateAccessoryRenderer(e);
+                if (e != null && e.type == EquipmentType.Weapon)
+                    CreateWeaponRenderer(e);
             Refresh();
         }
         
@@ -232,8 +232,8 @@ namespace EquipmentSystem.Runtime
             if (!equipments.Contains(equip))
             {
                 equipments.Add(equip);
-                if (equip.type == EquipmentType.Accessory)
-                    CreateAccessoryRenderer(equip);
+                if (equip.type == EquipmentType.Weapon)
+                    CreateWeaponRenderer(equip);
             }
             Refresh();
         }
@@ -251,11 +251,11 @@ namespace EquipmentSystem.Runtime
             Refresh();
         }
         
-        void CreateAccessoryRenderer(EquipmentData equip)
+        void CreateWeaponRenderer(EquipmentData equip)
         {
             if (_equipRenderers.ContainsKey(equip)) return;
             
-            var go = new GameObject($"Equip_{equip.name}");
+            var go = new GameObject($"Weapon_{equip.name}");
             go.transform.SetParent(transform);
             go.transform.localPosition = Vector3.zero;
             go.transform.localScale = Vector3.one;
@@ -302,15 +302,15 @@ namespace EquipmentSystem.Runtime
                 
                 switch (equip.type)
                 {
-                    case EquipmentType.Accessory:
+                    case EquipmentType.Weapon:
                         if (_equipRenderers.TryGetValue(equip, out var sr))
-                            RenderAccessory(equip, sr, hideLeftWeapon, hideRightWeapon);
+                            RenderWeapon(equip, sr, hideLeftWeapon, hideRightWeapon);
                         break;
                     case EquipmentType.Clothing:
                         SetClothingGPU(equip);
                         break;
-                    case EquipmentType.FacialDecor:
-                        SetFacialDecorGPU(equip);
+                    case EquipmentType.HeadGear:
+                        SetHeadGearGPU(equip);
                         break;
                     case EquipmentType.Gloves:
                         SetGlovesGPU(equip);
@@ -406,7 +406,7 @@ namespace EquipmentSystem.Runtime
         /// <summary>
         /// GPU 方式设置头部装饰 (头盔/胡子/头发) - 根据方向选择贴图
         /// </summary>
-        void SetFacialDecorGPU(EquipmentData equip)
+        void SetHeadGearGPU(EquipmentData equip)
         {
             if (_gpuMaterial == null) return;
             
@@ -450,9 +450,9 @@ namespace EquipmentSystem.Runtime
         }
         
         /// <summary>
-        /// 渲染挂件 - 用锚点定位，根据方向选择贴图
+        /// 渲染武器 - 用锚点定位，根据方向选择贴图
         /// </summary>
-        void RenderAccessory(EquipmentData equip, SpriteRenderer sr, bool hideLeftWeapon, bool hideRightWeapon)
+        void RenderWeapon(EquipmentData equip, SpriteRenderer sr, bool hideLeftWeapon, bool hideRightWeapon)
         {
             // 根据当前方向获取对应贴图
             sr.sprite = equip.GetSpriteByRow(_rowIndex);
@@ -518,9 +518,36 @@ namespace EquipmentSystem.Runtime
             // 旋转
             sr.transform.localRotation = Quaternion.Euler(0, 0, anchor.GetRotationAngle());
             
-            // 排序
+            // 排序 - 根据朝向和左右手决定前后
             sr.sortingLayerID = _charRenderer.sortingLayerID;
-            sr.sortingOrder = _charRenderer.sortingOrder + equip.sortingOffset;
+            int sortOffset = GetWeaponSortOffset(equip.anchorType, _rowIndex);
+            sr.sortingOrder = _charRenderer.sortingOrder + sortOffset;
+        }
+        
+        /// <summary>
+        /// 根据朝向和左右手计算武器排序偏移
+        /// SE(0): 左手在后(-1), 右手在前(+1)
+        /// SW(1): 左手在前(+1), 右手在后(-1)
+        /// NE(2): 左手在前(+1), 右手在后(-1)
+        /// NW(3): 左手在后(-1), 右手在前(+1)
+        /// </summary>
+        int GetWeaponSortOffset(AnchorType anchorType, int rowIndex)
+        {
+            bool isLeftWeapon = anchorType == AnchorType.LeftWeapon;
+            
+            switch (rowIndex)
+            {
+                case 0: // SE - 东南
+                    return isLeftWeapon ? -1 : 1;
+                case 1: // SW - 西南
+                    return isLeftWeapon ? 1 : -1;
+                case 2: // NE - 东北
+                    return isLeftWeapon ? 1 : -1;
+                case 3: // NW - 西北
+                    return isLeftWeapon ? -1 : 1;
+                default:
+                    return 1;
+            }
         }
         
 #if UNITY_EDITOR

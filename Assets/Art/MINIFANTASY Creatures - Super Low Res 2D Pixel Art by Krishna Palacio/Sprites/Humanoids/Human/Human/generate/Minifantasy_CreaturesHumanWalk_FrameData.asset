@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992a1667bac02fc4f903843a8453ef1f, type: 3}
   m_Name: Minifantasy_CreaturesHumanWalk_FrameData
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.CharacterFrameData
-  bodyTemplate: {fileID: 0}
-  headTemplate: {fileID: 0}
   headExpandUp: 5
   headExpandSide: 2
   headExpandDown: 2
@@ -68,14 +66,10 @@ MonoBehaviour:
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
-      - type: 1
         position: {x: 17, y: 17}
         direction: 0
         flipX: 0
-      - type: 2
+      - type: 1
         position: {x: 13, y: 17}
         direction: 0
         flipX: 0
