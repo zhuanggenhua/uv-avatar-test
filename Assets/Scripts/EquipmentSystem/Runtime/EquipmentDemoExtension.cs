@@ -6,9 +6,9 @@ using EquipmentSystem.Data;
 namespace EquipmentSystem.Runtime
 {
     /// <summary>
-    /// 装备系统测试扩展
-    /// 挂在角色容器上（子对象是多个角色预制体）
-    /// 自动检测当前激活的角色并管理装备
+    /// 装备与动画测试工具
+    /// 自动查找场景中的 EquipmentRenderer 并提供控制 UI
+    /// 多个角色时可通过下拉框切换
     /// </summary>
     public class EquipmentDemoExtension : MonoBehaviour
     {
@@ -19,8 +19,14 @@ namespace EquipmentSystem.Runtime
         public float panelWidth = 200f;
         public float panelMargin = 10f;
         
+        // 场景中所有的 EquipmentRenderer
+        List<EquipmentRenderer> _allRenderers = new List<EquipmentRenderer>();
+        int _selectedRendererIndex = 0;
+        
+        // 当前选中的角色
         EquipmentRenderer _currentEquipRenderer;
-        GameObject _lastCharacter;
+        Animator _currentAnimator;
+        string[] _animatorBoolParams;  // 从 Animator 读取的 Bool 参数名
         
         // 按类型分组的装备
         Dictionary<EquipmentType, List<EquipmentData>> _equipmentsByType;
@@ -37,26 +43,62 @@ namespace EquipmentSystem.Runtime
                 _equipmentsByType[type] = availableEquipments.Where(e => e != null && e.type == type).ToList();
                 _selectedIndex[type] = 0;  // 0 = 无
             }
+            
+            RefreshRendererList();
         }
         
-        void LateUpdate()
+        /// <summary>
+        /// 刷新场景中的 EquipmentRenderer 列表
+        /// </summary>
+        public void RefreshRendererList()
         {
-            CheckCharacterChange();
-        }
-        
-        void CheckCharacterChange()
-        {
-            for (int i = 0; i < transform.childCount; i++)
+            // 包含 inactive 对象
+            _allRenderers = FindObjectsOfType<EquipmentRenderer>(true).ToList();
+            
+            if (_allRenderers.Count > 0)
             {
-                var child = transform.GetChild(i).gameObject;
-                if (child.activeSelf && child != _lastCharacter)
+                _selectedRendererIndex = 0;
+                SelectRenderer(_allRenderers[0]);
+            }
+            else
+            {
+                _currentEquipRenderer = null;
+                _currentAnimator = null;
+            }
+        }
+        
+        void SelectRenderer(EquipmentRenderer renderer)
+        {
+            if (renderer == _currentEquipRenderer) return;
+            
+            _currentEquipRenderer = renderer;
+            _currentAnimator = renderer != null ? renderer.GetComponentInChildren<Animator>() : null;
+            
+            // 从 Animator 读取 Bool 参数名作为动画选项
+            RefreshAnimatorParams();
+            
+            SyncSelectionFromEquipped();
+            _selectedAnimIndex = 0;
+            _selectedDirIndex = 0;
+        }
+        
+        void RefreshAnimatorParams()
+        {
+            if (_currentAnimator == null || _currentAnimator.runtimeAnimatorController == null)
+            {
+                _animatorBoolParams = DefaultAnimations;
+                return;
+            }
+            
+            var boolParams = new List<string>();
+            foreach (var param in _currentAnimator.parameters)
+            {
+                if (param.type == AnimatorControllerParameterType.Bool)
                 {
-                    _lastCharacter = child;
-                    _currentEquipRenderer = child.GetComponentInChildren<EquipmentRenderer>();
-                    SyncSelectionFromEquipped();
-                    break;
+                    boolParams.Add(param.name);
                 }
             }
+            _animatorBoolParams = boolParams.Count > 0 ? boolParams.ToArray() : DefaultAnimations;
         }
         
         void SyncSelectionFromEquipped()
@@ -79,6 +121,17 @@ namespace EquipmentSystem.Runtime
             }
         }
         
+        // 动画控制状态
+        int _selectedAnimIndex = 0;
+        int _selectedDirIndex = 0;
+        bool _shadowEnabled = true;
+        int _openAnimDropdown = 0;  // 0=无, 1=动画, 2=方向
+        bool _openCharDropdown = false;
+        
+        // 动画/方向选项
+        static readonly string[] DefaultAnimations = { "Idle", "Walk", "Run", "Attack", "Hurt", "Die" };
+        static readonly string[] DirectionNames = { "SE", "SW", "NE", "NW" };
+        
         void OnGUI()
         {
             if (_equipmentsByType == null) return;
@@ -88,12 +141,15 @@ namespace EquipmentSystem.Runtime
             float dropdownWidth = panelWidth - labelWidth - 5f;
             float spacing = 8f;
             
-            // 计算面板高度
+            // 计算面板高度 (角色选择 + 装备 + 动画控制)
             int typeCount = 0;
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
                 if (_equipmentsByType[type].Count > 0) typeCount++;
             
-            float panelHeight = 45 + typeCount * (lineHeight + spacing) + 40;
+            // 额外: 角色选择 + 分隔 + 动画标题 + 动画下拉 + 方向下拉 + 阴影开关
+            float charSelectHeight = lineHeight + spacing + 10;
+            float animSectionHeight = 15 + 30 + (lineHeight + spacing) * 2 + 30;
+            float panelHeight = charSelectHeight + 45 + typeCount * (lineHeight + spacing) + 40 + animSectionHeight;
             
             // 右侧居中
             float x = Screen.width - panelWidth - panelMargin;
@@ -101,9 +157,31 @@ namespace EquipmentSystem.Runtime
             
             // 收集所有下拉框位置
             var dropdownRects = new List<(EquipmentType type, Rect rect, string[] options)>();
+            var animDropdownRects = new List<(int id, Rect rect, string[] options, int selected)>();
+            Rect charDropdownRect = Rect.zero;
             
             // 背景
             GUI.Box(new Rect(x - 10, y - 10, panelWidth + 20, panelHeight + 20), "", GetBoxStyle());
+            
+            // 角色选择下拉框
+            bool hasSelection = _currentEquipRenderer != null;
+            bool anyDropdownOpen = _openDropdown != null || _openAnimDropdown != 0 || _openCharDropdown;
+            
+            GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "角色:", GetLabelStyle());
+            charDropdownRect = new Rect(x + labelWidth, y, dropdownWidth - 35, lineHeight);
+            string charLabel = hasSelection ? _currentEquipRenderer.gameObject.name : "(无)";
+            GUI.enabled = !anyDropdownOpen || _openCharDropdown;
+            if (GUI.Button(charDropdownRect, charLabel, GetDropdownStyle()))
+            {
+                _openCharDropdown = !_openCharDropdown;
+            }
+            // 刷新按钮
+            GUI.enabled = !anyDropdownOpen;
+            if (GUI.Button(new Rect(x + labelWidth + dropdownWidth - 30, y, 30, lineHeight), "↻"))
+            {
+                RefreshRendererList();
+            }
+            y += charSelectHeight;
             
             GUI.Label(new Rect(x, y, panelWidth, 30), "装备预览", GetTitleStyle());
             y += 35;
@@ -131,7 +209,7 @@ namespace EquipmentSystem.Runtime
                 string label = selected >= 0 && selected < options.Count ? options[selected] : "(无)";
                 
                 // 当有下拉框打开时，只有当前打开的那个可以点击
-                GUI.enabled = !hasOpenDropdown || _openDropdown == type;
+                GUI.enabled = hasSelection && (!anyDropdownOpen || _openDropdown == type);
                 
                 if (GUI.Button(dropRect, label, GetDropdownStyle()))
                 {
@@ -147,14 +225,60 @@ namespace EquipmentSystem.Runtime
             y += 5;
             
             // 全部卸下按钮
-            GUI.enabled = !hasOpenDropdown;
+            GUI.enabled = hasSelection && !anyDropdownOpen;
             if (GUI.Button(new Rect(x, y, panelWidth, 30), "卸下全部", GetButtonStyle()))
             {
                 UnequipAll();
             }
+            y += 40;
+            
+            // ===== 动画控制区域 =====
+            GUI.enabled = true;
+            GUI.Label(new Rect(x, y, panelWidth, 25), "动画控制", GetTitleStyle());
+            y += 30;
+            
+            // 获取动画选项
+            string[] animOptions = _animatorBoolParams ?? DefaultAnimations;
+            string[] dirOptions = DirectionNames;
+            
+            bool hasAnimDropdownOpen = _openAnimDropdown != 0;
+            
+            // 动画下拉框
+            GUI.enabled = hasSelection && (!anyDropdownOpen || _openAnimDropdown == 1);
+            GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "动画:", GetLabelStyle());
+            Rect animRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
+            string animLabel = _selectedAnimIndex < animOptions.Length ? animOptions[_selectedAnimIndex] : "---";
+            if (GUI.Button(animRect, animLabel, GetDropdownStyle()))
+            {
+                _openAnimDropdown = _openAnimDropdown == 1 ? 0 : 1;
+            }
+            animDropdownRects.Add((1, animRect, animOptions, _selectedAnimIndex));
+            y += lineHeight + spacing;
+            
+            // 方向下拉框
+            GUI.enabled = hasSelection && (!anyDropdownOpen || _openAnimDropdown == 2);
+            GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "方向:", GetLabelStyle());
+            Rect dirRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
+            string dirLabel = _selectedDirIndex < dirOptions.Length ? dirOptions[_selectedDirIndex] : "---";
+            if (GUI.Button(dirRect, dirLabel, GetDropdownStyle()))
+            {
+                _openAnimDropdown = _openAnimDropdown == 2 ? 0 : 2;
+            }
+            animDropdownRects.Add((2, dirRect, dirOptions, _selectedDirIndex));
+            y += lineHeight + spacing;
+            
+            // 阴影开关 (寻找 Shadow 子对象)
+            GUI.enabled = hasSelection && !anyDropdownOpen;
+            bool newShadow = GUI.Toggle(new Rect(x, y, panelWidth, 25), _shadowEnabled, " 显示阴影");
+            if (newShadow != _shadowEnabled)
+            {
+                _shadowEnabled = newShadow;
+                SetShadowVisible(_shadowEnabled);
+            }
+            
             GUI.enabled = true;
             
-            // 最后绘制展开的下拉列表
+            // 绘制装备下拉列表
             if (_openDropdown != null)
             {
                 foreach (var (type, rect, options) in dropdownRects)
@@ -170,6 +294,46 @@ namespace EquipmentSystem.Runtime
                         }
                         break;
                     }
+                }
+            }
+            
+            // 绘制动画下拉列表
+            if (_openAnimDropdown != 0)
+            {
+                foreach (var (id, rect, options, selected) in animDropdownRects)
+                {
+                    if (id == _openAnimDropdown)
+                    {
+                        int newIndex = DrawDropdownList(rect, selected, options);
+                        if (newIndex != selected)
+                        {
+                            if (id == 1)
+                            {
+                                _selectedAnimIndex = newIndex;
+                                ApplyAnimation(newIndex);
+                            }
+                            else if (id == 2)
+                            {
+                                _selectedDirIndex = newIndex;
+                                ApplyDirection(newIndex);
+                            }
+                            _openAnimDropdown = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            // 绘制角色下拉列表
+            if (_openCharDropdown && _allRenderers.Count > 0)
+            {
+                var charOptions = _allRenderers.Select(r => r.gameObject.name).ToArray();
+                int newIndex = DrawDropdownList(charDropdownRect, _selectedRendererIndex, charOptions);
+                if (newIndex != _selectedRendererIndex)
+                {
+                    _selectedRendererIndex = newIndex;
+                    SelectRenderer(_allRenderers[newIndex]);
+                    _openCharDropdown = false;
                 }
             }
         }
@@ -204,6 +368,76 @@ namespace EquipmentSystem.Runtime
                 _selectedIndex[type] = 0;
         }
         
+        void ApplyAnimation(int index)
+        {
+            if (_currentAnimator == null) return;
+            var animOptions = _animatorBoolParams ?? DefaultAnimations;
+            if (index < 0 || index >= animOptions.Length) return;
+            
+            // 关闭所有 Bool 参数
+            foreach (var paramName in animOptions)
+            {
+                try { _currentAnimator.SetBool(paramName, false); } catch { }
+            }
+            
+            // 开启选中的
+            try
+            {
+                _currentAnimator.SetTrigger("Clicked");
+                _currentAnimator.SetBool(animOptions[index], true);
+            }
+            catch { }
+        }
+        
+        // 方向对应的 X/Y 值: SE(1,-1), SW(-1,-1), NE(1,1), NW(-1,1)
+        static readonly Vector2[] DirectionValues = {
+            new Vector2(1, -1),   // SE
+            new Vector2(-1, -1),  // SW
+            new Vector2(1, 1),    // NE
+            new Vector2(-1, 1)    // NW
+        };
+        
+        void ApplyDirection(int index)
+        {
+            if (_currentAnimator == null) return;
+            if (index < 0 || index >= DirectionValues.Length) return;
+            
+            var dir = DirectionValues[index];
+            try
+            {
+                _currentAnimator.SetFloat("X", dir.x);
+                _currentAnimator.SetFloat("Y", dir.y);
+            }
+            catch { }
+        }
+        
+        void SetShadowVisible(bool visible)
+        {
+            if (_currentEquipRenderer == null) return;
+            
+            // 尝试查找 Shadow 子对象
+            var shadow = _currentEquipRenderer.transform.Find("Shadow");
+            if (shadow != null)
+            {
+                shadow.gameObject.SetActive(visible);
+                return;
+            }
+            
+            // 回退: 查找第一个子对象的第一个子对象
+            if (_currentEquipRenderer.transform.childCount > 0)
+            {
+                var firstChild = _currentEquipRenderer.transform.GetChild(0);
+                if (firstChild.childCount > 0)
+                {
+                    var possibleShadow = firstChild.GetChild(0).gameObject;
+                    if (possibleShadow.name.ToLower().Contains("shadow"))
+                    {
+                        possibleShadow.SetActive(visible);
+                    }
+                }
+            }
+        }
+        
         string GetTypeName(EquipmentType type)
         {
             switch (type)
@@ -221,7 +455,22 @@ namespace EquipmentSystem.Runtime
         EquipmentType? _openDropdown = null;
         
         // 样式缓存
-        GUIStyle _titleStyle, _labelStyle, _boxStyle, _dropdownStyle, _buttonStyle, _listItemStyle;
+        GUIStyle _titleStyle, _labelStyle, _boxStyle, _dropdownStyle, _buttonStyle, _listItemStyle, _charNameStyle;
+        
+        GUIStyle GetCharNameStyle()
+        {
+            if (_charNameStyle == null)
+            {
+                _charNameStyle = new GUIStyle(GUI.skin.label)
+                {
+                    fontStyle = FontStyle.Bold,
+                    fontSize = 14,
+                    alignment = TextAnchor.MiddleCenter
+                };
+                _charNameStyle.normal.textColor = new Color(0.8f, 0.9f, 1f);
+            }
+            return _charNameStyle;
+        }
         
         GUIStyle GetTitleStyle()
         {
@@ -350,11 +599,18 @@ namespace EquipmentSystem.Runtime
                 if (!listRect.Contains(Event.current.mousePosition) && 
                     !buttonRect.Contains(Event.current.mousePosition))
                 {
-                    _openDropdown = null;
+                    CloseAllDropdowns();
                 }
             }
             
             return result;
+        }
+        
+        void CloseAllDropdowns()
+        {
+            _openDropdown = null;
+            _openAnimDropdown = 0;
+            _openCharDropdown = false;
         }
     }
 }

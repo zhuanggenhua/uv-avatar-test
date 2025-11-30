@@ -92,6 +92,9 @@ Shader "EquipmentSystem/EquipmentUV"
             sampler2D _HelmetTex;
             float4 _MainTex_ST;
             
+            // Unity provides texel size uniforms; declare to use them
+            float4 _HelmetTex_TexelSize; // (1/width, 1/height, width, height)
+            
             // ============================================================
             // Sprite Rect for each equipment texture (minU, minV, maxU, maxV)
             // ============================================================
@@ -109,10 +112,6 @@ Shader "EquipmentSystem/EquipmentUV"
             float4 _BeardRect;   // Beard sprite rect in its texture
             float4 _HelmetRect;  // Helmet sprite rect in its texture
             
-            // 当前帧在“UVMap所用spritesheet”中的矩形（规范化UV）
-            // 用于将顶点 UV (0-1, sprite 局部) 转成 UVMap 纹理空间下的实际 UV
-            // 确保 UV Map 采样与动画帧对齐，而不受 SpriteAtlas 坐标系影响
-            float4 _UVMapFrameRect;  // (minU, minV, maxU, maxV)
             
             // Legacy properties
             sampler2D _UVMapTex;
@@ -233,6 +232,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 // Helmet (top). If hit, override and early-out.
                 if (_EnableHelmet > 0.5)
                 {
+                    // UVMap already uses bottom-up V, so no flip needed.
                     float2 uv = TransformUV(baseHeadUV, _HelmetRect);
                     fixed4 c = tex2D(_HelmetTex, uv);
                     if (c.a > CUTOFF)
@@ -274,9 +274,7 @@ Shader "EquipmentSystem/EquipmentUV"
             {
                 fixed4 baseColor = tex2D(_MainTex, i.uv);
 
-                // Sample UV maps directly with sprite UVs.
-                // SpriteRenderer already outputs UVs in the sprite's texture space,
-                // which matches the UVMap layout when the spritesheet is used at runtime.
+                // Sample UV maps directly with sprite UVs (UVMap shares spritesheet layout at runtime)
                 float2 uvFrame = i.uv;
                 fixed4 bodyUV = tex2D(_BodyUVMap, uvFrame);
                 fixed4 headUV = tex2D(_HeadUVMap, uvFrame);
@@ -322,6 +320,35 @@ Shader "EquipmentSystem/EquipmentUV"
                         return fixed4(helmetColor.rgb, 1);
                     }
                     return fixed4(0, 0, 0, baseColor.a);
+                }
+                
+                // Debug mode 7: Show helmetUV as color
+                if (_DebugMode > 6.5 && _DebugMode < 7.5)
+                {
+                    if (IsPartID(headPartID, ID_HEAD))
+                    {
+                        float2 helmetUV = TransformUV(headUV.rg, _HelmetRect);
+                        return fixed4(helmetUV.x, helmetUV.y, 0, 1);
+                    }
+                    return fixed4(0, 0, 0, baseColor.a);
+                }
+                
+                // Debug mode 8: Show _HelmetTex with _HelmetRect applied
+                if (_DebugMode > 7.5 && _DebugMode < 8.5)
+                {
+                    // Use TransformUV to map to the correct sprite in the atlas
+                    float2 helmetUV = TransformUV(i.uv, _HelmetRect);
+                    fixed4 helmetColor = tex2D(_HelmetTex, helmetUV);
+                    return fixed4(helmetColor.rgb, 1);
+                }
+                
+                // Debug mode 9: Show _HelmetRect values as color
+                if (_DebugMode > 8.5 && _DebugMode < 9.5)
+                {
+                    // Display rect as: R=minU, G=minV, B=width, A=height
+                    float width = _HelmetRect.z - _HelmetRect.x;
+                    float height = _HelmetRect.w - _HelmetRect.y;
+                    return fixed4(_HelmetRect.x, _HelmetRect.y, width, 1);
                 }
 
                 // Debug mode 4: Show raw UV values from head UV map (R=U, G=V as colors)

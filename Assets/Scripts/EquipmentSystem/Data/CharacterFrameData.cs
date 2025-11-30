@@ -290,9 +290,9 @@ namespace EquipmentSystem.Data
         [Tooltip("头部区域向上扩展的像素数")]
         public int headExpandUp = 5;
         [Tooltip("头部区域向左右扩展的像素数")]
-        public int headExpandSide = 2;
+        public int headExpandSide = 5;
         [Tooltip("头部区域向下扩展的像素数 (会排除与身体/手脚重叠的像素)")]
-        public int headExpandDown = 2;
+        public int headExpandDown = 3;
         
         [Header("检测配置")]
         public DetectConfig detectConfig = new DetectConfig();

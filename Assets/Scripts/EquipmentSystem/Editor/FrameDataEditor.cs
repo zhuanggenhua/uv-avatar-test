@@ -65,6 +65,28 @@ namespace EquipmentSystem.Editor
         {
             wantsMouseMove = true;
             Undo.undoRedoPerformed += OnUndoRedo;
+            
+            // 如果没有选中数据，自动查找并选中第一个 CharacterFrameData 资源
+            if (_data == null)
+                AutoSelectFirstFrameData();
+        }
+        
+        /// <summary>
+        /// 自动选中项目中第一个 CharacterFrameData 资源
+        /// </summary>
+        void AutoSelectFirstFrameData()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:CharacterFrameData");
+            if (guids.Length > 0)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+                _data = AssetDatabase.LoadAssetAtPath<CharacterFrameData>(path);
+                if (_data != null)
+                {
+                    SyncFromData();
+                    Debug.Log($"[FrameDataEditor] 自动加载: {path}");
+                }
+            }
         }
         
         void OnDisable()
@@ -278,10 +300,14 @@ namespace EquipmentSystem.Editor
         void DrawHelpInfo()
         {
             GUILayout.Space(10);
-            EditorGUILayout.HelpBox(
+                EditorGUILayout.HelpBox(
                 "左键涂色/设置, 右键擦除\n" +
                 "中键拖动: 平移 | 滚轮: 缩放\n" +
-                "快捷键: 1/2/3 切换标签页",
+                "快捷键: 1/2/3 切换标签页\n\n" +
+                "UV 写入约定:\n" +
+                "• R/G = 帧内绝对坐标(0–1)，V 方向为 bottom-up (下=0, 上=1)\n" +
+                "• B = 部位 ID，A = 遮罩(死区为 0)\n" +
+                "• 头部与躯干使用同一坐标系，便于扩张区域与 32×32 装备逐像素对齐",
                 MessageType.Info);
         }
         
@@ -1543,34 +1569,27 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 处理扩展后的头部区域
+        /// 统一的 UV Map 像素写入函数
         /// 
-        /// 头盔 UV 系统设计说明:
-        /// - 头盔贴图和角色帧是位置对齐的（都是 32x32，头盔画在对应角色头部的位置）
-        /// - 因此 UV 应该是帧内绝对坐标: UV = (pos.x / (frameW-1), pos.y / (frameH-1))
-        /// - 这样帧中位置 (x, y) 会直接采样头盔贴图的 (x, y) 位置
-        /// 
-        /// 这与衣服系统不同！衣服系统是把躯干区域映射到 (0,0)->(1,1)，
-        /// 因为衣服贴图只包含躯干部分，而头盔贴图是整帧大小且位置对齐的。
+        /// UV 写入规则:
+        /// - R/G = 帧内绝对坐标 (0–1)，V 方向为 bottom-up (下=0, 上=1)
+        /// - B = 部位 ID
+        /// - A = 遮罩 (死区为 0)
         /// </summary>
-        void ProcessExpandedHeadRegion(List<Vector2Int> expandedPixels, float partID,
-                                       Color[] pixels, int texWidth, int texHeight,
-                                       int frameOffsetX, int frameOffsetY, int frameH,
-                                       DeadZoneMark deadZone)
+        void WritePixelsToUVMap(IEnumerable<Vector2Int> positions, float partID,
+                                Color[] pixels, int texWidth, int texHeight,
+                                int frameOffsetX, int frameOffsetY, int frameH,
+                                System.Func<Vector2Int, bool> isDeadZone)
         {
-            if (expandedPixels.Count == 0) return;
+            int frameW = frameH; // 当前帧为正方形(如 32x32)。若将来非方形，请改为传入 frameW。
             
-            // 帧尺寸（假设正方形，通常是 32x32）
-            int frameW = frameH;
-            
-            foreach (var pos in expandedPixels)
+            foreach (var pos in positions)
             {
-                // 帧内绝对坐标作为 UV
-                // 这样头盔贴图与角色帧位置对齐，头部移动时会采样头盔贴图的不同位置
+                // 帧内绝对坐标作为 UV (bottom-up: 下=0, 上=1)
                 float texU = frameW > 1 ? (float)pos.x / (frameW - 1) : 0.5f;
-                float texV = frameH > 1 ? (float)pos.y / (frameH - 1) : 0.5f;
+                float texV = frameH > 1 ? 1f - (float)pos.y / (frameH - 1) : 0.5f;
                 
-                bool isDead = deadZone != null && deadZone.Contains(pos);
+                bool isDead = isDeadZone != null && isDeadZone(pos);
                 
                 int globalX = frameOffsetX + pos.x;
                 int globalY = frameOffsetY + (frameH - 1 - pos.y);
@@ -1582,53 +1601,36 @@ namespace EquipmentSystem.Editor
             }
         }
         
+        // 便捷重载：处理扩展头部区域
+        void ProcessExpandedHeadRegion(List<Vector2Int> expandedPixels, float partID,
+                                       Color[] pixels, int texWidth, int texHeight,
+                                       int frameOffsetX, int frameOffsetY, int frameH,
+                                       DeadZoneMark deadZone)
+        {
+            if (expandedPixels.Count == 0) return;
+            WritePixelsToUVMap(expandedPixels, partID, pixels, texWidth, texHeight,
+                               frameOffsetX, frameOffsetY, frameH,
+                               pos => deadZone != null && deadZone.Contains(pos));
+        }
+        
+        // 便捷重载：处理 FrameData 中的区域
         void ProcessRegionForUVMap(FrameData frame, CharacterBodyPart part, float partID,
                                    Color[] pixels, int texWidth, int texHeight,
                                    int frameOffsetX, int frameOffsetY, int frameH)
         {
             var region = frame.GetRegion(part);
             if (region == null || region.pixels.Count == 0) return;
-            
-            var bounds = region.GetBounds();
-            int regionW = bounds.width;
-            int regionH = bounds.height;
-            
-            foreach (var px in region.pixels)
-            {
-                float relX = regionW > 1 ? (float)(px.position.x - bounds.x) / (regionW - 1) : 0.5f;
-                float relY = regionH > 1 ? (float)(px.position.y - bounds.y) / (regionH - 1) : 0.5f;
-                
-                bool isDead = frame.IsInDeadZone(px.position);
-                
-                int globalX = frameOffsetX + px.position.x;
-                int globalY = frameOffsetY + (frameH - 1 - px.position.y);
-                
-                if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
-                {
-                    pixels[globalY * texWidth + globalX] = new Color(relX, relY, partID, isDead ? 0f : 1f);
-                }
-            }
+            WritePixelsToUVMap(region.pixels.Select(px => px.position), partID, pixels, texWidth, texHeight,
+                               frameOffsetX, frameOffsetY, frameH,
+                               pos => frame.IsInDeadZone(pos));
         }
         
+        // 别名，保持向后兼容
         void ProcessBodyPartForUVMap(FrameData frame, CharacterBodyPart part, float partID,
                                      Color[] pixels, int texWidth, int texHeight,
                                      int frameOffsetX, int frameOffsetY, int frameH)
         {
-            var region = frame.GetRegion(part);
-            if (region == null || region.pixels.Count == 0) return;
-            
-            foreach (var px in region.pixels)
-            {
-                bool isDead = frame.IsInDeadZone(px.position);
-                
-                int globalX = frameOffsetX + px.position.x;
-                int globalY = frameOffsetY + (frameH - 1 - px.position.y);
-                
-                if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
-                {
-                    pixels[globalY * texWidth + globalX] = new Color(0, 0, partID, isDead ? 0f : 1f);
-                }
-            }
+            ProcessRegionForUVMap(frame, part, partID, pixels, texWidth, texHeight, frameOffsetX, frameOffsetY, frameH);
         }
         
         #endregion
