@@ -34,7 +34,7 @@ namespace EquipmentSystem.Editor
         bool _anchorFlipX;
         bool _showSkinColors;
         bool _showHeadExpandConfig;
-        bool _showReferenceFrameConfig;
+        bool _showBodyExpandConfig;
         int _paintDisplayMode = 2;  // 0=隐藏, 1=当前, 2=全部
         
         // 视图
@@ -47,9 +47,27 @@ namespace EquipmentSystem.Editor
         Rect _canvas, _display;
         Vector2 _canvasOffset;
         
+        // UV 画板（纯坐标网格）
+        Vector2Int _paletteSize = new Vector2Int(32, 32);  // 画板尺寸
+        Sprite _paletteRefSprite;       // 参考底图（可选，显示装备贴图）
+        float _paletteZoom = 8f;        // 画板缩放
+        Vector2 _palettePan;            // 画板平移
+        Rect _paletteDisplayRect;       // 画板显示区域
+        Rect _paletteCanvasRect;        // 画板画布区域（用于输入检测）
+        bool _showPalette = true;       // 是否显示画板
+        
+        // 选区
+        bool _isSelecting;              // 是否正在框选
+        bool _selectOnPalette;          // 选区在画板上还是画布上
+        bool _isErasing;                // 是否正在擦除模式
+        Vector2Int _selectionStart;     // 选区起始点
+        Vector2Int _selectionEnd;       // 选区结束点
+        RectInt _paletteSelection;      // 画板选区（已确定）
+        RectInt _canvasSelection;       // 画布选区（已确定）
+        
         // 编辑缓存
         Dictionary<CharacterBodyPart, HashSet<Vector2Int>> _partPixels = new Dictionary<CharacterBodyPart, HashSet<Vector2Int>>();
-        Dictionary<CharacterBodyPart, Dictionary<Vector2Int, int>> _partUVIndices = new Dictionary<CharacterBodyPart, Dictionary<Vector2Int, int>>();
+        Dictionary<CharacterBodyPart, Dictionary<Vector2Int, Vector2>> _partUVs = new Dictionary<CharacterBodyPart, Dictionary<Vector2Int, Vector2>>();
         Dictionary<CharacterBodyPart, UVOrientation> _partOrientations = new Dictionary<CharacterBodyPart, UVOrientation>();
         Dictionary<CharacterBodyPart, CharacterFacing> _partSpriteFacings = new Dictionary<CharacterBodyPart, CharacterFacing>();
         List<AnchorPoint> _anchors = new List<AnchorPoint>();
@@ -69,6 +87,9 @@ namespace EquipmentSystem.Editor
             wantsMouseMove = true;
             Undo.undoRedoPerformed += OnUndoRedo;
             
+            // 加载保存的参考底图设置
+            LoadPaletteSettings();
+            
             // 如果没有选中数据，自动查找并选中第一个 CharacterFrameData 资源
             if (_data == null)
                 AutoSelectFirstFrameData();
@@ -80,6 +101,31 @@ namespace EquipmentSystem.Editor
                     SyncFromAnimation(anim);
                 LoadFrameData();
             }
+        }
+        
+        void OnDisable()
+        {
+            Undo.undoRedoPerformed -= OnUndoRedo;
+            SavePaletteSettings();
+        }
+        
+        void LoadPaletteSettings()
+        {
+            _paletteSize.x = EditorPrefs.GetInt("FrameDataEditor_PaletteSizeX", 32);
+            _paletteSize.y = EditorPrefs.GetInt("FrameDataEditor_PaletteSizeY", 32);
+            
+            string spritePath = EditorPrefs.GetString("FrameDataEditor_PaletteRefSprite", "");
+            if (!string.IsNullOrEmpty(spritePath))
+                _paletteRefSprite = AssetDatabase.LoadAssetAtPath<Sprite>(spritePath);
+        }
+        
+        void SavePaletteSettings()
+        {
+            EditorPrefs.SetInt("FrameDataEditor_PaletteSizeX", _paletteSize.x);
+            EditorPrefs.SetInt("FrameDataEditor_PaletteSizeY", _paletteSize.y);
+            
+            string spritePath = _paletteRefSprite != null ? AssetDatabase.GetAssetPath(_paletteRefSprite) : "";
+            EditorPrefs.SetString("FrameDataEditor_PaletteRefSprite", spritePath);
         }
         
         /// <summary>
@@ -122,16 +168,32 @@ namespace EquipmentSystem.Editor
         void OnGUI()
         {
             float toolbarWidth = Mathf.Clamp(position.width * 0.28f, 320f, 400f);
+            float rightWidth = position.width - toolbarWidth;
             
+            // 左侧工具栏
             GUILayout.BeginArea(new Rect(0, 0, toolbarWidth, position.height));
             DrawToolbar();
             GUILayout.EndArea();
             
-            GUILayout.BeginArea(new Rect(toolbarWidth, 0, position.width - toolbarWidth, position.height));
+            // 右侧区域：上面画板、下面画布
+            float paletteHeight = _showPalette ? position.height * 0.4f : 0;
+            float canvasHeight = position.height - paletteHeight;
+            
+            // 画板区域
+            if (_showPalette)
+            {
+                _paletteCanvasRect = new Rect(toolbarWidth, 0, rightWidth, paletteHeight);
+                GUILayout.BeginArea(_paletteCanvasRect);
+                DrawPalette();
+                GUILayout.EndArea();
+            }
+            
+            // 画布区域
+            _canvasOffset = new Vector2(toolbarWidth, paletteHeight);
+            GUILayout.BeginArea(new Rect(toolbarWidth, paletteHeight, rightWidth, canvasHeight));
             DrawCanvas();
             GUILayout.EndArea();
             
-            _canvasOffset = new Vector2(toolbarWidth, 0);
             HandleInput();
         }
         
@@ -318,13 +380,16 @@ namespace EquipmentSystem.Editor
         void DrawHelpInfo()
         {
             GUILayout.Space(10);
-                EditorGUILayout.HelpBox(
-                "左键涂色/设置, 右键擦除\n" +
-                "中键拖动: 平移 | 滚轮: 缩放\n" +
-                "快捷键: 1/2 切换标签页\n\n" +
-                "UV 写入约定:\n" +
-                "• R/G = 帧内绝对坐标(0–1)，V 方向为 bottom-up (下=0, 上=1)\n" +
-                "• B = 部位 ID\n",
+            EditorGUILayout.HelpBox(
+                "涂色操作:\n" +
+                "• 左键: 涂色（使用当前 UV）\n" +
+                "• 右键: 擦除\n" +
+                "• Shift+左键拖拽: 框选区域\n" +
+                "• ESC: 取消选区\n\n" +
+                "视图操作:\n" +
+                "• 中键拖动: 平移\n" +
+                "• 滚轮: 缩放\n" +
+                "• 快捷键 1/2: 切换标签页",
                 MessageType.Info);
         }
         
@@ -334,6 +399,7 @@ namespace EquipmentSystem.Editor
         
         void DrawBodyPaintTab()
         {
+            // 显示设置
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("显示:", GUILayout.Width(35));
             _paintDisplayMode = GUILayout.Toolbar(_paintDisplayMode, new[] { "隐藏", "当前", "全部" });
@@ -412,6 +478,77 @@ namespace EquipmentSystem.Editor
                 SaveWithUndo("清除全部部位");
             }
             GUI.backgroundColor = Color.white;
+            
+            // UV 画板配置
+            GUILayout.Space(10);
+            GUILayout.Label("UV 画板", EditorStyles.boldLabel);
+            
+            _showPalette = EditorGUILayout.Toggle("显示画板", _showPalette);
+            
+            if (_showPalette)
+            {
+                _paletteSize = EditorGUILayout.Vector2IntField("画板尺寸", _paletteSize);
+                _paletteRefSprite = (Sprite)EditorGUILayout.ObjectField("参考底图(可选)", _paletteRefSprite, typeof(Sprite), false);
+                
+                if (_paletteRefSprite != null)
+                {
+                    var spriteSize = new Vector2Int((int)_paletteRefSprite.rect.width, (int)_paletteRefSprite.rect.height);
+                    if (spriteSize != _paletteSize)
+                    {
+                        if (GUILayout.Button($"同步尺寸为 {spriteSize.x}×{spriteSize.y}"))
+                            _paletteSize = spriteSize;
+                    }
+                }
+                
+                EditorGUILayout.Space(5);
+                
+                // 选区状态和操作
+                EditorGUILayout.BeginVertical("helpbox");
+                GUILayout.Label("选区操作", EditorStyles.boldLabel);
+                
+                if (_paletteSelection.width > 0)
+                    EditorGUILayout.LabelField($"画板选区: {_paletteSelection.width}×{_paletteSelection.height}");
+                else
+                    EditorGUILayout.LabelField("画板选区: 无 (左键拖拽)");
+                    
+                if (_canvasSelection.width > 0)
+                    EditorGUILayout.LabelField($"画布选区: {_canvasSelection.width}×{_canvasSelection.height}");
+                else
+                    EditorGUILayout.LabelField("画布选区: 无 (左键拖拽)");
+                
+                // 核心操作按钮
+                bool canCopy = _paletteSelection.width > 0 && _canvasSelection.width > 0;
+                bool sizeMatch = canCopy && _paletteSelection.size == _canvasSelection.size;
+                bool singlePalette = _paletteSelection.width == 1 && _paletteSelection.height == 1;
+                
+                // 情况1：选区大小一致，正常复制
+                // 情况2：画板选区是单像素，可以填充到画布选区
+                GUI.enabled = canCopy && (sizeMatch || singlePalette);
+                string copyLabel = singlePalette && !sizeMatch ? 
+                    $"🎨 用单点UV填充选区 ({_canvasSelection.width}×{_canvasSelection.height})" : 
+                    "📋 复制UV到画布选区";
+                if (GUILayout.Button(copyLabel, GUILayout.Height(30)))
+                    CopyUVFromPaletteToCanvas();
+                GUI.enabled = true;
+                
+                // 删除选区涂色
+                GUI.enabled = _canvasSelection.width > 0;
+                if (GUILayout.Button("🗑️ 删除画布选区涂色", GUILayout.Height(25)))
+                    DeleteCanvasSelection();
+                GUI.enabled = true;
+                
+                if (canCopy && !sizeMatch && !singlePalette)
+                {
+                    EditorGUILayout.HelpBox($"选区大小不一致！\n画板: {_paletteSelection.width}×{_paletteSelection.height}\n画布: {_canvasSelection.width}×{_canvasSelection.height}\n(画板选单像素可填充)", MessageType.Warning);
+                }
+                
+                if (GUILayout.Button("清除选区 (ESC)"))
+                {
+                    _paletteSelection = default;
+                    _canvasSelection = default;
+                }
+                EditorGUILayout.EndVertical();
+            }
         }
         
         void DrawAnchorTab()
@@ -493,11 +630,11 @@ namespace EquipmentSystem.Editor
                 FixAllFramesSpriteFacing();
             
             GUILayout.Space(5);
-            GUILayout.Label("头部区域扩展", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("扩展后可用画笔修改，点击「自动检测该部位」可恢复原始区域", MessageType.Info);
+            GUILayout.Label("区域扩展", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox("基于边界像素的 UV 向外扩展\n先上下、再左右，扩展像素继承边界 UV", MessageType.Info);
             
-            // 可折叠的扩展配置
-            _showHeadExpandConfig = EditorGUILayout.Foldout(_showHeadExpandConfig, "扩展范围配置", true);
+            // 头部扩展配置
+            _showHeadExpandConfig = EditorGUILayout.Foldout(_showHeadExpandConfig, "头部扩展配置", true);
             if (_showHeadExpandConfig && _data != null)
             {
                 EditorGUI.indentLevel++;
@@ -507,58 +644,23 @@ namespace EquipmentSystem.Editor
                 EditorGUI.indentLevel--;
             }
             
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("🔄 扩展当前帧头部"))
-                ExpandHeadRegionForCurrentFrame();
-            if (GUILayout.Button("🔄 扩展全部帧头部"))
-                ExpandHeadRegionForAllFrames();
-            EditorGUILayout.EndHorizontal();
-            
-            // 清理头部扩展按钮
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("🗑 清理当前帧头部扩展"))
-                ClearHeadExpandForCurrentFrame();
-            if (GUILayout.Button("🗑 清理全部帧头部扩展"))
-                ClearHeadExpandForAllFrames();
-            EditorGUILayout.EndHorizontal();
-            
-            GUILayout.Space(5);
-            GUILayout.Label("UV 参考帧", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("头盔贴图是根据参考帧的头部位置绘制的，其他帧的 UV 会自动补偿位置偏移", MessageType.Info);
-            
-            // 可折叠的参考帧配置
-            _showReferenceFrameConfig = EditorGUILayout.Foldout(_showReferenceFrameConfig, "参考帧配置", true);
-            if (_showReferenceFrameConfig && _data != null)
+            // 身体扩展配置
+            _showBodyExpandConfig = EditorGUILayout.Foldout(_showBodyExpandConfig, "身体扩展配置", true);
+            if (_showBodyExpandConfig && _data != null)
             {
                 EditorGUI.indentLevel++;
-                
-                // 显示当前状态
-                if (_data.hasReferenceFrame)
-                {
-                    EditorGUILayout.HelpBox("✓ 已设置参考帧", MessageType.Info);
-                }
-                else
-                {
-                    EditorGUILayout.HelpBox("未设置参考帧，生成 UV Map 将使用居中算法", MessageType.Warning);
-                }
-                
-                // 设置按钮
-                if (GUILayout.Button("📌 将当前帧设为参考帧"))
-                {
-                    SetCurrentFrameAsReference();
-                }
-                
-                // 清除按钮
-                if (_data.hasReferenceFrame && GUILayout.Button("🗑 清除参考帧"))
-                {
-                    Undo.RecordObject(_data, "清除参考帧");
-                    _data.hasReferenceFrame = false;
-                    _data.referenceHeadCenter = Vector2.zero;
-                    EditorUtility.SetDirty(_data);
-                }
-                
+                _data.bodyExpandUp = EditorGUILayout.IntSlider("向上扩展", _data.bodyExpandUp, 0, 10);
+                _data.bodyExpandSide = EditorGUILayout.IntSlider("左右扩展", _data.bodyExpandSide, 0, 10);
+                _data.bodyExpandDown = EditorGUILayout.IntSlider("向下扩展", _data.bodyExpandDown, 0, 10);
                 EditorGUI.indentLevel--;
             }
+            
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("🔄 扩展当前部位"))
+                ExpandCurrentPartRegion();
+            if (GUILayout.Button("🔄 扩展全部帧当前部位"))
+                ExpandPartRegionForAllFrames();
+            EditorGUILayout.EndHorizontal();
             
             GUILayout.Space(5);
             GUILayout.Label("方向数据生成", EditorStyles.boldLabel);
@@ -608,6 +710,113 @@ namespace EquipmentSystem.Editor
         
         #region 画布绘制
         
+        /// <summary>
+        /// 绘制 UV 画板区域
+        /// </summary>
+        void DrawPalette()
+        {
+            Rect paletteCanvas = GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, 
+                GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+            
+            EditorGUI.DrawRect(paletteCanvas, new Color(0.12f, 0.12f, 0.18f));
+            
+            int palW = _paletteSize.x;
+            int palH = _paletteSize.y;
+            
+            float w = palW * _paletteZoom;
+            float h = palH * _paletteZoom;
+            var center = paletteCanvas.center + _palettePan;
+            _paletteDisplayRect = new Rect(center.x - w/2, center.y - h/2, w, h);
+            
+            // 1. 先绘制参考底图（在最底层）
+            if (_paletteRefSprite != null && _paletteRefSprite.texture != null)
+            {
+                var spriteRect = _paletteRefSprite.rect;
+                var tex = _paletteRefSprite.texture;
+                Rect uv = new Rect(
+                    spriteRect.x / tex.width,
+                    spriteRect.y / tex.height,
+                    spriteRect.width / tex.width,
+                    spriteRect.height / tex.height
+                );
+                GUI.DrawTextureWithTexCoords(_paletteDisplayRect, tex, uv);
+            }
+            
+            // 2. 再绘制 UV 颜色（半透明叠加在上方）
+            for (int y = 0; y < palH; y++)
+            {
+                for (int x = 0; x < palW; x++)
+                {
+                    // UV 颜色：R=U, G=V
+                    float u = (float)x / palW;
+                    float v = 1f - (float)y / palH;  // Y 翻转
+                    Color uvColor = new Color(u, v, 0.3f, 0.4f);  // 40% 透明度
+                    
+                    EditorGUI.DrawRect(new Rect(_paletteDisplayRect.x + x * _paletteZoom, 
+                                                _paletteDisplayRect.y + y * _paletteZoom, 
+                                                _paletteZoom, _paletteZoom), uvColor);
+                }
+            }
+            
+            // 3. 绘制选区
+            DrawPaletteSelection();
+            
+            // 4. 绘制网格线
+            if (_paletteZoom >= 4)
+            {
+                Handles.color = new Color(1, 1, 1, 0.2f);
+                for (int x = 0; x <= palW; x++)
+                    Handles.DrawLine(new Vector3(_paletteDisplayRect.x + x * _paletteZoom, _paletteDisplayRect.y), 
+                                     new Vector3(_paletteDisplayRect.x + x * _paletteZoom, _paletteDisplayRect.yMax));
+                for (int y = 0; y <= palH; y++)
+                    Handles.DrawLine(new Vector3(_paletteDisplayRect.x, _paletteDisplayRect.y + y * _paletteZoom), 
+                                     new Vector3(_paletteDisplayRect.xMax, _paletteDisplayRect.y + y * _paletteZoom));
+            }
+            
+            // 5. 标签
+            string label = $"UV 画板 ({palW}×{palH}) | 左键框选";
+            if (_paletteSelection.width > 0)
+                label += $" | 选区: {_paletteSelection.width}×{_paletteSelection.height}";
+            GUI.Label(new Rect(paletteCanvas.x + 10, paletteCanvas.y + 10, 400, 20), label, EditorStyles.whiteLabel);
+        }
+        
+        /// <summary>
+        /// 绘制画板选区
+        /// </summary>
+        void DrawPaletteSelection()
+        {
+            // 已确定的选区
+            if (_paletteSelection.width > 0)
+            {
+                Rect selRect = new Rect(
+                    _paletteDisplayRect.x + _paletteSelection.x * _paletteZoom,
+                    _paletteDisplayRect.y + _paletteSelection.y * _paletteZoom,
+                    _paletteSelection.width * _paletteZoom,
+                    _paletteSelection.height * _paletteZoom);
+                EditorGUI.DrawRect(selRect, new Color(1, 1, 0, 0.3f));
+                Handles.color = Color.yellow;
+                Handles.DrawWireCube(selRect.center, new Vector3(selRect.width, selRect.height, 0));
+            }
+            
+            // 正在拖拽的选区
+            if (_isSelecting && _selectOnPalette)
+            {
+                int minX = Mathf.Min(_selectionStart.x, _selectionEnd.x);
+                int maxX = Mathf.Max(_selectionStart.x, _selectionEnd.x);
+                int minY = Mathf.Min(_selectionStart.y, _selectionEnd.y);
+                int maxY = Mathf.Max(_selectionStart.y, _selectionEnd.y);
+                
+                Rect dragRect = new Rect(
+                    _paletteDisplayRect.x + minX * _paletteZoom,
+                    _paletteDisplayRect.y + minY * _paletteZoom,
+                    (maxX - minX + 1) * _paletteZoom,
+                    (maxY - minY + 1) * _paletteZoom);
+                EditorGUI.DrawRect(dragRect, new Color(1, 1, 0, 0.2f));
+                Handles.color = Color.yellow;
+                Handles.DrawWireCube(dragRect.center, new Vector3(dragRect.width, dragRect.height, 0));
+            }
+        }
+        
         void DrawCanvas()
         {
             _canvas = GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, 
@@ -636,12 +845,13 @@ namespace EquipmentSystem.Editor
             GUI.DrawTextureWithTexCoords(_display, _sprite, uv);
             DrawBodyPixels(_display);
             DrawAnchors(_display);
+            DrawCanvasSelection(_display);  // 画布选区
             if (_zoom >= 4) DrawGrid(_display);
             
             string rowHint = _row < 4 ? new[]{ "SE", "SW", "NE", "NW" }[_row] : $"R{_row}";
-            string modeStr = _tab == TabMode.BodyPaint ? $"涂色:{_currentPart}" : _tab.ToString();
-            GUI.Label(new Rect(_canvas.x + 10, _canvas.y + 10, 300, 20),
-                $"{_animName} | 行{_row}({rowHint}) | 帧{_frame} | {modeStr}", EditorStyles.whiteLabel);
+            string selInfo = _canvasSelection.width > 0 ? $" | 选区: {_canvasSelection.width}×{_canvasSelection.height}" : "";
+            GUI.Label(new Rect(_canvas.x + 10, _canvas.y + 10, 450, 20),
+                $"画布 | {_animName} | 行{_row}({rowHint}) | 帧{_frame} | 左键框选 | Shift+拖拽擦除{selInfo}", EditorStyles.whiteLabel);
         }
         
         void DrawBodyPixels(Rect r)
@@ -652,69 +862,395 @@ namespace EquipmentSystem.Editor
             {
                 if (_paintDisplayMode == 1 && kv.Key != _currentPart) continue;
                 
-                Color c = GetPartColor(kv.Key);
+                var uvs = _partUVs.ContainsKey(kv.Key) ? _partUVs[kv.Key] : null;
+                int palW = _paletteSize.x;
+                int palH = _paletteSize.y;
+                
                 foreach (var p in kv.Value)
+                {
+                    Color c;
+                    
+                    // 使用 UV 颜色显示
+                    if (uvs != null && uvs.TryGetValue(p, out var uv))
+                    {
+                        // UV 颜色：R=U, G=V, B=0.3
+                        c = new Color(uv.x, uv.y, 0.3f, 0.8f);
+                    }
+                    else
+                    {
+                        // 没有 UV 的像素用灰色
+                        c = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                    }
+                    
                     EditorGUI.DrawRect(new Rect(r.x + p.x * _zoom, r.y + p.y * _zoom, _zoom, _zoom), c);
+                }
             }
         }
         
         /// <summary>
-        /// 根据配置计算扩展后的头部区域像素
-        /// 使用"先收缩再扩展"策略，确保多次点击结果一致
+        /// 绘制画布选区
         /// </summary>
-        HashSet<Vector2Int> GetExpandedHeadPixels(HashSet<Vector2Int> currentHeadPixels)
+        void DrawCanvasSelection(Rect r)
         {
-            if (currentHeadPixels == null || currentHeadPixels.Count == 0) return new HashSet<Vector2Int>();
-            
-            // 获取当前头部区域的包围盒
-            int minX = int.MaxValue, maxX = int.MinValue;
-            int minY = int.MaxValue, maxY = int.MinValue;
-            foreach (var p in currentHeadPixels)
+            // 已确定的选区
+            if (_canvasSelection.width > 0)
             {
-                minX = Mathf.Min(minX, p.x);
-                maxX = Mathf.Max(maxX, p.x);
-                minY = Mathf.Min(minY, p.y);
-                maxY = Mathf.Max(maxY, p.y);
+                Rect selRect = new Rect(
+                    r.x + _canvasSelection.x * _zoom,
+                    r.y + _canvasSelection.y * _zoom,
+                    _canvasSelection.width * _zoom,
+                    _canvasSelection.height * _zoom);
+                EditorGUI.DrawRect(selRect, new Color(0, 1, 1, 0.3f));
+                Handles.color = Color.cyan;
+                Handles.DrawWireCube(selRect.center, new Vector3(selRect.width, selRect.height, 0));
             }
             
-            // 扩展配置
-            int expandUp = _data.headExpandUp;
-            int expandSide = _data.headExpandSide;
-            int expandDown = _data.headExpandDown;
-            
-            // 先收缩到核心区域（反向减去扩展值）
-            // 这样无论当前是否已扩展，都能得到一致的核心区域
-            int coreMinX = minX + expandSide;
-            int coreMaxX = maxX - expandSide;
-            int coreMinY = minY + expandUp;
-            int coreMaxY = maxY - expandDown;
-            
-            // 如果收缩后无效（核心区域太小），使用当前包围盒
-            if (coreMinX > coreMaxX || coreMinY > coreMaxY)
+            // 正在拖拽的选区
+            if (_isSelecting && !_selectOnPalette)
             {
-                coreMinX = minX;
-                coreMaxX = maxX;
-                coreMinY = minY;
-                coreMaxY = maxY;
+                int minX = Mathf.Min(_selectionStart.x, _selectionEnd.x);
+                int maxX = Mathf.Max(_selectionStart.x, _selectionEnd.x);
+                int minY = Mathf.Min(_selectionStart.y, _selectionEnd.y);
+                int maxY = Mathf.Max(_selectionStart.y, _selectionEnd.y);
+                
+                Rect dragRect = new Rect(
+                    r.x + minX * _zoom,
+                    r.y + minY * _zoom,
+                    (maxX - minX + 1) * _zoom,
+                    (maxY - minY + 1) * _zoom);
+                
+                // 擦除模式用红色，普通模式用青色
+                Color fillColor = _isErasing ? new Color(1, 0, 0, 0.3f) : new Color(0, 1, 1, 0.2f);
+                Color lineColor = _isErasing ? Color.red : Color.cyan;
+                
+                EditorGUI.DrawRect(dragRect, fillColor);
+                Handles.color = lineColor;
+                Handles.DrawWireCube(dragRect.center, new Vector3(dragRect.width, dragRect.height, 0));
+            }
+        }
+        
+        /// <summary>
+        /// 从画板选区拷贝 UV 到画布选区
+        /// 支持：1) 选区大小一致时 1:1 复制  2) 画板单像素时填充整个画布选区
+        /// </summary>
+        void CopyUVFromPaletteToCanvas()
+        {
+            if (_paletteSelection.width <= 0 || _canvasSelection.width <= 0)
+            {
+                Debug.LogWarning("请先在画板和画布上分别框选区域");
+                return;
             }
             
-            // 基于核心区域计算扩展后的范围
-            int newMinX = Mathf.Max(0, coreMinX - expandSide);
-            int newMaxX = Mathf.Min(_frameSize.x - 1, coreMaxX + expandSide);
-            int newMinY = Mathf.Max(0, coreMinY - expandUp);
-            int newMaxY = Mathf.Min(_frameSize.y - 1, coreMaxY + expandDown);
+            bool sizeMatch = _paletteSelection.size == _canvasSelection.size;
+            bool singlePalette = _paletteSelection.width == 1 && _paletteSelection.height == 1;
             
-            // 生成扩展区域的像素
-            var expandedPixels = new HashSet<Vector2Int>();
-            for (int y = newMinY; y <= newMaxY; y++)
+            if (!sizeMatch && !singlePalette)
             {
-                for (int x = newMinX; x <= newMaxX; x++)
+                Debug.LogWarning($"选区大小不匹配: 画板 {_paletteSelection.width}×{_paletteSelection.height}, 画布 {_canvasSelection.width}×{_canvasSelection.height}");
+                return;
+            }
+            
+            if (!_partPixels.ContainsKey(_currentPart))
+                _partPixels[_currentPart] = new HashSet<Vector2Int>();
+            if (!_partUVs.ContainsKey(_currentPart))
+                _partUVs[_currentPart] = new Dictionary<Vector2Int, Vector2>();
+            
+            var pixels = _partPixels[_currentPart];
+            var uvs = _partUVs[_currentPart];
+            
+            int palW = _paletteSize.x;
+            int palH = _paletteSize.y;
+            
+            // 单像素填充：计算单个 UV
+            Vector2 singleUV = Vector2.zero;
+            if (singlePalette)
+            {
+                float u = (float)_paletteSelection.x / palW;
+                float v = 1f - (float)_paletteSelection.y / palH;
+                singleUV = new Vector2(u, v);
+            }
+            
+            for (int dy = 0; dy < _canvasSelection.height; dy++)
+            {
+                for (int dx = 0; dx < _canvasSelection.width; dx++)
                 {
-                    expandedPixels.Add(new Vector2Int(x, y));
+                    // 画布目标像素
+                    int dstX = _canvasSelection.x + dx;
+                    int dstY = _canvasSelection.y + dy;
+                    var dstPos = new Vector2Int(dstX, dstY);
+                    
+                    if (!IsValidPixel(dstPos)) continue;
+                    
+                    Vector2 uv;
+                    if (singlePalette)
+                    {
+                        // 单像素填充模式
+                        uv = singleUV;
+                    }
+                    else
+                    {
+                        // 1:1 复制模式
+                        int srcX = _paletteSelection.x + dx;
+                        int srcY = _paletteSelection.y + dy;
+                        float u = (float)srcX / palW;
+                        float v = 1f - (float)srcY / palH;
+                        uv = new Vector2(u, v);
+                    }
+                    
+                    pixels.Add(dstPos);
+                    uvs[dstPos] = uv;
                 }
             }
             
-            return expandedPixels;
+            SaveWithUndo("拷贝 UV");
+            Repaint();
+            
+            if (singlePalette && !sizeMatch)
+                Debug.Log($"已用单点UV填充 {_canvasSelection.width * _canvasSelection.height} 个像素");
+            else
+                Debug.Log($"已拷贝 {_canvasSelection.width * _canvasSelection.height} 个像素的 UV");
+        }
+        
+        /// <summary>
+        /// 删除画布选区内的涂色
+        /// </summary>
+        void DeleteCanvasSelection()
+        {
+            if (_canvasSelection.width <= 0)
+            {
+                Debug.LogWarning("请先在画布上框选区域");
+                return;
+            }
+            
+            if (!_partPixels.ContainsKey(_currentPart))
+                return;
+            
+            var pixels = _partPixels[_currentPart];
+            var uvs = _partUVs.ContainsKey(_currentPart) ? _partUVs[_currentPart] : null;
+            
+            int removed = 0;
+            for (int dy = 0; dy < _canvasSelection.height; dy++)
+            {
+                for (int dx = 0; dx < _canvasSelection.width; dx++)
+                {
+                    var pos = new Vector2Int(_canvasSelection.x + dx, _canvasSelection.y + dy);
+                    if (pixels.Remove(pos))
+                    {
+                        uvs?.Remove(pos);
+                        removed++;
+                    }
+                }
+            }
+            
+            SaveWithUndo("删除选区");
+            Repaint();
+            Debug.Log($"已删除 {removed} 个像素的涂色");
+        }
+        
+        /// <summary>
+        /// 扩展当前选中部位的区域
+        /// 基于边界像素的 UV 向外扩展：先上下、再左右
+        /// 扩展像素继承边界像素的 UV
+        /// </summary>
+        void ExpandCurrentPartRegion()
+        {
+            if (_data == null) return;
+            
+            if (!_partPixels.ContainsKey(_currentPart) || _partPixels[_currentPart].Count == 0)
+            {
+                Debug.LogWarning($"当前部位 {_currentPart} 没有涂色区域");
+                return;
+            }
+            
+            var pixels = _partPixels[_currentPart];
+            if (!_partUVs.ContainsKey(_currentPart))
+                _partUVs[_currentPart] = new Dictionary<Vector2Int, Vector2>();
+            var uvs = _partUVs[_currentPart];
+            
+            // 根据部位选择扩展配置
+            int expandUp, expandDown, expandSide;
+            if (_currentPart == CharacterBodyPart.Head)
+            {
+                expandUp = _data.headExpandUp;
+                expandDown = _data.headExpandDown;
+                expandSide = _data.headExpandSide;
+            }
+            else
+            {
+                expandUp = _data.bodyExpandUp;
+                expandDown = _data.bodyExpandDown;
+                expandSide = _data.bodyExpandSide;
+            }
+            
+            ExpandRegionWithBoundaryUV(pixels, uvs, expandUp, expandDown, expandSide, expandSide);
+            
+            SaveWithUndo($"扩展{_currentPart}区域");
+            Repaint();
+        }
+        
+        /// <summary>
+        /// 扩展全部帧的当前部位区域
+        /// </summary>
+        void ExpandPartRegionForAllFrames()
+        {
+            if (_data == null) return;
+            
+            SaveIfDirty();
+            Undo.RecordObject(_data, "扩展全部帧区域");
+            
+            // 根据部位选择扩展配置
+            int expandUp, expandDown, expandSide;
+            if (_currentPart == CharacterBodyPart.Head)
+            {
+                expandUp = _data.headExpandUp;
+                expandDown = _data.headExpandDown;
+                expandSide = _data.headExpandSide;
+            }
+            else
+            {
+                expandUp = _data.bodyExpandUp;
+                expandDown = _data.bodyExpandDown;
+                expandSide = _data.bodyExpandSide;
+            }
+            
+            int savedFrame = _frame;
+            int savedRow = _row;
+            int expandedCount = 0;
+            
+            for (int r = 0; r < _rowCount; r++)
+            {
+                _row = r;
+                for (int f = 0; f < _framesPerRow; f++)
+                {
+                    _frame = f;
+                    LoadFrameData();
+                    
+                    if (!_partPixels.ContainsKey(_currentPart) || _partPixels[_currentPart].Count == 0)
+                        continue;
+                    
+                    var pixels = _partPixels[_currentPart];
+                    if (!_partUVs.ContainsKey(_currentPart))
+                        _partUVs[_currentPart] = new Dictionary<Vector2Int, Vector2>();
+                    var uvs = _partUVs[_currentPart];
+                    
+                    int beforeCount = pixels.Count;
+                    ExpandRegionWithBoundaryUV(pixels, uvs, expandUp, expandDown, expandSide, expandSide);
+                    
+                    if (pixels.Count > beforeCount)
+                    {
+                        SaveFrameToData(false);
+                        expandedCount++;
+                    }
+                }
+            }
+            
+            _frame = savedFrame;
+            _row = savedRow;
+            _isDirty = false;
+            LoadFrameData();
+            
+            EditorUtility.SetDirty(_data);
+            Debug.Log($"区域扩展完成: 扩展了 {expandedCount} 帧");
+        }
+        
+        /// <summary>
+        /// 基于边界像素 UV 进行四边扩展
+        /// 扩展顺序：先上下、再左右（这样角落会被正确覆盖）
+        /// </summary>
+        void ExpandRegionWithBoundaryUV(HashSet<Vector2Int> regionPixels, Dictionary<Vector2Int, Vector2> pixelUVs,
+                                        int expandUp, int expandDown, int expandLeft, int expandRight)
+        {
+            if (regionPixels.Count == 0) return;
+            
+            // 1. 计算当前边界
+            int minX = regionPixels.Min(p => p.x);
+            int maxX = regionPixels.Max(p => p.x);
+            int minY = regionPixels.Min(p => p.y);
+            int maxY = regionPixels.Max(p => p.y);
+            
+            // 2. 向上扩展（Y 减小）
+            for (int i = 1; i <= expandUp; i++)
+            {
+                int newY = minY - i;
+                if (newY < 0) break;
+                
+                for (int x = minX; x <= maxX; x++)
+                {
+                    var boundaryPos = new Vector2Int(x, minY);
+                    var newPos = new Vector2Int(x, newY);
+                    
+                    if (!regionPixels.Contains(newPos))
+                    {
+                        regionPixels.Add(newPos);
+                        if (pixelUVs.TryGetValue(boundaryPos, out var uv))
+                            pixelUVs[newPos] = uv;
+                    }
+                }
+            }
+            
+            // 3. 向下扩展（Y 增大）
+            for (int i = 1; i <= expandDown; i++)
+            {
+                int newY = maxY + i;
+                if (newY >= _frameSize.y) break;
+                
+                for (int x = minX; x <= maxX; x++)
+                {
+                    var boundaryPos = new Vector2Int(x, maxY);
+                    var newPos = new Vector2Int(x, newY);
+                    
+                    if (!regionPixels.Contains(newPos))
+                    {
+                        regionPixels.Add(newPos);
+                        if (pixelUVs.TryGetValue(boundaryPos, out var uv))
+                            pixelUVs[newPos] = uv;
+                    }
+                }
+            }
+            
+            // 4. 重新计算边界（上下扩展后）
+            int expandedMinY = Mathf.Max(0, minY - expandUp);
+            int expandedMaxY = Mathf.Min(_frameSize.y - 1, maxY + expandDown);
+            
+            // 5. 向左扩展（X 减小）
+            for (int i = 1; i <= expandLeft; i++)
+            {
+                int newX = minX - i;
+                if (newX < 0) break;
+                
+                for (int y = expandedMinY; y <= expandedMaxY; y++)
+                {
+                    var boundaryPos = new Vector2Int(minX, y);
+                    var newPos = new Vector2Int(newX, y);
+                    
+                    if (!regionPixels.Contains(newPos))
+                    {
+                        regionPixels.Add(newPos);
+                        if (pixelUVs.TryGetValue(boundaryPos, out var uv))
+                            pixelUVs[newPos] = uv;
+                    }
+                }
+            }
+            
+            // 6. 向右扩展（X 增大）
+            for (int i = 1; i <= expandRight; i++)
+            {
+                int newX = maxX + i;
+                if (newX >= _frameSize.x) break;
+                
+                for (int y = expandedMinY; y <= expandedMaxY; y++)
+                {
+                    var boundaryPos = new Vector2Int(maxX, y);
+                    var newPos = new Vector2Int(newX, y);
+                    
+                    if (!regionPixels.Contains(newPos))
+                    {
+                        regionPixels.Add(newPos);
+                        if (pixelUVs.TryGetValue(boundaryPos, out var uv))
+                            pixelUVs[newPos] = uv;
+                    }
+                }
+            }
         }
         
         /// <summary>
@@ -797,36 +1333,186 @@ namespace EquipmentSystem.Editor
                 {
                     case KeyCode.Alpha1: SaveIfDirty(); _tab = TabMode.BodyPaint; Repaint(); e.Use(); break;
                     case KeyCode.Alpha2: SaveIfDirty(); _tab = TabMode.Anchor; Repaint(); e.Use(); break;
+                    case KeyCode.Escape:
+                        // 取消选区
+                        _isSelecting = false;
+                        _paletteSelection = default;
+                        _canvasSelection = default;
+                        Repaint();
+                        e.Use();
+                        break;
                 }
             }
             
-            Vector2 localMouse = e.mousePosition - _canvasOffset;
-            if (!new Rect(0, 0, _canvas.width, _canvas.height).Contains(localMouse)) return;
+            // 检测鼠标在哪个区域
+            bool inPalette = _showPalette && _paletteCanvasRect.Contains(e.mousePosition);
+            bool inCanvas = !inPalette && new Rect(_canvasOffset.x, _canvasOffset.y, _canvas.width, _canvas.height).Contains(e.mousePosition);
+            
+            if (!inPalette && !inCanvas) return;
             
             switch (e.type)
             {
                 case EventType.MouseDown:
-                    if (e.button == 0) { OnLeftClick(localMouse); e.Use(); }
-                    else if (e.button == 1 && _tab != TabMode.Anchor) { OnRightClick(localMouse); e.Use(); }
-                    else if (e.button == 2) { _panning = true; _lastMouse = localMouse; e.Use(); }
+                    if (e.button == 0 && _tab == TabMode.BodyPaint)
+                    {
+                        bool isShift = e.shift;
+                        
+                        // Shift+左键在画布 = 擦除模式
+                        // 左键 = 框选模式
+                        if (inPalette && !isShift)
+                        {
+                            var p = GetPalettePixelPos(e.mousePosition);
+                            if (IsValidPalettePixel(p))
+                            {
+                                _isSelecting = true;
+                                _isErasing = false;
+                                _selectOnPalette = true;
+                                _selectionStart = p;
+                                _selectionEnd = p;
+                            }
+                        }
+                        else if (inCanvas)
+                        {
+                            var p = GetPixelPos(e.mousePosition - _canvasOffset);
+                            if (IsValidPixel(p))
+                            {
+                                _isSelecting = true;
+                                _isErasing = isShift;  // Shift = 擦除模式
+                                _selectOnPalette = false;
+                                _selectionStart = p;
+                                _selectionEnd = p;
+                            }
+                        }
+                        e.Use();
+                    }
+                    else if (e.button == 0 && _tab == TabMode.Anchor && inCanvas)
+                    {
+                        OnLeftClick(e.mousePosition - _canvasOffset);
+                        e.Use();
+                    }
+                    else if (e.button == 1 && inCanvas)
+                    {
+                        OnRightClick(e.mousePosition - _canvasOffset);
+                        e.Use();
+                    }
+                    else if (e.button == 2)
+                    {
+                        _panning = true;
+                        _lastMouse = e.mousePosition;
+                        e.Use();
+                    }
                     break;
                     
                 case EventType.MouseDrag:
-                    if (_panning) { _pan += localMouse - _lastMouse; _lastMouse = localMouse; Repaint(); e.Use(); }
-                    else if (e.button == 0 && _tab != TabMode.Anchor) { OnLeftClick(localMouse); e.Use(); }
-                    else if (e.button == 1 && _tab != TabMode.Anchor) { OnRightClick(localMouse); e.Use(); }
+                    if (_panning)
+                    {
+                        Vector2 delta = e.mousePosition - _lastMouse;
+                        if (inPalette)
+                            _palettePan += delta;
+                        else
+                            _pan += delta;
+                        _lastMouse = e.mousePosition;
+                        Repaint();
+                        e.Use();
+                    }
+                    else if (_isSelecting)
+                    {
+                        // 更新选区
+                        if (_selectOnPalette)
+                        {
+                            var p = GetPalettePixelPos(e.mousePosition);
+                            var palSize = GetPaletteSize();
+                            _selectionEnd = new Vector2Int(
+                                Mathf.Clamp(p.x, 0, palSize.x - 1),
+                                Mathf.Clamp(p.y, 0, palSize.y - 1)
+                            );
+                        }
+                        else
+                        {
+                            var p = GetPixelPos(e.mousePosition - _canvasOffset);
+                            _selectionEnd = new Vector2Int(
+                                Mathf.Clamp(p.x, 0, _frameSize.x - 1),
+                                Mathf.Clamp(p.y, 0, _frameSize.y - 1)
+                            );
+                        }
+                        Repaint();
+                        e.Use();
+                    }
                     break;
                     
                 case EventType.MouseUp:
+                    if (_isSelecting && e.button == 0)
+                    {
+                        // 完成选区
+                        _isSelecting = false;
+                        int minX = Mathf.Min(_selectionStart.x, _selectionEnd.x);
+                        int maxX = Mathf.Max(_selectionStart.x, _selectionEnd.x);
+                        int minY = Mathf.Min(_selectionStart.y, _selectionEnd.y);
+                        int maxY = Mathf.Max(_selectionStart.y, _selectionEnd.y);
+                        
+                        if (_selectOnPalette)
+                        {
+                            _paletteSelection = new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
+                        }
+                        else
+                        {
+                            if (_isErasing)
+                            {
+                                // 擦除模式：直接删除选区内的涂色
+                                _canvasSelection = new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
+                                DeleteCanvasSelection();
+                                _canvasSelection = default;  // 擦除后清除选区
+                            }
+                            else
+                            {
+                                _canvasSelection = new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
+                            }
+                        }
+                        
+                        _isErasing = false;
+                        Repaint();
+                        e.Use();
+                    }
                     _panning = false;
                     break;
                     
                 case EventType.ScrollWheel:
-                    _zoom = Mathf.Clamp(_zoom - e.delta.y * 0.5f, 2f, 50f);
+                    if (inPalette)
+                        _paletteZoom = Mathf.Clamp(_paletteZoom - e.delta.y * 0.5f, 2f, 50f);
+                    else
+                        _zoom = Mathf.Clamp(_zoom - e.delta.y * 0.5f, 2f, 50f);
                     Repaint();
                     e.Use();
                     break;
             }
+        }
+        
+        /// <summary>
+        /// 获取画板像素坐标
+        /// </summary>
+        Vector2Int GetPalettePixelPos(Vector2 mousePos)
+        {
+            // _paletteDisplayRect 是相对于 _paletteCanvasRect 的，需要先转换
+            Vector2 localInPaletteArea = mousePos - _paletteCanvasRect.position;
+            Vector2 local = localInPaletteArea - _paletteDisplayRect.position;
+            return new Vector2Int(Mathf.FloorToInt(local.x / _paletteZoom), Mathf.FloorToInt(local.y / _paletteZoom));
+        }
+        
+        /// <summary>
+        /// 获取画板尺寸
+        /// </summary>
+        Vector2Int GetPaletteSize()
+        {
+            return _paletteSize;
+        }
+        
+        /// <summary>
+        /// 检查画板像素是否有效
+        /// </summary>
+        bool IsValidPalettePixel(Vector2Int p)
+        {
+            var size = GetPaletteSize();
+            return p.x >= 0 && p.x < size.x && p.y >= 0 && p.y < size.y;
         }
         
         Vector2Int GetPixelPos(Vector2 mouse)
@@ -847,12 +1533,6 @@ namespace EquipmentSystem.Editor
                 case TabMode.Anchor:
                     SetOrUpdateAnchor(_anchorType, p, _anchorOrientation, _anchorFlipX);
                     SaveWithUndo("设置锚点");
-                    break;
-                case TabMode.BodyPaint:
-                    if (!_partPixels.ContainsKey(_currentPart))
-                        _partPixels[_currentPart] = new HashSet<Vector2Int>();
-                    _partPixels[_currentPart].Add(p);
-                    SaveWithUndo("涂色");
                     break;
             }
             
@@ -936,10 +1616,10 @@ namespace EquipmentSystem.Editor
                         spriteFacing = _partSpriteFacings.ContainsKey(kv.Key) ? _partSpriteFacings[kv.Key] : GetDefaultSpriteFacing()
                     };
                     
-                    // 获取 UV 索引字典
-                    Dictionary<Vector2Int, int> uvIndices = null;
-                    if (_partUVIndices.ContainsKey(kv.Key))
-                        uvIndices = _partUVIndices[kv.Key];
+                    // 获取 UV 字典
+                    Dictionary<Vector2Int, Vector2> uvDict = null;
+                    if (_partUVs.ContainsKey(kv.Key))
+                        uvDict = _partUVs[kv.Key];
                     
                     foreach (var pos in kv.Value)
                     {
@@ -948,13 +1628,18 @@ namespace EquipmentSystem.Editor
                         
                         if (gx >= 0 && gx < _sprite.width && gy >= 0 && gy < _sprite.height)
                         {
-                            region.pixels.Add(new BodyPartPixel
+                            var pixel = new BodyPartPixel
                             {
                                 part = kv.Key,
                                 position = pos,
-                                color = pixels[gy * _sprite.width + gx],
-                                uvIndex = uvIndices != null && uvIndices.ContainsKey(pos) ? uvIndices[pos] : -1
-                            });
+                                color = pixels[gy * _sprite.width + gx]
+                            };
+                            
+                            // 保存 UV 坐标
+                            if (uvDict != null && uvDict.ContainsKey(pos))
+                                pixel.uv = uvDict[pos];
+                            
+                            region.pixels.Add(pixel);
                         }
                     }
                     
@@ -969,7 +1654,7 @@ namespace EquipmentSystem.Editor
         {
             _anchors.Clear();
             _partPixels.Clear();
-            _partUVIndices.Clear();
+            _partUVs.Clear();
             _partOrientations.Clear();
             _partSpriteFacings.Clear();
             _isDirty = false;
@@ -1000,12 +1685,12 @@ namespace EquipmentSystem.Editor
                 _partOrientations[region.part] = region.orientation;
                 _partSpriteFacings[region.part] = region.spriteFacing;
                 _partPixels[region.part] = new HashSet<Vector2Int>();
-                _partUVIndices[region.part] = new Dictionary<Vector2Int, int>();
+                _partUVs[region.part] = new Dictionary<Vector2Int, Vector2>();
                 foreach (var px in region.pixels)
                 {
                     _partPixels[region.part].Add(px.position);
-                    if (px.uvIndex >= 0)
-                        _partUVIndices[region.part][px.position] = px.uvIndex;
+                    if (px.HasUV)
+                        _partUVs[region.part][px.position] = px.uv;
                 }
             }
             
@@ -1486,7 +2171,7 @@ namespace EquipmentSystem.Editor
                     
                     // 重置缓存，确保每帧独立检测
                     _partPixels.Clear();
-                    _partUVIndices.Clear();
+                    _partUVs.Clear();
                     _partOrientations.Clear();
                     _partSpriteFacings.Clear();
                     _anchors.Clear();
@@ -1548,229 +2233,6 @@ namespace EquipmentSystem.Editor
             LoadFrameData();
             
             Debug.Log($"贴图方向修复完成: 共 {totalRegions} 个区域，修复了 {fixedCount} 个");
-        }
-        
-        /// <summary>
-        /// 将当前帧的头部区域设为 UV 参考帧
-        /// 所有帧的头部 UV 都将基于此位置计算
-        /// </summary>
-        void SetCurrentFrameAsReference()
-        {
-            if (_data == null)
-            {
-                Debug.LogWarning("请先选择 CharacterFrameData");
-                return;
-            }
-            
-            // 检查当前帧是否有头部涂色区域
-            if (!_partPixels.ContainsKey(CharacterBodyPart.Head) || _partPixels[CharacterBodyPart.Head].Count == 0)
-            {
-                Debug.LogWarning("当前帧没有头部涂色区域，请先涂色或自动检测");
-                return;
-            }
-            
-            var headPixels = _partPixels[CharacterBodyPart.Head];
-            
-            // 计算头部区域的中心
-            int minX = int.MaxValue, maxX = int.MinValue;
-            int minY = int.MaxValue, maxY = int.MinValue;
-            foreach (var p in headPixels)
-            {
-                minX = Mathf.Min(minX, p.x);
-                maxX = Mathf.Max(maxX, p.x);
-                minY = Mathf.Min(minY, p.y);
-                maxY = Mathf.Max(maxY, p.y);
-            }
-            
-            // 使用整数中心，避免小数导致 UV 采样重复
-            Vector2 center = new Vector2((minX + maxX) / 2, (minY + maxY) / 2);
-            
-            Undo.RecordObject(_data, "设置参考帧");
-            _data.hasReferenceFrame = true;
-            _data.referenceHeadCenter = center;
-            EditorUtility.SetDirty(_data);
-            
-            Debug.Log($"已将当前帧设为参考帧，头部中心: ({center.x:F0}, {center.y:F0})");
-        }
-        
-        /// <summary>
-        /// 扩展当前帧的头部区域
-        /// </summary>
-        void ExpandHeadRegionForCurrentFrame()
-        {
-            if (_data == null)
-            {
-                Debug.LogWarning("请先选择 CharacterFrameData");
-                return;
-            }
-            
-            if (!_partPixels.ContainsKey(CharacterBodyPart.Head) || _partPixels[CharacterBodyPart.Head].Count == 0)
-            {
-                Debug.LogWarning("当前帧没有头部区域，请先检测或手动绘制头部");
-                return;
-            }
-            
-            var headPixels = _partPixels[CharacterBodyPart.Head];
-            var expandedPixels = GetExpandedHeadPixels(headPixels);
-            
-            // 将扩展像素添加到头部区域
-            int addedCount = 0;
-            foreach (var p in expandedPixels)
-            {
-                if (!headPixels.Contains(p))
-                {
-                    headPixels.Add(p);
-                    addedCount++;
-                }
-            }
-            
-            SaveWithUndo("扩展头部区域");
-            Repaint();
-            Debug.Log($"头部区域扩展完成: 新增 {addedCount} 像素，总计 {headPixels.Count} 像素");
-        }
-        
-        /// <summary>
-        /// 扩展全部帧的头部区域（基于已保存的数据，不重新检测）
-        /// </summary>
-        void ExpandHeadRegionForAllFrames()
-        {
-            if (_data == null)
-            {
-                Debug.LogWarning("请先选择 CharacterFrameData");
-                return;
-            }
-            
-            // 先保存当前帧的修改
-            SaveIfDirty();
-            
-            Undo.RecordObject(_data, "Expand Head Region All Frames");
-            
-            int savedFrame = _frame;
-            int savedRow = _row;
-            int expandedCount = 0;
-            int totalFrames = _rowCount * _framesPerRow;
-            
-            for (int r = 0; r < _rowCount; r++)
-            {
-                _row = r;
-                for (int f = 0; f < _framesPerRow; f++)
-                {
-                    _frame = f;
-                    
-                    // 从已保存的数据加载，保留用户的微调
-                    LoadFrameData();
-                    
-                    if (!_partPixels.ContainsKey(CharacterBodyPart.Head) || _partPixels[CharacterBodyPart.Head].Count == 0)
-                        continue;
-                    
-                    var headPixels = _partPixels[CharacterBodyPart.Head];
-                    var expandedPixels = GetExpandedHeadPixels(headPixels);
-                    
-                    int addedCount = 0;
-                    foreach (var p in expandedPixels)
-                    {
-                        if (!headPixels.Contains(p))
-                        {
-                            headPixels.Add(p);
-                            addedCount++;
-                        }
-                    }
-                    
-                    if (addedCount > 0)
-                    {
-                        SaveFrameToData(false);
-                        expandedCount++;
-                    }
-                }
-            }
-            
-            _frame = savedFrame;
-            _row = savedRow;
-            _isDirty = false;
-            LoadFrameData();
-            
-            EditorUtility.SetDirty(_data);
-            Debug.Log($"头部区域扩展完成: 共{totalFrames}帧，扩展了{expandedCount}帧");
-        }
-        
-        /// <summary>
-        /// 清理当前帧的头部扩展（重新自动检测头部区域）
-        /// </summary>
-        void ClearHeadExpandForCurrentFrame()
-        {
-            if (_data == null)
-            {
-                Debug.LogWarning("请先选择 CharacterFrameData");
-                return;
-            }
-            
-            // 调用自动检测头部，这会重置为原始 3x4 区域
-            AutoDetectPart(CharacterBodyPart.Head);
-            Debug.Log("当前帧头部区域已重置为自动检测结果");
-        }
-        
-        /// <summary>
-        /// 清理全部帧的头部扩展（重新自动检测所有帧的头部区域）
-        /// </summary>
-        void ClearHeadExpandForAllFrames()
-        {
-            if (_data == null)
-            {
-                Debug.LogWarning("请先选择 CharacterFrameData");
-                return;
-            }
-            
-            // 先保存当前帧的修改
-            SaveIfDirty();
-            
-            Undo.RecordObject(_data, "Clear Head Expand All Frames");
-            
-            int savedFrame = _frame;
-            int savedRow = _row;
-            int clearedCount = 0;
-            int totalFrames = _rowCount * _framesPerRow;
-            
-            for (int r = 0; r < _rowCount; r++)
-            {
-                _row = r;
-                for (int f = 0; f < _framesPerRow; f++)
-                {
-                    _frame = f;
-                    
-                    // 从已保存的数据加载
-                    LoadFrameData();
-                    
-                    // 获取检测参数
-                    var p = GetDetectParams();
-                    if (p == null) continue;
-                    
-                    // 重新检测头部区域 (3x4)
-                    _partPixels[CharacterBodyPart.Head] = new HashSet<Vector2Int>();
-                    if (!_partSpriteFacings.ContainsKey(CharacterBodyPart.Head))
-                        _partSpriteFacings[CharacterBodyPart.Head] = GetDefaultSpriteFacing();
-                    
-                    for (int dy = 0; dy < 3; dy++)
-                    {
-                        for (int dx = 0; dx < 4; dx++)
-                        {
-                            int px = p.firstPixel.x + dx, py = p.firstPixel.y + dy;
-                            if (px < _frameSize.x && py < _frameSize.y)
-                                _partPixels[CharacterBodyPart.Head].Add(new Vector2Int(px, py));
-                        }
-                    }
-                    
-                    SaveFrameToData(false);
-                    clearedCount++;
-                }
-            }
-            
-            _frame = savedFrame;
-            _row = savedRow;
-            _isDirty = false;
-            LoadFrameData();
-            
-            EditorUtility.SetDirty(_data);
-            Debug.Log($"头部区域清理完成: 共{totalFrames}帧，清理了{clearedCount}帧");
         }
         
         void SetOrUpdateAnchor(AnchorType type, Vector2Int pos, UVOrientation orientation, bool flipX = false)
@@ -1917,7 +2379,7 @@ namespace EquipmentSystem.Editor
                         part = newRegion.part,
                         position = MirrorPosition(px.position),
                         color = px.color,
-                        uvIndex = px.uvIndex
+                        uv = px.uv
                     });
                 }
                 
@@ -1964,7 +2426,7 @@ namespace EquipmentSystem.Editor
                         part = px.part,
                         position = px.position,
                         color = px.color,
-                        uvIndex = px.uvIndex
+                        uv = px.uv
                     });
                 }
                 

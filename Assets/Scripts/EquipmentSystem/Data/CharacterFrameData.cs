@@ -94,10 +94,15 @@ namespace EquipmentSystem.Data
         public Color32 color;  // 原始颜色（用于匹配）
         
         /// <summary>
-        /// UV 索引：对应模板中的第几个像素
-        /// -1 表示未分配，使用时会回退到相对坐标映射
+        /// UV 坐标：直接存储要采样装备贴图的 UV 位置
+        /// 从 UV 画板拷贝而来，或由扩展算法从边界像素复制
         /// </summary>
-        public int uvIndex = -1;
+        public Vector2 uv = new Vector2(-1, -1);  // -1 表示未设置
+        
+        /// <summary>
+        /// UV 是否已设置
+        /// </summary>
+        public bool HasUV => uv.x >= 0 && uv.y >= 0;
     }
     
     /// <summary>
@@ -302,12 +307,20 @@ namespace EquipmentSystem.Data
     public class CharacterFrameData : ScriptableObject
     {
         [Header("头部区域扩展配置")]
-        [Tooltip("头部区域向上扩展的像素数")]
+        [Tooltip("头部向上扩展的像素数")]
         public int headExpandUp = 5;
-        [Tooltip("头部区域向左右扩展的像素数")]
+        [Tooltip("头部向左右扩展的像素数")]
         public int headExpandSide = 5;
-        [Tooltip("头部区域向下扩展的像素数 (会排除与身体/手脚重叠的像素)")]
+        [Tooltip("头部向下扩展的像素数")]
         public int headExpandDown = 3;
+        
+        [Header("身体区域扩展配置")]
+        [Tooltip("身体向上扩展的像素数")]
+        public int bodyExpandUp = 3;
+        [Tooltip("身体向左右扩展的像素数")]
+        public int bodyExpandSide = 3;
+        [Tooltip("身体向下扩展的像素数")]
+        public int bodyExpandDown = 2;
         
         [Header("UV 参考帧配置")]
         [Tooltip("是否已设置参考帧（头部装备贴图的绘制基准）")]
