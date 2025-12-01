@@ -1,6 +1,6 @@
-// Dual UV Map Equipment System
-// Body Layer: Clothing/Gloves/Shoes (BodyUVMap)
-// Head Layer: Hair->Beard->Helmet (HeadUVMap) - Three layers rendered on top of body
+// 装备系统 - 双层 UV Map
+// 身体层：服装 / 手套 / 鞋子（BodyUVMap）
+// 头部层：头发 -> 胡子 -> 头盔（HeadUVMap，叠加在身体层之上）
 Shader "EquipmentSystem/EquipmentUV"
 {
     Properties
@@ -36,15 +36,10 @@ Shader "EquipmentSystem/EquipmentUV"
         _EnableShoes ("Enable Shoes", Float) = 0
         
         [Header(Debug)]
-        // Debug Mode: 0=Off, 1=Body regions, 2=Head regions, 3=UV sampling
+        // 调试模式：0=关闭，1=显示身体区域，2=显示头部区域，3=显示采样结果，其它模式见下方注释
         _DebugMode ("Debug Mode", Float) = 0
         
         _Color ("Tint", Color) = (1,1,1,1)
-        
-        // Legacy properties (deprecated)
-        [HideInInspector] _UVMapTex ("UV Map", 2D) = "black" {}
-        [HideInInspector] _HeadTex ("Head Texture", 2D) = "white" {}
-        [HideInInspector] _EnableHead ("Enable Head", Float) = 0
     }
     
     SubShader
@@ -92,30 +87,25 @@ Shader "EquipmentSystem/EquipmentUV"
             sampler2D _HelmetTex;
             float4 _MainTex_ST;
             
-            // Unity provides texel size uniforms; declare to use them
+            // Unity 提供的纹素大小变量，这里只需要声明即可使用
             float4 _HelmetTex_TexelSize; // (1/width, 1/height, width, height)
             
             // ============================================================
-            // Sprite Rect for each equipment texture (minU, minV, maxU, maxV)
+            // 每个装备贴图在纹理中的 Sprite Rect（minU, minV, maxU, maxV）
             // ============================================================
-            // IMPORTANT: Unity Sprite.texture returns the ENTIRE source texture!
-            // - If sprite is cut from spritesheet, texture is the whole sheet
-            // - If sprite uses Sprite Atlas, texture is the packed atlas
-            // - If sprite is standalone, texture is just that image (rect = 0,0,1,1)
+            // 重要：Sprite.texture 始终指向整张源纹理，而不是切片后的小图！
+            // - 如果 sprite 来自 spritesheet，texture 指向整张 spritesheet
+            // - 如果 sprite 使用 Sprite Atlas 打包，texture 指向打包后的图集
+            // - 如果 sprite 是单独图片，texture 就是该图片本身（Rect 为 0,0,1,1）
             //
-            // Therefore, we MUST use sprite.rect to calculate correct UV coordinates.
-            // The C# code passes these rects, and we use TransformUV() to convert
-            // 0-1 UV coordinates to the actual sprite region in the texture.
+            // 因此在 Shader 中采样时，必须使用 sprite.rect 计算出正确的 UV 范围。
+            // C# 侧会把这些 Rect 传进来，这里通过 TransformUV() 把 0~1 的局部 UV
+            // 映射到纹理上的实际区域。
             // ============================================================
-            float4 _ClothRect;   // Clothing sprite rect in its texture
-            float4 _HairRect;    // Hair sprite rect in its texture
-            float4 _BeardRect;   // Beard sprite rect in its texture
-            float4 _HelmetRect;  // Helmet sprite rect in its texture
-            
-            
-            // Legacy properties
-            sampler2D _UVMapTex;
-            sampler2D _HeadTex;
+            float4 _ClothRect;   // 服装贴图在纹理中的 Rect
+            float4 _HairRect;    // 头发贴图在纹理中的 Rect
+            float4 _BeardRect;   // 胡子贴图在纹理中的 Rect
+            float4 _HelmetRect;  // 头盔贴图在纹理中的 Rect
             
             fixed4 _LeftHandColor;
             fixed4 _RightHandColor;
@@ -125,7 +115,6 @@ Shader "EquipmentSystem/EquipmentUV"
             float _EnableHair;
             float _EnableBeard;
             float _EnableHelmet;
-            float _EnableHead;
             float _EnableCloth;
             float _EnableGloves;
             float _EnableShoes;
@@ -133,16 +122,16 @@ Shader "EquipmentSystem/EquipmentUV"
             
             fixed4 _Color;
             
-            // Transform 0-1 UV to actual sprite rect UV in the texture
-            // This is ESSENTIAL for sprites cut from spritesheet or packed in atlas!
+            // 将 0~1 的局部 UV 转换为纹理上的实际 UV（根据 Sprite Rect 映射）
+            // 对于从 spritesheet 或图集中切出来的 Sprite，这一步是必不可少的。
             // 
-            // rect: (minU, minV, maxU, maxV) - the sprite's region in texture UV space
-            // uv: 0-1 coordinates within the sprite (from UV Map)
-            // returns: actual UV coordinates to sample the texture
+            // rect: (minU, minV, maxU, maxV) 表示该 Sprite 在整张纹理 UV 空间中的区域
+            // uv:   0~1 的局部 UV（来自 UV Map，表示在装备贴图内的位置）
+            // 返回值：可以直接用于采样纹理的实际 UV 坐标
             //
-            // Example: sprite at rect (0.25, 0.5, 0.5, 0.75) in a 512x512 texture
-            //   Input uv (0,0) -> output (0.25, 0.5)  = bottom-left of sprite
-            //   Input uv (1,1) -> output (0.5, 0.75)  = top-right of sprite
+            // 示例：Sprite 在 512x512 纹理中的 UV Rect 为 (0.25, 0.5, 0.5, 0.75)
+            //   输入 uv (0,0) -> 输出 (0.25, 0.5)   = Sprite 左下角
+            //   输入 uv (1,1) -> 输出 (0.5, 0.75)  = Sprite 右上角
             float2 TransformUV(float2 uv, float4 rect)
             {
                 return float2(
@@ -151,7 +140,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 );
             }
             
-            // Pixel-art: treat alpha > cutoff as solid
+            // 像素风格：将 alpha 大于阈值的像素视为实心像素
             static const float CUTOFF = 0.5;
             
             // Body Part ID 定义 (对应 B 通道值)
@@ -189,7 +178,7 @@ Shader "EquipmentSystem/EquipmentUV"
             }
             
             // ------------------------------------------------------------
-            // Split body/head composition into two helpers so they can be toggled independently
+            // 身体层 / 头部层的合成拆分为两个函数，方便独立开关与调试
             // ------------------------------------------------------------
             fixed4 ApplyBodyLayers(fixed4 baseColor, fixed4 bodyUV)
             {
@@ -222,17 +211,17 @@ Shader "EquipmentSystem/EquipmentUV"
                 return color;
             }
 
-            // Head layers: Hair (bottom) -> Beard (middle) -> Helmet (top)
-            // Hard overlay: no color blending. Any hit writes RGB and lifts final alpha.
+            // 头部层顺序：头发（底层）-> 胡子（中层）-> 头盔（顶层）
+            // 采用硬覆盖：采样命中时直接写入 RGB，并抬高最终透明度
             void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, out float headLayerAlpha)
             {
                 headLayerAlpha = 0;
                 if (!IsPartID(headPartID, ID_HEAD)) return;
 
-                // Helmet (top). If hit, override and early-out.
+                // 头盔（顶层）：如果采样命中，直接覆盖并提前返回
                 if (_EnableHelmet > 0.5)
                 {
-                    // UVMap already uses bottom-up V, so no flip needed.
+                    // UVMap 使用 bottom-up 的 V 方向，无需翻转
                     float2 uv = TransformUV(baseHeadUV, _HelmetRect);
                     fixed4 c = tex2D(_HelmetTex, uv);
                     if (c.a > CUTOFF)
@@ -243,7 +232,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                 }
 
-                // Beard (middle)
+                // 胡子（中层）
                 bool wrote = false;
                 if (_EnableBeard > 0.5)
                 {
@@ -257,7 +246,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                 }
 
-                // Hair (bottom) - only if beard didn't write
+                // 头发（底层）——仅在胡子没有写入时才生效
                 if (!wrote && _EnableHair > 0.5)
                 {
                     float2 uv = TransformUV(baseHeadUV, _HairRect);
@@ -274,7 +263,7 @@ Shader "EquipmentSystem/EquipmentUV"
             {
                 fixed4 baseColor = tex2D(_MainTex, i.uv);
 
-                // Sample UV maps directly with sprite UVs (UVMap shares spritesheet layout at runtime)
+                // 使用 Sprite 的 UV 直接采样 UV Map（运行时 UVMap 与角色 spritesheet 共享布局）
                 float2 uvFrame = i.uv;
                 fixed4 bodyUV = tex2D(_BodyUVMap, uvFrame);
                 fixed4 headUV = tex2D(_HeadUVMap, uvFrame);
@@ -304,7 +293,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     return debugColor;
                 }
 
-                // Debug mode 3: Show sampling result (both layers)
+                // 调试模式 3：直接显示身体层 / 头部层的采样结果
                 if (_DebugMode > 2.5 && _DebugMode < 3.5)
                 {
                     if (IsPartID(bodyPartID, ID_TORSO))
@@ -322,7 +311,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     return fixed4(0, 0, 0, baseColor.a);
                 }
                 
-                // Debug mode 7: Show helmetUV as color
+                // 调试模式 7：用颜色显示经过 Rect 映射后的头盔 UV
                 if (_DebugMode > 6.5 && _DebugMode < 7.5)
                 {
                     if (IsPartID(headPartID, ID_HEAD))
@@ -333,25 +322,25 @@ Shader "EquipmentSystem/EquipmentUV"
                     return fixed4(0, 0, 0, baseColor.a);
                 }
                 
-                // Debug mode 8: Show _HelmetTex with _HelmetRect applied
+                // 调试模式 8：显示应用了 _HelmetRect 的头盔贴图
                 if (_DebugMode > 7.5 && _DebugMode < 8.5)
                 {
-                    // Use TransformUV to map to the correct sprite in the atlas
+                    // 使用 TransformUV 映射到图集中的正确 Sprite 区域
                     float2 helmetUV = TransformUV(i.uv, _HelmetRect);
                     fixed4 helmetColor = tex2D(_HelmetTex, helmetUV);
                     return fixed4(helmetColor.rgb, 1);
                 }
                 
-                // Debug mode 9: Show _HelmetRect values as color
+                // 调试模式 9：用颜色显示 _HelmetRect 的数值
                 if (_DebugMode > 8.5 && _DebugMode < 9.5)
                 {
-                    // Display rect as: R=minU, G=minV, B=width, A=height
+                    // 用颜色表示 Rect：R=minU, G=minV, B=width, A=height
                     float width = _HelmetRect.z - _HelmetRect.x;
                     float height = _HelmetRect.w - _HelmetRect.y;
                     return fixed4(_HelmetRect.x, _HelmetRect.y, width, 1);
                 }
 
-                // Debug mode 4: Show raw UV values from head UV map (R=U, G=V as colors)
+                // 调试模式 4：显示头部 UVMap 中的原始 UV（R=U, G=V）
                 if (_DebugMode > 3.5 && _DebugMode < 4.5)
                 {
                     if (IsPartID(headPartID, ID_HEAD))
@@ -361,13 +350,13 @@ Shader "EquipmentSystem/EquipmentUV"
                     return fixed4(0, 0, 0, baseColor.a);
                 }
 
-                // Debug mode 5: Show raw vertex UV (i.uv) as colors
+                // 调试模式 5：显示顶点原始 UV（i.uv）
                 if (_DebugMode > 4.5 && _DebugMode < 5.5)
                 {
                     return fixed4(i.uv.x, i.uv.y, 0, baseColor.a);
                 }
 
-                // Debug mode 6: Show helmet sampling directly
+                // 调试模式 6：只显示头盔采样结果（命中为贴图颜色，否则红色警告）
                 if (_DebugMode > 5.5 && _DebugMode < 6.5)
                 {
                     if (IsPartID(headPartID, ID_HEAD))
@@ -381,14 +370,14 @@ Shader "EquipmentSystem/EquipmentUV"
 
                 fixed4 finalColor = baseColor;
 
-                // Body: isolated method
+                // 应用身体层装备
                 finalColor = ApplyBodyLayers(finalColor, bodyUV);
 
-                // Head: isolated method
+                // 应用头部层装备
                 float headLayerAlpha;
                 ApplyHeadLayers(headUV.rg, headPartID, finalColor, headLayerAlpha);
 
-                // In expanded areas (baseColor.a = 0), use head layer alpha
+                // 在扩展区域（原 baseColor.a = 0）使用头部层的 alpha
                 if (IsPartID(headPartID, ID_HEAD))
                 {
                     finalColor.a = max(finalColor.a, headLayerAlpha);

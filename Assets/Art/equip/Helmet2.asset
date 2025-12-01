@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74340105d53c6d4e96c80db64c93b00, type: 3}
+  m_Name: Helmet2
+  m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.EquipmentData
+  equipmentId: 2
+  type: 2
+  weaponSprite: {fileID: 0}
+  spriteSE: {fileID: 461197340019467446, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
+  spriteSW: {fileID: -5949199350038639316, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
+  spriteNE: {fileID: 4643227416413941556, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
+  spriteNW: {fileID: 8094058871704577632, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
+  anchorType: 0
+  selfAnchor: {x: 0, y: 0}
+  leftColor:
+    serializedVersion: 2
+    rgba: 4281492630
+  rightColor:
+    serializedVersion: 2
+    rgba: 4281492630

@@ -1773,6 +1773,7 @@ MonoBehaviour:
   availableEquipments:
   - {fileID: 11400000, guid: 736999a148e3ca14e8d9072ce5224e4b, type: 2}
   - {fileID: 11400000, guid: e5c1a3599aa2a4046a2c2f34e322ceda, type: 2}
+  - {fileID: 11400000, guid: 28a4fdf5f2498554cb260a4d544c16e3, type: 2}
   panelWidth: 200
   panelMargin: 10
 --- !u!1 &185487911
@@ -7049,10 +7050,6 @@ MonoBehaviour:
   _debugAnimatorState: 
   _debugHasBodyUVMap: 0
   _debugHasHeadUVMap: 0
-  _debugHasClothTex: 0
-  _debugHasHairTex: 0
-  _debugHasBeardTex: 0
-  _debugHasHelmetTex: 0
 --- !u!1 &727835557
 GameObject:
   m_ObjectHideFlags: 0

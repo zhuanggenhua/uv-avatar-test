@@ -16,7 +16,22 @@ namespace EquipmentSystem.Data
 
     public enum FacingDirection { Front, Back }
     
-    public enum PartDirection { Down = 0, Up = 1, Left = 2, Right = 3 }
+    /// <summary>
+    /// UV 空间方向配置
+    /// UV 坐标系：左下角 (0,0)，右上角 (1,1)
+    /// 用对角线方向描述纹理的朝向
+    /// </summary>
+    public enum UVOrientation
+    {
+        /// <summary>右上（默认）- 纹理从左下指向右上</summary>
+        UpRight = 0,
+        /// <summary>左下 - 纹理从右上指向左下（旋转180°）</summary>
+        DownLeft = 1,
+        /// <summary>左上 - 纹理从右下指向左上（逆时针旋转90°）</summary>
+        UpLeft = 2,
+        /// <summary>右下 - 纹理从左上指向右下（顺时针旋转90°）</summary>
+        DownRight = 3
+    }
     
     #endregion
 
@@ -36,17 +51,17 @@ namespace EquipmentSystem.Data
     {
         public AnchorType type;
         public Vector2Int position;
-        public PartDirection direction;
+        public UVOrientation orientation;
         public bool flipX;  // 水平翻转（角色转头时用）
         
         public float GetRotationAngle()
         {
-            switch (direction)
+            switch (orientation)
             {
-                case PartDirection.Up: return 180f;
-                case PartDirection.Left: return 90f;
-                case PartDirection.Right: return -90f;
-                default: return 0f;
+                case UVOrientation.DownLeft: return 180f;
+                case UVOrientation.UpLeft: return 90f;
+                case UVOrientation.DownRight: return -90f;
+                default: return 0f;  // UpRight
             }
         }
     }
@@ -92,7 +107,22 @@ namespace EquipmentSystem.Data
     public class BodyPartRegion
     {
         public CharacterBodyPart part;
+        public UVOrientation orientation = UVOrientation.UpRight;
+        
+        /// <summary>
+        /// 贴图方向（用于转头等场景，指定该部位使用哪个方向的装备贴图）
+        /// </summary>
+        public CharacterFacing spriteFacing = CharacterFacing.SouthEast;
+        
         public List<BodyPartPixel> pixels = new List<BodyPartPixel>();
+        
+        /// <summary>
+        /// 获取实际使用的装备贴图方向
+        /// </summary>
+        public CharacterFacing GetSpriteFacing(int rowIndex)
+        {
+            return spriteFacing;
+        }
         
         /// <summary>
         /// 获取区域的包围盒
@@ -114,16 +144,6 @@ namespace EquipmentSystem.Data
         }
     }
 
-    /// <summary>
-    /// 死区涂色
-    /// </summary>
-    [Serializable]
-    public class DeadZoneMark
-    {
-        public List<Vector2Int> pixels = new List<Vector2Int>();
-        public bool Contains(Vector2Int pos) => pixels.Contains(pos);
-    }
-
     #endregion
 
     #region 帧数据
@@ -140,12 +160,9 @@ namespace EquipmentSystem.Data
         [Header("部位区域 - 服装/手套/鞋")]
         public List<BodyPartRegion> bodyRegions = new List<BodyPartRegion>();
         
-        [Header("死区涂色")]
-        public DeadZoneMark deadZone = new DeadZoneMark();
-        
         public AnchorPoint GetAnchor(AnchorType type) => anchors.Find(a => a.type == type);
         
-        public void SetAnchor(AnchorType type, Vector2Int pos, PartDirection dir)
+        public void SetAnchor(AnchorType type, Vector2Int pos, UVOrientation orientation)
         {
             var a = GetAnchor(type);
             if (a == null)
@@ -154,7 +171,7 @@ namespace EquipmentSystem.Data
                 anchors.Add(a);
             }
             a.position = pos;
-            a.direction = dir;
+            a.orientation = orientation;
         }
         
         /// <summary>
@@ -196,8 +213,6 @@ namespace EquipmentSystem.Data
             var r = GetRegion(part);
             return r?.pixels.Count > 0 ? r.pixels[0] : null;
         }
-        
-        public bool IsInDeadZone(Vector2Int pos) => deadZone.Contains(pos);
     }
 
     [Serializable]
@@ -293,6 +308,12 @@ namespace EquipmentSystem.Data
         public int headExpandSide = 5;
         [Tooltip("头部区域向下扩展的像素数 (会排除与身体/手脚重叠的像素)")]
         public int headExpandDown = 3;
+        
+        [Header("UV 参考帧配置")]
+        [Tooltip("是否已设置参考帧（头部装备贴图的绘制基准）")]
+        public bool hasReferenceFrame = false;
+        [Tooltip("参考帧的头部区域中心（帧内坐标），所有帧的 UV 都基于此位置计算")]
+        public Vector2 referenceHeadCenter;
         
         [Header("检测配置")]
         public DetectConfig detectConfig = new DetectConfig();

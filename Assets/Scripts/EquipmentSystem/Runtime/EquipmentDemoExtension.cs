@@ -25,8 +25,7 @@ namespace EquipmentSystem.Runtime
         
         // 当前选中的角色
         EquipmentRenderer _currentEquipRenderer;
-        Animator _currentAnimator;
-        string[] _animatorBoolParams;  // 从 Animator 读取的 Bool 参数名
+        AnimationController _currentAnimController;
         
         // 按类型分组的装备
         Dictionary<EquipmentType, List<EquipmentData>> _equipmentsByType;
@@ -53,7 +52,7 @@ namespace EquipmentSystem.Runtime
         public void RefreshRendererList()
         {
             // 包含 inactive 对象
-            _allRenderers = FindObjectsOfType<EquipmentRenderer>(true).ToList();
+            _allRenderers = FindObjectsByType<EquipmentRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
             
             if (_allRenderers.Count > 0)
             {
@@ -63,7 +62,7 @@ namespace EquipmentSystem.Runtime
             else
             {
                 _currentEquipRenderer = null;
-                _currentAnimator = null;
+                _currentAnimController = null;
             }
         }
         
@@ -72,34 +71,13 @@ namespace EquipmentSystem.Runtime
             if (renderer == _currentEquipRenderer) return;
             
             _currentEquipRenderer = renderer;
-            _currentAnimator = renderer != null ? renderer.GetComponentInChildren<Animator>() : null;
-            
-            // 从 Animator 读取 Bool 参数名作为动画选项
-            RefreshAnimatorParams();
+            _currentAnimController = renderer != null ? renderer.GetComponent<AnimationController>() : null;
             
             SyncSelectionFromEquipped();
             _selectedAnimIndex = 0;
             _selectedDirIndex = 0;
         }
         
-        void RefreshAnimatorParams()
-        {
-            if (_currentAnimator == null || _currentAnimator.runtimeAnimatorController == null)
-            {
-                _animatorBoolParams = DefaultAnimations;
-                return;
-            }
-            
-            var boolParams = new List<string>();
-            foreach (var param in _currentAnimator.parameters)
-            {
-                if (param.type == AnimatorControllerParameterType.Bool)
-                {
-                    boolParams.Add(param.name);
-                }
-            }
-            _animatorBoolParams = boolParams.Count > 0 ? boolParams.ToArray() : DefaultAnimations;
-        }
         
         void SyncSelectionFromEquipped()
         {
@@ -128,8 +106,7 @@ namespace EquipmentSystem.Runtime
         int _openAnimDropdown = 0;  // 0=无, 1=动画, 2=方向
         bool _openCharDropdown = false;
         
-        // 动画/方向选项
-        static readonly string[] DefaultAnimations = { "Idle", "Walk", "Run", "Attack", "Hurt", "Die" };
+        // 方向名称
         static readonly string[] DirectionNames = { "SE", "SW", "NE", "NW" };
         
         void OnGUI()
@@ -238,8 +215,8 @@ namespace EquipmentSystem.Runtime
             y += 30;
             
             // 获取动画选项
-            string[] animOptions = _animatorBoolParams ?? DefaultAnimations;
-            string[] dirOptions = DirectionNames;
+            string[] animOptions = _currentAnimController?.animationNames ?? System.Array.Empty<string>();
+            string[] dirOptions = _currentAnimController?.GetDirectionNames() ?? DirectionNames;
             
             bool hasAnimDropdownOpen = _openAnimDropdown != 0;
             
@@ -370,71 +347,24 @@ namespace EquipmentSystem.Runtime
         
         void ApplyAnimation(int index)
         {
-            if (_currentAnimator == null) return;
-            var animOptions = _animatorBoolParams ?? DefaultAnimations;
-            if (index < 0 || index >= animOptions.Length) return;
-            
-            // 关闭所有 Bool 参数
-            foreach (var paramName in animOptions)
-            {
-                try { _currentAnimator.SetBool(paramName, false); } catch { }
-            }
-            
-            // 开启选中的
-            try
-            {
-                _currentAnimator.SetTrigger("Clicked");
-                _currentAnimator.SetBool(animOptions[index], true);
-            }
-            catch { }
+            if (_currentAnimController != null)
+                _currentAnimController.SetAnimation(index);
         }
-        
-        // 方向对应的 X/Y 值: SE(1,-1), SW(-1,-1), NE(1,1), NW(-1,1)
-        static readonly Vector2[] DirectionValues = {
-            new Vector2(1, -1),   // SE
-            new Vector2(-1, -1),  // SW
-            new Vector2(1, 1),    // NE
-            new Vector2(-1, 1)    // NW
-        };
         
         void ApplyDirection(int index)
         {
-            if (_currentAnimator == null) return;
-            if (index < 0 || index >= DirectionValues.Length) return;
-            
-            var dir = DirectionValues[index];
-            try
-            {
-                _currentAnimator.SetFloat("X", dir.x);
-                _currentAnimator.SetFloat("Y", dir.y);
-            }
-            catch { }
+            if (_currentAnimController != null)
+                _currentAnimController.SetDirection(index);
         }
         
         void SetShadowVisible(bool visible)
         {
             if (_currentEquipRenderer == null) return;
             
-            // 尝试查找 Shadow 子对象
-            var shadow = _currentEquipRenderer.transform.Find("Shadow");
-            if (shadow != null)
+            // 使用 AnimationController 控制阴影
+            if (_currentAnimController != null)
             {
-                shadow.gameObject.SetActive(visible);
-                return;
-            }
-            
-            // 回退: 查找第一个子对象的第一个子对象
-            if (_currentEquipRenderer.transform.childCount > 0)
-            {
-                var firstChild = _currentEquipRenderer.transform.GetChild(0);
-                if (firstChild.childCount > 0)
-                {
-                    var possibleShadow = firstChild.GetChild(0).gameObject;
-                    if (possibleShadow.name.ToLower().Contains("shadow"))
-                    {
-                        possibleShadow.SetActive(visible);
-                    }
-                }
+                _currentAnimController.SetShadowEnabled(visible);
             }
         }
         

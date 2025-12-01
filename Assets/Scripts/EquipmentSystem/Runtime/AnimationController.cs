@@ -4,8 +4,7 @@ namespace EquipmentSystem.Runtime
 {
     /// <summary>
     /// 动画控制器组件
-    /// 挂在角色上，提供动画和方向控制 API
-    /// 替代原 MINIFANTASY 的 CTR_AnimateCreature
+    /// 挂在角色上，提供动画切换、方向控制和阴影开关 API
     /// </summary>
     public class AnimationController : MonoBehaviour
     {
@@ -42,6 +41,16 @@ namespace EquipmentSystem.Runtime
         
         /// <summary>获取 Animator</summary>
         public Animator Animator => _animator;
+        
+        /// <summary>
+        /// 根据方向索引获取方向向量（供其他组件复用）
+        /// </summary>
+        public static Vector2 GetDirectionValue(int index)
+        {
+            if (index < 0 || index >= DirectionValues.Length)
+                return DirectionValues[0];
+            return DirectionValues[index];
+        }
         
         void Awake()
         {
@@ -112,28 +121,12 @@ namespace EquipmentSystem.Runtime
         {
             _shadowObject = null;
             
-            // 尝试按名称查找
+            // 按名称查找 Shadow 子对象
             var shadow = transform.Find("Shadow");
             if (shadow != null)
             {
                 _shadowObject = shadow.gameObject;
                 _shadowEnabled = _shadowObject.activeSelf;
-                return;
-            }
-            
-            // 回退: MINIFANTASY 结构 (child[0]/child[0])
-            if (transform.childCount > 0)
-            {
-                var firstChild = transform.GetChild(0);
-                if (firstChild.childCount > 0)
-                {
-                    var possibleShadow = firstChild.GetChild(0).gameObject;
-                    if (possibleShadow.name.ToLower().Contains("shadow"))
-                    {
-                        _shadowObject = possibleShadow;
-                        _shadowEnabled = _shadowObject.activeSelf;
-                    }
-                }
             }
         }
         

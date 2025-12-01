@@ -38,10 +38,6 @@ namespace EquipmentSystem.Runtime
         [SerializeField] string _debugAnimatorState = "";
         [SerializeField] bool _debugHasBodyUVMap = false;
         [SerializeField] bool _debugHasHeadUVMap = false;
-        [SerializeField] bool _debugHasClothTex = false;
-        [SerializeField] bool _debugHasHairTex = false;
-        [SerializeField] bool _debugHasBeardTex = false;
-        [SerializeField] bool _debugHasHelmetTex = false;
         
         // 动画同步
         Animator _animator;
@@ -420,10 +416,6 @@ namespace EquipmentSystem.Runtime
             ClearTextureAndRect(HairTexProp, HairRectProp);
             ClearTextureAndRect(BeardTexProp, BeardRectProp);
             ClearTextureAndRect(HelmetTexProp, HelmetRectProp);
-            
-            _debugHasHairTex = false;
-            _debugHasBeardTex = false;
-            _debugHasHelmetTex = false;
         }
 
         void ClearTextureAndRect(int texProp, int rectProp)
@@ -433,34 +425,8 @@ namespace EquipmentSystem.Runtime
         }
         
         /// <summary>
-        /// 计算 Sprite 在其 Texture 中的 UV Rect (minU, minV, maxU, maxV)
-        /// 
-        /// 重要: Unity 中 Sprite.texture 返回的是整张原始贴图，而不是切片后的小图！
-        /// - 如果 sprite 是从 spritesheet 切出的，texture 指向整张大图
-        /// - 如果 sprite 是单独的图片，texture 就是这张图片本身
-        /// - 如果使用了 Sprite Atlas 打包，texture 指向打包后的图集
-        /// 
-        /// 因此，在 Shader 中采样时必须使用 sprite.rect 计算正确的 UV 范围，
-        /// 而不能直接用 0-1 的 UV 采样整张 texture。
-        /// </summary>
-        Vector4 GetSpriteUVRect(Sprite sprite)
-        {
-            if (sprite == null || sprite.texture == null)
-                return new Vector4(0, 0, 1, 1);  // 默认全图
-            
-            var tex = sprite.texture;
-            var rect = sprite.rect;
-            
-            float minU = rect.x / tex.width;
-            float minV = rect.y / tex.height;
-            float maxU = (rect.x + rect.width) / tex.width;
-            float maxV = (rect.y + rect.height) / tex.height;
-            
-            return new Vector4(minU, minV, maxU, maxV);
-        }
-        
-        /// <summary>
         /// 设置服装 - 根据方向选择贴图
+        /// 支持部位级别的贴图方向覆盖（用于转头等场景）
         /// 
         /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
         /// </summary>
@@ -468,27 +434,28 @@ namespace EquipmentSystem.Runtime
         {
             if (_shaderMaterial == null) return;
             
-            var clothingSprite = equip.GetSpriteByRow(_rowIndex);
+            // 获取实际使用的贴图方向（支持部位级别覆盖）
+            var facing = GetSpriteFacingForPart(CharacterBodyPart.Torso);
+            var clothingSprite = equip.GetSprite(facing);
             if (clothingSprite == null || clothingSprite.texture == null)
             {
-                Debug.LogWarning($"[EquipmentRenderer] 服装 {equip.name} 没有方向 {_rowIndex} 的贴图");
-                _debugHasClothTex = false;
+                Debug.LogWarning($"[EquipmentRenderer] 服装 {equip.name} 没有方向 {facing} 的贴图");
                 return;
             }
             
             // 重要: 同时传递 texture 和 sprite rect，Shader 中用 TransformUV() 转换 UV
             _shaderMaterial.SetTexture(ClothTexProp, clothingSprite.texture);
-            var clothRect = GetSpriteUVRect(clothingSprite);
+            var clothRect = SpriteUtils.GetUVRect(clothingSprite);
             _shaderMaterial.SetVector(ClothRectProp, clothRect);
             _shaderMaterial.SetFloat(EnableClothProp, 1);
-            _debugHasClothTex = true;
             Debug.Log($"[EquipmentRenderer] 服装 Rect: ({clothRect.x:F3}, {clothRect.y:F3}, {clothRect.z:F3}, {clothRect.w:F3}), " +
                       $"Sprite尺寸: {clothingSprite.rect.width}x{clothingSprite.rect.height}, " +
-                      $"Texture尺寸: {clothingSprite.texture.width}x{clothingSprite.texture.height}");
+                      $"Texture尺寸: {clothingSprite.texture.width}x{clothingSprite.texture.height}, 方向: {facing}");
         }
         
         /// <summary>
         /// 设置头盔 - 根据方向选择贴图
+        /// 支持部位级别的贴图方向覆盖（用于转头等场景）
         /// 
         /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
         /// </summary>
@@ -496,25 +463,42 @@ namespace EquipmentSystem.Runtime
         {
             if (_shaderMaterial == null) return;
             
-            var helmetSprite = equip.GetSpriteByRow(_rowIndex);
+            // 获取实际使用的贴图方向（支持部位级别覆盖）
+            var facing = GetSpriteFacingForPart(CharacterBodyPart.Head);
+            var helmetSprite = equip.GetSprite(facing);
             if (helmetSprite == null || helmetSprite.texture == null)
             {
-                Debug.LogWarning($"[EquipmentRenderer] 头盔 {equip.name} 没有方向 {_rowIndex} 的贴图");
-                _debugHasHelmetTex = false;
+                Debug.LogWarning($"[EquipmentRenderer] 头盔 {equip.name} 没有方向 {facing} 的贴图");
                 return;
             }
             
             // 重要: 同时传递 texture 和 sprite rect，Shader 中用 TransformUV() 转换 UV
-            var helmetRect = GetSpriteUVRect(helmetSprite);
+            var helmetRect = SpriteUtils.GetUVRect(helmetSprite);
             _shaderMaterial.SetTexture(HelmetTexProp, helmetSprite.texture);
             _shaderMaterial.SetVector(HelmetRectProp, helmetRect);
             _shaderMaterial.SetFloat(EnableHelmetProp, 1);
-            _debugHasHelmetTex = true;
             
             // 调试: 输出头盔的 sprite rect 信息
             Debug.Log($"[EquipmentRenderer] 头盔 Rect: ({helmetRect.x:F3}, {helmetRect.y:F3}, {helmetRect.z:F3}, {helmetRect.w:F3}), " +
                       $"Sprite尺寸: {helmetSprite.rect.width}x{helmetSprite.rect.height}, " +
-                      $"Texture尺寸: {helmetSprite.texture.width}x{helmetSprite.texture.height}");
+                      $"Texture尺寸: {helmetSprite.texture.width}x{helmetSprite.texture.height}, 方向: {facing}");
+        }
+        
+        /// <summary>
+        /// 获取指定部位实际使用的贴图方向
+        /// 如果部位配置了覆盖，返回覆盖的方向；否则返回当前动画行对应的方向
+        /// </summary>
+        CharacterFacing GetSpriteFacingForPart(CharacterBodyPart part)
+        {
+            if (_cachedFrame != null)
+            {
+                var region = _cachedFrame.GetRegion(part);
+                if (region != null)
+                {
+                    return region.GetSpriteFacing(_rowIndex);
+                }
+            }
+            return (CharacterFacing)_rowIndex;
         }
         
         /// <summary>
@@ -533,9 +517,8 @@ namespace EquipmentSystem.Runtime
                 if (hairSprite != null && hairSprite.texture != null)
                 {
                     _shaderMaterial.SetTexture(HairTexProp, hairSprite.texture);
-                    _shaderMaterial.SetVector(HairRectProp, GetSpriteUVRect(hairSprite));
+                    _shaderMaterial.SetVector(HairRectProp, SpriteUtils.GetUVRect(hairSprite));
                     _shaderMaterial.SetFloat(EnableHairProp, 1);
-                    _debugHasHairTex = true;
                 }
             }
             
@@ -546,9 +529,8 @@ namespace EquipmentSystem.Runtime
                 if (beardSprite != null && beardSprite.texture != null)
                 {
                     _shaderMaterial.SetTexture(BeardTexProp, beardSprite.texture);
-                    _shaderMaterial.SetVector(BeardRectProp, GetSpriteUVRect(beardSprite));
+                    _shaderMaterial.SetVector(BeardRectProp, SpriteUtils.GetUVRect(beardSprite));
                     _shaderMaterial.SetFloat(EnableBeardProp, 1);
-                    _debugHasBeardTex = true;
                 }
             }
         }
@@ -610,13 +592,6 @@ namespace EquipmentSystem.Runtime
             
             var anchor = _cachedFrame.GetAnchor(equip.anchorType);
             if (anchor == null)
-            {
-                sr.enabled = false;
-                return;
-            }
-            
-            // 死区检查 - 如果锚点在死区内则隐藏
-            if (_cachedFrame.IsInDeadZone(anchor.position))
             {
                 sr.enabled = false;
                 return;

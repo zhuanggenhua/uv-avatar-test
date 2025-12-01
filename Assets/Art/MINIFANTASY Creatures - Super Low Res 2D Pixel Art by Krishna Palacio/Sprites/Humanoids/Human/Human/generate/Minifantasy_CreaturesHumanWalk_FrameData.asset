@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Minifantasy_CreaturesHumanWalk_FrameData
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.CharacterFrameData
   headExpandUp: 5
-  headExpandSide: 2
+  headExpandSide: 5
   headExpandDown: 2
+  hasReferenceFrame: 1
+  referenceHeadCenter: {x: 15.5, y: 12.5}
   detectConfig:
     leftHandColor:
       serializedVersion: 2
@@ -44,14 +46,10 @@ MonoBehaviour:
       rowIndex: 0
       anchors: []
       bodyRegions: []
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 0
       anchors: []
       bodyRegions: []
-      deadZone:
-        pixels: []
   - animationName: Idle
     spritesheet: {fileID: 2800000, guid: e85e5167d1ce52440bb46cc98af5f571, type: 3}
     frameSize: {x: 32, y: 32}
@@ -67,88 +65,92 @@ MonoBehaviour:
       anchors:
       - type: 0
         position: {x: 17, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 1
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
           color:
             serializedVersion: 2
             rgba: 4287608797
-          uvIndex: 3
+          uvIndex: -1
         - part: 0
           position: {x: 15, y: 13}
           color:
             serializedVersion: 2
             rgba: 4288332782
-          uvIndex: 2
+          uvIndex: -1
         - part: 0
           position: {x: 16, y: 13}
           color:
             serializedVersion: 2
             rgba: 4288332782
-          uvIndex: 1
+          uvIndex: -1
         - part: 0
           position: {x: 17, y: 13}
           color:
             serializedVersion: 2
             rgba: 4289121274
-          uvIndex: 0
+          uvIndex: -1
         - part: 0
           position: {x: 14, y: 14}
           color:
             serializedVersion: 2
             rgba: 4287608797
-          uvIndex: 7
+          uvIndex: -1
         - part: 0
           position: {x: 15, y: 14}
           color:
             serializedVersion: 2
             rgba: 4278190080
-          uvIndex: 6
+          uvIndex: -1
         - part: 0
           position: {x: 16, y: 14}
           color:
             serializedVersion: 2
             rgba: 4288332782
-          uvIndex: 5
+          uvIndex: -1
         - part: 0
           position: {x: 17, y: 14}
           color:
             serializedVersion: 2
             rgba: 4278190080
-          uvIndex: 4
+          uvIndex: -1
         - part: 0
           position: {x: 14, y: 15}
           color:
             serializedVersion: 2
             rgba: 4287608797
-          uvIndex: 11
+          uvIndex: -1
         - part: 0
           position: {x: 15, y: 15}
           color:
             serializedVersion: 2
             rgba: 4288332782
-          uvIndex: 10
+          uvIndex: -1
         - part: 0
           position: {x: 16, y: 15}
           color:
             serializedVersion: 2
             rgba: 4288332782
-          uvIndex: 9
+          uvIndex: -1
         - part: 0
           position: {x: 17, y: 15}
           color:
             serializedVersion: 2
             rgba: 4289121274
-          uvIndex: 8
+          uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -187,6 +189,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -195,6 +199,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -203,6 +209,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -211,6 +219,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -218,25 +228,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -311,6 +317,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -349,6 +357,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -357,6 +367,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -365,6 +377,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -373,6 +387,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -380,25 +396,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -473,6 +485,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -511,6 +525,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -519,6 +535,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -527,6 +545,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -535,6 +555,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -542,25 +564,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -635,6 +653,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -673,6 +693,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -681,6 +703,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -689,6 +713,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -697,6 +723,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -704,25 +732,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 4
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -797,6 +821,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -835,6 +861,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -843,6 +871,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -851,6 +881,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -859,6 +891,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -866,25 +900,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 5
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -959,6 +989,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -997,6 +1029,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1005,6 +1039,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1013,6 +1049,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1021,6 +1059,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -1028,25 +1068,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 6
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -1121,6 +1157,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -1159,6 +1197,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1167,6 +1207,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1175,6 +1217,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1183,6 +1227,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -1190,25 +1236,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 7
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -1283,6 +1325,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -1321,6 +1365,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1329,6 +1375,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1337,6 +1385,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1345,6 +1395,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -1352,25 +1404,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 8
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 16, y: 13}
-        direction: 0
-        flipX: 1
-      - type: 1
         position: {x: 17, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
-      - type: 2
+      - type: 1
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 13, y: 13}
@@ -1445,6 +1493,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -1483,6 +1533,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1491,6 +1543,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1499,6 +1553,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1507,6 +1563,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -1514,25 +1572,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 9
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 16, y: 13}
-        direction: 0
-        flipX: 1
-      - type: 1
         position: {x: 17, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
-      - type: 2
+      - type: 1
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 13, y: 13}
@@ -1607,6 +1661,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -1645,6 +1701,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1653,6 +1711,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1661,6 +1721,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1669,6 +1731,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -1676,25 +1740,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 10
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 16, y: 13}
-        direction: 0
-        flipX: 1
-      - type: 1
         position: {x: 17, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
-      - type: 2
+      - type: 1
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 13, y: 13}
@@ -1769,6 +1829,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -1807,6 +1869,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1815,6 +1879,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1823,6 +1889,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1831,6 +1899,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -1838,25 +1908,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 11
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -1931,6 +1997,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -1969,6 +2037,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -1977,6 +2047,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -1985,6 +2057,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -1993,6 +2067,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -2000,25 +2076,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 12
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -2093,6 +2165,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -2131,6 +2205,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -2139,6 +2215,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -2147,6 +2225,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -2155,6 +2235,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -2162,25 +2244,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 13
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -2255,6 +2333,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -2293,6 +2373,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -2301,6 +2383,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -2309,6 +2393,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -2317,6 +2403,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -2324,25 +2412,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 14
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -2417,6 +2501,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -2455,6 +2541,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -2463,6 +2551,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -2471,6 +2561,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -2479,6 +2571,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -2486,25 +2580,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 15
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -2579,6 +2669,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -2617,6 +2709,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -2625,6 +2719,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -2633,6 +2729,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -2641,6 +2739,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -2648,17 +2748,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 0
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -2733,6 +2829,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -2771,6 +2869,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -2779,6 +2879,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -2786,17 +2888,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -2871,6 +2969,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -2909,6 +3009,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -2917,6 +3019,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -2924,17 +3028,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -3009,6 +3109,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3047,6 +3149,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3055,6 +3159,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3062,17 +3168,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -3147,6 +3249,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3185,6 +3289,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3193,6 +3299,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3200,17 +3308,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 4
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -3285,6 +3389,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3323,6 +3429,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3331,6 +3439,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3338,17 +3448,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 5
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -3423,6 +3529,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3461,6 +3569,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3469,6 +3579,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3476,17 +3588,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 6
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -3561,6 +3669,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3599,6 +3709,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3607,6 +3719,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3614,17 +3728,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 7
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -3699,6 +3809,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3737,6 +3849,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3745,6 +3859,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3752,17 +3868,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 8
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 15, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 15, y: 13}
@@ -3837,6 +3949,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -3875,6 +3989,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -3883,6 +3999,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -3890,17 +4008,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 9
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 15, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 15, y: 13}
@@ -3975,6 +4089,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4013,6 +4129,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4021,6 +4139,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4028,17 +4148,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 10
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 15, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 15, y: 13}
@@ -4113,6 +4229,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4151,6 +4269,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4159,6 +4279,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4166,17 +4288,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 11
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -4251,6 +4369,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4289,6 +4409,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4297,6 +4419,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4304,17 +4428,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 12
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -4389,6 +4509,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4427,6 +4549,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4435,6 +4559,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4442,17 +4568,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 13
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -4527,6 +4649,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4565,6 +4689,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4573,6 +4699,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4580,17 +4708,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 14
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -4665,6 +4789,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4703,6 +4829,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4711,6 +4839,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4718,17 +4848,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 15
       rowIndex: 1
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -4803,6 +4929,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -4841,6 +4969,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -4849,6 +4979,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -4856,17 +4988,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 0
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -4941,6 +5069,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -4979,6 +5109,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -4987,6 +5119,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -4994,17 +5128,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5079,6 +5209,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5117,6 +5249,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5125,6 +5259,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5132,17 +5268,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5217,6 +5349,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5255,6 +5389,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5263,6 +5399,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5270,17 +5408,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5355,6 +5489,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5393,6 +5529,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5401,6 +5539,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5408,17 +5548,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 4
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5493,6 +5629,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5531,6 +5669,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5539,6 +5679,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5546,17 +5688,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 5
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5631,6 +5769,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5669,6 +5809,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5677,6 +5819,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5684,17 +5828,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 6
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5769,6 +5909,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5807,6 +5949,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5815,6 +5959,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5822,17 +5968,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 7
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -5907,6 +6049,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -5945,6 +6089,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -5953,6 +6099,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -5960,17 +6108,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 8
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 13, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 13, y: 13}
@@ -6045,6 +6189,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6083,6 +6229,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6091,6 +6239,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6098,17 +6248,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 9
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 13, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 13, y: 13}
@@ -6183,6 +6329,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6221,6 +6369,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6229,6 +6379,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6236,17 +6388,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 10
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 13, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 13, y: 13}
@@ -6321,6 +6469,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6359,6 +6509,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6367,6 +6519,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6374,17 +6528,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 11
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -6459,6 +6609,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6497,6 +6649,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6505,6 +6659,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6512,17 +6668,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 12
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -6597,6 +6749,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6635,6 +6789,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6643,6 +6799,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6650,17 +6808,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 13
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -6735,6 +6889,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6773,6 +6929,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6781,6 +6939,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6788,17 +6948,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 14
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -6873,6 +7029,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -6911,6 +7069,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -6919,6 +7079,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -6926,17 +7088,13 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 15
       rowIndex: 2
-      anchors:
-      - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
-        flipX: 0
+      anchors: []
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7011,6 +7169,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -7049,6 +7209,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -7057,6 +7219,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -7064,25 +7228,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 0
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7157,6 +7317,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -7195,6 +7357,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -7203,6 +7367,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -7211,6 +7377,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -7219,6 +7387,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -7226,25 +7396,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7319,6 +7485,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -7357,6 +7525,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -7365,6 +7535,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -7373,6 +7545,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -7381,6 +7555,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -7388,25 +7564,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7481,6 +7653,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -7519,6 +7693,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -7527,6 +7703,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -7535,6 +7713,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -7543,6 +7723,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -7550,25 +7732,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7643,6 +7821,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -7681,6 +7861,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -7689,6 +7871,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -7697,6 +7881,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -7705,6 +7891,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -7712,25 +7900,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 4
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7805,6 +7989,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -7843,6 +8029,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -7851,6 +8039,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -7859,6 +8049,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -7867,6 +8059,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -7874,25 +8068,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 5
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -7967,6 +8157,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8005,6 +8197,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8013,6 +8207,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8021,6 +8217,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -8029,6 +8227,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -8036,25 +8236,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 6
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -8129,6 +8325,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8167,6 +8365,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8175,6 +8375,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8183,6 +8385,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -8191,6 +8395,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -8198,25 +8404,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 7
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -8291,6 +8493,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8329,6 +8533,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8337,6 +8543,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8345,6 +8553,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -8353,6 +8563,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -8360,25 +8572,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 8
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 15, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 15, y: 13}
@@ -8453,6 +8661,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8491,6 +8701,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8499,6 +8711,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8507,6 +8721,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -8515,6 +8731,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -8522,25 +8740,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 9
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 15, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 15, y: 13}
@@ -8615,6 +8829,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8653,6 +8869,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8661,6 +8879,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8669,6 +8889,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -8677,6 +8899,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -8684,25 +8908,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 10
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 15, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 15, y: 13}
@@ -8777,6 +8997,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8815,6 +9037,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8823,6 +9047,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8831,6 +9057,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -8839,6 +9067,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -8846,25 +9076,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 11
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -8939,6 +9165,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -8977,6 +9205,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -8985,6 +9215,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -8993,6 +9225,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -9001,6 +9235,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -9008,25 +9244,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 12
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -9101,6 +9333,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -9139,6 +9373,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -9147,6 +9383,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -9155,6 +9393,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -9163,6 +9403,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -9170,25 +9412,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 13
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -9263,6 +9501,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -9301,6 +9541,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -9309,6 +9551,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -9317,6 +9561,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -9325,6 +9571,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -9332,25 +9580,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 14
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -9425,6 +9669,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -9463,6 +9709,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -9471,6 +9719,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -9479,6 +9729,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -9487,6 +9739,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -9494,25 +9748,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 15
       rowIndex: 3
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 14, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 14, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -9587,6 +9837,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -9625,6 +9877,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -9633,6 +9887,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -9641,6 +9897,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -9649,6 +9907,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -9656,8 +9916,6 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
   - animationName: Walk
     spritesheet: {fileID: 2800000, guid: 4c22395747f62d84e8c7c5e2ac027e1a, type: 3}
     frameSize: {x: 32, y: 32}
@@ -9672,19 +9930,17 @@ MonoBehaviour:
       rowIndex: 0
       anchors:
       - type: 0
-        position: {x: 14, y: 13}
-        direction: 0
+        position: {x: 17, y: 17}
+        orientation: 0
         flipX: 0
       - type: 1
-        position: {x: 17, y: 17}
-        direction: 0
-        flipX: 0
-      - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -9759,6 +10015,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -9797,6 +10055,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -9805,6 +10065,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -9813,6 +10075,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -9821,6 +10085,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -9828,21 +10094,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 0
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 14, y: 15}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -9917,6 +10183,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 15}
@@ -9955,6 +10223,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 17}
@@ -9963,6 +10233,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 14, y: 15}
@@ -9971,6 +10243,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 16}
@@ -9978,25 +10252,25 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4289121274
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 0
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 1
         position: {x: 17, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 13, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -10071,6 +10345,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -10109,6 +10385,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 17, y: 17}
@@ -10117,6 +10395,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 3
           position: {x: 13, y: 17}
@@ -10125,6 +10405,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 18}
@@ -10133,6 +10415,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 18}
@@ -10140,21 +10424,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 0
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 1
         position: {x: 16, y: 15}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -10229,6 +10513,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 1
           position: {x: 14, y: 15}
@@ -10267,6 +10553,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 2
           position: {x: 16, y: 15}
@@ -10275,6 +10563,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 4
           position: {x: 16, y: 17}
@@ -10283,6 +10573,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 0
         pixels:
         - part: 5
           position: {x: 14, y: 16}
@@ -10290,17 +10582,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 0
       rowIndex: 1
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -10375,6 +10667,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -10413,6 +10707,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -10421,6 +10717,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -10428,21 +10726,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 1
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 17, y: 16}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -10517,6 +10815,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 15}
@@ -10555,6 +10855,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 3
           position: {x: 17, y: 16}
@@ -10563,6 +10865,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 15, y: 16}
@@ -10570,17 +10874,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 1
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -10655,6 +10959,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -10693,6 +10999,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 18}
@@ -10701,6 +11009,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 18}
@@ -10708,21 +11018,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 1
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 17, y: 15}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -10797,6 +11107,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 1
           position: {x: 15, y: 15}
@@ -10835,6 +11147,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 3
           position: {x: 17, y: 15}
@@ -10843,6 +11157,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 4
           position: {x: 17, y: 16}
@@ -10851,6 +11167,8 @@ MonoBehaviour:
             rgba: 4288332782
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 1
         pixels:
         - part: 5
           position: {x: 15, y: 17}
@@ -10858,17 +11176,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 0
       rowIndex: 2
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -10943,6 +11261,8 @@ MonoBehaviour:
             rgba: 4288792822
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -10981,6 +11301,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -10989,6 +11311,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -10996,17 +11320,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 2
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -11081,6 +11405,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 15}
@@ -11119,6 +11445,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 17}
@@ -11126,17 +11454,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 2
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -11211,6 +11539,8 @@ MonoBehaviour:
             rgba: 4288792822
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 16}
@@ -11249,6 +11579,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 4
           position: {x: 14, y: 18}
@@ -11257,6 +11589,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 18}
@@ -11264,17 +11598,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 2
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -11349,6 +11683,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 1
           position: {x: 14, y: 15}
@@ -11387,6 +11723,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 2
         pixels:
         - part: 5
           position: {x: 16, y: 17}
@@ -11394,25 +11732,25 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 0
       rowIndex: 3
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 1
         position: {x: 14, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -11487,6 +11825,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -11525,6 +11865,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -11533,6 +11875,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -11541,6 +11885,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -11549,6 +11895,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -11556,17 +11904,17 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 1
       rowIndex: 3
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -11641,6 +11989,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 15}
@@ -11679,6 +12029,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 17}
@@ -11686,25 +12038,25 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 2
       rowIndex: 3
       anchors:
       - type: 0
         position: {x: 14, y: 13}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 1
         position: {x: 14, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 18, y: 17}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 13}
@@ -11779,6 +12131,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 16}
@@ -11817,6 +12171,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 2
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 2
           position: {x: 14, y: 17}
@@ -11825,6 +12181,8 @@ MonoBehaviour:
             rgba: 4287608797
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 18, y: 17}
@@ -11833,6 +12191,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 18}
@@ -11841,6 +12201,8 @@ MonoBehaviour:
             rgba: 4286950605
           uvIndex: -1
       - part: 5
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 5
           position: {x: 17, y: 18}
@@ -11848,21 +12210,21 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4288332782
           uvIndex: -1
-      deadZone:
-        pixels: []
     - frameIndex: 3
       rowIndex: 3
       anchors:
       - type: 0
         position: {x: 14, y: 12}
-        direction: 0
+        orientation: 0
         flipX: 0
       - type: 2
         position: {x: 17, y: 16}
-        direction: 0
+        orientation: 0
         flipX: 0
       bodyRegions:
       - part: 0
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 0
           position: {x: 14, y: 12}
@@ -11937,6 +12299,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 1
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 1
           position: {x: 15, y: 15}
@@ -11975,6 +12339,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 3
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 3
           position: {x: 17, y: 16}
@@ -11983,6 +12349,8 @@ MonoBehaviour:
             rgba: 4289121274
           uvIndex: -1
       - part: 4
+        orientation: 0
+        spriteFacing: 3
         pixels:
         - part: 4
           position: {x: 15, y: 17}
@@ -11990,8 +12358,6 @@ MonoBehaviour:
             serializedVersion: 2
             rgba: 4286950605
           uvIndex: -1
-      deadZone:
-        pixels: []
   - animationName: Hit
     spritesheet: {fileID: 0}
     frameSize: {x: 32, y: 32}
