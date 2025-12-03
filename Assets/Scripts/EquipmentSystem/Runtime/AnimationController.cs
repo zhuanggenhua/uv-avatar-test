@@ -1,4 +1,5 @@
 using UnityEngine;
+using EquipmentSystem.Data;
 
 namespace EquipmentSystem.Runtime
 {
@@ -9,8 +10,8 @@ namespace EquipmentSystem.Runtime
     public class AnimationController : MonoBehaviour
     {
         [Header("动画配置")]
-        [Tooltip("可用的动画名称列表（对应 Animator 的 Bool 参数）")]
-        public string[] animationNames = { "Idle", "Walk", "Run", "Attack", "Hurt", "Die" };
+        [Tooltip("动画类型数据库")]
+        public AnimationTypeDatabase animDatabase;
         
         [Header("方向配置")]
         [Tooltip("方向名称")]
@@ -29,6 +30,7 @@ namespace EquipmentSystem.Runtime
         int _currentDirIndex = 0;
         GameObject _shadowObject;
         bool _shadowEnabled = true;
+        AnimationTypeItem _lastAnimType;
         
         /// <summary>当前动画索引</summary>
         public int CurrentAnimationIndex => _currentAnimIndex;
@@ -71,23 +73,22 @@ namespace EquipmentSystem.Runtime
         /// <param name="index">动画索引</param>
         public void SetAnimation(int index)
         {
-            if (index < 0 || index >= animationNames.Length) return;
+            if (animDatabase == null || index < 0 || index >= animDatabase.Count) return;
             _currentAnimIndex = index;
             ApplyAnimation();
         }
         
         /// <summary>
-        /// 设置动画（按名称）
+        /// 设置动画（按类型）
         /// </summary>
-        public void SetAnimation(string animName)
+        public void SetAnimation(AnimationTypeItem animType)
         {
-            for (int i = 0; i < animationNames.Length; i++)
+            if (animDatabase == null || animType == null) return;
+            int index = animDatabase.IndexOf(animType);
+            if (index >= 0)
             {
-                if (animationNames[i] == animName)
-                {
-                    SetAnimation(i);
-                    return;
-                }
+                _currentAnimIndex = index;
+                ApplyAnimation();
             }
         }
         
@@ -132,22 +133,35 @@ namespace EquipmentSystem.Runtime
         
         void ApplyAnimation()
         {
-            if (_animator == null) return;
+            if (_animator == null || animDatabase == null) return;
             
             // 关闭所有动画
-            foreach (var anim in animationNames)
+            if (_lastAnimType == null)
             {
-                try { _animator.SetBool(anim, false); } catch { }
+                foreach (var animType in animDatabase.ItemsReadOnly)
+                {
+                    if (animType != null)
+                    {
+                        try { _animator.SetBool(animType.name, false); } catch { }
+                    }
+                }
+            }
+            else
+            {
+                try { _animator.SetBool(_lastAnimType.name, false); } catch { }
             }
             
             // 开启当前动画
-            string animName = animationNames[_currentAnimIndex];
-            try
+            if (animDatabase.TryGetByIndex(_currentAnimIndex, out var currentType) && currentType != null)
             {
-                _animator.SetTrigger("Clicked");
-                _animator.SetBool(animName, true);
+                try
+                {
+                    _animator.SetTrigger("Clicked");
+                    _animator.SetBool(currentType.name, true);
+                }
+                catch { }
+                _lastAnimType = currentType;
             }
-            catch { }
         }
         
         void ApplyDirection()

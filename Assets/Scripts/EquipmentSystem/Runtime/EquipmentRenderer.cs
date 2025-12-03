@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+
 using EquipmentSystem.Data;
-using System.Collections.Generic;
+
+using UnityEngine;
 
 namespace EquipmentSystem.Runtime
 {
@@ -26,8 +28,13 @@ namespace EquipmentSystem.Runtime
         [Tooltip("角色外观数据，包含头发、胡子等捷人时选择的外观")]
         public CharacterAppearance appearance;
         
-        [Header("装备")]
-        public List<EquipmentData> equipments = new List<EquipmentData>();
+        [Header("装备槽位")]
+        public EquipmentData helmet;
+        public EquipmentData clothing;
+        public EquipmentData cloak;
+        public EquipmentData gloves;
+        public EquipmentData shoes;
+        public List<EquipmentData> weapons = new List<EquipmentData>();
         
         [Header("调试")]
         [Tooltip("如果 Shader.Find 失败，可以手动指定 Shader")]
@@ -44,7 +51,7 @@ namespace EquipmentSystem.Runtime
         string _currentAnimName;
         
         SpriteRenderer _charRenderer;
-        Dictionary<EquipmentData, SpriteRenderer> _equipRenderers = new Dictionary<EquipmentData, SpriteRenderer>();
+        Dictionary<EquipmentData, SpriteRenderer> _weaponRenderers = new Dictionary<EquipmentData, SpriteRenderer>();
         
         // 帧同步
         Sprite _lastSprite;
@@ -56,18 +63,25 @@ namespace EquipmentSystem.Runtime
         // Shader 换装材质
         Material _shaderMaterial;
         
+        // 方案 D：Animator 参数缓存
+        List<string> _validAnimParams;
+        bool _animParamsCached;
+        
         // Shader 属性 ID - 双层 UV Map
         static readonly int BodyUVMapProp = Shader.PropertyToID("_BodyUVMap");
         static readonly int HeadUVMapProp = Shader.PropertyToID("_HeadUVMap");
         static readonly int ClothTexProp = Shader.PropertyToID("_ClothTex");
-        // 头部三层贴图
+        static readonly int CloakTexProp = Shader.PropertyToID("_CloakTex");
+        // 头部四层贴图
         static readonly int HairTexProp = Shader.PropertyToID("_HairTex");
+        static readonly int FaceAccessoryTexProp = Shader.PropertyToID("_FaceAccessoryTex");
         static readonly int BeardTexProp = Shader.PropertyToID("_BeardTex");
         static readonly int HelmetTexProp = Shader.PropertyToID("_HelmetTex");
-        static readonly int UVMapFrameRectProp = Shader.PropertyToID("_UVMapFrameRect");
         // 装备贴图的 Sprite Rect (UV 偏移和缩放)
         static readonly int ClothRectProp = Shader.PropertyToID("_ClothRect");
+        static readonly int CloakRectProp = Shader.PropertyToID("_CloakRect");
         static readonly int HairRectProp = Shader.PropertyToID("_HairRect");
+        static readonly int FaceAccessoryRectProp = Shader.PropertyToID("_FaceAccessoryRect");
         static readonly int BeardRectProp = Shader.PropertyToID("_BeardRect");
         static readonly int HelmetRectProp = Shader.PropertyToID("_HelmetRect");
         // 颜色属性
@@ -75,13 +89,19 @@ namespace EquipmentSystem.Runtime
         static readonly int RightHandColorProp = Shader.PropertyToID("_RightHandColor");
         static readonly int LeftFootColorProp = Shader.PropertyToID("_LeftFootColor");
         static readonly int RightFootColorProp = Shader.PropertyToID("_RightFootColor");
+        static readonly int LeftEyeColorProp = Shader.PropertyToID("_LeftEyeColor");
+        static readonly int RightEyeColorProp = Shader.PropertyToID("_RightEyeColor");
         // 启用开关
         static readonly int EnableHairProp = Shader.PropertyToID("_EnableHair");
+        static readonly int EnableFaceAccessoryProp = Shader.PropertyToID("_EnableFaceAccessory");
         static readonly int EnableBeardProp = Shader.PropertyToID("_EnableBeard");
         static readonly int EnableHelmetProp = Shader.PropertyToID("_EnableHelmet");
         static readonly int EnableClothProp = Shader.PropertyToID("_EnableCloth");
+        static readonly int EnableCloakProp = Shader.PropertyToID("_EnableCloak");
         static readonly int EnableGlovesProp = Shader.PropertyToID("_EnableGloves");
         static readonly int EnableShoesProp = Shader.PropertyToID("_EnableShoes");
+        static readonly int EnableLeftEyeProp = Shader.PropertyToID("_EnableLeftEye");
+        static readonly int EnableRightEyeProp = Shader.PropertyToID("_EnableRightEye");
         
         void Awake()
         {
@@ -92,9 +112,11 @@ namespace EquipmentSystem.Runtime
         
         void Start()
         {
-            foreach (var e in equipments)
-                if (e != null && e.type == EquipmentType.Weapon)
-                    CreateWeaponRenderer(e);
+            foreach (var w in weapons)
+            {
+                if (w != null)
+                    CreateWeaponRenderer(w);
+            }
             Refresh();
         }
         
@@ -111,8 +133,38 @@ namespace EquipmentSystem.Runtime
             }
         }
         
-        // 动画关键字列表 - 用于匹配 Animator Bool 参数
-        static readonly string[] AnimKeywords = { "Idle", "Walk", "Run", "Attack", "Hurt", "Die", "Jump", "Fall" };
+        /// <summary>
+        /// 缓存 Animator 中有效的 Bool 参数
+        /// 从 AnimationTypeDatabase 获取动画 Key 列表
+        /// </summary>
+        void CacheValidAnimParams()
+        {
+            if (_animParamsCached || _animator == null) return;
+            
+            _validAnimParams = new List<string>();
+            
+            // 从 frameData 中的数据库获取所有动画 Key
+            var keywordSet = new HashSet<string>();
+            var db = frameData?.animDatabase;
+            if (db != null)
+            {
+                foreach (var type in db.ItemsReadOnly)
+                {
+                    if (type != null)
+                        keywordSet.Add(type.name);
+                }
+            }
+            
+            foreach (var param in _animator.parameters)
+            {
+                if (param.type == AnimatorControllerParameterType.Bool 
+                    && keywordSet.Contains(param.name))
+                {
+                    _validAnimParams.Add(param.name);
+                }
+            }
+            _animParamsCached = true;
+        }
         
         /// <summary>
         /// 从 Animator Bool 参数同步当前动画名称
@@ -122,20 +174,18 @@ namespace EquipmentSystem.Runtime
         {
             if (_animator == null || frameData == null) return;
             
+            // 方案 D：使用缓存的参数列表，避免 try/catch
+            CacheValidAnimParams();
+            
             // 从 Animator 的 Bool 参数找到当前激活的动画
             string activeParam = null;
-            foreach (var keyword in AnimKeywords)
+            foreach (var keyword in _validAnimParams)
             {
-                // 检查 Animator 是否有这个 Bool 参数且为 true
-                try
+                if (_animator.GetBool(keyword))
                 {
-                    if (_animator.GetBool(keyword))
-                    {
-                        activeParam = keyword;
-                        break;
-                    }
+                    activeParam = keyword;
+                    break;
                 }
-                catch { } // 参数不存在时会抛异常，忽略
             }
             
             _debugAnimatorState = activeParam ?? "(none)";
@@ -146,49 +196,33 @@ namespace EquipmentSystem.Runtime
                 activeParam = "Idle";
             }
             
-            // 在 frameData 中找到包含该关键字的动画
-            string newAnimName = FindAnimationByKeyword(activeParam);
+            // 在 frameData 中找到包含该 Key 的动画
+            var newAnimData = FindAnimationByKey(activeParam);
             
-            if (!string.IsNullOrEmpty(newAnimName) && newAnimName != _currentAnimName)
+            if (newAnimData != null && newAnimData != _currentAnimData)
             {
-                _currentAnimName = newAnimName;
-                _currentAnimData = frameData.GetAnimation(_currentAnimName);
-                _debugCurrentAnim = _currentAnimName;
+                _currentAnimData = newAnimData;
+                _currentAnimName = newAnimData.GetKey();
+                _debugCurrentAnim = _currentAnimName ?? "(null)";
                 
-                if (_currentAnimData != null)
-                {
-                    Debug.Log($"[EquipmentRenderer] 动画同步: {activeParam} -> {_currentAnimName}");
-                    UpdateUVMapTexture();
-                }
+                UpdateUVMapTexture();
             }
         }
         
         /// <summary>
-        /// 根据关键字在 frameData 中找到对应的动画
+        /// 根据 Key 在 frameData 中找到对应的动画
         /// </summary>
-        string FindAnimationByKeyword(string keyword)
+        AnimationData FindAnimationByKey(string key)
         {
             if (frameData == null) return null;
             
-            string keywordLower = keyword.ToLowerInvariant();
-            
-            // 先尝试精确匹配
-            foreach (var anim in frameData.animations)
-            {
-                if (string.Equals(anim.animationName, keyword, System.StringComparison.OrdinalIgnoreCase))
-                    return anim.animationName;
-            }
-            
-            // 再尝试包含匹配
-            foreach (var anim in frameData.animations)
-            {
-                if (anim.animationName.ToLowerInvariant().Contains(keywordLower))
-                    return anim.animationName;
-            }
+            // 精确匹配
+            var exact = frameData.GetAnimationByKey(key);
+            if (exact != null) return exact;
             
             // 默认返回第一个
             if (frameData.animations.Count > 0)
-                return frameData.animations[0].animationName;
+                return frameData.animations[0];
             
             return null;
         }
@@ -214,8 +248,6 @@ namespace EquipmentSystem.Runtime
             
             _shaderMaterial = new Material(shader);
             _charRenderer.material = _shaderMaterial;
-            
-            Debug.Log($"[EquipmentRenderer] Shader 加载成功: {shader.name}");
         }
         
         /// <summary>
@@ -243,12 +275,32 @@ namespace EquipmentSystem.Runtime
         {
             if (equip == null) return;
             
-            if (!equipments.Contains(equip))
+            switch (equip.type)
             {
-                equipments.Add(equip);
-                if (equip.type == EquipmentType.Weapon)
-                    CreateWeaponRenderer(equip);
+                case EquipmentType.Helmet:
+                    helmet = equip;
+                    break;
+                case EquipmentType.Clothing:
+                    clothing = equip;
+                    break;
+                case EquipmentType.Cloak:
+                    cloak = equip;
+                    break;
+                case EquipmentType.Gloves:
+                    gloves = equip;
+                    break;
+                case EquipmentType.Shoes:
+                    shoes = equip;
+                    break;
+                case EquipmentType.Weapon:
+                    if (!weapons.Contains(equip))
+                    {
+                        weapons.Add(equip);
+                        CreateWeaponRenderer(equip);
+                    }
+                    break;
             }
+            
             Refresh();
         }
         
@@ -256,18 +308,88 @@ namespace EquipmentSystem.Runtime
         {
             if (equip == null) return;
             
-            if (_equipRenderers.TryGetValue(equip, out var sr))
+            switch (equip.type)
+            {
+                case EquipmentType.Helmet:
+                    if (helmet == equip) helmet = null;
+                    break;
+                case EquipmentType.Clothing:
+                    if (clothing == equip) clothing = null;
+                    break;
+                case EquipmentType.Cloak:
+                    if (cloak == equip) cloak = null;
+                    break;
+                case EquipmentType.Gloves:
+                    if (gloves == equip) gloves = null;
+                    break;
+                case EquipmentType.Shoes:
+                    if (shoes == equip) shoes = null;
+                    break;
+                case EquipmentType.Weapon:
+                    if (weapons.Contains(equip))
+                        weapons.Remove(equip);
+                    break;
+            }
+            
+            if (_weaponRenderers.TryGetValue(equip, out var sr))
             {
                 Destroy(sr.gameObject);
-                _equipRenderers.Remove(equip);
+                _weaponRenderers.Remove(equip);
             }
-            equipments.Remove(equip);
+            
             Refresh();
+        }
+        
+        /// <summary>
+        /// 设置角色外观（头发/胡子等）
+        /// 会自动刷新
+        /// </summary>
+        public void SetAppearance(CharacterAppearance newAppearance)
+        {
+            if (appearance == newAppearance) return;
+            appearance = newAppearance;
+            Refresh();
+        }
+        
+        /// <summary>
+        /// 一次性卸下所有装备（包括武器）
+        /// </summary>
+        public void UnequipAll()
+        {
+            var toUnequip = new List<EquipmentData>();
+            if (helmet != null) toUnequip.Add(helmet);
+            if (clothing != null) toUnequip.Add(clothing);
+            if (cloak != null) toUnequip.Add(cloak);
+            if (gloves != null) toUnequip.Add(gloves);
+            if (shoes != null) toUnequip.Add(shoes);
+            toUnequip.AddRange(weapons);
+            
+            foreach (var e in toUnequip)
+            {
+                Unequip(e);
+            }
+        }
+        
+        /// <summary>
+        /// 获取指定类型当前装备（武器返回第一个，如有）
+        /// </summary>
+        public EquipmentData GetEquipped(EquipmentType type)
+        {
+            switch (type)
+            {
+                case EquipmentType.Helmet:   return helmet;
+                case EquipmentType.Clothing: return clothing;
+                case EquipmentType.Cloak:    return cloak;
+                case EquipmentType.Gloves:   return gloves;
+                case EquipmentType.Shoes:    return shoes;
+                case EquipmentType.Weapon:   return weapons.Count > 0 ? weapons[0] : null;
+                default:                     return null;
+            }
         }
         
         void CreateWeaponRenderer(EquipmentData equip)
         {
-            if (_equipRenderers.ContainsKey(equip)) return;
+            if (_weaponRenderers.ContainsKey(equip)) return;
             
             var go = new GameObject($"Weapon_{equip.name}");
             go.transform.SetParent(transform);
@@ -275,7 +397,7 @@ namespace EquipmentSystem.Runtime
             go.transform.localScale = Vector3.one;
             
             var sr = go.AddComponent<SpriteRenderer>();
-            _equipRenderers[equip] = sr;
+            _weaponRenderers[equip] = sr;
         }
         
         public void Refresh()
@@ -286,11 +408,11 @@ namespace EquipmentSystem.Runtime
                 return;
             }
             
-            _cachedFrame = frameData.GetFrameData(_currentAnimName, _rowIndex, _frameIndex);
+            _cachedFrame = frameData.GetFrameDataByKey(_currentAnimName, _rowIndex, _frameIndex);
             
             // 获取当前动画配置
             if (_currentAnimData == null)
-                _currentAnimData = frameData.GetAnimation(_currentAnimName);
+                _currentAnimData = frameData.GetAnimationByKey(_currentAnimName);
             
             if (_currentAnimData == null)
             {
@@ -304,39 +426,33 @@ namespace EquipmentSystem.Runtime
             // 设置 UV Map 贴图
             UpdateUVMapTexture();
             
-            // 重置装备状态
+            // 武器需要每帧更新位置（基于锚点）——直接遍历缓存的武器渲染器
+            foreach (var kv in _weaponRenderers)
+            {
+                RenderWeapon(kv.Key, kv.Value, hideLeftWeapon, hideRightWeapon);
+            }
+            
+            // 每次刷新都从当前槽位完整重算 Shader 状态
             ResetEquipmentState();
             
-            // 应用角色外观 (头发/胡子 - 来自捏人数据)
+            // 应用角色外观 (头发/胡子/面部装饰 - 来自捏人数据)
             ApplyAppearanceToShader();
             
-            // 处理所有装备
-            foreach (var equip in equipments)
-            {
-                if (equip == null) continue;
-                
-                Debug.Log($"[EquipmentRenderer] 处理装备: {equip.name}, 类型: {equip.type}");
-                
-                switch (equip.type)
-                {
-                    case EquipmentType.Weapon:
-                        if (_equipRenderers.TryGetValue(equip, out var sr))
-                            RenderWeapon(equip, sr, hideLeftWeapon, hideRightWeapon);
-                        break;
-                    case EquipmentType.Clothing:
-                        ApplyClothingToShader(equip);
-                        break;
-                    case EquipmentType.Helmet:
-                        ApplyHelmetToShader(equip);
-                        break;
-                    case EquipmentType.Gloves:
-                        ApplyGlovesToShader(equip);
-                        break;
-                    case EquipmentType.Shoes:
-                        ApplyShoesToShader(equip);
-                        break;
-                }
-            }
+            // 处理 Shader 装备（基于槽位）
+            if (clothing != null)
+                ApplySpriteEquipment(clothing, CharacterBodyPart.Torso, ClothTexProp, ClothRectProp, EnableClothProp);
+            
+            if (cloak != null)
+                ApplySpriteEquipment(cloak, CharacterBodyPart.Torso, CloakTexProp, CloakRectProp, EnableCloakProp);
+            
+            if (helmet != null)
+                ApplySpriteEquipment(helmet, CharacterBodyPart.Head, HelmetTexProp, HelmetRectProp, EnableHelmetProp);
+            
+            if (gloves != null)
+                ApplyColorEquipment(gloves, LeftHandColorProp, RightHandColorProp, EnableGlovesProp);
+            
+            if (shoes != null)
+                ApplyColorEquipment(shoes, LeftFootColorProp, RightFootColorProp, EnableShoesProp);
         }
         
         void UpdateUVMapTexture()
@@ -349,139 +465,57 @@ namespace EquipmentSystem.Runtime
             
             // 设置身体层 UV Map
             if (_currentAnimData.bodyUVMap != null)
-            {
                 _shaderMaterial.SetTexture(BodyUVMapProp, _currentAnimData.bodyUVMap);
-                Debug.Log($"[EquipmentRenderer] 身体层 UV Map: {_currentAnimData.bodyUVMap.name}");
-            }
-            else
-            {
-                Debug.LogWarning($"[EquipmentRenderer] 动画 '{_currentAnimName}' 没有身体层 UV Map");
-            }
             
             // 设置头部层 UV Map
             if (_currentAnimData.headUVMap != null)
-            {
                 _shaderMaterial.SetTexture(HeadUVMapProp, _currentAnimData.headUVMap);
-                Debug.Log($"[EquipmentRenderer] 头部层 UV Map: {_currentAnimData.headUVMap.name}");
-            }
-            
-            // 简化：UVMap 与 SpriteRenderer 在运行时共用同一 spritesheet 坐标系，直采 i.uv
-            // 如需 Atlas 适配，可再恢复 _UVMapFrameRect 分支。
         }
         
-        // 计算当前帧在“UVMap使用的spritesheet”中的UV矩形（与UVMap贴图同坐标系）
-        void UpdateUVMapFrameRect()
-        {
-            if (_shaderMaterial == null || _currentAnimData == null) return;
-
-            // 以 headUV 或 bodyUV 的尺寸为基准，避免与 SpriteAtlas 混淆
-            var uvMapTex = _currentAnimData.headUVMap != null ? _currentAnimData.headUVMap : _currentAnimData.bodyUVMap;
-            var sheet = uvMapTex != null ? uvMapTex : _currentAnimData.spritesheet;
-            if (sheet == null)
-            {
-                Debug.LogWarning("[EquipmentRenderer] 无法计算 _UVMapFrameRect：缺少 UVMap 或 spritesheet");
-                return;
-            }
-
-            int texW = sheet.width;
-            int texH = sheet.height;
-            int frameW = _currentAnimData.frameSize.x;
-            int frameH = _currentAnimData.frameSize.y;
-
-            // 注意：纹理UV原点在左下角，行号从上到下需要转换
-            float minU = (float)(_frameIndex * frameW) / texW;
-            float maxU = (float)((_frameIndex + 1) * frameW) / texW;
-            float minV = (float)(texH - (_rowIndex + 1) * frameH) / texH;
-            float maxV = (float)(texH - _rowIndex * frameH) / texH;
-
-            var rect = new Vector4(minU, minV, maxU, maxV);
-            _shaderMaterial.SetVector(UVMapFrameRectProp, rect);
-            Debug.Log($"[EquipmentRenderer] _UVMapFrameRect: ({minU:F3}, {minV:F3}, {maxU:F3}, {maxV:F3}), Frame={_frameIndex}, Row={_rowIndex}, UVMapTex={sheet.width}x{sheet.height}");
-        }
-        
+        /// <summary>
+        /// 重置所有装备层为禁用状态
+        /// </summary>
         void ResetEquipmentState()
         {
             if (_shaderMaterial == null) return;
             
-            // 重置所有装备层为禁用
             _shaderMaterial.SetFloat(EnableHairProp, 0);
+            _shaderMaterial.SetFloat(EnableFaceAccessoryProp, 0);
             _shaderMaterial.SetFloat(EnableBeardProp, 0);
             _shaderMaterial.SetFloat(EnableHelmetProp, 0);
             _shaderMaterial.SetFloat(EnableClothProp, 0);
+            _shaderMaterial.SetFloat(EnableCloakProp, 0);
             _shaderMaterial.SetFloat(EnableGlovesProp, 0);
             _shaderMaterial.SetFloat(EnableShoesProp, 0);
-            
-            // 同步清空对应纹理与 Rect，避免 UI 切换为空后仍采样到上一次纹理（尤其在 Debug 模式下）
-            ClearTextureAndRect(ClothTexProp, ClothRectProp);
-            ClearTextureAndRect(HairTexProp, HairRectProp);
-            ClearTextureAndRect(BeardTexProp, BeardRectProp);
-            ClearTextureAndRect(HelmetTexProp, HelmetRectProp);
-        }
-
-        void ClearTextureAndRect(int texProp, int rectProp)
-        {
-            _shaderMaterial.SetTexture(texProp, null);
-            _shaderMaterial.SetVector(rectProp, Vector4.zero);
+            _shaderMaterial.SetFloat(EnableLeftEyeProp, 0);
+            _shaderMaterial.SetFloat(EnableRightEyeProp, 0);
         }
         
         /// <summary>
-        /// 设置服装 - 根据方向选择贴图
-        /// 支持部位级别的贴图方向覆盖（用于转头等场景）
-        /// 
-        /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
+        /// 通用 Sprite 装备应用方法 - 支持序列帧覆盖 + 循环变体 + 基础贴图回退
+        /// 用于服装、头盔等使用贴图的装备类型
         /// </summary>
-        void ApplyClothingToShader(EquipmentData equip)
+        void ApplySpriteEquipment(EquipmentData equip, CharacterBodyPart part, int texProp, int rectProp, int enableProp)
         {
             if (_shaderMaterial == null) return;
             
-            // 获取实际使用的贴图方向（支持部位级别覆盖）
-            var facing = GetSpriteFacingForPart(CharacterBodyPart.Torso);
-            var clothingSprite = equip.GetSprite(facing);
-            if (clothingSprite == null || clothingSprite.texture == null)
+            var facing = GetSpriteFacingForPart(part);
+            
+            // 优先级：1. 序列帧动画集 -> 2. 循环变体 -> 3. 基础 4 向贴图
+            var seqSprite = equip.TryGetSequenceSpriteByKey(_currentAnimName, (int)facing, _frameIndex);
+            Sprite finalSprite = seqSprite;
+            
+            if (finalSprite == null)
             {
-                Debug.LogWarning($"[EquipmentRenderer] 服装 {equip.name} 没有方向 {facing} 的贴图");
-                return;
+                var loopType = GetCurrentVariantLoopType();
+                finalSprite = equip.GetLoopSprite(loopType, facing, _frameIndex);
             }
             
-            // 重要: 同时传递 texture 和 sprite rect，Shader 中用 TransformUV() 转换 UV
-            _shaderMaterial.SetTexture(ClothTexProp, clothingSprite.texture);
-            var clothRect = SpriteUtils.GetUVRect(clothingSprite);
-            _shaderMaterial.SetVector(ClothRectProp, clothRect);
-            _shaderMaterial.SetFloat(EnableClothProp, 1);
-            Debug.Log($"[EquipmentRenderer] 服装 Rect: ({clothRect.x:F3}, {clothRect.y:F3}, {clothRect.z:F3}, {clothRect.w:F3}), " +
-                      $"Sprite尺寸: {clothingSprite.rect.width}x{clothingSprite.rect.height}, " +
-                      $"Texture尺寸: {clothingSprite.texture.width}x{clothingSprite.texture.height}, 方向: {facing}");
-        }
-        
-        /// <summary>
-        /// 设置头盔 - 根据方向选择贴图
-        /// 支持部位级别的贴图方向覆盖（用于转头等场景）
-        /// 
-        /// 注意: 必须同时设置 texture 和 rect，因为 sprite.texture 可能是整张 spritesheet
-        /// </summary>
-        void ApplyHelmetToShader(EquipmentData equip)
-        {
-            if (_shaderMaterial == null) return;
+            if (finalSprite == null || finalSprite.texture == null) return;
             
-            // 获取实际使用的贴图方向（支持部位级别覆盖）
-            var facing = GetSpriteFacingForPart(CharacterBodyPart.Head);
-            var helmetSprite = equip.GetSprite(facing);
-            if (helmetSprite == null || helmetSprite.texture == null)
-            {
-                Debug.LogWarning($"[EquipmentRenderer] 头盔 {equip.name} 没有方向 {facing} 的贴图");
-                return;
-            }
-            
-            // 重要: 同时传递 texture 和 sprite rect，Shader 中用 TransformUV() 转换 UV
-            var helmetRect = SpriteUtils.GetUVRect(helmetSprite);
-            _shaderMaterial.SetTexture(HelmetTexProp, helmetSprite.texture);
-            _shaderMaterial.SetVector(HelmetRectProp, helmetRect);
-            _shaderMaterial.SetFloat(EnableHelmetProp, 1);
-            
-            // 调试: 输出头盔的 sprite rect 信息
-            Debug.Log($"[EquipmentRenderer] 头盔 Rect: ({helmetRect.x:F3}, {helmetRect.y:F3}, {helmetRect.z:F3}, {helmetRect.w:F3}), " +
-                      $"Sprite尺寸: {helmetSprite.rect.width}x{helmetSprite.rect.height}, " +
-                      $"Texture尺寸: {helmetSprite.texture.width}x{helmetSprite.texture.height}, 方向: {facing}");
+            _shaderMaterial.SetTexture(texProp, finalSprite.texture);
+            _shaderMaterial.SetVector(rectProp, SpriteUtils.GetUVRect(finalSprite));
+            _shaderMaterial.SetFloat(enableProp, 1);
         }
         
         /// <summary>
@@ -490,15 +524,23 @@ namespace EquipmentSystem.Runtime
         /// </summary>
         CharacterFacing GetSpriteFacingForPart(CharacterBodyPart part)
         {
-            if (_cachedFrame != null)
-            {
-                var region = _cachedFrame.GetRegion(part);
-                if (region != null)
-                {
-                    return region.GetSpriteFacing(_rowIndex);
-                }
-            }
-            return (CharacterFacing)_rowIndex;
+            if (_cachedFrame == null)
+                return (CharacterFacing)_rowIndex;
+            
+            var region = _cachedFrame.GetRegion(part);
+            if (region == null)
+                return (CharacterFacing)_rowIndex;
+            
+            return region.spriteFacing;
+        }
+        
+        /// <summary>
+        /// 获取当前动画的变体循环类型
+        /// </summary>
+        EquipVariantLoopType GetCurrentVariantLoopType()
+        {
+            var animType = _currentAnimData?.animationType;
+            return animType != null ? animType.variantLoopType : EquipVariantLoopType.Idle;
         }
         
         /// <summary>
@@ -510,8 +552,16 @@ namespace EquipmentSystem.Runtime
         {
             if (_shaderMaterial == null || appearance == null) return;
             
-            // 设置头发 - 同时传递 texture 和 sprite rect
-            if (appearance.HasHair)
+            bool hideHair = false;
+            bool hideBeard = false;
+            if (helmet != null)
+            {
+                hideHair = helmet.hideHair;
+                hideBeard = helmet.hideBeard;
+            }
+            
+            // 设置头发
+            if (appearance.HasHair && !hideHair)
             {
                 var hairSprite = appearance.GetHairByRow(_rowIndex);
                 if (hairSprite != null && hairSprite.texture != null)
@@ -522,8 +572,20 @@ namespace EquipmentSystem.Runtime
                 }
             }
             
-            // 设置胡子 - 同时传递 texture 和 sprite rect
-            if (appearance.HasBeard)
+            // 设置面部装饰（每个方向独立，未填写的方向不显示）
+            if (appearance.HasFaceAccessory)
+            {
+                var faceAccessorySprite = appearance.GetFaceAccessoryByRow(_rowIndex);
+                if (faceAccessorySprite != null && faceAccessorySprite.texture != null)
+                {
+                    _shaderMaterial.SetTexture(FaceAccessoryTexProp, faceAccessorySprite.texture);
+                    _shaderMaterial.SetVector(FaceAccessoryRectProp, SpriteUtils.GetUVRect(faceAccessorySprite));
+                    _shaderMaterial.SetFloat(EnableFaceAccessoryProp, 1);
+                }
+            }
+            
+            // 设置胡子
+            if (appearance.HasBeard && !hideBeard)
             {
                 var beardSprite = appearance.GetBeardByRow(_rowIndex);
                 if (beardSprite != null && beardSprite.texture != null)
@@ -533,51 +595,35 @@ namespace EquipmentSystem.Runtime
                     _shaderMaterial.SetFloat(EnableBeardProp, 1);
                 }
             }
+            
+            // 设置眼睛颜色
+            _shaderMaterial.SetColor(LeftEyeColorProp, appearance.leftEyeColor);
+            _shaderMaterial.SetColor(RightEyeColorProp, appearance.rightEyeColor);
+            _shaderMaterial.SetFloat(EnableLeftEyeProp, 1);
+            _shaderMaterial.SetFloat(EnableRightEyeProp, 1);
         }
         
         /// <summary>
-        /// 设置手套 - 只需设置颜色参数
+        /// 通用颜色装备应用方法 - 用于手套、鞋子等只需颜色参数的装备
         /// </summary>
-        void ApplyGlovesToShader(EquipmentData equip)
+        void ApplyColorEquipment(EquipmentData equip, int leftColorProp, int rightColorProp, int enableProp)
         {
             if (_shaderMaterial == null) return;
             
-            _shaderMaterial.SetColor(LeftHandColorProp, equip.leftColor);
-            _shaderMaterial.SetColor(RightHandColorProp, equip.rightColor);
-            _shaderMaterial.SetFloat(EnableGlovesProp, 1);
-            Debug.Log($"[EquipmentRenderer] 手套已启用: {equip.name}, 左={equip.leftColor}, 右={equip.rightColor}");
+            _shaderMaterial.SetColor(leftColorProp, equip.leftColor);
+            _shaderMaterial.SetColor(rightColorProp, equip.rightColor);
+            _shaderMaterial.SetFloat(enableProp, 1);
         }
         
         /// <summary>
-        /// 设置鞋子 - 只需设置颜色参数
-        /// </summary>
-        void ApplyShoesToShader(EquipmentData equip)
-        {
-            if (_shaderMaterial == null) return;
-            
-            _shaderMaterial.SetColor(LeftFootColorProp, equip.leftColor);
-            _shaderMaterial.SetColor(RightFootColorProp, equip.rightColor);
-            _shaderMaterial.SetFloat(EnableShoesProp, 1);
-        }
-        
-        /// <summary>
-        /// 渲染武器 - 用锚点定位，根据方向选择贴图
+        /// 渲染武器 - 支持序列帧覆盖 + 挂点模式回退
         /// 
-        /// 注意: 武器使用 SpriteRenderer 渲染，直接赋值 sprite 即可。
-        /// SpriteRenderer 会自动处理 sprite.rect，不需要手动计算 UV。
-        /// 这与 Shader 换装不同，Shader 换装需要手动传递 rect 给 Shader。
+        /// 优先级：
+        /// 1. 有序列帧 strip → 使用序列帧，位置由 Sprite pivot 决定
+        /// 2. 无序列帧 → 回退挂点模式 + 4 向基础贴图
         /// </summary>
         void RenderWeapon(EquipmentData equip, SpriteRenderer sr, bool hideLeftWeapon, bool hideRightWeapon)
         {
-            // 武器用 SpriteRenderer 渲染，直接赋值 sprite（自动处理 rect）
-            sr.sprite = equip.GetSpriteByRow(_rowIndex);
-            
-            if (_cachedFrame == null)
-            {
-                sr.enabled = false;
-                return;
-            }
-            
             // 检查武器隐藏配置
             if (equip.anchorType == AnchorType.LeftWeapon && hideLeftWeapon)
             {
@@ -585,6 +631,34 @@ namespace EquipmentSystem.Runtime
                 return;
             }
             if (equip.anchorType == AnchorType.RightWeapon && hideRightWeapon)
+            {
+                sr.enabled = false;
+                return;
+            }
+            
+            // 1. 先尝试序列帧覆盖
+            var seqSprite = equip.TryGetSequenceSpriteByKey(_currentAnimName, _rowIndex, _frameIndex);
+            
+            if (seqSprite != null)
+            {
+                // 序列帧模式：位置由 Sprite pivot 决定，不依赖挂点精确计算
+                sr.sprite = seqSprite;
+                sr.enabled = true;
+                sr.transform.localPosition = Vector3.zero;
+                sr.transform.localRotation = Quaternion.identity;
+                sr.flipX = false;
+                
+                // 排序仍然保持
+                sr.sortingLayerID = _charRenderer.sortingLayerID;
+                int sortOffset = GetWeaponSortOffset(equip.anchorType, _rowIndex);
+                sr.sortingOrder = _charRenderer.sortingOrder + sortOffset;
+                return;
+            }
+            
+            // 2. 回退到挂点模式
+            sr.sprite = equip.GetSpriteByRow(_rowIndex);
+            
+            if (_cachedFrame == null)
             {
                 sr.enabled = false;
                 return;
@@ -628,34 +702,18 @@ namespace EquipmentSystem.Runtime
             
             // 排序 - 根据朝向和左右手决定前后
             sr.sortingLayerID = _charRenderer.sortingLayerID;
-            int sortOffset = GetWeaponSortOffset(equip.anchorType, _rowIndex);
-            sr.sortingOrder = _charRenderer.sortingOrder + sortOffset;
+            sr.sortingOrder = _charRenderer.sortingOrder + GetWeaponSortOffset(equip.anchorType, _rowIndex);
         }
         
-        /// <summary>
-        /// 根据朝向和左右手计算武器排序偏移
-        /// SE(0): 左手在后(-1), 右手在前(+1)
-        /// SW(1): 左手在前(+1), 右手在后(-1)
-        /// NE(2): 左手在前(+1), 右手在后(-1)
-        /// NW(3): 左手在后(-1), 右手在前(+1)
-        /// </summary>
+        // 武器排序偏移表：[rowIndex] = 左手偏移（右手取反）
+        // SE(0): 左后(-1)/右前(+1), SW(1): 左前(+1)/右后(-1), NE(2): 左前(+1)/右后(-1), NW(3): 左后(-1)/右前(+1)
+        static readonly int[] LeftWeaponSortOffsets = { -1, 1, 1, -1 };
+        
         int GetWeaponSortOffset(AnchorType anchorType, int rowIndex)
         {
-            bool isLeftWeapon = anchorType == AnchorType.LeftWeapon;
-            
-            switch (rowIndex)
-            {
-                case 0: // SE - 东南
-                    return isLeftWeapon ? -1 : 1;
-                case 1: // SW - 西南
-                    return isLeftWeapon ? 1 : -1;
-                case 2: // NE - 东北
-                    return isLeftWeapon ? 1 : -1;
-                case 3: // NW - 西北
-                    return isLeftWeapon ? -1 : 1;
-                default:
-                    return 1;
-            }
+            int leftOffset = (rowIndex >= 0 && rowIndex < LeftWeaponSortOffsets.Length) 
+                ? LeftWeaponSortOffsets[rowIndex] : 1;
+            return anchorType == AnchorType.LeftWeapon ? leftOffset : -leftOffset;
         }
         
 #if UNITY_EDITOR

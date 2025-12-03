@@ -433,7 +433,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5272552500058403403, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 241005997}
   m_SourcePrefab: {fileID: 100100000, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
 --- !u!4 &23843574 stripped
 Transform:
@@ -1774,6 +1777,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 736999a148e3ca14e8d9072ce5224e4b, type: 2}
   - {fileID: 11400000, guid: e5c1a3599aa2a4046a2c2f34e322ceda, type: 2}
   - {fileID: 11400000, guid: 28a4fdf5f2498554cb260a4d544c16e3, type: 2}
+  - {fileID: 11400000, guid: 28bc3987db4b748408e99b8f8f982f42, type: 2}
+  availableAppearances:
+  - {fileID: 11400000, guid: a1ff30d38f2dfa346a3c8920b6183736, type: 2}
   panelWidth: 200
   panelMargin: 10
 --- !u!1 &185487911
@@ -2313,6 +2319,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237222474}
   m_CullTransparentMesh: 1
+--- !u!1 &241005993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5272552500058403403, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
+  m_PrefabInstance: {fileID: 23843573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &241005997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241005993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa6552a27abf1a4e88046d3e6a2d23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentSystem.Runtime.EquipmentRenderer
+  frameData: {fileID: 11400000, guid: 81eb04687dcfd354e887de2494386233, type: 2}
+  appearance: {fileID: 0}
+  equipments: []
+  overrideShader: {fileID: 4800000, guid: 0dea0d18fec057147bded1c4d11e93f0, type: 3}
+  _debugCurrentAnim: 
+  _debugAnimatorState: 
+  _debugHasBodyUVMap: 0
+  _debugHasHeadUVMap: 0
 --- !u!1 &255780314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5272552499143439441, guid: d119c0d3f90839b4cb41aa2cd6063f82, type: 3}

@@ -16,6 +16,8 @@ namespace EquipmentSystem.Editor
         const float ID_NONE = 0f;
         const float ID_HEAD = 0.1f;       // 头部 - 头盔/胡子/头发
         const float ID_TORSO = 0.2f;      // 躯干 - 服装
+        const float ID_LEFTEYE = 0.3f;    // 左眼 - 颜色替换
+        const float ID_RIGHTEYE = 0.35f;  // 右眼 - 颜色替换
         const float ID_LEFTHAND = 0.4f;   // 左手 - 手套
         const float ID_RIGHTHAND = 0.5f;  // 右手 - 手套
         const float ID_LEFTFOOT = 0.6f;   // 左脚 - 鞋子
@@ -25,7 +27,7 @@ namespace EquipmentSystem.Editor
         {
             if (data == null || anim == null || anim.spritesheet == null)
             {
-                Debug.LogWarning($"[UV Map] 动画 {anim?.animationName ?? "null"} 没有 spritesheet");
+                Debug.LogWarning($"[UV Map] 动画 {anim?.GetKey() ?? "null"} 没有 spritesheet");
                 return false;
             }
 
@@ -132,11 +134,13 @@ namespace EquipmentSystem.Editor
                 // 躯干
                 WriteRegionToUVMap(frame, CharacterBodyPart.Torso, ID_TORSO, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
 
-                // 手脚
-                WriteRegionToUVMap(frame, CharacterBodyPart.LeftHand,  ID_LEFTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
-                WriteRegionToUVMap(frame, CharacterBodyPart.RightHand, ID_RIGHTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
-                WriteRegionToUVMap(frame, CharacterBodyPart.LeftFoot,  ID_LEFTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
-                WriteRegionToUVMap(frame, CharacterBodyPart.RightFoot, ID_RIGHTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                // 手脚眼睛 - 从 limbMask 读取（只用颜色替换，不需要UV映射）
+                WriteLimbToUVMap(frame, CharacterBodyPart.LeftHand,  ID_LEFTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                WriteLimbToUVMap(frame, CharacterBodyPart.RightHand, ID_RIGHTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                WriteLimbToUVMap(frame, CharacterBodyPart.LeftFoot,  ID_LEFTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                WriteLimbToUVMap(frame, CharacterBodyPart.RightFoot, ID_RIGHTFOOT, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                WriteLimbToUVMap(frame, CharacterBodyPart.LeftEye,   ID_LEFTEYE, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                WriteLimbToUVMap(frame, CharacterBodyPart.RightEye,  ID_RIGHTEYE, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
             }
 
             tex.SetPixels(pixels);
@@ -171,7 +175,16 @@ namespace EquipmentSystem.Editor
                 int frameOffsetX = frame.frameIndex * frameW;
                 int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
 
-                WriteRegionToUVMap(frame, CharacterBodyPart.Head, ID_HEAD, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                // 收集手部像素位置（头部不应覆盖手）
+                var handPixels = new HashSet<Vector2Int>();
+                var leftHand = frame.GetLimbPixels(CharacterBodyPart.LeftHand);
+                var rightHand = frame.GetLimbPixels(CharacterBodyPart.RightHand);
+                if (leftHand != null)
+                    foreach (var pos in leftHand) handPixels.Add(pos);
+                if (rightHand != null)
+                    foreach (var pos in rightHand) handPixels.Add(pos);
+
+                WriteRegionToUVMap(frame, CharacterBodyPart.Head, ID_HEAD, pixels, width, height, frameOffsetX, frameOffsetY, frameH, handPixels);
             }
 
             tex.SetPixels(pixels);
@@ -180,12 +193,12 @@ namespace EquipmentSystem.Editor
         }
 
         /// <summary>
-        /// 将区域像素写入 UV Map
-        /// 直接使用每个像素存储的 UV 坐标，不做任何居中/偏移计算
+        /// 将 UV 部位（头/身体）像素写入 UV Map
         /// </summary>
         static void WriteRegionToUVMap(FrameData frame, CharacterBodyPart part, float partID,
                                        Color[] pixels, int texWidth, int texHeight,
-                                       int frameOffsetX, int frameOffsetY, int frameH)
+                                       int frameOffsetX, int frameOffsetY, int frameH,
+                                       HashSet<Vector2Int> excludePositions = null)
         {
             var region = frame.GetRegion(part);
             if (region == null || region.pixels.Count == 0) return;
@@ -194,27 +207,51 @@ namespace EquipmentSystem.Editor
             
             foreach (var px in region.pixels)
             {
-                // 跳过没有设置 UV 的像素
-                if (!px.HasUV)
-                {
-                    missingUVCount++;
+                // 跳过排除的像素位置
+                if (excludePositions != null && excludePositions.Contains(px.position))
                     continue;
-                }
-
-                // 计算在 UV Map 纹理中的位置
+                
                 int globalX = frameOffsetX + px.position.x;
                 int globalY = frameOffsetY + (frameH - 1 - px.position.y);
                 
-                if (globalX >= 0 && globalX < texWidth && globalY >= 0 && globalY < texHeight)
+                if (globalX < 0 || globalX >= texWidth || globalY < 0 || globalY >= texHeight)
+                    continue;
+
+                if (px.HasUV)
                 {
-                    // 直接使用存储的 UV 坐标
                     pixels[globalY * texWidth + globalX] = new Color(px.uv.x, px.uv.y, partID, 1f);
+                }
+                else
+                {
+                    missingUVCount++;
                 }
             }
             
             if (missingUVCount > 0)
             {
                 Debug.LogWarning($"[UV Map] 帧({frame.frameIndex},{frame.rowIndex}) 部位 {part} 有 {missingUVCount} 个像素没有设置 UV");
+            }
+        }
+
+        /// <summary>
+        /// 将手脚蒙版像素写入 UV Map（只用颜色替换，不需要UV映射）
+        /// </summary>
+        static void WriteLimbToUVMap(FrameData frame, CharacterBodyPart part, float partID,
+                                     Color[] pixels, int texWidth, int texHeight,
+                                     int frameOffsetX, int frameOffsetY, int frameH)
+        {
+            var limbPixels = frame.GetLimbPixels(part);
+            if (limbPixels == null || limbPixels.Count == 0) return;
+
+            foreach (var pos in limbPixels)
+            {
+                int globalX = frameOffsetX + pos.x;
+                int globalY = frameOffsetY + (frameH - 1 - pos.y);
+                
+                if (globalX < 0 || globalX >= texWidth || globalY < 0 || globalY >= texHeight)
+                    continue;
+
+                pixels[globalY * texWidth + globalX] = new Color(0, 0, partID, 1f);
             }
         }
     }

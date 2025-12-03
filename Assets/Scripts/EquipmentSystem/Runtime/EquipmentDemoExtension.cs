@@ -7,21 +7,20 @@ namespace EquipmentSystem.Runtime
 {
     /// <summary>
     /// 装备与动画测试工具
-    /// 自动查找场景中的 EquipmentRenderer 并提供控制 UI
-    /// 多个角色时可通过下拉框切换
+    /// 自动检测场景中激活的 EquipmentRenderer
+    /// 提供装备切换和动画控制 UI
     /// </summary>
     public class EquipmentDemoExtension : MonoBehaviour
     {
         [Header("装备库")]
         public List<EquipmentData> availableEquipments = new List<EquipmentData>();
         
+        [Header("外观库")]
+        public List<CharacterAppearance> availableAppearances = new List<CharacterAppearance>();
+        
         [Header("UI 设置")]
         public float panelWidth = 200f;
         public float panelMargin = 10f;
-        
-        // 场景中所有的 EquipmentRenderer
-        List<EquipmentRenderer> _allRenderers = new List<EquipmentRenderer>();
-        int _selectedRendererIndex = 0;
         
         // 当前选中的角色
         EquipmentRenderer _currentEquipRenderer;
@@ -30,6 +29,9 @@ namespace EquipmentSystem.Runtime
         // 按类型分组的装备
         Dictionary<EquipmentType, List<EquipmentData>> _equipmentsByType;
         Dictionary<EquipmentType, int> _selectedIndex;  // 每个类型的当前选择 (0=无)
+        
+        // 外观选择
+        int _selectedAppearanceIndex = 0;  // 0 = 无
         
         void Start()
         {
@@ -43,27 +45,35 @@ namespace EquipmentSystem.Runtime
                 _selectedIndex[type] = 0;  // 0 = 无
             }
             
-            RefreshRendererList();
+        }
+        
+        void Update()
+        {
+            // 在场景中查找当前激活的 EquipmentRenderer
+            if (_currentEquipRenderer == null || !_currentEquipRenderer.gameObject.activeInHierarchy)
+            {
+                // 查找场景中激活的 EquipmentRenderer
+                var renderer = FindObjectOfType<EquipmentRenderer>();
+                if (renderer != null && renderer != _currentEquipRenderer)
+                {
+                    SelectRenderer(renderer);
+                }
+            }
         }
         
         /// <summary>
-        /// 刷新场景中的 EquipmentRenderer 列表
+        /// 设置目标角色（供外部调用）
         /// </summary>
-        public void RefreshRendererList()
+        public void SetTarget(GameObject target)
         {
-            // 包含 inactive 对象
-            _allRenderers = FindObjectsByType<EquipmentRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+            if (target == null) return;
             
-            if (_allRenderers.Count > 0)
-            {
-                _selectedRendererIndex = 0;
-                SelectRenderer(_allRenderers[0]);
-            }
-            else
-            {
-                _currentEquipRenderer = null;
-                _currentAnimController = null;
-            }
+            var renderer = target.GetComponent<EquipmentRenderer>()
+                        ?? target.GetComponentInParent<EquipmentRenderer>()
+                        ?? target.GetComponentInChildren<EquipmentRenderer>();
+            
+            if (renderer != null)
+                SelectRenderer(renderer);
         }
         
         void SelectRenderer(EquipmentRenderer renderer)
@@ -90,9 +100,24 @@ namespace EquipmentSystem.Runtime
                 var list = _equipmentsByType[type];
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (_currentEquipRenderer.equipments.Contains(list[i]))
+                    var equipped = _currentEquipRenderer.GetEquipped(type);
+                    if (equipped == list[i])
                     {
                         _selectedIndex[type] = i + 1;  // +1 因为 0 是 "无"
+                        break;
+                    }
+                }
+            }
+            
+            // 同步外观选择
+            _selectedAppearanceIndex = 0;
+            if (_currentEquipRenderer.appearance != null)
+            {
+                for (int i = 0; i < availableAppearances.Count; i++)
+                {
+                    if (availableAppearances[i] == _currentEquipRenderer.appearance)
+                    {
+                        _selectedAppearanceIndex = i + 1;
                         break;
                     }
                 }
@@ -104,7 +129,6 @@ namespace EquipmentSystem.Runtime
         int _selectedDirIndex = 0;
         bool _shadowEnabled = true;
         int _openAnimDropdown = 0;  // 0=无, 1=动画, 2=方向
-        bool _openCharDropdown = false;
         
         // 方向名称
         static readonly string[] DirectionNames = { "SE", "SW", "NE", "NW" };
@@ -118,15 +142,16 @@ namespace EquipmentSystem.Runtime
             float dropdownWidth = panelWidth - labelWidth - 5f;
             float spacing = 8f;
             
-            // 计算面板高度 (角色选择 + 装备 + 动画控制)
+            // 计算面板高度 (角色显示 + 装备 + 动画控制)
             int typeCount = 0;
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
                 if (_equipmentsByType[type].Count > 0) typeCount++;
             
-            // 额外: 角色选择 + 分隔 + 动画标题 + 动画下拉 + 方向下拉 + 阴影开关
-            float charSelectHeight = lineHeight + spacing + 10;
+            // 额外: 角色显示 + 分隔 + 动画标题 + 动画下拉 + 方向下拉 + 阴影开关
+            float charDisplayHeight = lineHeight + spacing;
             float animSectionHeight = 15 + 30 + (lineHeight + spacing) * 2 + 30;
-            float panelHeight = charSelectHeight + 45 + typeCount * (lineHeight + spacing) + 40 + animSectionHeight;
+            float appearanceHeight = availableAppearances.Count > 0 ? (lineHeight + spacing) : 0;
+            float panelHeight = charDisplayHeight + 45 + typeCount * (lineHeight + spacing) + appearanceHeight + 40 + animSectionHeight;
             
             // 右侧居中
             float x = Screen.width - panelWidth - panelMargin;
@@ -135,36 +160,27 @@ namespace EquipmentSystem.Runtime
             // 收集所有下拉框位置
             var dropdownRects = new List<(EquipmentType type, Rect rect, string[] options)>();
             var animDropdownRects = new List<(int id, Rect rect, string[] options, int selected)>();
-            Rect charDropdownRect = Rect.zero;
+            Rect appearanceDropdownRect = Rect.zero;
+            string[] appearanceOptions = null;
             
             // 背景
             GUI.Box(new Rect(x - 10, y - 10, panelWidth + 20, panelHeight + 20), "", GetBoxStyle());
             
-            // 角色选择下拉框
+            // 当前角色显示（只读）
             bool hasSelection = _currentEquipRenderer != null;
-            bool anyDropdownOpen = _openDropdown != null || _openAnimDropdown != 0 || _openCharDropdown;
+            bool anyDropdownOpen = _openDropdown != null || _openAnimDropdown != 0;
             
             GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "角色:", GetLabelStyle());
-            charDropdownRect = new Rect(x + labelWidth, y, dropdownWidth - 35, lineHeight);
-            string charLabel = hasSelection ? _currentEquipRenderer.gameObject.name : "(无)";
-            GUI.enabled = !anyDropdownOpen || _openCharDropdown;
-            if (GUI.Button(charDropdownRect, charLabel, GetDropdownStyle()))
-            {
-                _openCharDropdown = !_openCharDropdown;
-            }
-            // 刷新按钮
-            GUI.enabled = !anyDropdownOpen;
-            if (GUI.Button(new Rect(x + labelWidth + dropdownWidth - 30, y, 30, lineHeight), "↻"))
-            {
-                RefreshRendererList();
-            }
-            y += charSelectHeight;
+            string charLabel = hasSelection ? _currentEquipRenderer.gameObject.name : "(选中场景对象)";
+            GUI.Label(new Rect(x + labelWidth, y + 4, dropdownWidth, lineHeight), charLabel, GetCharNameStyle());
+            y += charDisplayHeight;
             
             GUI.Label(new Rect(x, y, panelWidth, 30), "装备预览", GetTitleStyle());
             y += 35;
             
             // 如果有下拉框打开，禁用其他控件
             bool hasOpenDropdown = _openDropdown != null;
+            anyDropdownOpen = _openDropdown != null || _openAnimDropdown != 0 || _openAppearanceDropdown;
             
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
             {
@@ -201,6 +217,37 @@ namespace EquipmentSystem.Runtime
             
             y += 5;
             
+            // 外观下拉框
+            if (availableAppearances.Count > 0)
+            {
+                GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "外观:", GetLabelStyle());
+                
+                var appOptions = new List<string> { "(无)" };
+                appOptions.AddRange(availableAppearances.Where(a => a != null).Select(a => a.name));
+                appearanceOptions = appOptions.ToArray();
+                
+                appearanceDropdownRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
+                
+                string appLabel = _selectedAppearanceIndex >= 0 && _selectedAppearanceIndex < appearanceOptions.Length 
+                    ? appearanceOptions[_selectedAppearanceIndex] : "(无)";
+                
+                GUI.enabled = hasSelection && (!anyDropdownOpen || _openAppearanceDropdown);
+                
+                if (GUI.Button(appearanceDropdownRect, appLabel, GetDropdownStyle()))
+                {
+                    _openAppearanceDropdown = !_openAppearanceDropdown;
+                    if (_openAppearanceDropdown)
+                    {
+                        _openDropdown = null;
+                        _openAnimDropdown = 0;
+                    }
+                }
+                
+                y += lineHeight + spacing;
+            }
+            
+            y += 5;
+            
             // 全部卸下按钮
             GUI.enabled = hasSelection && !anyDropdownOpen;
             if (GUI.Button(new Rect(x, y, panelWidth, 30), "卸下全部", GetButtonStyle()))
@@ -215,7 +262,7 @@ namespace EquipmentSystem.Runtime
             y += 30;
             
             // 获取动画选项
-            string[] animOptions = _currentAnimController?.animationNames ?? System.Array.Empty<string>();
+            string[] animOptions = GetAnimationDisplayNames(_currentAnimController);
             string[] dirOptions = _currentAnimController?.GetDirectionNames() ?? DirectionNames;
             
             bool hasAnimDropdownOpen = _openAnimDropdown != 0;
@@ -301,18 +348,18 @@ namespace EquipmentSystem.Runtime
                 }
             }
             
-            // 绘制角色下拉列表
-            if (_openCharDropdown && _allRenderers.Count > 0)
+            // 绘制外观下拉列表
+            if (_openAppearanceDropdown && appearanceOptions != null)
             {
-                var charOptions = _allRenderers.Select(r => r.gameObject.name).ToArray();
-                int newIndex = DrawDropdownList(charDropdownRect, _selectedRendererIndex, charOptions);
-                if (newIndex != _selectedRendererIndex)
+                int newIndex = DrawDropdownList(appearanceDropdownRect, _selectedAppearanceIndex, appearanceOptions);
+                if (newIndex != _selectedAppearanceIndex)
                 {
-                    _selectedRendererIndex = newIndex;
-                    SelectRenderer(_allRenderers[newIndex]);
-                    _openCharDropdown = false;
+                    OnAppearanceChanged(_selectedAppearanceIndex, newIndex);
+                    _selectedAppearanceIndex = newIndex;
+                    _openAppearanceDropdown = false;
                 }
             }
+            
         }
         
         void OnSelectionChanged(EquipmentType type, int oldIndex, int newIndex)
@@ -338,8 +385,7 @@ namespace EquipmentSystem.Runtime
         {
             if (_currentEquipRenderer == null) return;
             
-            foreach (var e in new List<EquipmentData>(_currentEquipRenderer.equipments))
-                _currentEquipRenderer.Unequip(e);
+            _currentEquipRenderer.UnequipAll();
             
             foreach (var type in _selectedIndex.Keys.ToList())
                 _selectedIndex[type] = 0;
@@ -374,6 +420,7 @@ namespace EquipmentSystem.Runtime
             {
                 case EquipmentType.Weapon: return "武器";
                 case EquipmentType.Clothing: return "服装";
+                case EquipmentType.Cloak: return "斗篷";
                 case EquipmentType.Helmet: return "头盔";
                 case EquipmentType.Gloves: return "手套";
                 case EquipmentType.Shoes: return "鞋子";
@@ -383,6 +430,7 @@ namespace EquipmentSystem.Runtime
         
         // 当前打开的下拉框
         EquipmentType? _openDropdown = null;
+        bool _openAppearanceDropdown = false;
         
         // 样式缓存
         GUIStyle _titleStyle, _labelStyle, _boxStyle, _dropdownStyle, _buttonStyle, _listItemStyle, _charNameStyle;
@@ -400,6 +448,17 @@ namespace EquipmentSystem.Runtime
                 _charNameStyle.normal.textColor = new Color(0.8f, 0.9f, 1f);
             }
             return _charNameStyle;
+        }
+        
+        /// <summary>
+        /// 从 AnimationController 获取动画显示名数组
+        /// </summary>
+        string[] GetAnimationDisplayNames(AnimationController controller)
+        {
+            if (controller == null || controller.animDatabase == null)
+                return System.Array.Empty<string>();
+            
+            return controller.animDatabase.GetAllDisplayNames();
         }
         
         GUIStyle GetTitleStyle()
@@ -540,7 +599,20 @@ namespace EquipmentSystem.Runtime
         {
             _openDropdown = null;
             _openAnimDropdown = 0;
-            _openCharDropdown = false;
+            _openAppearanceDropdown = false;
+        }
+        
+        void OnAppearanceChanged(int oldIndex, int newIndex)
+        {
+            if (_currentEquipRenderer == null) return;
+            
+            CharacterAppearance newAppearance = null;
+            if (newIndex > 0 && newIndex <= availableAppearances.Count)
+            {
+                newAppearance = availableAppearances[newIndex - 1];
+            }
+            
+            _currentEquipRenderer.SetAppearance(newAppearance);
         }
     }
 }

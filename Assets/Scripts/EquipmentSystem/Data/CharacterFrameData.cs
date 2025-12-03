@@ -80,7 +80,9 @@ namespace EquipmentSystem.Data
         LeftHand,   // 左手 1px
         RightHand,  // 右手 1px
         LeftFoot,   // 左脚 1px
-        RightFoot   // 右脚 1px
+        RightFoot,  // 右脚 1px
+        LeftEye,    // 左眼（头部区域内的黑色像素）
+        RightEye    // 右眼（头部区域内的黑色像素）
     }
     
     /// <summary>
@@ -148,6 +150,58 @@ namespace EquipmentSystem.Data
             return new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
         }
     }
+    
+    /// <summary>
+    /// 手脚蒙版数据（用于颜色替换，不需要UV映射）
+    /// </summary>
+    [Serializable]
+    public class LimbMask
+    {
+        public List<Vector2Int> leftHand = new List<Vector2Int>();
+        public List<Vector2Int> rightHand = new List<Vector2Int>();
+        public List<Vector2Int> leftFoot = new List<Vector2Int>();
+        public List<Vector2Int> rightFoot = new List<Vector2Int>();
+        public List<Vector2Int> leftEye = new List<Vector2Int>();
+        public List<Vector2Int> rightEye = new List<Vector2Int>();
+        
+        public List<Vector2Int> GetPixels(CharacterBodyPart part)
+        {
+            switch (part)
+            {
+                case CharacterBodyPart.LeftHand: return leftHand;
+                case CharacterBodyPart.RightHand: return rightHand;
+                case CharacterBodyPart.LeftFoot: return leftFoot;
+                case CharacterBodyPart.RightFoot: return rightFoot;
+                case CharacterBodyPart.LeftEye: return leftEye;
+                case CharacterBodyPart.RightEye: return rightEye;
+                default: return null;
+            }
+        }
+        
+        public void SetPixels(CharacterBodyPart part, IEnumerable<Vector2Int> pixels)
+        {
+            var list = GetPixels(part);
+            if (list != null)
+            {
+                list.Clear();
+                list.AddRange(pixels);
+            }
+        }
+        
+        public void Clear()
+        {
+            leftHand.Clear();
+            rightHand.Clear();
+            leftFoot.Clear();
+            rightFoot.Clear();
+            leftEye.Clear();
+            rightEye.Clear();
+        }
+        
+        public bool IsEmpty => leftHand.Count == 0 && rightHand.Count == 0 && 
+                               leftFoot.Count == 0 && rightFoot.Count == 0 &&
+                               leftEye.Count == 0 && rightEye.Count == 0;
+    }
 
     #endregion
 
@@ -162,8 +216,11 @@ namespace EquipmentSystem.Data
         [Header("锚点 - 挂件")]
         public List<AnchorPoint> anchors = new List<AnchorPoint>();
         
-        [Header("部位区域 - 服装/手套/鞋")]
+        [Header("部位区域 - UV贴图（头/身体）")]
         public List<BodyPartRegion> bodyRegions = new List<BodyPartRegion>();
+        
+        [Header("手脚蒙版 - 颜色替换")]
+        public LimbMask limbMask = new LimbMask();
         
         public AnchorPoint GetAnchor(AnchorType type) => anchors.Find(a => a.type == type);
         
@@ -206,24 +263,45 @@ namespace EquipmentSystem.Data
         /// </summary>
         public bool IsPartVisible(CharacterBodyPart part)
         {
+            // 手脚检查 limbMask
+            if (IsLimbPart(part))
+            {
+                var pixels = limbMask?.GetPixels(part);
+                return pixels != null && pixels.Count > 0;
+            }
+            // UV部位检查 bodyRegions
             var r = GetRegion(part);
             return r != null && r.pixels.Count > 0;
         }
         
         /// <summary>
-        /// 获取单像素部位的位置（手/脚），没有则返回null
+        /// 获取手脚蒙版像素
         /// </summary>
-        public BodyPartPixel GetSinglePixelPart(CharacterBodyPart part)
+        public List<Vector2Int> GetLimbPixels(CharacterBodyPart part)
         {
-            var r = GetRegion(part);
-            return r?.pixels.Count > 0 ? r.pixels[0] : null;
+            return limbMask?.GetPixels(part);
+        }
+        
+        /// <summary>
+        /// 判断是否为手脚部位
+        /// </summary>
+        public static bool IsLimbPart(CharacterBodyPart part)
+        {
+            return part == CharacterBodyPart.LeftHand || part == CharacterBodyPart.RightHand ||
+                   part == CharacterBodyPart.LeftFoot || part == CharacterBodyPart.RightFoot;
         }
     }
 
     [Serializable]
     public class AnimationData
     {
-        public string animationName;  // 动画名称（从Animator或SpriteLibrary获取）
+        [Tooltip("动画类型")]
+        public AnimationTypeItem animationType;
+        
+        /// <summary>
+        /// 获取动画类型名
+        /// </summary>
+        public string GetKey() => animationType != null ? animationType.name : null;
         
         [Header("Spritesheet 配置")]
         public Texture2D spritesheet;
@@ -283,7 +361,10 @@ namespace EquipmentSystem.Data
         public Color32 rightFootColor = new Color32(238,195,154, 255);
         
         [Header("检测参数")]
-        public int outlineThreshold = 30;
+        [Tooltip("描边检测阈值：RGB之和小于此值视为描边（建议50-100）")]
+        public int outlineThreshold = 80;
+        [Tooltip("手脚颜色匹配容差（RGB差值之和，默认30可容忍轻微色差）")]
+        public int limbColorThreshold = 30;
         
         /// <summary>
         /// 是否为描边/黑色像素
@@ -291,14 +372,41 @@ namespace EquipmentSystem.Data
         public bool IsOutline(Color32 c) => (c.r + c.g + c.b) < outlineThreshold && c.a > 0;
         
         /// <summary>
+        /// 手脚颜色是否匹配（带容差）
+        /// </summary>
+        public bool IsLimbColorMatch(Color32 pixel, Color32 limbColor)
+        {
+            if (pixel.a == 0 || IsOutline(pixel)) return false;
+            return ColorSimilar(pixel, limbColor, limbColorThreshold);
+        }
+        
+        /// <summary>
         /// 是否为有色非黑色像素
         /// </summary>
         public bool IsColoredPixel(Color32 c) => c.a > 0 && !IsOutline(c);
         
         /// <summary>
-        /// 颜色是否完全匹配
+        /// 判断颜色是否与皮肤色相近（用手部颜色作为参考）
         /// </summary>
-        public bool ColorMatch(Color32 a, Color32 b) => a.r == b.r && a.g == b.g && a.b == b.b && a.a > 0 && b.a > 0;
+        public bool IsSkinLike(Color32 c)
+        {
+            if (c.a == 0 || IsOutline(c)) return false;
+            
+            // 与任一手部颜色相近即可，复用 limbColorThreshold
+            return ColorSimilar(c, leftHandColor, limbColorThreshold) || 
+                   ColorSimilar(c, rightHandColor, limbColorThreshold);
+        }
+        
+        /// <summary>
+        /// 判断两个颜色是否相近
+        /// </summary>
+        public bool ColorSimilar(Color32 a, Color32 b, int threshold)
+        {
+            int dr = Mathf.Abs(a.r - b.r);
+            int dg = Mathf.Abs(a.g - b.g);
+            int db = Mathf.Abs(a.b - b.b);
+            return (dr + dg + db) < threshold;
+        }
     }
 
     #endregion
@@ -306,11 +414,27 @@ namespace EquipmentSystem.Data
     [CreateAssetMenu(fileName = "CharacterFrameData", menuName = "Equipment System/Character Frame Data")]
     public class CharacterFrameData : ScriptableObject
     {
+        [Header("编辑器配置")]
+        [Tooltip("动画类型数据库")]
+        public AnimationTypeDatabase animDatabase;
+        [Tooltip("UV 画板参考底图")]
+        public Sprite paletteRefSprite;
+        [Tooltip("UV 画板尺寸")]
+        public Vector2Int paletteSize = new Vector2Int(32, 32);
+        [Tooltip("头部 UV 源区域（画板上）")]
+        public RectInt headUVRegion = new RectInt(0, 0, 4, 3);
+        [Tooltip("身体 UV 源区域（画板上）")]
+        public RectInt torsoUVRegion = new RectInt(0, 3, 3, 2);
+        [Tooltip("头部检测目标区域大小")]
+        public Vector2Int headDetectSize = new Vector2Int(4, 3);
+        [Tooltip("身体检测目标区域大小")]
+        public Vector2Int torsoDetectSize = new Vector2Int(3, 2);
+        
         [Header("头部区域扩展配置")]
         [Tooltip("头部向上扩展的像素数")]
-        public int headExpandUp = 5;
+        public int headExpandUp = 7;
         [Tooltip("头部向左右扩展的像素数")]
-        public int headExpandSide = 5;
+        public int headExpandSide = 7;
         [Tooltip("头部向下扩展的像素数")]
         public int headExpandDown = 3;
         
@@ -318,7 +442,7 @@ namespace EquipmentSystem.Data
         [Tooltip("身体向上扩展的像素数")]
         public int bodyExpandUp = 3;
         [Tooltip("身体向左右扩展的像素数")]
-        public int bodyExpandSide = 3;
+        public int bodyExpandSide = 4;
         [Tooltip("身体向下扩展的像素数")]
         public int bodyExpandDown = 2;
         
@@ -335,20 +459,41 @@ namespace EquipmentSystem.Data
         public List<AnimationData> animations = new List<AnimationData>();
         
         /// <summary>
-        /// 获取动画数据
+        /// 获取动画数据（按类型）
         /// </summary>
-        public AnimationData GetAnimation(string animName)
+        public AnimationData GetAnimation(AnimationTypeItem animType)
         {
-            return animations.Find(x => 
-                string.Equals(x.animationName, animName, System.StringComparison.OrdinalIgnoreCase));
+            if (animType == null) return null;
+            return animations.Find(x => x.animationType == animType);
         }
         
         /// <summary>
-        /// 获取帧数据
+        /// 获取动画数据（按 Key，用于与 Animator 参数匹配）
         /// </summary>
-        public FrameData GetFrameData(string animName, int rowIndex, int frame)
+        public AnimationData GetAnimationByKey(string key)
         {
-            var a = GetAnimation(animName);
+            if (string.IsNullOrEmpty(key)) return null;
+            return animations.Find(x => 
+                x.animationType != null && 
+                string.Equals(x.animationType.name, key, System.StringComparison.OrdinalIgnoreCase));
+        }
+        
+        /// <summary>
+        /// 获取帧数据（按动画类型）
+        /// </summary>
+        public FrameData GetFrameData(AnimationTypeItem animType, int rowIndex, int frame)
+        {
+            var a = GetAnimation(animType);
+            if (a == null) return null;
+            return a.GetFrame(frame, rowIndex);
+        }
+        
+        /// <summary>
+        /// 获取帧数据（按 Key）
+        /// </summary>
+        public FrameData GetFrameDataByKey(string key, int rowIndex, int frame)
+        {
+            var a = GetAnimationByKey(key);
             if (a == null) return null;
             return a.GetFrame(frame, rowIndex);
         }
@@ -356,27 +501,30 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 获取或创建动画数据
         /// </summary>
-        public AnimationData GetOrCreateAnimation(string animName)
+        public AnimationData GetOrCreateAnimation(AnimationTypeItem animType)
         {
-            var a = GetAnimation(animName);
+            if (animType == null) return null;
+            var a = GetAnimation(animType);
             if (a == null)
             {
-                a = new AnimationData { animationName = animName };
+                a = new AnimationData { animationType = animType };
                 animations.Add(a);
             }
             return a;
         }
         
         /// <summary>
-        /// 获取所有动画名称
+        /// 获取所有动画类型
         /// </summary>
-        public List<string> GetAnimationNames()
+        public List<AnimationTypeItem> GetAnimationTypes()
         {
-            var names = new List<string>();
+            var types = new List<AnimationTypeItem>();
             foreach (var a in animations)
-                if (!string.IsNullOrEmpty(a.animationName))
-                    names.Add(a.animationName);
-            return names;
+            {
+                if (a.animationType != null)
+                    types.Add(a.animationType);
+            }
+            return types;
         }
         
         public static FacingDirection GetFacingDirection(CharacterFacing f)

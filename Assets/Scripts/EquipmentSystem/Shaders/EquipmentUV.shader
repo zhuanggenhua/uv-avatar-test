@@ -13,9 +13,11 @@ Shader "EquipmentSystem/EquipmentUV"
         
         [Header(Body Layer Textures)]
         _ClothTex ("Clothing Texture", 2D) = "white" {}
+        _CloakTex ("Cloak Texture", 2D) = "white" {}
         
         [Header(Head Layer Textures)]
         _HairTex ("Hair Texture", 2D) = "white" {}
+        _FaceAccessoryTex ("Face Accessory Texture", 2D) = "white" {}
         _BeardTex ("Beard Texture", 2D) = "white" {}
         _HelmetTex ("Helmet Texture", 2D) = "white" {}
         
@@ -27,16 +29,24 @@ Shader "EquipmentSystem/EquipmentUV"
         [HDR] _LeftFootColor ("Left Foot Color", Color) = (0.3, 0.2, 0.1, 1)
         [HDR] _RightFootColor ("Right Foot Color", Color) = (0.3, 0.2, 0.1, 1)
         
+        [Header(Eye Colors)]
+        [HDR] _LeftEyeColor ("Left Eye Color", Color) = (0.6, 0.2, 0.8, 1)
+        [HDR] _RightEyeColor ("Right Eye Color", Color) = (0.6, 0.2, 0.8, 1)
+        
         [Header(Enable Layers)]
         _EnableHair ("Enable Hair", Float) = 0
+        _EnableFaceAccessory ("Enable Face Accessory", Float) = 0
         _EnableBeard ("Enable Beard", Float) = 0
         _EnableHelmet ("Enable Helmet", Float) = 0
         _EnableCloth ("Enable Clothing", Float) = 0
+        _EnableCloak ("Enable Cloak", Float) = 0
         _EnableGloves ("Enable Gloves", Float) = 0
         _EnableShoes ("Enable Shoes", Float) = 0
+        _EnableLeftEye ("Enable Left Eye", Float) = 0
+        _EnableRightEye ("Enable Right Eye", Float) = 0
         
         [Header(Debug)]
-        // 调试模式：0=关闭，1=显示身体区域，2=显示头部区域，3=显示采样结果，其它模式见下方注释
+        // 调试模式：0=关闭，1=身体层区域，2=头部层区域，3=装备采样结果，4=UVMap原始UV，5=顶点UV
         _DebugMode ("Debug Mode", Float) = 0
         
         _Color ("Tint", Color) = (1,1,1,1)
@@ -74,7 +84,6 @@ Shader "EquipmentSystem/EquipmentUV"
             {
                 float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float2 uvRaw : TEXCOORD1;  // 原始顶点 UV
                 float4 color : COLOR;
             };
             
@@ -82,13 +91,11 @@ Shader "EquipmentSystem/EquipmentUV"
             sampler2D _BodyUVMap;
             sampler2D _HeadUVMap;
             sampler2D _ClothTex;
+            sampler2D _CloakTex;
             sampler2D _HairTex;
+            sampler2D _FaceAccessoryTex;
             sampler2D _BeardTex;
             sampler2D _HelmetTex;
-            float4 _MainTex_ST;
-            
-            // Unity 提供的纹素大小变量，这里只需要声明即可使用
-            float4 _HelmetTex_TexelSize; // (1/width, 1/height, width, height)
             
             // ============================================================
             // 每个装备贴图在纹理中的 Sprite Rect（minU, minV, maxU, maxV）
@@ -103,21 +110,29 @@ Shader "EquipmentSystem/EquipmentUV"
             // 映射到纹理上的实际区域。
             // ============================================================
             float4 _ClothRect;   // 服装贴图在纹理中的 Rect
-            float4 _HairRect;    // 头发贴图在纹理中的 Rect
-            float4 _BeardRect;   // 胡子贴图在纹理中的 Rect
-            float4 _HelmetRect;  // 头盔贴图在纹理中的 Rect
+            float4 _CloakRect;   // 斗篷贴图在纹理中的 Rect
+            float4 _HairRect;          // 头发贴图在纹理中的 Rect
+            float4 _FaceAccessoryRect; // 面部装饰贴图在纹理中的 Rect
+            float4 _BeardRect;          // 胡子贴图在纹理中的 Rect
+            float4 _HelmetRect;         // 头盔贴图在纹理中的 Rect
             
             fixed4 _LeftHandColor;
             fixed4 _RightHandColor;
             fixed4 _LeftFootColor;
             fixed4 _RightFootColor;
+            fixed4 _LeftEyeColor;
+            fixed4 _RightEyeColor;
             
             float _EnableHair;
+            float _EnableFaceAccessory;
             float _EnableBeard;
             float _EnableHelmet;
             float _EnableCloth;
+            float _EnableCloak;
             float _EnableGloves;
             float _EnableShoes;
+            float _EnableLeftEye;
+            float _EnableRightEye;
             float _DebugMode;
             
             fixed4 _Color;
@@ -147,6 +162,8 @@ Shader "EquipmentSystem/EquipmentUV"
             // 0.0        = 非换装区域
             // 0.1 (25)   = Head (面部装饰)
             // 0.2 (51)   = Torso (服装)
+            // 0.3 (76)   = LeftEye (左眼)
+            // 0.35(89)   = RightEye (右眼)
             // 0.4 (102)  = LeftHand (左手套)
             // 0.5 (127)  = RightHand (右手套)
             // 0.6 (153)  = LeftFoot (左鞋)
@@ -155,6 +172,8 @@ Shader "EquipmentSystem/EquipmentUV"
             #define ID_NONE      0.0
             #define ID_HEAD      0.1
             #define ID_TORSO     0.2
+            #define ID_LEFTEYE   0.3
+            #define ID_RIGHTEYE  0.35
             #define ID_LEFTHAND  0.4
             #define ID_RIGHTHAND 0.5
             #define ID_LEFTFOOT  0.6
@@ -166,13 +185,23 @@ Shader "EquipmentSystem/EquipmentUV"
                 return abs(id - target) < 0.05;
             }
             
+            // 通用贴图采样：采样成功返回 true 并写入颜色
+            // 注意：HLSL 不支持 swizzle 作为 inout 参数，改用 out 参数
+            bool TrySampleEquip(float2 uv, float4 rect, sampler2D tex, out fixed3 outColor)
+            {
+                float2 coord = TransformUV(uv, rect);
+                fixed4 c = tex2D(tex, coord);
+                outColor = c.rgb;
+                if (c.a > CUTOFF)
+                    return true;
+                return false;
+            }
+            
             v2f vert(appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                // 对于 Sprite，直接使用原始 UV
                 o.uv = v.uv;
-                o.uvRaw = v.uv;  // 保存原始 UV 用于计算
                 o.color = v.color * _Color;
                 return o;
             }
@@ -180,83 +209,98 @@ Shader "EquipmentSystem/EquipmentUV"
             // ------------------------------------------------------------
             // 身体层 / 头部层的合成拆分为两个函数，方便独立开关与调试
             // ------------------------------------------------------------
-            fixed4 ApplyBodyLayers(fixed4 baseColor, fixed4 bodyUV)
+            // isHeadCore: 真实头部区域（headUV.b=ID_HEAD 且 baseColor.a>0）
+            // 在真实头部区域，衣服不会覆盖角色本体的头
+            void ApplyBodyLayers(fixed4 bodyUV, bool isHeadCore, inout fixed4 ioColor, out float bodyLayerAlpha)
             {
-                fixed4 color = baseColor;
                 float bodyPartID = bodyUV.b;
+                bodyLayerAlpha = 0;
 
-                if (IsPartID(bodyPartID, ID_TORSO) && _EnableCloth > 0.5)
+                // 真实头部区域：禁止 Torso 覆盖（衣服不能画在角色头上）
+                if (isHeadCore && IsPartID(bodyPartID, ID_TORSO))
+                    return;
+
+                if (IsPartID(bodyPartID, ID_TORSO))
                 {
-                    float2 clothUVCoord = TransformUV(bodyUV.rg, _ClothRect);
-                    fixed4 clothColor = tex2D(_ClothTex, clothUVCoord);
-                    color.rgb = clothColor.rgb;
+                    fixed3 sampled;
+                    // 服装（底层）-> 斗篷（上层）
+                    if (_EnableCloth > 0.5 && TrySampleEquip(bodyUV.rg, _ClothRect, _ClothTex, sampled))
+                    {
+                        ioColor.rgb = sampled;
+                        bodyLayerAlpha = 1.0;
+                    }
+                    if (_EnableCloak > 0.5 && TrySampleEquip(bodyUV.rg, _CloakRect, _CloakTex, sampled))
+                    {
+                        ioColor.rgb = sampled;
+                        bodyLayerAlpha = 1.0;
+                    }
                 }
                 else if (IsPartID(bodyPartID, ID_LEFTHAND) && _EnableGloves > 0.5)
                 {
-                    color.rgb = _LeftHandColor.rgb;
+                    ioColor.rgb = _LeftHandColor.rgb;
+                    bodyLayerAlpha = 1.0;
                 }
                 else if (IsPartID(bodyPartID, ID_RIGHTHAND) && _EnableGloves > 0.5)
                 {
-                    color.rgb = _RightHandColor.rgb;
+                    ioColor.rgb = _RightHandColor.rgb;
+                    bodyLayerAlpha = 1.0;
                 }
                 else if (IsPartID(bodyPartID, ID_LEFTFOOT) && _EnableShoes > 0.5)
                 {
-                    color.rgb = _LeftFootColor.rgb;
+                    ioColor.rgb = _LeftFootColor.rgb;
+                    bodyLayerAlpha = 1.0;
                 }
                 else if (IsPartID(bodyPartID, ID_RIGHTFOOT) && _EnableShoes > 0.5)
                 {
-                    color.rgb = _RightFootColor.rgb;
+                    ioColor.rgb = _RightFootColor.rgb;
+                    bodyLayerAlpha = 1.0;
                 }
-
-                return color;
+                else if (IsPartID(bodyPartID, ID_LEFTEYE) && _EnableLeftEye > 0.5)
+                {
+                    ioColor.rgb = _LeftEyeColor.rgb;
+                    bodyLayerAlpha = 1.0;
+                }
+                else if (IsPartID(bodyPartID, ID_RIGHTEYE) && _EnableRightEye > 0.5)
+                {
+                    ioColor.rgb = _RightEyeColor.rgb;
+                    bodyLayerAlpha = 1.0;
+                }
             }
 
-            // 头部层顺序：头发（底层）-> 胡子（中层）-> 头盔（顶层）
-            // 采用硬覆盖：采样命中时直接写入 RGB，并抬高最终透明度
+            // 头部层顺序：头发（底层）-> 面部装饰 -> 胡子 -> 头盔（顶层）
             void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, out float headLayerAlpha)
             {
                 headLayerAlpha = 0;
                 if (!IsPartID(headPartID, ID_HEAD)) return;
 
-                // 头盔（顶层）：如果采样命中，直接覆盖并提前返回
-                if (_EnableHelmet > 0.5)
+                fixed3 sampled;
+                // 头盔（顶层）：命中则提前返回
+                if (_EnableHelmet > 0.5 && TrySampleEquip(baseHeadUV, _HelmetRect, _HelmetTex, sampled))
                 {
-                    // UVMap 使用 bottom-up 的 V 方向，无需翻转
-                    float2 uv = TransformUV(baseHeadUV, _HelmetRect);
-                    fixed4 c = tex2D(_HelmetTex, uv);
-                    if (c.a > CUTOFF)
-                    {
-                        ioColor.rgb = c.rgb;
-                        headLayerAlpha = 1.0;
-                        return;
-                    }
+                    ioColor.rgb = sampled;
+                    headLayerAlpha = 1.0;
+                    return;
                 }
 
-                // 胡子（中层）
+                // 胡子 -> 面部装饰 -> 头发（从上到下层级）
                 bool wrote = false;
-                if (_EnableBeard > 0.5)
+                if (_EnableBeard > 0.5 && TrySampleEquip(baseHeadUV, _BeardRect, _BeardTex, sampled))
                 {
-                    float2 uv = TransformUV(baseHeadUV, _BeardRect);
-                    fixed4 c = tex2D(_BeardTex, uv);
-                    if (c.a > CUTOFF)
-                    {
-                        ioColor.rgb = c.rgb;
-                        headLayerAlpha = 1.0;
-                        wrote = true;
-                    }
+                    ioColor.rgb = sampled;
+                    wrote = true;
                 }
-
-                // 头发（底层）——仅在胡子没有写入时才生效
-                if (!wrote && _EnableHair > 0.5)
+                if (!wrote && _EnableFaceAccessory > 0.5 && TrySampleEquip(baseHeadUV, _FaceAccessoryRect, _FaceAccessoryTex, sampled))
                 {
-                    float2 uv = TransformUV(baseHeadUV, _HairRect);
-                    fixed4 c = tex2D(_HairTex, uv);
-                    if (c.a > CUTOFF)
-                    {
-                        ioColor.rgb = c.rgb;
-                        headLayerAlpha = 1.0;
-                    }
+                    ioColor.rgb = sampled;
+                    wrote = true;
                 }
+                if (!wrote && _EnableHair > 0.5 && TrySampleEquip(baseHeadUV, _HairRect, _HairTex, sampled))
+                {
+                    ioColor.rgb = sampled;
+                    wrote = true;
+                }
+                
+                if (wrote) headLayerAlpha = 1.0;
             }
 
             fixed4 frag(v2f i) : SV_Target
@@ -293,7 +337,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     return debugColor;
                 }
 
-                // 调试模式 3：直接显示身体层 / 头部层的采样结果
+                // 调试模式 3：显示装备采样结果（身体层=衣服，头部层=头盔）
                 if (_DebugMode > 2.5 && _DebugMode < 3.5)
                 {
                     if (IsPartID(bodyPartID, ID_TORSO))
@@ -310,43 +354,14 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                     return fixed4(0, 0, 0, baseColor.a);
                 }
-                
-                // 调试模式 7：用颜色显示经过 Rect 映射后的头盔 UV
-                if (_DebugMode > 6.5 && _DebugMode < 7.5)
-                {
-                    if (IsPartID(headPartID, ID_HEAD))
-                    {
-                        float2 helmetUV = TransformUV(headUV.rg, _HelmetRect);
-                        return fixed4(helmetUV.x, helmetUV.y, 0, 1);
-                    }
-                    return fixed4(0, 0, 0, baseColor.a);
-                }
-                
-                // 调试模式 8：显示应用了 _HelmetRect 的头盔贴图
-                if (_DebugMode > 7.5 && _DebugMode < 8.5)
-                {
-                    // 使用 TransformUV 映射到图集中的正确 Sprite 区域
-                    float2 helmetUV = TransformUV(i.uv, _HelmetRect);
-                    fixed4 helmetColor = tex2D(_HelmetTex, helmetUV);
-                    return fixed4(helmetColor.rgb, 1);
-                }
-                
-                // 调试模式 9：用颜色显示 _HelmetRect 的数值
-                if (_DebugMode > 8.5 && _DebugMode < 9.5)
-                {
-                    // 用颜色表示 Rect：R=minU, G=minV, B=width, A=height
-                    float width = _HelmetRect.z - _HelmetRect.x;
-                    float height = _HelmetRect.w - _HelmetRect.y;
-                    return fixed4(_HelmetRect.x, _HelmetRect.y, width, 1);
-                }
 
-                // 调试模式 4：显示头部 UVMap 中的原始 UV（R=U, G=V）
+                // 调试模式 4：显示 UVMap 中的原始 UV（R=U, G=V）
                 if (_DebugMode > 3.5 && _DebugMode < 4.5)
                 {
+                    if (IsPartID(bodyPartID, ID_TORSO))
+                        return fixed4(bodyUV.r, bodyUV.g, 0, 1);
                     if (IsPartID(headPartID, ID_HEAD))
-                    {
                         return fixed4(headUV.r, headUV.g, 0, 1);
-                    }
                     return fixed4(0, 0, 0, baseColor.a);
                 }
 
@@ -356,32 +371,22 @@ Shader "EquipmentSystem/EquipmentUV"
                     return fixed4(i.uv.x, i.uv.y, 0, baseColor.a);
                 }
 
-                // 调试模式 6：只显示头盔采样结果（命中为贴图颜色，否则红色警告）
-                if (_DebugMode > 5.5 && _DebugMode < 6.5)
-                {
-                    if (IsPartID(headPartID, ID_HEAD))
-                    {
-                        float2 helmetUV = TransformUV(headUV.rg, _HelmetRect);
-                        fixed4 helmetColor = tex2D(_HelmetTex, helmetUV);
-                        return fixed4(helmetColor.rgb, 1);
-                    }
-                    return fixed4(1, 0, 0, 1);
-                }
-
                 fixed4 finalColor = baseColor;
 
-                // 应用身体层装备
-                finalColor = ApplyBodyLayers(finalColor, bodyUV);
+                // 计算真实头部区域：headUV 标记为 HEAD 且角色本体有像素，且不在身体区域
+                // 如果同时是 HEAD 和 TORSO（重叠区域），优先渲染衣服
+                bool isHeadCore = IsPartID(headPartID, ID_HEAD) && baseColor.a > CUTOFF && !IsPartID(bodyPartID, ID_TORSO);
+
+                // 应用身体层装备（真实头部区域不渲染衣服）
+                float bodyLayerAlpha;
+                ApplyBodyLayers(bodyUV, isHeadCore, finalColor, bodyLayerAlpha);
 
                 // 应用头部层装备
                 float headLayerAlpha;
                 ApplyHeadLayers(headUV.rg, headPartID, finalColor, headLayerAlpha);
 
-                // 在扩展区域（原 baseColor.a = 0）使用头部层的 alpha
-                if (IsPartID(headPartID, ID_HEAD))
-                {
-                    finalColor.a = max(finalColor.a, headLayerAlpha);
-                }
+                // 在扩展区域（原 baseColor.a = 0）使用装备层的 alpha
+                finalColor.a = max(finalColor.a, max(bodyLayerAlpha, headLayerAlpha));
 
                 return finalColor * i.color;
             }
