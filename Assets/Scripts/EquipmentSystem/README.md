@@ -2,30 +2,40 @@
 
 ## 概述
 
-这是一个基于 UV Map 的像素风格角色换装系统，支持：
-- **武器**: 用锚点定位
-- **服装**: Shader UV 重映射到躯干
-- **斗篷**: Shader UV 重映射到躯干，渲染在服装前面
-- **头部装备**: 头发 → 胡子 → 头盔（三层叠加）
+这是一个 **配置驱动** 的像素风格角色换装系统，基于 UV Map + Shader 实现，支持：
+
+- **武器**: 主手 + 副手双武器系统，锚点定位 + Shader 深度处理
+- **服装/裤子/斗篷**: Shader UV 重映射到躯干，按层级叠加
+- **头部装备**: 头发 → 面部装饰 → 胡子 → 头盔（四层叠加）
 - **手套/鞋子**: 颜色替换
+
+### 核心特性
+
+- **配置驱动渲染**: 通过 `EquipTypeConfig` + `EquipTypeRegistry` 管理装备类型，新增类型无需修改 Renderer 代码
+- **武器槽位系统**: `WeaponSlotType` 定义武器类型（主手/双手/双持/副手），自动处理装备规则
+- **双武器 Shader**: 支持主手 + 副手同时渲染，双持武器在两个锚点显示
 
 ## 系统架构
 
 ```
 EquipmentSystem/
-├── Data/                    # 数据定义
-│   ├── CharacterFrameData.cs    # 帧数据（锚点、部位区域、UV方向等）
-│   ├── CharacterAppearance.cs   # 角色外观（头发、胡子）
-│   └── EquipmentData.cs         # 装备数据（4方向贴图）
-├── Editor/                  # 编辑器工具
-│   ├── FrameDataEditor.cs       # 帧数据编辑器窗口
-│   ├── DualUVMapGenerator.cs    # UV Map 生成器
-│   └── EquipmentDataEditor.cs   # 装备数据编辑器
-├── Runtime/                 # 运行时组件
-│   ├── EquipmentRenderer.cs     # 装备渲染器
-│   └── AnimationController.cs   # 动画控制器
-└── Shaders/                 # Shader
-    └── EquipmentUV.shader       # 装备渲染 Shader
+├── Data/                        # 数据定义
+│   ├── CharacterFrameData.cs        # 帧数据（锚点、部位区域、UV方向等）
+│   ├── CharacterAppearance.cs       # 角色外观（头发、胡子、眼睛颜色）
+│   ├── EquipmentData.cs             # 装备数据（4方向贴图、武器槽位类型）
+│   ├── EquipTypeConfig.cs           # 装备类型配置（渲染模式、Shader属性）
+│   └── EquipAnimSequenceAsset.cs    # 装备序列帧动画资产
+├── Editor/                      # 编辑器工具
+│   ├── FrameDataEditor.cs           # 帧数据编辑器窗口
+│   ├── DualUVMapGenerator.cs        # UV Map 生成器
+│   ├── EquipmentDataEditor.cs       # 装备数据编辑器
+│   └── EquipAnimSequenceEditor.cs   # 序列帧动画编辑器
+├── Runtime/                     # 运行时组件
+│   ├── EquipmentRenderer.cs         # 装备渲染器（配置驱动）
+│   ├── AnimationController.cs       # 动画控制器
+│   └── EquipmentDemoExtension.cs    # 测试工具（主手/副手UI）
+└── Shaders/                     # Shader
+    └── EquipmentUV.shader           # 装备渲染 Shader（双武器支持）
 ```
 
 ---
@@ -93,12 +103,51 @@ CharacterFrameData
 ```csharp
 EquipmentData
 ├── equipmentId: string
-├── type: EquipmentType      // Weapon/Clothing/Cloak/Helmet/Gloves/Shoes
-├── spriteSE/SW/NE/NW: Sprite  // 4方向贴图
-├── anchorType: AnchorType   // 武器锚点类型
-├── selfAnchor: Vector2Int   // 装备自身锚点
-└── leftColor/rightColor: Color32  // 手套/鞋子颜色
+├── type: EquipmentType           // Weapon/Clothing/Cloak/Helmet/Gloves/Shoes/Pants
+├── spriteSE/SW/NE/NW: Sprite     // 4方向贴图
+├── weaponSlotType: WeaponSlotType // 武器槽位类型（仅武器）
+├── leftColor/rightColor: Color32  // 手套/鞋子颜色
+└── animSet: EquipAnimSetAsset    // 序列帧动画集（可选）
 ```
+
+### WeaponSlotType（武器槽位类型）
+
+```csharp
+public enum WeaponSlotType
+{
+    MainHand,    // 主手单手武器，可搭配副手
+    TwoHand,     // 双手武器，禁止副手
+    DualWield,   // 双持武器，一件装备两个锚点显示，禁止副手
+    OffHand,     // 副手武器（盾牌等），只能装在副手槽
+}
+```
+
+**装备规则**:
+- `MainHand/TwoHand/DualWield` → 装备到主手槽，使用 `LeftWeapon` 锚点
+- `OffHand` → 装备到副手槽，使用 `RightWeapon` 锚点
+- `TwoHand/DualWield` 装备后自动禁止副手装备
+- `DualWield` 在静态模式下同一贴图在两个锚点各显示一次
+
+### EquipTypeConfig（装备类型配置）
+
+```csharp
+public class EquipTypeConfig
+{
+    public EquipmentType Type;
+    public string DisplayName;
+    public EquipRenderMode RenderMode;  // None/Sprite/Color/Weapon
+    public CharacterBodyPart BodyPart;  // Sprite 模式用
+    public string TexProp, RectProp, EnableProp;  // Shader 属性名
+    public string LeftColorProp, RightColorProp;  // Color 模式用
+    public int RenderOrder;             // 渲染顺序
+}
+```
+
+**渲染模式**:
+- `Sprite`: UV 贴图映射（服装、裤子、斗篷、头盔）
+- `Color`: 颜色替换（手套、鞋子）
+- `Weapon`: 武器专用渲染（锚点 + Shader 深度处理）
+- `None`: 不渲染
 
 ### BodyPartRegion
 
@@ -244,20 +293,56 @@ BodyPartRegion
 主要功能：
 1. 采样 UV Map 获取部位信息和 UV 坐标
 2. 根据部位 ID 选择对应的装备贴图采样
-3. 支持多层叠加（头发 → 胡子 → 头盔）
+3. 支持多层叠加（身体层 + 头部层 + 武器层）
+4. **双武器支持**: 主手 (`_Weapon0*`) + 副手 (`_Weapon1*`) 独立渲染
 
-关键函数：
+#### 渲染层级
+
+**身体层** (`ApplyBodyLayers`):
+- 裤子 (`_PantsTex`) → 服装 (`_ClothTex`) → 斗篷 (`_CloakTex`)
+- 手套/鞋子: 颜色替换
+
+**头部层** (`ApplyHeadLayers`):
+- 头发 → 面部装饰 → 胡子 → 头盔（顶层）
+
+**武器层** (无武器区域方案):
+- 朝北: 武器在身体后面
+- 朝南: 武器在身体前面，但手脚始终在武器前面
+- 主手在副手前面
+
+#### 武器参数（每把武器独立）
+
+```hlsl
+// 主手武器 (Weapon0)
+_Weapon0Tex, _Weapon0Rect, _Weapon0AnchorFrameUV
+_Weapon0RotCosSin, _Weapon0FlipX, _Weapon0DepthMode, _Weapon0Enabled
+
+// 副手武器 (Weapon1)
+_Weapon1Tex, _Weapon1Rect, _Weapon1AnchorFrameUV
+_Weapon1RotCosSin, _Weapon1FlipX, _Weapon1DepthMode, _Weapon1Enabled
+
+// 共用
+_CharFrameRect  // 当前角色帧在 _MainTex 中的 Rect
+```
+
+#### 关键函数
 
 ```hlsl
 // 将局部 UV (0~1) 转换为贴图实际 UV
 float2 TransformUV(float2 uv, float4 rect)
 
-// 应用身体层装备
-fixed4 ApplyBodyLayers(fixed4 baseColor, fixed4 bodyUV)
+// 通用武器采样
+bool TrySampleWeaponGeneric(float2 mainUV, sampler2D weaponTex, ...)
 
-// 应用头部层装备
-void ApplyHeadLayers(float2 baseHeadUV, float headPartID, 
-                     inout fixed4 ioColor, out float headLayerAlpha)
+// 主手/副手武器采样
+bool TrySampleWeapon0(float2 mainUV, out fixed4 outColor)
+bool TrySampleWeapon1(float2 mainUV, out fixed4 outColor)
+
+// 身体层装备
+void ApplyBodyLayers(fixed4 bodyUV, bool isHeadCore, inout fixed4 ioColor, out float bodyLayerAlpha)
+
+// 头部层装备
+void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, out float headLayerAlpha)
 ```
 
 ### 调试模式
@@ -313,14 +398,42 @@ void ApplyHeadLayers(float2 baseHeadUV, float headPartID,
 ### EquipmentRenderer
 
 ```csharp
-// 装备
-public void Equip(EquipmentData equip)
+// 装备（自动根据 weaponSlotType 分配到主手/副手槽）
+public void Equip(EquipmentData equip, bool autoRefresh = true)
 
 // 卸载
-public void Unequip(EquipmentData equip)
+public void Unequip(EquipmentData equip, bool autoRefresh = true)
+
+// 卸载所有装备
+public void UnequipAll()
 
 // 刷新显示
 public void Refresh()
+
+// 获取主手武器
+public EquipmentData GetMainHandWeapon()
+
+// 获取副手武器
+public EquipmentData GetOffHandWeapon()
+
+// 检查当前是否允许装备副手
+public bool CanEquipOffHand()
+
+// 设置角色外观
+public void SetAppearance(CharacterAppearance newAppearance)
+```
+
+### EquipTypeRegistry
+
+```csharp
+// 获取装备类型配置
+public static EquipTypeConfig Get(EquipmentType type)
+
+// 获取显示名称
+public static string GetDisplayName(EquipmentType type)
+
+// 所有配置（用于遍历）
+public static IEnumerable<EquipTypeConfig> All
 ```
 
 ### CharacterFrameData
@@ -351,13 +464,18 @@ public Sprite GetSpriteByRow(int rowIndex)
 - **v1.2**: 添加参考帧系统，解决头部抖动问题
 - **v1.3**: 添加 spriteFacing 支持，用于转头场景
 - **v1.4**: 添加从 SE 方向自动生成其他方向数据的功能
-  - SW = SE 水平镜像（左右手/脚自动互换）
-  - NE = SE 直接复制
-  - NW = SE 水平镜像（同 SW 逻辑）
-- **v1.5**: 添加斗篷(Cloak)装备类型，渲染层级在服装前面
+- **v1.5**: 添加斗篷(Cloak)装备类型
 - **v1.6**: 添加面部装饰(FaceAccessory)外观层
-  - 渲染层级：头发（底层）→ 面部装饰 → 胡子 → 头盔（顶层）
-  - 特殊处理：每个方向独立，未填写的方向不显示（不回退到其他方向）
+- **v1.7**: 添加裤子(Pants)装备类型，渲染层级在服装下面
+- **v2.0**: 配置驱动渲染系统重构
+  - 引入 `EquipTypeConfig` + `EquipTypeRegistry`，新增装备类型无需修改 Renderer 代码
+  - 移除 `hideLeftWeapon`/`hideRightWeapon` 配置，武器渲染由序列帧优先原则控制
+- **v2.1**: 武器槽位系统
+  - 引入 `WeaponSlotType` 枚举（MainHand/TwoHand/DualWield/OffHand）
+  - 主手 + 副手双武器支持，自动处理装备规则
+  - Shader 支持双武器独立渲染（`_Weapon0*` + `_Weapon1*`）
+  - 双持武器在两个锚点同时显示
+  - 测试 UI 拆分为主手/副手两个下拉框
 
 ## 帧数据编辑器（FrameDataEditor）架构概览
 

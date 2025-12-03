@@ -23,12 +23,10 @@ namespace EquipmentSystem.Data
         public Sprite beardNE;
         public Sprite beardNW;
         
-        [Header("面部装饰 (4方向)")]
-        [Tooltip("每个方向独立，未填写的方向不显示")]
+        [Header("面部装饰 (朝南时显示)")]
+        [Tooltip("只在朝南(SE/SW)时显示，朝北不显示")]
         public Sprite faceAccessorySE;
         public Sprite faceAccessorySW;
-        public Sprite faceAccessoryNE;
-        public Sprite faceAccessoryNW;
         
         [Header("肤色")]
         public Color skinColor = new Color(1f, 0.85f, 0.7f, 1f);
@@ -63,35 +61,8 @@ namespace EquipmentSystem.Data
             {
                 case CharacterFacing.SouthEast: return faceAccessorySE;
                 case CharacterFacing.SouthWest: return faceAccessorySW;
-                case CharacterFacing.NorthEast: return faceAccessoryNE;
-                case CharacterFacing.NorthWest: return faceAccessoryNW;
                 default: return null;
             }
-        }
-        
-        /// <summary>
-        /// 根据行索引获取头发贴图 (0=SE, 1=SW, 2=NE, 3=NW)
-        /// </summary>
-        public Sprite GetHairByRow(int rowIndex)
-        {
-            return GetHairSprite((CharacterFacing)rowIndex);
-        }
-        
-        /// <summary>
-        /// 根据行索引获取胡子贴图 (0=SE, 1=SW, 2=NE, 3=NW)
-        /// </summary>
-        public Sprite GetBeardByRow(int rowIndex)
-        {
-            return GetBeardSprite((CharacterFacing)rowIndex);
-        }
-        
-        /// <summary>
-        /// 根据行索引获取面部装饰贴图 (0=SE, 1=SW, 2=NE, 3=NW)
-        /// 特殊处理：不回退，未填写的方向返回 null
-        /// </summary>
-        public Sprite GetFaceAccessoryByRow(int rowIndex)
-        {
-            return GetFaceAccessorySprite((CharacterFacing)rowIndex);
         }
         
         /// <summary>
@@ -107,6 +78,6 @@ namespace EquipmentSystem.Data
         /// <summary>
         /// 是否有面部装饰（任一方向有即可）
         /// </summary>
-        public bool HasFaceAccessory => faceAccessorySE != null || faceAccessorySW != null || faceAccessoryNE != null || faceAccessoryNW != null;
+        public bool HasFaceAccessory => faceAccessorySE != null || faceAccessorySW != null;
     }
 }

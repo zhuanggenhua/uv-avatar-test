@@ -16,6 +16,18 @@ namespace EquipmentSystem.Data
         Cloak, //   斗篷 - UV 映射到躯干 (Body 层)，渲染在服装前面
         Weapon, //   武器 - 用锚点定位
         Bag, //  背包 - 用锚点定位
+        Pants, //   裤子 - UV 映射到躯干 (Body 层)，与服装共用 Body 区域
+    }
+
+    /// <summary>
+    /// 武器槽位类型
+    /// </summary>
+    public enum WeaponSlotType
+    {
+        MainHand,    // 单手主手武器
+        TwoHand,     // 双手武器（禁止副手）
+        DualWield,   // 双持武器（禁止副手）
+        OffHand,     // 副手武器（盾牌等）
     }
 
     /// <summary>
@@ -38,9 +50,11 @@ namespace EquipmentSystem.Data
                 case CharacterFacing.SouthWest:
                     return sw;
                 case CharacterFacing.NorthEast:
-                    return ne;
+                    // NE 优先使用自身；未配置时回退到 SE
+                    return ne != null ? ne : se;
                 case CharacterFacing.NorthWest:
-                    return nw;
+                    // NW 优先使用自身；未配置时回退到 SW
+                    return nw != null ? nw : sw;
                 default:
                     return se;
             }
@@ -120,16 +134,16 @@ namespace EquipmentSystem.Data
         public Sprite spriteNE;
         public Sprite spriteNW;
 
-        [Header("循环变体（可选）")]
-        [Tooltip("静止类动画使用的循环贴图（如斗篷轻微摆动）")]
-        public DirectionalSpriteSet[] idleLoop;
-        
-        [Tooltip("移动类动画使用的循环贴图（如斗篷飘动）")]
-        public DirectionalSpriteSet[] moveLoop;
+        [Header("贴图变体（可选）")]
+        [Tooltip("向上动作时使用的 4 向变体贴图（FrameVariant.Up）；SE 不为空时视为启用")] 
+        public DirectionalSpriteSet upVariant;
+
+        [Tooltip("向下动作时使用的 4 向变体贴图（FrameVariant.Down）；SE 不为空时视为启用")] 
+        public DirectionalSpriteSet downVariant;
 
         // 武器设置
-        public AnchorType anchorType = AnchorType.RightWeapon;
-        public Vector2Int selfAnchor;
+        [Tooltip("武器槽位类型：主手/双手/双持/副手")]
+        public WeaponSlotType weaponSlotType = WeaponSlotType.MainHand;
 
         // 颜色替换 (手套/鞋子)
         public Color32 leftColor = new Color32(150, 100, 50, 255);
@@ -167,7 +181,7 @@ namespace EquipmentSystem.Data
         public bool HasAnimSet => animSet != null;
 
         /// <summary>
-        /// 根据方向获取对应的 Sprite (服装/头部装饰用)
+        /// 根据方向获取对应的基础 Sprite (服装/头部装饰用)
         /// </summary>
         public Sprite GetSprite(CharacterFacing facing)
         {
@@ -185,41 +199,47 @@ namespace EquipmentSystem.Data
         }
 
         /// <summary>
-        /// 根据循环类型、方向和动画帧索引获取循环变体贴图
+        /// 根据方向和帧变体获取 Sprite
         /// </summary>
-        public Sprite GetLoopSprite(EquipVariantLoopType loopType, CharacterFacing facing, int frameIndex)
+        public Sprite GetSprite(CharacterFacing facing, FrameVariant variant)
         {
             // 武器只有一张贴图
             if (type == EquipmentType.Weapon)
                 return weaponSprite;
             
-            var loopArray = loopType == EquipVariantLoopType.Move ? moveLoop : idleLoop;
-            
-            if (loopArray == null || loopArray.Length == 0)
-                return GetSprite(facing);
-            
-            int idx = frameIndex % loopArray.Length;
-            var set = loopArray[idx];
-            if (set == null)
-                return GetSprite(facing);
-            
-            return set.GetByFacing(facing) ?? GetSprite(facing);
+            // 选择对应的变体贴图集
+            DirectionalSpriteSet set = null;
+            switch (variant)
+            {
+                case FrameVariant.Up:
+                    set = upVariant;
+                    break;
+                case FrameVariant.Down:
+                    set = downVariant;
+                    break;
+                case FrameVariant.Base:
+                default:
+                    break;
+            }
+
+            // 使用变体时，以 SE 是否配置作为「是否启用该变体」的标记
+            if (set != null && set.se != null)
+            {
+                var sprite = set.GetByFacing(facing);
+                if (sprite != null)
+                    return sprite;
+            }
+
+            // 回退到基础贴图
+            return GetSprite(facing);
         }
 
         /// <summary>
-        /// 根据行索引获取对应的 Sprite (0=SE, 1=SW, 2=NE, 3=NW)
+        /// 根据行索引获取对应的基础 Sprite (0=SE, 1=SW, 2=NE, 3=NW)
         /// </summary>
         public Sprite GetSpriteByRow(int rowIndex)
         {
             return GetSprite((CharacterFacing)rowIndex);
-        }
-
-        /// <summary>
-        /// 根据行索引和循环类型获取对应的 Sprite
-        /// </summary>
-        public Sprite GetLoopSpriteByRow(EquipVariantLoopType loopType, int rowIndex, int frameIndex)
-        {
-            return GetLoopSprite(loopType, (CharacterFacing)rowIndex, frameIndex);
         }
     }
 }

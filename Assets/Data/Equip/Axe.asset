@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74340105d53c6d4e96c80db64c93b00, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentSystem.Data.EquipmentData
+  equipmentId: 
+  type: 5
+  weaponSprite: {fileID: 21300000, guid: 1d387f6eed313fd44acbcb39fc1b8724, type: 3}
+  spriteSE: {fileID: 0}
+  spriteSW: {fileID: 0}
+  spriteNE: {fileID: 0}
+  spriteNW: {fileID: 0}
+  upVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  downVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  anchorType: 0
+  leftColor:
+    serializedVersion: 2
+    rgba: 4281492630
+  rightColor:
+    serializedVersion: 2
+    rgba: 4281492630
+  hideHair: 0
+  hideBeard: 0
+  animSet: {fileID: 0}

@@ -15,22 +15,40 @@ namespace EquipmentSystem.Data
     }
 
     public enum FacingDirection { Front, Back }
+
+    public enum FrameVariant
+    {
+        Base = 0,
+        Up = 1,
+        Down = 2
+    }
     
     /// <summary>
-    /// UV 空间方向配置
-    /// UV 坐标系：左下角 (0,0)，右上角 (1,1)
-    /// 用对角线方向描述纹理的朝向
+    /// UV 空间方向配置（部位 UV 用）
     /// </summary>
     public enum UVOrientation
     {
-        /// <summary>右上（默认）- 纹理从左下指向右上</summary>
         UpRight = 0,
-        /// <summary>左下 - 纹理从右上指向左下（旋转180°）</summary>
         DownLeft = 1,
-        /// <summary>左上 - 纹理从右下指向左上（逆时针旋转90°）</summary>
         UpLeft = 2,
-        /// <summary>右下 - 纹理从左上指向右下（顺时针旋转90°）</summary>
         DownRight = 3
+    }
+    
+    /// <summary>
+    /// 武器锚点朝向（仅用于武器旋转）
+    /// 角度表以 East 为 0°，逆时针为正：
+    /// East=0, NorthEast=45, North=90, NorthWest=135, West=180, SouthWest=-135, South=-90, SouthEast=-45
+    /// </summary>
+    public enum AnchorDirection
+    {
+        East = 0,
+        NorthEast = 1,
+        North = 2,
+        NorthWest = 3,
+        West = 4,
+        SouthWest = 5,
+        South = 6,
+        SouthEast = 7
     }
     
     #endregion
@@ -51,17 +69,21 @@ namespace EquipmentSystem.Data
     {
         public AnchorType type;
         public Vector2Int position;
-        public UVOrientation orientation;
-        public bool flipX;  // 水平翻转（角色转头时用）
+        public AnchorDirection direction = AnchorDirection.East;
         
         public float GetRotationAngle()
         {
-            switch (orientation)
+            switch (direction)
             {
-                case UVOrientation.DownLeft: return 180f;
-                case UVOrientation.UpLeft: return 90f;
-                case UVOrientation.DownRight: return -90f;
-                default: return 0f;  // UpRight
+                case AnchorDirection.East: return 0f;
+                case AnchorDirection.NorthEast: return 45f;
+                case AnchorDirection.North: return 90f;
+                case AnchorDirection.NorthWest: return 135f;
+                case AnchorDirection.West: return 180f;
+                case AnchorDirection.SouthWest: return -135f;
+                case AnchorDirection.South: return -90f;
+                case AnchorDirection.SouthEast: return -45f;
+                default: return 0f;
             }
         }
     }
@@ -120,6 +142,11 @@ namespace EquipmentSystem.Data
         /// 贴图方向（用于转头等场景，指定该部位使用哪个方向的装备贴图）
         /// </summary>
         public CharacterFacing spriteFacing = CharacterFacing.SouthEast;
+        
+        /// <summary>
+        /// 贴图变体（基础/向上/向下 等）
+        /// </summary>
+        public FrameVariant variant = FrameVariant.Base;
         
         public List<BodyPartPixel> pixels = new List<BodyPartPixel>();
         
@@ -224,18 +251,6 @@ namespace EquipmentSystem.Data
         
         public AnchorPoint GetAnchor(AnchorType type) => anchors.Find(a => a.type == type);
         
-        public void SetAnchor(AnchorType type, Vector2Int pos, UVOrientation orientation)
-        {
-            var a = GetAnchor(type);
-            if (a == null)
-            {
-                a = new AnchorPoint { type = type };
-                anchors.Add(a);
-            }
-            a.position = pos;
-            a.orientation = orientation;
-        }
-        
         /// <summary>
         /// 获取指定部位区域
         /// </summary>
@@ -308,10 +323,6 @@ namespace EquipmentSystem.Data
         public Vector2Int frameSize = new Vector2Int(32, 32);
         public int framesPerRow = 8;
         public int rowCount = 4;
-        
-        [Header("武器显示配置")]
-        public bool hideLeftWeapon;   // 隐藏左手武器
-        public bool hideRightWeapon;  // 隐藏右手武器
         
         [Header("GPU 换装 - 双层 UV Map")]
         [Tooltip("身体层 UV Map (衣服、手套、鞋子)")]
@@ -429,6 +440,10 @@ namespace EquipmentSystem.Data
         public Vector2Int headDetectSize = new Vector2Int(4, 3);
         [Tooltip("身体检测目标区域大小")]
         public Vector2Int torsoDetectSize = new Vector2Int(3, 2);
+        
+        [Header("武器握点（UV 画板像素）")]
+        public Vector2Int rightHandWeaponPivot = new Vector2Int(0, 0);
+        public Vector2Int leftHandWeaponPivot = new Vector2Int(0, 0);
         
         [Header("头部区域扩展配置")]
         [Tooltip("头部向上扩展的像素数")]

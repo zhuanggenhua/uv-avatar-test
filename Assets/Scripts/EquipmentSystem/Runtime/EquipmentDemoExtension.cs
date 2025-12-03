@@ -30,6 +30,12 @@ namespace EquipmentSystem.Runtime
         Dictionary<EquipmentType, List<EquipmentData>> _equipmentsByType;
         Dictionary<EquipmentType, int> _selectedIndex;  // 每个类型的当前选择 (0=无)
         
+        // 武器分组（主手/副手）
+        List<EquipmentData> _mainHandWeapons = new List<EquipmentData>();
+        List<EquipmentData> _offHandWeapons = new List<EquipmentData>();
+        int _selectedMainHandIndex = 0;  // 0 = 无
+        int _selectedOffHandIndex = 0;   // 0 = 无
+        
         // 外观选择
         int _selectedAppearanceIndex = 0;  // 0 = 无
         
@@ -45,6 +51,13 @@ namespace EquipmentSystem.Runtime
                 _selectedIndex[type] = 0;  // 0 = 无
             }
             
+            // 武器按槽位类型分组
+            var weapons = _equipmentsByType[EquipmentType.Weapon];
+            _mainHandWeapons = weapons.Where(w => 
+                w.weaponSlotType == WeaponSlotType.MainHand ||
+                w.weaponSlotType == WeaponSlotType.TwoHand ||
+                w.weaponSlotType == WeaponSlotType.DualWield).ToList();
+            _offHandWeapons = weapons.Where(w => w.weaponSlotType == WeaponSlotType.OffHand).ToList();
         }
         
         void Update()
@@ -93,9 +106,11 @@ namespace EquipmentSystem.Runtime
         {
             if (_currentEquipRenderer == null) return;
             
-            // 根据当前穿戴的装备同步下拉框选择
+            // 根据当前穿戴的装备同步下拉框选择（跳过武器，单独处理）
             foreach (var type in _equipmentsByType.Keys)
             {
+                if (type == EquipmentType.Weapon) continue;
+                
                 _selectedIndex[type] = 0;
                 var list = _equipmentsByType[type];
                 for (int i = 0; i < list.Count; i++)
@@ -103,10 +118,28 @@ namespace EquipmentSystem.Runtime
                     var equipped = _currentEquipRenderer.GetEquipped(type);
                     if (equipped == list[i])
                     {
-                        _selectedIndex[type] = i + 1;  // +1 因为 0 是 "无"
+                        _selectedIndex[type] = i + 1;
                         break;
                     }
                 }
+            }
+            
+            // 同步主手武器选择
+            _selectedMainHandIndex = 0;
+            var mainHand = _currentEquipRenderer.GetMainHandWeapon();
+            if (mainHand != null)
+            {
+                int idx = _mainHandWeapons.IndexOf(mainHand);
+                if (idx >= 0) _selectedMainHandIndex = idx + 1;
+            }
+            
+            // 同步副手武器选择
+            _selectedOffHandIndex = 0;
+            var offHand = _currentEquipRenderer.GetOffHandWeapon();
+            if (offHand != null)
+            {
+                int idx = _offHandWeapons.IndexOf(offHand);
+                if (idx >= 0) _selectedOffHandIndex = idx + 1;
             }
             
             // 同步外观选择
@@ -142,10 +175,16 @@ namespace EquipmentSystem.Runtime
             float dropdownWidth = panelWidth - labelWidth - 5f;
             float spacing = 8f;
             
-            // 计算面板高度 (角色显示 + 装备 + 动画控制)
+            // 计算面板高度 (角色显示 + 装备 + 武器 + 动画控制)
             int typeCount = 0;
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
+            {
+                if (type == EquipmentType.Weapon) continue; // 武器单独计算
                 if (_equipmentsByType[type].Count > 0) typeCount++;
+            }
+            // 主手/副手武器行数
+            if (_mainHandWeapons.Count > 0) typeCount++;
+            if (_offHandWeapons.Count > 0) typeCount++;
             
             // 额外: 角色显示 + 分隔 + 动画标题 + 动画下拉 + 方向下拉 + 阴影开关
             float charDisplayHeight = lineHeight + spacing;
@@ -180,28 +219,28 @@ namespace EquipmentSystem.Runtime
             
             // 如果有下拉框打开，禁用其他控件
             bool hasOpenDropdown = _openDropdown != null;
-            anyDropdownOpen = _openDropdown != null || _openAnimDropdown != 0 || _openAppearanceDropdown;
+            anyDropdownOpen = _openDropdown != null || _openAnimDropdown != 0 || _openAppearanceDropdown 
+                || _openMainHandDropdown || _openOffHandDropdown;
             
+            // 非武器类型的装备下拉框
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
             {
+                if (type == EquipmentType.Weapon) continue; // 武器单独处理
+                
                 var list = _equipmentsByType[type];
                 if (list.Count == 0) continue;
                 
-                // 标签
                 GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), GetTypeName(type), GetLabelStyle());
                 
-                // 下拉框选项
                 var options = new List<string> { "(无)" };
                 options.AddRange(list.Select(e => e.name));
                 
                 Rect dropRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
                 dropdownRects.Add((type, dropRect, options.ToArray()));
                 
-                // 绘制下拉框按钮
                 int selected = _selectedIndex[type];
                 string label = selected >= 0 && selected < options.Count ? options[selected] : "(无)";
                 
-                // 当有下拉框打开时，只有当前打开的那个可以点击
                 GUI.enabled = hasSelection && (!anyDropdownOpen || _openDropdown == type);
                 
                 if (GUI.Button(dropRect, label, GetDropdownStyle()))
@@ -212,6 +251,61 @@ namespace EquipmentSystem.Runtime
                         _openDropdown = type;
                 }
                 
+                y += lineHeight + spacing;
+            }
+            
+            // ========== 主手武器下拉框 ==========
+            if (_mainHandWeapons.Count > 0)
+            {
+                GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "主手:", GetLabelStyle());
+                
+                var mainOptions = new List<string> { "(无)" };
+                mainOptions.AddRange(_mainHandWeapons.Select(e => e.name));
+                
+                Rect mainRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
+                string mainLabel = _selectedMainHandIndex >= 0 && _selectedMainHandIndex < mainOptions.Count 
+                    ? mainOptions[_selectedMainHandIndex] : "(无)";
+                
+                GUI.enabled = hasSelection && (!anyDropdownOpen || _openMainHandDropdown);
+                
+                if (GUI.Button(mainRect, mainLabel, GetDropdownStyle()))
+                {
+                    _openMainHandDropdown = !_openMainHandDropdown;
+                    if (_openMainHandDropdown) { _openDropdown = null; _openOffHandDropdown = false; _openAnimDropdown = 0; _openAppearanceDropdown = false; }
+                }
+                
+                y += lineHeight + spacing;
+            }
+            
+            // ========== 副手武器下拉框 ==========
+            if (_offHandWeapons.Count > 0)
+            {
+                GUI.Label(new Rect(x, y + 4, labelWidth, lineHeight), "副手:", GetLabelStyle());
+                
+                var offOptions = new List<string> { "(无)" };
+                offOptions.AddRange(_offHandWeapons.Select(e => e.name));
+                
+                Rect offRect = new Rect(x + labelWidth, y, dropdownWidth, lineHeight);
+                string offLabel = _selectedOffHandIndex >= 0 && _selectedOffHandIndex < offOptions.Count 
+                    ? offOptions[_selectedOffHandIndex] : "(无)";
+                
+                // 检查是否允许副手
+                bool canEquipOffHand = _currentEquipRenderer == null || _currentEquipRenderer.CanEquipOffHand();
+                GUI.enabled = hasSelection && canEquipOffHand && (!anyDropdownOpen || _openOffHandDropdown);
+                
+                if (!canEquipOffHand)
+                    GUI.color = new Color(0.7f, 0.7f, 0.7f);
+                
+                if (GUI.Button(offRect, canEquipOffHand ? offLabel : "(禁用)", GetDropdownStyle()))
+                {
+                    if (canEquipOffHand)
+                    {
+                        _openOffHandDropdown = !_openOffHandDropdown;
+                        if (_openOffHandDropdown) { _openDropdown = null; _openMainHandDropdown = false; _openAnimDropdown = 0; _openAppearanceDropdown = false; }
+                    }
+                }
+                
+                GUI.color = Color.white;
                 y += lineHeight + spacing;
             }
             
@@ -360,6 +454,56 @@ namespace EquipmentSystem.Runtime
                 }
             }
             
+            // 绘制主手武器下拉列表
+            if (_openMainHandDropdown && _mainHandWeapons.Count > 0)
+            {
+                var mainOptions = new List<string> { "(无)" };
+                mainOptions.AddRange(_mainHandWeapons.Select(e => e.name));
+                Rect mainRect = new Rect(x + labelWidth, 0, dropdownWidth, lineHeight); // y 会在 DrawDropdownList 里重新计算
+                
+                // 找到主手下拉框的实际位置
+                float mainY = (Screen.height - panelHeight) / 2f + charDisplayHeight + 35;
+                foreach (EquipmentType t in System.Enum.GetValues(typeof(EquipmentType)))
+                {
+                    if (t == EquipmentType.Weapon) continue;
+                    if (_equipmentsByType[t].Count > 0) mainY += lineHeight + spacing;
+                }
+                mainRect.y = mainY;
+                
+                int newIndex = DrawDropdownList(mainRect, _selectedMainHandIndex, mainOptions.ToArray());
+                if (newIndex != _selectedMainHandIndex)
+                {
+                    OnMainHandChanged(_selectedMainHandIndex, newIndex);
+                    _selectedMainHandIndex = newIndex;
+                    _openMainHandDropdown = false;
+                }
+            }
+            
+            // 绘制副手武器下拉列表
+            if (_openOffHandDropdown && _offHandWeapons.Count > 0)
+            {
+                var offOptions = new List<string> { "(无)" };
+                offOptions.AddRange(_offHandWeapons.Select(e => e.name));
+                
+                // 找到副手下拉框的实际位置
+                float offY = (Screen.height - panelHeight) / 2f + charDisplayHeight + 35;
+                foreach (EquipmentType t in System.Enum.GetValues(typeof(EquipmentType)))
+                {
+                    if (t == EquipmentType.Weapon) continue;
+                    if (_equipmentsByType[t].Count > 0) offY += lineHeight + spacing;
+                }
+                if (_mainHandWeapons.Count > 0) offY += lineHeight + spacing;
+                Rect offRect = new Rect(x + labelWidth, offY, dropdownWidth, lineHeight);
+                
+                int newIndex = DrawDropdownList(offRect, _selectedOffHandIndex, offOptions.ToArray());
+                if (newIndex != _selectedOffHandIndex)
+                {
+                    OnOffHandChanged(_selectedOffHandIndex, newIndex);
+                    _selectedOffHandIndex = newIndex;
+                    _openOffHandDropdown = false;
+                }
+            }
+            
         }
         
         void OnSelectionChanged(EquipmentType type, int oldIndex, int newIndex)
@@ -381,6 +525,55 @@ namespace EquipmentSystem.Runtime
             }
         }
         
+        void OnMainHandChanged(int oldIndex, int newIndex)
+        {
+            if (_currentEquipRenderer == null) return;
+            
+            // 卸下旧主手
+            if (oldIndex > 0 && oldIndex <= _mainHandWeapons.Count)
+            {
+                _currentEquipRenderer.Unequip(_mainHandWeapons[oldIndex - 1]);
+            }
+            
+            // 装备新主手
+            if (newIndex > 0 && newIndex <= _mainHandWeapons.Count)
+            {
+                _currentEquipRenderer.Equip(_mainHandWeapons[newIndex - 1]);
+            }
+            
+            // 同步副手选择（可能被禁用）
+            SyncOffHandSelection();
+        }
+        
+        void OnOffHandChanged(int oldIndex, int newIndex)
+        {
+            if (_currentEquipRenderer == null) return;
+            
+            // 卸下旧副手
+            if (oldIndex > 0 && oldIndex <= _offHandWeapons.Count)
+            {
+                _currentEquipRenderer.Unequip(_offHandWeapons[oldIndex - 1]);
+            }
+            
+            // 装备新副手
+            if (newIndex > 0 && newIndex <= _offHandWeapons.Count)
+            {
+                _currentEquipRenderer.Equip(_offHandWeapons[newIndex - 1]);
+            }
+        }
+        
+        void SyncOffHandSelection()
+        {
+            // 如果当前主手禁止副手，清空副手选择
+            if (_currentEquipRenderer != null && !_currentEquipRenderer.CanEquipOffHand())
+            {
+                if (_selectedOffHandIndex > 0)
+                {
+                    _selectedOffHandIndex = 0;
+                }
+            }
+        }
+        
         void UnequipAll()
         {
             if (_currentEquipRenderer == null) return;
@@ -389,6 +582,9 @@ namespace EquipmentSystem.Runtime
             
             foreach (var type in _selectedIndex.Keys.ToList())
                 _selectedIndex[type] = 0;
+            
+            _selectedMainHandIndex = 0;
+            _selectedOffHandIndex = 0;
         }
         
         void ApplyAnimation(int index)
@@ -416,21 +612,14 @@ namespace EquipmentSystem.Runtime
         
         string GetTypeName(EquipmentType type)
         {
-            switch (type)
-            {
-                case EquipmentType.Weapon: return "武器";
-                case EquipmentType.Clothing: return "服装";
-                case EquipmentType.Cloak: return "斗篷";
-                case EquipmentType.Helmet: return "头盔";
-                case EquipmentType.Gloves: return "手套";
-                case EquipmentType.Shoes: return "鞋子";
-                default: return type.ToString();
-            }
+            return EquipTypeRegistry.GetDisplayName(type);
         }
         
         // 当前打开的下拉框
         EquipmentType? _openDropdown = null;
         bool _openAppearanceDropdown = false;
+        bool _openMainHandDropdown = false;
+        bool _openOffHandDropdown = false;
         
         // 样式缓存
         GUIStyle _titleStyle, _labelStyle, _boxStyle, _dropdownStyle, _buttonStyle, _listItemStyle, _charNameStyle;

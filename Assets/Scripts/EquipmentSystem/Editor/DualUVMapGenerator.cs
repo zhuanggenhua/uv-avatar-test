@@ -254,5 +254,6 @@ namespace EquipmentSystem.Editor
                 pixels[globalY * texWidth + globalX] = new Color(0, 0, partID, 1f);
             }
         }
+        
     }
 }

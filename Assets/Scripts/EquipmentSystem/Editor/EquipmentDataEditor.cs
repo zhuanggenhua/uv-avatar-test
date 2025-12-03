@@ -5,8 +5,8 @@ using EquipmentSystem.Data;
 namespace EquipmentSystem.Editor
 {
     /// <summary>
-    /// EquipmentData 自定义编辑器
-    /// 根据装备类型显示对应的配置项
+    /// EquipmentData 自定义编辑器（配置驱动）
+    /// 根据 EquipTypeRegistry 的 RenderMode 决定显示内容
     /// </summary>
     [CustomEditor(typeof(EquipmentData))]
     public class EquipmentDataEditor : UnityEditor.Editor
@@ -14,16 +14,12 @@ namespace EquipmentSystem.Editor
         SerializedProperty _equipmentId;
         SerializedProperty _type;
         SerializedProperty _weaponSprite;
-        SerializedProperty _spriteSE;
-        SerializedProperty _spriteSW;
-        SerializedProperty _spriteNE;
-        SerializedProperty _spriteNW;
-        SerializedProperty _anchorType;
-        SerializedProperty _selfAnchor;
-        SerializedProperty _leftColor;
-        SerializedProperty _rightColor;
+        SerializedProperty _spriteSE, _spriteSW, _spriteNE, _spriteNW;
+        SerializedProperty _weaponSlotType;
+        SerializedProperty _leftColor, _rightColor;
         SerializedProperty _animSet;
-        SerializedProperty _spriteVariants;
+        SerializedProperty _upVariant, _downVariant;
+        SerializedProperty _hideHair, _hideBeard;
         
         void OnEnable()
         {
@@ -34,12 +30,14 @@ namespace EquipmentSystem.Editor
             _spriteSW = serializedObject.FindProperty("spriteSW");
             _spriteNE = serializedObject.FindProperty("spriteNE");
             _spriteNW = serializedObject.FindProperty("spriteNW");
-            _anchorType = serializedObject.FindProperty("anchorType");
-            _selfAnchor = serializedObject.FindProperty("selfAnchor");
+            _weaponSlotType = serializedObject.FindProperty("weaponSlotType");
             _leftColor = serializedObject.FindProperty("leftColor");
             _rightColor = serializedObject.FindProperty("rightColor");
             _animSet = serializedObject.FindProperty("animSet");
-            _spriteVariants = serializedObject.FindProperty("spriteVariants");
+            _upVariant = serializedObject.FindProperty("upVariant");
+            _downVariant = serializedObject.FindProperty("downVariant");
+            _hideHair = serializedObject.FindProperty("hideHair");
+            _hideBeard = serializedObject.FindProperty("hideBeard");
         }
         
         public override void OnInspectorGUI()
@@ -54,90 +52,87 @@ namespace EquipmentSystem.Editor
             EditorGUILayout.Space(10);
             
             var equipType = (EquipmentType)_type.enumValueIndex;
+            var cfg = EquipTypeRegistry.Get(equipType);
             
-            switch (equipType)
+            // 根据 RenderMode 绘制对应字段
+            if (cfg != null)
             {
-                case EquipmentType.Weapon:
-                    DrawWeaponFields();
-                    break;
-                case EquipmentType.Clothing:
-                    DrawClothingFields();
-                    break;
-                case EquipmentType.Cloak:
-                    DrawCloakFields();
-                    break;
-                case EquipmentType.Helmet:
-                    DrawHelmetFields();
-                    break;
-                case EquipmentType.Gloves:
-                    DrawGlovesFields();
-                    break;
-                case EquipmentType.Shoes:
-                    DrawShoesFields();
-                    break;
+                switch (cfg.RenderMode)
+                {
+                    case EquipRenderMode.Sprite:
+                        DrawSpriteFields(cfg);
+                        break;
+                    case EquipRenderMode.Color:
+                        DrawColorFields(equipType);
+                        break;
+                    case EquipRenderMode.Weapon:
+                        DrawWeaponFields();
+                        break;
+                    case EquipRenderMode.None:
+                        EditorGUILayout.HelpBox("此类型暂无可配置字段", MessageType.Info);
+                        break;
+                }
             }
             
             serializedObject.ApplyModifiedProperties();
         }
         
         /// <summary>
-        /// 武器: 单张贴图 + 锚点 + 序列帧覆盖
+        /// Sprite 类型：4向贴图 + 变体 + 动画集 + 特殊字段
+        /// </summary>
+        void DrawSpriteFields(EquipTypeConfig cfg)
+        {
+            string layerName = cfg.BodyPart == CharacterBodyPart.Head ? "Head 层" : "Body 层";
+            DrawDirectionalSprites(layerName);
+            DrawAnimSetField();
+            
+            // 头盔特殊字段
+            if (cfg.Type == EquipmentType.Helmet)
+            {
+                EditorGUILayout.Space(10);
+                EditorGUILayout.LabelField("头盔设置", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(_hideHair, new GUIContent("隐藏头发"));
+                EditorGUILayout.PropertyField(_hideBeard, new GUIContent("隐藏胡子"));
+            }
+        }
+        
+        /// <summary>
+        /// 颜色类型：左右颜色
+        /// </summary>
+        void DrawColorFields(EquipmentType type)
+        {
+            string leftLabel = type == EquipmentType.Gloves ? "左手颜色" : "左脚颜色";
+            string rightLabel = type == EquipmentType.Gloves ? "右手颜色" : "右脚颜色";
+            string helpText = type == EquipmentType.Gloves 
+                ? "手套替换角色手部像素的颜色" 
+                : "鞋子替换角色脚部像素的颜色";
+            
+            EditorGUILayout.LabelField("颜色", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_leftColor, new GUIContent(leftLabel));
+            EditorGUILayout.PropertyField(_rightColor, new GUIContent(rightLabel));
+            EditorGUILayout.Space(5);
+            EditorGUILayout.HelpBox(helpText, MessageType.Info);
+        }
+        
+        /// <summary>
+        /// 武器：单张贴图 + 槽位类型 + 动画集
         /// </summary>
         void DrawWeaponFields()
         {
-            EditorGUILayout.LabelField("基础贴图（挂点模式打底）", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("基础贴图", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_weaponSprite, new GUIContent("武器贴图"));
             
             EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("武器槽位", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_weaponSlotType, new GUIContent("槽位类型"));
+            EditorGUILayout.HelpBox(
+                "• 主手: 单手武器，可搭配副手\n" +
+                "• 双手: 双手武器，禁止副手\n" +
+                "• 双持: 一件装备两个锚点显示，禁止副手\n" +
+                "• 副手: 盾牌等，只能装备在副手槽", 
+                MessageType.Info);
             
-            EditorGUILayout.LabelField("挂点设置", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_anchorType, new GUIContent("挂点类型", "左手或右手"));
-            EditorGUILayout.PropertyField(_selfAnchor, new GUIContent("装备锚点", "装备自身的锚点位置 (像素坐标)"));
-            
-            DrawAnimSetField("动画集可覆盖挂点模式");
-        }
-        
-        /// <summary>
-        /// 服装: 4方向贴图 (Body 层) + 序列帧覆盖
-        /// </summary>
-        void DrawClothingFields()
-        {
-            DrawDirectionalSprites("Body 层");
-            DrawAnimSetField("动画集可覆盖 UV 模式");
-        }
-        
-        /// <summary>
-        /// 斗篷: 4方向贴图 (Body 层)，渲染在服装前面
-        /// </summary>
-        void DrawCloakFields()
-        {
-            DrawDirectionalSprites("Body 层，在服装上面");
-            DrawAnimSetField("动画集可覆盖 UV 模式");
-        }
-        
-        /// <summary>
-        /// 头盔: 4方向贴图 (Head 层，覆盖在头发/胡子之上) + 序列帧覆盖
-        /// </summary>
-        void DrawHelmetFields()
-        {
-            DrawDirectionalSprites("Head 层，在头发/胡子上面");
-            DrawAnimSetField("动画集可覆盖 UV 模式");
-        }
-        
-        /// <summary>
-        /// 手套: 左右手颜色
-        /// </summary>
-        void DrawGlovesFields()
-        {
-            DrawLeftRightColors("左手颜色", "右手颜色", "手套替换角色手部像素的颜色");
-        }
-        
-        /// <summary>
-        /// 鞋子: 左右脚颜色
-        /// </summary>
-        void DrawShoesFields()
-        {
-            DrawLeftRightColors("左脚颜色", "右脚颜色", "鞋子替换角色脚部像素的颜色");
+            DrawAnimSetField();
         }
         
         /// <summary>
@@ -159,68 +154,55 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 绘制变体贴图数组
+        /// 绘制变体配置（向上/向下）
         /// </summary>
         void DrawSpriteVariants()
         {
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("贴图变体（可选）", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("用于移动等动画的形变贴图，如斗篷飘动。\n在帧编辑器中选择当前帧使用哪个变体。", MessageType.Info);
-            
-            EditorGUILayout.Space(5);
-            
-            // 添加/删除按钮
+            EditorGUILayout.HelpBox("按帧配置的语义化变体：基础 / 向上 / 向下。SE 不为空时视为启用该变体。", MessageType.Info);
+
+            DrawDirectionalSet("向上变体 (Up)", _upVariant);
+            DrawDirectionalSet("向下变体 (Down)", _downVariant);
+        }
+        
+        /// <summary>
+        /// 绘制单个 DirectionalSpriteSet（用于 Up/Down 变体）
+        /// </summary>
+        void DrawDirectionalSet(string title, SerializedProperty setProp)
+        {
+            if (setProp == null) return;
+
+            EditorGUILayout.BeginVertical("helpbox");
+            EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
+
+            var seProp = setProp.FindPropertyRelative("se");
+            var swProp = setProp.FindPropertyRelative("sw");
+            var neProp = setProp.FindPropertyRelative("ne");
+            var nwProp = setProp.FindPropertyRelative("nw");
+
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("+ 添加变体", GUILayout.Width(100)))
-            {
-                _spriteVariants.InsertArrayElementAtIndex(_spriteVariants.arraySize);
-            }
+            GUILayout.Label("SE", GUILayout.Width(24));
+            EditorGUILayout.PropertyField(seProp, GUIContent.none, GUILayout.Width(60));
+            GUILayout.Label("SW", GUILayout.Width(24));
+            EditorGUILayout.PropertyField(swProp, GUIContent.none, GUILayout.Width(60));
+            GUILayout.Label("NE", GUILayout.Width(24));
+            EditorGUILayout.PropertyField(neProp, GUIContent.none, GUILayout.Width(60));
+            GUILayout.Label("NW", GUILayout.Width(24));
+            EditorGUILayout.PropertyField(nwProp, GUIContent.none, GUILayout.Width(60));
             EditorGUILayout.EndHorizontal();
-            
-            // 绘制每个变体
-            for (int i = 0; i < _spriteVariants.arraySize; i++)
-            {
-                var variant = _spriteVariants.GetArrayElementAtIndex(i);
-                var seProp = variant.FindPropertyRelative("se");
-                var swProp = variant.FindPropertyRelative("sw");
-                var neProp = variant.FindPropertyRelative("ne");
-                var nwProp = variant.FindPropertyRelative("nw");
-                
-                EditorGUILayout.Space(5);
-                EditorGUILayout.BeginVertical("helpbox");
-                
-                // 标题行 + 删除按钮
-                EditorGUILayout.BeginHorizontal();
-                GUILayout.Label($"变体 {i + 1}", EditorStyles.boldLabel);
-                GUILayout.FlexibleSpace();
-                if (GUILayout.Button("×", GUILayout.Width(25)))
-                {
-                    _spriteVariants.DeleteArrayElementAtIndex(i);
-                    break;
-                }
-                EditorGUILayout.EndHorizontal();
-                
-                // 4方向贴图
-                EditorGUILayout.PropertyField(seProp, new GUIContent("SE"));
-                EditorGUILayout.PropertyField(swProp, new GUIContent("SW"));
-                EditorGUILayout.PropertyField(neProp, new GUIContent("NE"));
-                EditorGUILayout.PropertyField(nwProp, new GUIContent("NW"));
-                
-                EditorGUILayout.EndVertical();
-            }
+
+            EditorGUILayout.EndVertical();
         }
         
         /// <summary>
         /// 绘制动画集字段
         /// </summary>
-        void DrawAnimSetField(string helpText)
+        void DrawAnimSetField()
         {
-            EditorGUILayout.PropertyField(_animSet, new GUIContent("动画集", "一整套动画（Idle/Walk/Attack/Die 等），可被多个装备共享"));
+            EditorGUILayout.Space(10);
+            EditorGUILayout.PropertyField(_animSet, new GUIContent("动画集", "一整套动画，可被多个装备共享"));
             
-            EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox(helpText, MessageType.Info);
-            
-            // 如果已选择动画集，显示包含的动画列表
             var animSetObj = _animSet.objectReferenceValue as EquipAnimSetAsset;
             if (animSetObj != null && animSetObj.animations != null && animSetObj.animations.Count > 0)
             {
@@ -231,19 +213,6 @@ namespace EquipmentSystem.Editor
                 EditorGUILayout.LabelField(string.Join(", ", displayNames), EditorStyles.wordWrappedMiniLabel);
                 EditorGUILayout.EndVertical();
             }
-        }
-        
-        /// <summary>
-        /// 绘制左右颜色字段 (通用)
-        /// </summary>
-        void DrawLeftRightColors(string leftLabel, string rightLabel, string helpText)
-        {
-            EditorGUILayout.LabelField("颜色", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_leftColor, new GUIContent(leftLabel));
-            EditorGUILayout.PropertyField(_rightColor, new GUIContent(rightLabel));
-            
-            EditorGUILayout.Space(5);
-            EditorGUILayout.HelpBox(helpText, MessageType.Info);
         }
     }
 }

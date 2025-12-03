@@ -28,8 +28,7 @@ namespace EquipmentSystem.Editor
         TabMode _tab = TabMode.BodyPaint;
         CharacterBodyPart _currentPart = CharacterBodyPart.Torso;
         AnchorType _anchorType = AnchorType.LeftWeapon;
-        UVOrientation _anchorOrientation = UVOrientation.UpRight;
-        bool _anchorFlipX;
+        AnchorDirection _anchorDirection = AnchorDirection.East;
         bool _showSkinColors;
         bool _showHeadExpandConfig;
         bool _showBodyExpandConfig;
@@ -74,6 +73,7 @@ namespace EquipmentSystem.Editor
         Dictionary<CharacterBodyPart, HashSet<Vector2Int>> _partPixels = new Dictionary<CharacterBodyPart, HashSet<Vector2Int>>();
         Dictionary<CharacterBodyPart, Dictionary<Vector2Int, Vector2>> _partUVs = new Dictionary<CharacterBodyPart, Dictionary<Vector2Int, Vector2>>();
         Dictionary<CharacterBodyPart, CharacterFacing> _partSpriteFacings = new Dictionary<CharacterBodyPart, CharacterFacing>();
+        Dictionary<CharacterBodyPart, FrameVariant> _partVariants = new Dictionary<CharacterBodyPart, FrameVariant>();
         List<AnchorPoint> _anchors = new List<AnchorPoint>();
         
         // 脏标记 - 只在有修改时保存
@@ -335,17 +335,6 @@ namespace EquipmentSystem.Editor
             // 当前动画配置
             var currentType = _data.animDatabase[_animIndex];
             var currentAnim = _data.GetAnimation(currentType);
-            if (currentAnim != null)
-            {
-                // 武器隐藏配置
-                EditorGUI.BeginChangeCheck();
-                EditorGUILayout.BeginHorizontal();
-                currentAnim.hideLeftWeapon = EditorGUILayout.ToggleLeft("隐藏左手武器", currentAnim.hideLeftWeapon, GUILayout.Width(100));
-                currentAnim.hideRightWeapon = EditorGUILayout.ToggleLeft("隐藏右手武器", currentAnim.hideRightWeapon, GUILayout.Width(100));
-                EditorGUILayout.EndHorizontal();
-                if (EditorGUI.EndChangeCheck())
-                    EditorUtility.SetDirty(_data);
-            }
         }
         
         void DrawFrameSelection()
@@ -473,7 +462,7 @@ namespace EquipmentSystem.Editor
             GUILayout.Label($"当前: {GetPartName(_currentPart)} ({count}像素)", new GUIStyle(EditorStyles.boldLabel) { fontSize = 16 });
             GUI.contentColor = prevColor;
             
-            // 贴图方向设置（只对 UV 部位：头/身体）
+            // 贴图方向与变体设置（只对 UV 部位：头/身体）
             if (!IsLimbPart(_currentPart))
             {
                 // 确保有默认值
@@ -489,6 +478,22 @@ namespace EquipmentSystem.Editor
                     SaveWithUndo("设置贴图方向");
                 }
                 EditorGUILayout.EndHorizontal();
+
+                // 贴图变体（基础/向上/向下）
+                if (!_partVariants.ContainsKey(_currentPart))
+                    _partVariants[_currentPart] = FrameVariant.Base;
+
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label("贴图变体:", GUILayout.Width(60));
+                var currentVariant = _partVariants[_currentPart];
+                var newVariant = (FrameVariant)EditorGUILayout.EnumPopup(currentVariant);
+                EditorGUILayout.EndHorizontal();
+
+                if (newVariant != currentVariant)
+                {
+                    _partVariants[_currentPart] = newVariant;
+                    SaveWithUndo("设置贴图变体");
+                }
             }
             
             // === 涂色显示 ===
@@ -527,6 +532,8 @@ namespace EquipmentSystem.Editor
                         _partPixels[_currentPart].Clear();
                     if (_partUVs.ContainsKey(_currentPart))
                         _partUVs[_currentPart].Clear();
+                    if (_partVariants.ContainsKey(_currentPart))
+                        _partVariants[_currentPart] = FrameVariant.Base;
                     SaveWithUndo("清除部位");
                 }
                 
@@ -566,11 +573,16 @@ namespace EquipmentSystem.Editor
             
             GUILayout.Space(3);
             GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
-            if (GUILayout.Button("清除全部涂色"))
+            if (GUILayout.Button("清除当前帧涂色"))
             {
                 _partPixels.Clear();
                 _partUVs.Clear();
-                SaveWithUndo("清除全部涂色");
+                _partVariants.Clear();
+                SaveWithUndo("清除当前帧涂色");
+            }
+            if (GUILayout.Button("清除全部帧涂色"))
+            {
+                ClearAllFramesPaint();
             }
             GUI.backgroundColor = Color.white;
             
@@ -610,6 +622,13 @@ namespace EquipmentSystem.Editor
                 _data.headUVRegion = EditorGUILayout.RectIntField("头部UV", _data.headUVRegion);
                 _data.torsoUVRegion = EditorGUILayout.RectIntField("身体UV", _data.torsoUVRegion);
                 
+                // 武器握点配置（UV画板像素坐标）
+                EditorGUILayout.Space(5);
+                EditorGUILayout.LabelField("武器握点（UV画板像素）", EditorStyles.miniBoldLabel);
+                _data.rightHandWeaponPivot = EditorGUILayout.Vector2IntField("右手握点", _data.rightHandWeaponPivot);
+                _data.leftHandWeaponPivot = EditorGUILayout.Vector2IntField("左手握点", _data.leftHandWeaponPivot);
+                EditorGUILayout.HelpBox("武器贴图基于UV底图绘制，握点对应手部位置", MessageType.None);
+                
                 // 检测目标区域大小（角色实际区域）
                 EditorGUILayout.Space(5);
                 EditorGUILayout.LabelField("检测目标区域（角色）", EditorStyles.miniBoldLabel);
@@ -630,8 +649,7 @@ namespace EquipmentSystem.Editor
             EditorGUILayout.HelpBox("用于挂件定位（头盔、武器等）", MessageType.Info);
             
             _anchorType = (AnchorType)EditorGUILayout.EnumPopup("锚点类型", _anchorType);
-            _anchorOrientation = (UVOrientation)EditorGUILayout.EnumPopup("武器方向", _anchorOrientation);
-            _anchorFlipX = EditorGUILayout.Toggle("水平翻转", _anchorFlipX);
+            _anchorDirection = (AnchorDirection)EditorGUILayout.EnumPopup("武器方向", _anchorDirection);
             
             GUILayout.Space(5);
             GUILayout.Label("已有锚点:", EditorStyles.miniLabel);
@@ -644,20 +662,10 @@ namespace EquipmentSystem.Editor
                 if (GUILayout.Button(a.type.ToString(), EditorStyles.miniButtonLeft, GUILayout.Width(80)))
                 {
                     _anchorType = a.type;
-                    _anchorOrientation = a.orientation;
-                    _anchorFlipX = a.flipX;
+                    _anchorDirection = a.direction;
                 }
                 GUI.color = Color.white;
                 GUILayout.Label($"({a.position.x},{a.position.y})", GUILayout.Width(55));
-                
-                // 翻转切换
-                EditorGUI.BeginChangeCheck();
-                bool flip = GUILayout.Toggle(a.flipX, "翻转", EditorStyles.miniButton, GUILayout.Width(36));
-                if (EditorGUI.EndChangeCheck())
-                {
-                    a.flipX = flip;
-                    SaveWithUndo("修改锚点翻转");
-                }
                 
                 if (GUILayout.Button("×", GUILayout.Width(20)))
                 {
@@ -1602,7 +1610,7 @@ namespace EquipmentSystem.Editor
                 Handles.color = a.type == _anchorType ? Color.yellow : Color.cyan;
                 Handles.DrawSolidDisc(new Vector3(x, y, 0), Vector3.forward, 6);
                 
-                Vector2 dir = GetOrientationDirVec(a.orientation) * _zoom;
+                Vector2 dir = GetAnchorDirVec(a.direction) * _zoom;
                 Handles.DrawLine(new Vector3(x, y), new Vector3(x + dir.x, y + dir.y));
                 
                 GUI.Label(new Rect(x + 8, y - 8, 100, 20), a.type.ToString(), EditorStyles.whiteMiniLabel);
@@ -1610,17 +1618,21 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 获取 UV 方向对应的屏幕空间方向向量（用于可视化）
+        /// 获取锚点方向对应的屏幕空间方向向量（用于可视化）
         /// </summary>
-        Vector2 GetOrientationDirVec(UVOrientation orientation)
+        Vector2 GetAnchorDirVec(AnchorDirection direction)
         {
-            switch (orientation)
+            switch (direction)
             {
-                case UVOrientation.DownLeft: return new Vector2(0, -1);   // 指向上方（屏幕空间）
-                case UVOrientation.UpLeft: return new Vector2(-1, 0);     // 指向左方
-                case UVOrientation.DownRight: return new Vector2(1, 0);   // 指向右方
-                case UVOrientation.UpRight:
-                default: return new Vector2(0, 1);  // 指向下方（屏幕空间）
+                case AnchorDirection.East: return new Vector2(1, 0);
+                case AnchorDirection.NorthEast: return new Vector2(1, -1).normalized;
+                case AnchorDirection.North: return new Vector2(0, -1);
+                case AnchorDirection.NorthWest: return new Vector2(-1, -1).normalized;
+                case AnchorDirection.West: return new Vector2(-1, 0);
+                case AnchorDirection.SouthWest: return new Vector2(-1, 1).normalized;
+                case AnchorDirection.South: return new Vector2(0, 1);
+                case AnchorDirection.SouthEast: return new Vector2(1, 1).normalized;
+                default: return new Vector2(1, 0);
             }
         }
         
@@ -1908,7 +1920,7 @@ namespace EquipmentSystem.Editor
             switch (_tab)
             {
                 case TabMode.Anchor:
-                    SetOrUpdateAnchor(_anchorType, p, _anchorOrientation, _anchorFlipX);
+                    SetOrUpdateAnchor(_anchorType, p, _anchorDirection);
                     SaveWithUndo("设置锚点");
                     break;
             }
@@ -1975,8 +1987,7 @@ namespace EquipmentSystem.Editor
                 {
                     type = anchor.type,
                     position = anchor.position,
-                    orientation = anchor.orientation,
-                    flipX = anchor.flipX
+                    direction = anchor.direction
                 });
             }
             
@@ -2029,11 +2040,12 @@ namespace EquipmentSystem.Editor
             if (_partPixels.ContainsKey(part))
                 partPixels = _partPixels[part];
             
-            // 如果没有像素，也没有设置过贴图方向，跳过
+            // 如果没有像素、没有设置过贴图方向、也没有设置变体，跳过
             bool hasPixels = partPixels != null && partPixels.Count > 0;
             bool hasFacing = _partSpriteFacings.ContainsKey(part);
+            bool hasVariant = _partVariants.ContainsKey(part) && _partVariants[part] != FrameVariant.Base;
             
-            if (!hasPixels && !hasFacing)
+            if (!hasPixels && !hasFacing && !hasVariant)
                 return;
             
             // 收集手脚像素（用于排除）
@@ -2046,11 +2058,16 @@ namespace EquipmentSystem.Editor
                     limbPixels.UnionWith(_partPixels[limbPart]);
             }
             
+            var variant = FrameVariant.Base;
+            if (_partVariants.ContainsKey(part))
+                variant = _partVariants[part];
+
             var region = new BodyPartRegion
             {
                 part = part,
                 orientation = UVOrientation.UpRight,
-                spriteFacing = hasFacing ? _partSpriteFacings[part] : GetDefaultSpriteFacing()
+                spriteFacing = hasFacing ? _partSpriteFacings[part] : GetDefaultSpriteFacing(),
+                variant = variant
             };
             
             // 保存像素（排除手脚像素，手脚有更高优先级）
@@ -2106,6 +2123,7 @@ namespace EquipmentSystem.Editor
             _partPixels.Clear();
             _partUVs.Clear();
             _partSpriteFacings.Clear();
+            _partVariants.Clear();
             _isDirty = false;
             
             if (_data == null) return;
@@ -2123,8 +2141,7 @@ namespace EquipmentSystem.Editor
                 {
                     type = anchor.type,
                     position = anchor.position,
-                    orientation = anchor.orientation,
-                    flipX = anchor.flipX
+                    direction = anchor.direction
                 });
             }
             
@@ -2134,6 +2151,7 @@ namespace EquipmentSystem.Editor
                 _partSpriteFacings[region.part] = region.spriteFacing;
                 _partPixels[region.part] = new HashSet<Vector2Int>();
                 _partUVs[region.part] = new Dictionary<Vector2Int, Vector2>();
+                _partVariants[region.part] = region.variant;
                 foreach (var px in region.pixels)
                 {
                     _partPixels[region.part].Add(px.position);
@@ -2413,11 +2431,11 @@ namespace EquipmentSystem.Editor
             DetectLimb(p, CharacterBodyPart.LeftFoot, p.GetLeftFootColor());
             DetectLimb(p, CharacterBodyPart.RightFoot, p.GetRightFootColor());
             
-            // 锚点
+            // 锚点：默认使用 East 方向
             if (_partPixels.ContainsKey(CharacterBodyPart.LeftHand) && _partPixels[CharacterBodyPart.LeftHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First(), UVOrientation.UpRight);
+                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First(), AnchorDirection.East);
             if (_partPixels.ContainsKey(CharacterBodyPart.RightHand) && _partPixels[CharacterBodyPart.RightHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[CharacterBodyPart.RightHand].First(), UVOrientation.UpRight);
+                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[CharacterBodyPart.RightHand].First(), AnchorDirection.East);
             
         }
         
@@ -2571,6 +2589,45 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
+        /// 清除全部帧的涂色数据
+        /// </summary>
+        void ClearAllFramesPaint()
+        {
+            if (_data == null) return;
+            
+            var anim = GetCurrentAnimation();
+            if (anim == null) return;
+            
+            Undo.RecordObject(_data, "清除全部帧涂色");
+            
+            int cleared = 0;
+            for (int row = 0; row < anim.rowCount; row++)
+            {
+                for (int frame = 0; frame < anim.framesPerRow; frame++)
+                {
+                    var frameData = anim.GetFrame(frame, row);
+                    if (frameData != null)
+                    {
+                        frameData.bodyRegions.Clear();
+                        frameData.anchors.Clear();
+                        if (frameData.limbMask != null)
+                            frameData.limbMask.Clear();
+                        cleared++;
+                    }
+                }
+            }
+            
+            // 清除当前编辑状态
+            _partPixels.Clear();
+            _partUVs.Clear();
+            _partVariants.Clear();
+            _anchors.Clear();
+            
+            EditorUtility.SetDirty(_data);
+            Debug.Log($"[清除] 已清除 {cleared} 帧的涂色数据");
+        }
+        
+        /// <summary>
         /// 自动涂色指定部位（带UV设置）
         /// </summary>
         void AutoPaintPart(CharacterBodyPart targetPart)
@@ -2633,14 +2690,14 @@ namespace EquipmentSystem.Editor
                     };
                     DetectLimb(p, targetPart, color);
                     
-                    // 设置武器挂点
+                    // 设置武器挂点（默认 East）
                     if (_partPixels.ContainsKey(targetPart) && _partPixels[targetPart].Count > 0)
                     {
                         var pos = _partPixels[targetPart].First();
                         if (targetPart == CharacterBodyPart.LeftHand)
-                            SetOrUpdateAnchor(AnchorType.LeftWeapon, pos, UVOrientation.UpRight);
+                            SetOrUpdateAnchor(AnchorType.LeftWeapon, pos, AnchorDirection.East);
                         else if (targetPart == CharacterBodyPart.RightHand)
-                            SetOrUpdateAnchor(AnchorType.RightWeapon, pos, UVOrientation.UpRight);
+                            SetOrUpdateAnchor(AnchorType.RightWeapon, pos, AnchorDirection.East);
                     }
                     break;
                     
@@ -2944,18 +3001,17 @@ namespace EquipmentSystem.Editor
             return fixedCount;
         }
         
-        void SetOrUpdateAnchor(AnchorType type, Vector2Int pos, UVOrientation orientation, bool flipX = false)
+        void SetOrUpdateAnchor(AnchorType type, Vector2Int pos, AnchorDirection direction)
         {
             var existing = _anchors.Find(a => a.type == type);
             if (existing != null)
             {
                 existing.position = pos;
-                existing.orientation = orientation;
-                existing.flipX = flipX;
+                existing.direction = direction;
             }
             else
             {
-                _anchors.Add(new AnchorPoint { type = type, position = pos, orientation = orientation, flipX = flipX });
+                _anchors.Add(new AnchorPoint { type = type, position = pos, direction = direction });
             }
         }
         
@@ -3037,7 +3093,8 @@ namespace EquipmentSystem.Editor
                 {
                     part = sourceRegion.part,
                     orientation = sourceRegion.orientation,
-                    spriteFacing = targetFacing
+                    spriteFacing = targetFacing,
+                    variant = sourceRegion.variant
                 };
                 
                 // 头部/身体：每个部位单独计算偏移量
@@ -3088,8 +3145,7 @@ namespace EquipmentSystem.Editor
                 {
                     type = anchor.type,
                     position = translatePos ? MirrorPosition(anchor.position) : anchor.position,
-                    orientation = anchor.orientation,
-                    flipX = translatePos ? !anchor.flipX : anchor.flipX
+                    direction = anchor.direction
                 });
             }
         }

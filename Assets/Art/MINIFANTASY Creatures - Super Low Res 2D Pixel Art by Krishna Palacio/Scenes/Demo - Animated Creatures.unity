@@ -1778,8 +1778,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5c1a3599aa2a4046a2c2f34e322ceda, type: 2}
   - {fileID: 11400000, guid: 28a4fdf5f2498554cb260a4d544c16e3, type: 2}
   - {fileID: 11400000, guid: 28bc3987db4b748408e99b8f8f982f42, type: 2}
+  - {fileID: 11400000, guid: cb06eac0f3ca03f48b6b1c82d9d58edd, type: 2}
+  - {fileID: 11400000, guid: 593d6aae3d47aaa4980c0bd6c5d3a2fe, type: 2}
+  - {fileID: 11400000, guid: 6b4120a4c277326458c9b9f9051ee4a4, type: 2}
   availableAppearances:
   - {fileID: 11400000, guid: a1ff30d38f2dfa346a3c8920b6183736, type: 2}
+  - {fileID: 11400000, guid: 93a168d1740358645a13d2fcd4450383, type: 2}
   panelWidth: 200
   panelMargin: 10
 --- !u!1 &185487911
@@ -2338,7 +2342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentSystem.Runtime.EquipmentRenderer
   frameData: {fileID: 11400000, guid: 81eb04687dcfd354e887de2494386233, type: 2}
   appearance: {fileID: 0}
-  equipments: []
+  initialEquipments: []
   overrideShader: {fileID: 4800000, guid: 0dea0d18fec057147bded1c4d11e93f0, type: 3}
   _debugCurrentAnim: 
   _debugAnimatorState: 
@@ -7075,7 +7079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Runtime.EquipmentRenderer
   frameData: {fileID: 11400000, guid: 720d2b3b0c58d5b4295a6468bd84a86c, type: 2}
   appearance: {fileID: 0}
-  equipments: []
+  initialEquipments: []
   overrideShader: {fileID: 4800000, guid: 0dea0d18fec057147bded1c4d11e93f0, type: 3}
   _debugCurrentAnim: 
   _debugAnimatorState: 

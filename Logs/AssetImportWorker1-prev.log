@@ -1,9 +1,9 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
 Built from '6000.2/staging' branch; Version is '6000.2.9f1 (e0c4e791ab71) revision 14730471'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.22631) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 23777 MB
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao" at "2025-12-02T15:08:37.5561829Z"
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
-Date: 2025-12-02T15:08:37Z
+Date: 2025-12-03T06:39:03Z
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao" at "2025-12-03T06:39:03.4564336Z"
 
 COMMAND LINE ARGUMENTS:
 D:\gameObject\develop\Editor\6000.2.9f1\Editor\Unity.exe
@@ -17,7 +17,7 @@ C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-8470
+12373
 -licensingIpc
 LicenseClient-zhuagenbao
 -job-worker-count
@@ -65,12 +65,12 @@ C:/Users/zhuagenbao/Desktop/MiniCharacterCreator-main/test
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [30256]  Target information:
+Player connection [20396]  Target information:
 
-Player connection [30256]  * "[IP] 192.168.2.6 [Port] 0 [Flags] 2 [Guid] 2288689430 [EditorId] 2288689430 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KP4589M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [20396]  * "[IP] 192.168.2.6 [Port] 0 [Flags] 2 [Guid] 2061621258 [EditorId] 2061621258 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KP4589M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [30256] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [30256] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [20396] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [20396] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -79,13 +79,13 @@ Input System module state changed to: Initialized.
 [Licensing::Module] LicensingClient has failed validation; ignoring
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.17.3+a4e98f1
-  Session Id:              40681600af1e4a59b1075c939ce15dc4
+  Session Id:              a5571a79260a47779737c10e96cfa6bb
   Correlation Id:          7ed0678ec5d449865f50f1a7c281f007
-  External correlation Id: 2570981846975837246
+  External correlation Id: 2994887730503953003
   Machine Id:              K60tJ5c+ydKCg23vUYm+4PjQmTY=
 [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-zhuagenbao" (connect: 0.00s, validation: 0.00s, handshake: 0.04s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao-notifications" at "2025-12-02T15:08:37.5975276Z"
-[Licensing::Module] Licensing Background thread has ended after 0.04s
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-zhuagenbao-notifications" at "2025-12-03T06:39:03.5009729Z"
+[Licensing::Module] Licensing Background thread has ended after 0.05s
 Library Redirect Path: Library/
 [Physics::Module] Selected backend.
 [Physics::Module] Name: PhysX
@@ -93,7 +93,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 1.91 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 2.95 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.2.9f1 (e0c4e791ab71)
 [Subsystems] Discovering subsystems at path D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/Resources/UnitySubsystems
@@ -109,43 +109,43 @@ Initialize mono
 Mono path[0] = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/Managed'
 Mono path[1] = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56436
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56308
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/gameObject/develop/Editor/6000.2.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001516 seconds.
-- Loaded All Assemblies, in  0.298 seconds
+Registered in 0.001894 seconds.
+- Loaded All Assemblies, in  0.446 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.266 seconds
-Domain Reload Profiling: 562ms
-	BeginReloadAssembly (100ms)
+- Finished resetting the current domain, in  0.340 seconds
+Domain Reload Profiling: 785ms
+	BeginReloadAssembly (204ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (26ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (35ms)
-	LoadAllAssembliesAndSetupDomain (126ms)
-		LoadAssemblies (98ms)
+	RebuildCommonClasses (34ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (44ms)
+	LoadAllAssembliesAndSetupDomain (152ms)
+		LoadAssemblies (201ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (123ms)
-			TypeCache.Refresh (122ms)
-				TypeCache.ScanAssembly (112ms)
+		AnalyzeDomain (149ms)
+			TypeCache.Refresh (147ms)
+				TypeCache.ScanAssembly (134ms)
 			BuildScriptInfoCaches (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (266ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (341ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (228ms)
+		SetupLoadedEditorAssemblies (293ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (33ms)
-			SetLoadedEditorAssemblies (3ms)
-			BeforeProcessingInitializeOnLoad (47ms)
-			ProcessInitializeOnLoadAttributes (97ms)
-			ProcessInitializeOnLoadMethodAttributes (47ms)
+			InitializePlatformSupportModulesInManaged (41ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (60ms)
+			ProcessInitializeOnLoadAttributes (127ms)
+			ProcessInitializeOnLoadMethodAttributes (61ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -159,68 +159,404 @@ Begin MonoManager ReloadAssembly
   Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
   Product: Unity Personal
   Type: ULF
-  Expiration: 2025-12-12T16:04:55Z
+  Expiration: 2025-12-15T05:19:04Z
 [Licensing::Module] License group:
   Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
   Product: Unity Personal Version
   Type: Assigned
   Expiration: Unlimited
-- Loaded All Assemblies, in  1.252 seconds
-Refreshing native plugins compatible for Editor in 0.91 ms, found 4 plugins.
+- Loaded All Assemblies, in  1.408 seconds
+Refreshing native plugins compatible for Editor in 0.89 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.027 seconds
-Domain Reload Profiling: 3275ms
-	BeginReloadAssembly (137ms)
+- Finished resetting the current domain, in  2.638 seconds
+Domain Reload Profiling: 4043ms
+	BeginReloadAssembly (160ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
+		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (29ms)
-	RebuildCommonClasses (26ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (56ms)
-	LoadAllAssembliesAndSetupDomain (1021ms)
-		LoadAssemblies (777ms)
+		CreateAndSetChildDomain (38ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (67ms)
+	LoadAllAssembliesAndSetupDomain (1138ms)
+		LoadAssemblies (792ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (317ms)
-			TypeCache.Refresh (251ms)
-				TypeCache.ScanAssembly (234ms)
-			BuildScriptInfoCaches (54ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (2027ms)
+		AnalyzeDomain (426ms)
+			TypeCache.Refresh (354ms)
+				TypeCache.ScanAssembly (336ms)
+			BuildScriptInfoCaches (59ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (2639ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1916ms)
+		SetupLoadedEditorAssemblies (2470ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (1ms)
+			InitializePlatformSupportModulesInManaged (2ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (147ms)
-			ProcessInitializeOnLoadAttributes (1675ms)
-			ProcessInitializeOnLoadMethodAttributes (86ms)
+			BeforeProcessingInitializeOnLoad (210ms)
+			ProcessInitializeOnLoadAttributes (2087ms)
+			ProcessInitializeOnLoadMethodAttributes (163ms)
 			AfterProcessingInitializeOnLoad (3ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (4ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.91 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 1.28 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 34 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7727 unused Assets / (8.0 MB). Loaded Objects now: 8329.
-Memory consumption went from 166.7 MB to 158.7 MB.
-Total: 20.839800 ms (FindLiveObjects: 1.376400 ms CreateObjectMapping: 1.574700 ms MarkObjects: 10.950900 ms  DeleteObjects: 6.936200 ms)
+Unloading 7727 unused Assets / (8.5 MB). Loaded Objects now: 8329.
+Memory consumption went from 162.9 MB to 154.4 MB.
+Total: 24.238300 ms (FindLiveObjects: 2.007300 ms CreateObjectMapping: 2.534400 ms MarkObjects: 10.330300 ms  DeleteObjects: 9.363900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 116535.683899 seconds.
-  path: Assets/Data/FrameData/DwarfFramData.asset
-  artifactKey: Guid(81eb04687dcfd354e887de2494386233) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Data/FrameData/DwarfFramData.asset using Guid(81eb04687dcfd354e887de2494386233) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f0c932d2d1b0efa304a729617a871390') in 0.1338671 seconds
+  Time since last request: 172368.505106 seconds.
+  path: Assets/Art/equip/axe.png
+  artifactKey: Guid(1d387f6eed313fd44acbcb39fc1b8724) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/equip/axe.png using Guid(1d387f6eed313fd44acbcb39fc1b8724) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '072d96359aafc6a94bd6c00cdafc9948') in 0.1068907 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 22.038632 seconds.
+  path: Assets/Scripts/EquipmentSystem/Runtime/EquipmentRenderer.cs
+  artifactKey: Guid(eaa6552a27abf1a4e88046d3e6a2d23a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Runtime/EquipmentRenderer.cs using Guid(eaa6552a27abf1a4e88046d3e6a2d23a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e5e29dcedae39183975533505e90cf45') in 0.2004902 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/_Recovery/0.unity
+  artifactKey: Guid(ec76b6c8d1c8e4b4db44703767690d90) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/_Recovery/0.unity using Guid(ec76b6c8d1c8e4b4db44703767690d90) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f75a6b905995326d65b910b78be1e7c1') in 0.0361932 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Scripts/EquipmentSystem/序列帧扩展方案.md
+  artifactKey: Guid(91cba0eb2fc06c646b59532f5d8cb3f0) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/序列帧扩展方案.md using Guid(91cba0eb2fc06c646b59532f5d8cb3f0) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '95ad5d93a8985b4d24a804632695f06a') in 0.009 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/_Recovery/0 (8).unity
+  artifactKey: Guid(7554ae1d353f2e24a8d50349512f7cca) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/_Recovery/0 (8).unity using Guid(7554ae1d353f2e24a8d50349512f7cca) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a4b24c3005705790c9d141fddb196a67') in 0.0407411 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Data/FrameData/HalflingFramData.asset
+  artifactKey: Guid(34387288a2911e34a9a651f287eb7ccd) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/FrameData/HalflingFramData.asset using Guid(34387288a2911e34a9a651f287eb7ccd) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a9746edc84e0c99cc8e4928d6e183260') in 0.1096408 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/equip/eye2.png
+  artifactKey: Guid(e3ef21738d8f72a499f58951319d428e) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/equip/eye2.png using Guid(e3ef21738d8f72a499f58951319d428e) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7e4f04b4937ef296bf0aa65871aabab2') in 0.0762263 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000089 seconds.
+  path: Assets/Art/equip/axe.png
+  artifactKey: Guid(1d387f6eed313fd44acbcb39fc1b8724) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/equip/axe.png using Guid(1d387f6eed313fd44acbcb39fc1b8724) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0a0b7dd44a18aae67dd86362cc596aab') in 0.0173392 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/_Recovery/0 (7).unity
+  artifactKey: Guid(f296584f0f1e89a409f6fcdae716b072) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/_Recovery/0 (7).unity using Guid(f296584f0f1e89a409f6fcdae716b072) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'bd7a557444dffa2d70fb3374aa56889c') in 0.0223561 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Data/AnimationType/Dmg.asset
+  artifactKey: Guid(971c6e9b2539ab34b8cff58ef2d98f45) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/AnimationType/Dmg.asset using Guid(971c6e9b2539ab34b8cff58ef2d98f45) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2cf95704b7f4a4a7dbabfecd5f9c362e') in 0.0105116 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Scripts/EquipmentSystem/Editor/FrameDataEditor.cs
+  artifactKey: Guid(66e65b1b696e0c54b9889931cf8135a6) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Editor/FrameDataEditor.cs using Guid(66e65b1b696e0c54b9889931cf8135a6) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'bb1c93c6f806f631fbd6ace4b1d920a0') in 0.0110088 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Data/Appearance
+  artifactKey: Guid(66665cfdf64f31145ac966d00a11e7c1) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/Appearance using Guid(66665cfdf64f31145ac966d00a11e7c1) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '960cfb25b5ac563ed705e8aa534adecf') in 0.0052673 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanIdle_BodyUV.png
+  artifactKey: Guid(e10a7126cd208c24b88ab81e34b8ac72) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanIdle_BodyUV.png using Guid(e10a7126cd208c24b88ab81e34b8ac72) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2e8f1a11f203885c52b764541433d448') in 0.0205774 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanAttack_HeadUV.png
+  artifactKey: Guid(a7ad7e76bd845f8458dc56a8cfad84c3) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanAttack_HeadUV.png using Guid(a7ad7e76bd845f8458dc56a8cfad84c3) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '968a2dbe06136c7644513c38fd46d4c5') in 0.0164578 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Scripts/EquipmentSystem/Editor/FrameDataAlgorithms.cs
+  artifactKey: Guid(3c22b1066022a72439f50805e168fa3a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Editor/FrameDataAlgorithms.cs using Guid(3c22b1066022a72439f50805e168fa3a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c1735c4f46ad44d04ae1c78690a4c496') in 0.0076232 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/_Recovery/0 (4).unity
+  artifactKey: Guid(3f749c1bc137e5149bb9b527c7d14cf5) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/_Recovery/0 (4).unity using Guid(3f749c1bc137e5149bb9b527c7d14cf5) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'be92c5eef91eaff261c3273db4974521') in 0.0315699 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Data/AnimationType/Walk.asset
+  artifactKey: Guid(7527b24ffa851a1409351d5674af152d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/AnimationType/Walk.asset using Guid(7527b24ffa851a1409351d5674af152d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '43b68cc6c7834e3aaefa49729a455d00') in 0.0071819 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Data/FrameData/HumanFramData.asset
+  artifactKey: Guid(720d2b3b0c58d5b4295a6468bd84a86c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/FrameData/HumanFramData.asset using Guid(720d2b3b0c58d5b4295a6468bd84a86c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd9d4b2ae1874c3d9a7670767f460baa2') in 0.120104 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Scripts/EquipmentSystem/Data/CharacterFrameData.cs
+  artifactKey: Guid(992a1667bac02fc4f903843a8453ef1f) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Data/CharacterFrameData.cs using Guid(992a1667bac02fc4f903843a8453ef1f) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e0616edfd55fc7e55c838fe4b900a87c') in 0.0131304 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Scripts/EquipmentSystem/阴影方案.md
+  artifactKey: Guid(83926c9cb0a426048b77e2816595b05a) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/阴影方案.md using Guid(83926c9cb0a426048b77e2816595b05a) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b786ad49bc3f51ef6827d3d24efe29cd') in 0.0089321 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfIdle_BodyUV.png
+  artifactKey: Guid(fcdee7659de8ddf4bb816ff3ef351afd) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfIdle_BodyUV.png using Guid(fcdee7659de8ddf4bb816ff3ef351afd) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '632420159efcb5cf8a518f45590fccd9') in 0.0216594 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanBase_AnimatorController.controller
+  artifactKey: Guid(e1ea1036a27507c47a51a679db89c235) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Animations/Humanoids/Human/Human/HumanBase_AnimatorController.controller using Guid(e1ea1036a27507c47a51a679db89c235) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '87d8d0b58500515f95293203ee546aac') in 0.0473664 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 46
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Art/equip/精灵-0002.png
+  artifactKey: Guid(ea114cc00347e7f47b14a5672cae77b9) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/equip/精灵-0002.png using Guid(ea114cc00347e7f47b14a5672cae77b9) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd35a5ab1cdc6ddfefd938142bc10ccef') in 0.022356 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scenes/Demo - Animated Creatures.unity
+  artifactKey: Guid(72d21de280ce1454a8576451bc41bc57) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Scenes/Demo - Animated Creatures.unity using Guid(72d21de280ce1454a8576451bc41bc57) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fcb059ff4ce3699ebca5def5a32ffb7e') in 0.0339695 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Scripts/EquipmentSystem/Data/AnimationTypeItem.cs
+  artifactKey: Guid(7c90bc52523180a44ba4ad5474337480) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Data/AnimationTypeItem.cs using Guid(7c90bc52523180a44ba4ad5474337480) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '9aba827a41a34a0bd1c593df8a127e4d') in 0.0050898 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Data/AnimationType/ChargedAttack.asset
+  artifactKey: Guid(0ec505bb4227dc841bb51c6def1e489d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/AnimationType/ChargedAttack.asset using Guid(0ec505bb4227dc841bb51c6def1e489d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1ebe8ff46343e5d3d293ae5781e272e4') in 0.0082945 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/_Recovery/0 (6).unity
+  artifactKey: Guid(dec1a63c5d8ffc743be6e712e21acd58) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/_Recovery/0 (6).unity using Guid(dec1a63c5d8ffc743be6e712e21acd58) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2896ca08e1d0e51b1af6a55df5fe9c41') in 0.0281031 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Data/Equip/hat.asset
+  artifactKey: Guid(6b4120a4c277326458c9b9f9051ee4a4) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/Equip/hat.asset using Guid(6b4120a4c277326458c9b9f9051ee4a4) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6e26d2f57813f4f50703066b1be21438') in 0.0278346 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Scripts/EquipmentSystem/Data/AnimationTypeDatabase.cs
+  artifactKey: Guid(ccfe7a39f1f50714883f3f2760854507) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Data/AnimationTypeDatabase.cs using Guid(ccfe7a39f1f50714883f3f2760854507) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '92ba02b4f702552e967e72d2663d6a03') in 0.0068657 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/Scripts/EquipmentSystem/Editor/EquipAnimSequenceEditor.cs
+  artifactKey: Guid(d29535566d12af04286e87fb226d0f38) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Editor/EquipAnimSequenceEditor.cs using Guid(d29535566d12af04286e87fb226d0f38) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '321ffdd4f4507c9e3031f8516a5cdb52') in 0.0067827 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Data/AnimationType/Jump.asset
+  artifactKey: Guid(a36fd81b88a869f4a9d9c8d0d3807a23) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/AnimationType/Jump.asset using Guid(a36fd81b88a869f4a9d9c8d0d3807a23) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2c986bf470bf0d4991669d400c3974b5') in 0.0069974 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanWalk_BodyUV.png
+  artifactKey: Guid(1fe4b66fc5f451240b1b3e5613433277) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanWalk_BodyUV.png using Guid(1fe4b66fc5f451240b1b3e5613433277) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '55c3d1836383515010415e38cb6dd496') in 0.0193848 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Scripts/EquipmentSystem/Data/CharacterAppearance.cs
+  artifactKey: Guid(8f3a7a777562f444aa26aca7891b93cd) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Data/CharacterAppearance.cs using Guid(8f3a7a777562f444aa26aca7891b93cd) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e8741b555059adda04e0a7102876bf5f') in 0.0078818 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/equip/hair1.png
+  artifactKey: Guid(a98564453f29f9242810cdf491f225f5) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/equip/hair1.png using Guid(a98564453f29f9242810cdf491f225f5) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0d6ce2fc09808d09d1b672f03cd826db') in 0.0252172 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Data/AnimationType/Attack.asset
+  artifactKey: Guid(381921f99eee5f44584b409fe08a6788) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/AnimationType/Attack.asset using Guid(381921f99eee5f44584b409fe08a6788) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd6e522819f137056224a1ebe825f8176') in 0.0082598 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanWalk_HeadUV.png
+  artifactKey: Guid(cb15c192861ab9b40bf8851e0a2937f4) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanWalk_HeadUV.png using Guid(cb15c192861ab9b40bf8851e0a2937f4) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6a3dd5e2cd345308003f8c8171a71beb') in 0.0334531 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanAttack_BodyUV.png
+  artifactKey: Guid(4b1cc699879e9584da6cde60d761d74d) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Human/Human/Minifantasy_CreaturesHumanAttack_BodyUV.png using Guid(4b1cc699879e9584da6cde60d761d74d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6b8f2aee11402ac87bf9ef6f02d53079') in 0.0244969 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Art/equip/hat_yellow1.png
+  artifactKey: Guid(36e45e3177c57da448d24f496666d5ab) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/equip/hat_yellow1.png using Guid(36e45e3177c57da448d24f496666d5ab) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2db90d6660f470d4cb5be601a0b28406') in 0.0187027 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfWalk_BodyUV.png
+  artifactKey: Guid(106bfd7134273394aae39fb1deb65514) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/MINIFANTASY Creatures - Super Low Res 2D Pixel Art by Krishna Palacio/Sprites/Humanoids/Dwarf/Dwarf/Minifantasy_CreaturesDwarfWalk_BodyUV.png using Guid(106bfd7134273394aae39fb1deb65514) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e68878a2695ddb83b1c75c60b12c6a6d') in 0.0202751 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Data/AnimationType/AnimationTypeDatabase.asset
+  artifactKey: Guid(dcfa39904e5228b449bfaddba02ae639) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/AnimationType/AnimationTypeDatabase.asset using Guid(dcfa39904e5228b449bfaddba02ae639) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '482330ae6b5c1dda3067bf1454ade3df') in 0.0083032 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Art/equip/shield.png
+  artifactKey: Guid(76b47b0aed7e50d48b8a6cc4d84a6723) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Art/equip/shield.png using Guid(76b47b0aed7e50d48b8a6cc4d84a6723) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'dcab613e9ef34dfdefc3f86fddcf2750') in 0.0174191 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Scripts/EquipmentSystem/Data/EquipmentData.cs
+  artifactKey: Guid(a74340105d53c6d4e96c80db64c93b00) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Scripts/EquipmentSystem/Data/EquipmentData.cs using Guid(a74340105d53c6d4e96c80db64c93b00) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '033dc1f9985fdec96d1a7abe00ece52e') in 0.0059449 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.450510 seconds.
+  path: Assets/Data/Equip/Axe 1.asset
+  artifactKey: Guid(593d6aae3d47aaa4980c0bd6c5d3a2fe) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Data/Equip/Axe 1.asset using Guid(593d6aae3d47aaa4980c0bd6c5d3a2fe) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2fcac45247c5fe13ac76599fafd73837') in 0.0082974 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Prepare
@@ -230,7 +566,7 @@ Begin MonoManager ReloadAssembly
   Id: F4-NMTP-SXWG-HN24-U9HH-XXXX
   Product: Unity Personal
   Type: ULF
-  Expiration: 2025-12-12T16:04:55Z
+  Expiration: 2025-12-15T05:19:04Z
 [Licensing::Module] License group:
   Id: ewogICJzdWJzR3JvdXAiIDogInVuaXR5IGVkaXRvciIsCiAgIm5hbWVzcGFjZSIgOiAidW5pdHlfZWRpdG9yIiwKICAidHlwZSIgOiAiRURJVE9SIiwKICAidGFnIiA6ICJVbml0eVBlcnNvbmFsXXXX
   Product: Unity Personal Version
