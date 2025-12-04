@@ -13,27 +13,28 @@ MonoBehaviour:
   m_Name: "\u6597\u7BF7"
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.EquipmentData
   equipmentId: 1
-  type: 4
-  weaponSprite: {fileID: 0}
+  type: 3
   spriteSE: {fileID: 21300000, guid: db7f78885206c6b4caa13b02f77bf5db, type: 3}
   spriteSW: {fileID: 21300000, guid: 2da18e60080354143b107b6875d7151e, type: 3}
   spriteNE: {fileID: 0}
   spriteNW: {fileID: 0}
-  spriteVariants:
-  - se: {fileID: 21300000, guid: 2da18e60080354143b107b6875d7151e, type: 3}
+  upVariant:
+    se: {fileID: 0}
     sw: {fileID: 0}
     ne: {fileID: 0}
     nw: {fileID: 0}
-  - se: {fileID: 21300000, guid: 28ecc942c5112a247bcf93f6a83555b2, type: 3}
+  downVariant:
+    se: {fileID: 0}
     sw: {fileID: 0}
     ne: {fileID: 0}
     nw: {fileID: 0}
-  anchorType: 0
-  selfAnchor: {x: 14, y: 13}
+  weaponSlotType: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
   rightColor:
     serializedVersion: 2
     rgba: 4281492630
+  hideHair: 0
+  hideBeard: 0
   animSet: {fileID: 0}

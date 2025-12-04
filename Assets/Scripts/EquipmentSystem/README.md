@@ -15,6 +15,20 @@
 - **武器槽位系统**: `WeaponSlotType` 定义武器类型（主手/双手/双持/副手），自动处理装备规则
 - **双武器 Shader**: 支持主手 + 副手同时渲染，双持武器在两个锚点显示
 
+#### 当前版本要点总览
+- 使用 `CharacterFrameData + DualUVMap` 描述每一帧的锚点、部位区域、UV 与检测配置。
+- 使用 `EquipmentData + EquipTypeConfig/EquipTypeRegistry` 配置每一种装备的渲染模式（Sprite/Color/Weapon）、Shader 属性和头部遮挡规则（如隐藏头发/胡子、手在前还是武器在前等）。
+- 运行时由 `EquipmentRenderer`：
+  - 根据 Animator Bool 参数 + `AnimationTypeDatabase` 推导当前动画 Key（如 Idle/Walk/Attack）。
+  - 通过角色 `Sprite.rect` 计算 `_rowIndex`（朝向行：SE/SW/NE/NW）和 `_frameIndex`（列内帧号）。
+  - 从 `CharacterFrameData` 取出当前帧的 `FrameData`（锚点、部位区域、手脚蒙版等）。
+  - 先渲染武器，再按配置遍历所有装备类型，将贴图 / 颜色写入 Shader 参数。
+- 序列帧优先：若 `EquipmentData.animSet` 存在，优先通过 `EquipAnimSetAsset` 使用该装备自己的序列帧；若某方向/动画缺失，则自动回退到该装备的 4 向基础贴图。
+- 武器方向与镜像（详见下文专节）：
+  - 武器方向始终跟随躯干 `BodyPartRegion.spriteFacing`，而不是简单使用 `_rowIndex`；
+  - NE/NW 缺失时统一回退：NE → SE，NW → SW → SE（静态贴图与序列帧行为一致）；
+  - 只有在「西向行(SW/NW) 且没有 SW 基础贴图」时，才会从 SE 通过 `flipX + 角度取反` 镜像生成西向武器。
+
 ## 系统架构
 
 ```
@@ -93,7 +107,8 @@ CharacterFrameData
         └── frames: List<FrameData>      // 帧数据列表
             └── FrameData
                 ├── anchors: List<AnchorPoint>       // 锚点
-                └── bodyRegions: List<BodyPartRegion> // 部位区域
+                ├── bodyRegions: List<BodyPartRegion> // 部位区域（含 spriteFacing / variant 等）
+                └── limbMask: LimbMask               // 手脚蒙版（Left/RightHand/Foot/Eye），用于颜色替换与脚部高度计算
 ```
 
 ### EquipmentData (ScriptableObject)
@@ -158,6 +173,7 @@ BodyPartRegion
 ├── part: CharacterBodyPart  // Head/Torso/LeftHand/RightHand/LeftFoot/RightFoot
 ├── orientation: UVOrientation   // UV 旋转方向
 ├── spriteFacing: CharacterFacing // 贴图方向（选择哪张贴图）
+├── variant: FrameVariant          // 帧变体（Base/Up/Down 等），用于同一方向下的姿态区分
 └── pixels: List<BodyPartPixel>   // 像素列表
 ```
 
@@ -284,6 +300,17 @@ BodyPartRegion
    equipmentRenderer.Unequip(equipmentData);
    ```
 
+4. **刷新显示**
+   ```csharp
+   equipmentRenderer.Refresh();
+   ```
+
+### 阴影（当前实现状态）
+
+- 当前 Demo 中阴影是一个单独的 `Shadow` 子对象，由 `AnimationController.SetShadowEnabled(bool)` 控制启/停。
+- `EquipmentDemoExtension` 的「显示阴影」开关也是调用上述 API，仅切换 Shadow 对象的激活状态。
+- 主体 Shader `EquipmentUV.shader` 目前只负责角色与装备的合成渲染，尚未集成多 Pass 阴影；后续阴影 Pass 设计见《装备系统多 Pass 阴影与武器渲染设计文档》。
+
 ---
 
 ## Shader 说明
@@ -364,6 +391,28 @@ void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, 
 
 ---
 
+## 扩展新装备类型与动画
+
+### 扩展新装备类型
+
+- 在 `EquipTypeConfig` / `EquipTypeRegistry` 中新增一条配置：指定 `EquipmentType`、`RenderMode`、`BodyPart`、Shader 属性名、渲染顺序等。
+- 若是 Weapon 模式：根据是否需要特殊手部遮挡规则配置 `HandInFrontForWeapon`，并确保 Shader 中有对应 `_XXXTex/_XXXRect/_XXXEnable` 属性。
+- 若是 Sprite/Color 模式：保证 UV Map 中该 BodyPart 已正确标注，且 Shader 中有对应采样或颜色属性。
+
+### 为角色增加新动画
+
+- 创建新的 `AnimationTypeItem` 资产，名称与 Animator Bool 参数一致。
+- 运行 `AnimationTypeAutoRegister`，将新动画类型加入 `AnimationTypeDatabase`。
+- 在 `CharacterFrameData` 中为该动画类型添加 `AnimationData`，配置 Spritesheet、帧数、UV Map 和锚点等。
+
+### 为装备增加动画序列
+
+- 在 `EquipAnimSequenceAsset` 中为对应的动画 Key 新建 `AnimSequenceEntry`。
+- 为需要支持的方向（SE/SW/NE/NW）配置 `DirectionalStrip`，NE/NW 可按需留空，系统会自动回退到 SE / SW。
+- 在 `EquipmentData` 上挂载该 `animSet` 资产，即可在运行时优先使用序列帧渲染此装备。
+
+---
+
 ## 常见问题
 
 ### Q: 装备贴图显示不正确？
@@ -439,25 +488,42 @@ public static IEnumerable<EquipTypeConfig> All
 ### CharacterFrameData
 
 ```csharp
-// 获取帧数据
-public FrameData GetFrameData(string animName, int rowIndex, int frame)
+// 获取帧数据（按 AnimationTypeItem）
+public FrameData GetFrameData(AnimationTypeItem animType, int rowIndex, int frame);
 
-// 获取动画
-public AnimationData GetAnimation(string animName)
+// 获取帧数据（按 Key，用于与 Animator Bool 匹配）
+public FrameData GetFrameDataByKey(string key, int rowIndex, int frame);
+
+// 获取动画（按 AnimationTypeItem）
+public AnimationData GetAnimation(AnimationTypeItem animType);
+
+// 获取动画（按 Key）
+public AnimationData GetAnimationByKey(string key);
+
+// 获取所有动画类型
+public List<AnimationTypeItem> GetAnimationTypes();
 ```
 
 ### EquipmentData
 
 ```csharp
-// 根据方向获取贴图
-public Sprite GetSprite(CharacterFacing facing)
+// 是否包含序列帧动画集
+public bool HasAnimSet { get; }
 
-// 根据行索引获取贴图
-public Sprite GetSpriteByRow(int rowIndex)
+// 根据方向获取基础 4 向贴图（带 NE/NW 回退）
+public Sprite GetSprite(CharacterFacing facing);
+
+// 根据方向和帧变体获取贴图（非武器支持 Up/Down 变体）
+public Sprite GetSprite(CharacterFacing facing, FrameVariant variant);
+
+// 根据行索引获取基础贴图 (0=SE,1=SW,2=NE,3=NW)
+public Sprite GetSpriteByRow(int rowIndex);
+
+// 按动画 Key 尝试获取序列帧（与 Animator Bool 同名）
+public Sprite TryGetSequenceSpriteByKey(string key, int rowIndex, int frameIndex);
 ```
 
-
-## 版本历史
+ ## 版本历史
 
 - **v1.0**: 初始版本，基础换装功能
 - **v1.1**: 添加双层 UV Map，分离头部和身体渲染
@@ -477,119 +543,3 @@ public Sprite GetSpriteByRow(int rowIndex)
   - 双持武器在两个锚点同时显示
   - 测试 UI 拆分为主手/副手两个下拉框
 
-## 帧数据编辑器（FrameDataEditor）架构概览
-
-### 1. 角色与职责边界
-
-- **CharacterFrameData**
-  - 纯数据资产（ScriptableObject）
-  - 持久化存储：动画列表、每帧的锚点、部位区域、UV、检测配置、UV 画板配置等
-  - 不负责任何编辑逻辑或 GUI
-
-- **FrameDataEditor (EditorWindow)**
-  - 编辑器入口窗口，负责：
-    - 显示和编辑 `CharacterFrameData` 的内容
-    - 提供涂色、自动检测、区域扩展、UV Map 生成等工具
-  - 持有一份“当前编辑会话状态”：当前动画、行、帧、当前部位、选区、视图缩放/平移等
-  - 通过 `_isDirty + SaveFrameToData + LoadFrameData` 在内存缓存与 ScriptableObject 之间同步
-
-- **DualUVMapGenerator**
-  - 纯工具类，不依赖 EditorWindow 状态
-  - 从 `CharacterFrameData.AnimationData` 生成 `bodyUVMap` / `headUVMap` 纹理
-  - 只依赖于每个 `BodyPartPixel.uv` 和部位 ID 约定
-
-- **EquipmentDataEditor**
-  - `EquipmentData` 的自定义 Inspector
-  - 与 `FrameDataEditor` 解耦，只通过约定的 UV Map / Shader 协议协同工作
-
-> 设计要点：持久化数据（CharacterFrameData）与编辑器状态（FrameDataEditor）严格分离，
-> 所有可以复用到其他工具或运行时调试器的逻辑，优先放在 Data/Utility 中，而不是 EditorWindow 里。
-
-### 2. FrameDataEditor 内部模块
-
-从代码结构上可以粗略分为四块：
-
-1. **左侧工具栏（Toolbar）**
-   - `DrawDataSection`：选择 `CharacterFrameData`
-   - `DrawConfigSection`：当前动画的 Spritesheet / 帧尺寸 / 帧数
-   - `DrawAnimationSection`：动画类型数据库、隐藏武器开关
-   - `DrawFrameSelection`：行/帧切换，调用 `SwitchRow` / `SwitchFrame`（内部会 `SaveIfDirty + LoadFrameData`）
-   - `DrawTabContent`：
-     - `BodyPaint` 标签：部位选择、显示选项、编辑模式、自动涂色、批量操作、UV 画板配置
-     - `Anchor` 标签：武器锚点编辑
-
-2. **右上：UV 画板（Palette）**
-   - `DrawPalette`：
-     - 绘制背景与参考底图（`_data.paletteRefSprite`）
-     - 按 `BodyPartPixel.uv` 计算颜色，显示 UV 分布
-     - 绘制头/身体的 UV 区域框（`headUVRegion` / `torsoUVRegion`）
-     - 根据 `_hoverPalettePixel` 在左上角显示当前悬停像素坐标与 UV 值
-   - `DrawPaletteSelection`：
-     - 显示悬停高亮（白框）
-     - 显示已确定的画板选区（用于从调色板复制 UV）
-   - `GetPalettePixelPos / IsValidPalettePixel`：处理屏幕坐标到调色板像素坐标的转换与校验
-
-3. **右下：画布（角色 Spritesheet 预览）**
-   - `DrawCanvas`：
-     - 背景棋盘格 + 当前帧 Spritesheet 区域
-     - 用 `_partPixels` / `_partUVs` 叠加部位着色（支持按当前部位或全部部位显示）
-     - 显示当前部位的边框与锚点
-     - 根据 `_hoverCanvasPixel` 在左上角显示悬停像素坐标与对应 UV
-   - `DrawCanvasSelection`：
-     - 显示悬停高亮（白框）
-     - 显示画布选区（用于从画板复制 UV 到角色或擦除区域）
-
-4. **输入与命令处理**
-   - `HandleInput`：集中处理键鼠事件：
-     - 左键：涂色 / 框选
-     - 右键：擦除 / 拖动擦除
-     - 中键：平移
-     - Shift + 拖拽：框选区域
-     - 键盘 1/2：标签切换
-   - `OnLeftClick / OnRightClick`：根据当前标签和模式分发到具体逻辑（改锚点、改涂色、修改选区等）
-   - 所有会修改当前帧数据的操作，最终都会更新 `_partPixels` / `_partUVs` / `_anchors`，并设置 `_isDirty = true`，由 `SaveIfDirty/SaveWithUndo` 统一落盘
-
-### 3. 数据流与保存策略
-
-1. **加载（Editor → 内存）**
-   - 打开窗口或切换动画/行/帧时：
-     - `LoadFrameData()` 根据 `_animName + _row + _frame` 从 `CharacterFrameData` 中取到对应 `FrameData`
-     - 将其中的 `anchors`、`bodyRegions` 深拷贝到 `_anchors`、`_partPixels`、`_partUVs` 等运行时结构
-
-2. **编辑（内存 → 内存）**
-   - 所有操作只修改 EditorWindow 内部的字典/列表，不直接改 ScriptableObject
-   - 例如：涂色、擦除、镜像、扩展/收缩、自动检测等
-
-3. **保存（内存 → Editor 资产）**
-   - 触发点：
-     - 切换行/帧 / 切换标签
-     - 窗口失焦 (`OnLostFocus`) / 关闭 (`OnDisable`)
-     - 批量操作内部手动调用 `SaveWithUndo`
-   - `SaveFrameToData()`：
-     - 通过 `GetCurrentAnimation()` 找到当前动画
-     - `GetOrCreateFrame(_frame, _row)` 拿到对应 `FrameData`
-     - 清空并重建 `anchors` / `bodyRegions`，把 `_partPixels` / `_partUVs` 写回
-     - `EditorUtility.SetDirty(_data)` 标记资产已修改
-
-> 注意：Editor 使用 `_animName` + `AnimationTypeDatabase` 来定位当前动画，
-> 而不是直接依赖 `_animIndex` 与 `animations` 列表的顺序，避免数据错位。
-
-### 4. 可复用 & 强耦合部分（为后续重构做准备）
-
-- **相对“通用/可抽象”的逻辑**：
-  - 帧数据读写：`LoadFrameData / SaveFrameToData`
-  - 区域扩展/收缩算法：基于边界像素向外填充 UV
-  - 自动检测：根据检测配置和皮肤颜色，自动识别头部/身体/手脚区域
-  - 从 SE 生成其他方向行的数据（镜像+手脚互换）
-  - UV Map 生成（已在 `DualUVMapGenerator` 中，与具体编辑器解耦）
-
-- **当前与项目强耦合的逻辑**：
-  - 部位枚举与 Shader 中 B 通道编码的约定（0.1, 0.2, 0.4...）
-  - 头/身体 UV 区域与检测区域尺寸的默认配置
-  - 调色板尺寸、坐标系以及“以整张调色板为 UV 空间”的假设
-
-在后续重构时，可以优先把“通用逻辑”下沉到 Data/Utility 层，
-并通过接口或策略模式抽象出“项目特定的 UV 编码规则 / 调色板布局”，
-从而让 FrameDataEditor 变成一个更通用的“像素角色 UV/区域编辑器”。
-
----

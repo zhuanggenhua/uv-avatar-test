@@ -162,7 +162,8 @@ namespace EquipmentSystem.Editor
             var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
 
-            var defaultColor = new Color(0, 0, ID_NONE, 1);
+            // 非头部区域：ID_NONE，alpha=0（不视为核心头部）
+            var defaultColor = new Color(0, 0, ID_NONE, 0);
             var pixels = new Color[width * height];
             for (int i = 0; i < pixels.Length; i++)
                 pixels[i] = defaultColor;
@@ -175,16 +176,48 @@ namespace EquipmentSystem.Editor
                 int frameOffsetX = frame.frameIndex * frameW;
                 int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
 
-                // 收集手部像素位置（头部不应覆盖手）
-                var handPixels = new HashSet<Vector2Int>();
-                var leftHand = frame.GetLimbPixels(CharacterBodyPart.LeftHand);
-                var rightHand = frame.GetLimbPixels(CharacterBodyPart.RightHand);
-                if (leftHand != null)
-                    foreach (var pos in leftHand) handPixels.Add(pos);
-                if (rightHand != null)
-                    foreach (var pos in rightHand) handPixels.Add(pos);
+                // 计算“核心头部区域”像素集合：在当前 Head 区域基础上按 headExpand 参数做一次收缩
+                HashSet<Vector2Int> coreHeadPixels = null;
+                var headRegion = frame.GetRegion(CharacterBodyPart.Head);
+                if (headRegion != null && headRegion.pixels.Count > 0)
+                {
+                    // 拷贝当前位置和UV，避免修改原数据
+                    var allPositions = new HashSet<Vector2Int>();
+                    var uvDict = new Dictionary<Vector2Int, Vector2>();
+                    foreach (var px in headRegion.pixels)
+                    {
+                        allPositions.Add(px.position);
+                        if (px.HasUV)
+                            uvDict[px.position] = px.uv;
+                    }
 
-                WriteRegionToUVMap(frame, CharacterBodyPart.Head, ID_HEAD, pixels, width, height, frameOffsetX, frameOffsetY, frameH, handPixels);
+                    coreHeadPixels = new HashSet<Vector2Int>(allPositions);
+                    var coreUVs = new Dictionary<Vector2Int, Vector2>(uvDict);
+
+                    // 使用与扩展相同的参数进行一次收缩，得到更“小”的核心区域
+                    FrameDataAlgorithms.ShrinkRegion(
+                        coreHeadPixels,
+                        coreUVs,
+                        data.headExpandUp,
+                        data.headExpandDown,
+                        data.headExpandSide,
+                        data.headExpandSide
+                    );
+                }
+
+                WriteRegionToUVMap(
+                    frame,
+                    CharacterBodyPart.Head,
+                    ID_HEAD,
+                    pixels,
+                    width,
+                    height,
+                    frameOffsetX,
+                    frameOffsetY,
+                    frameH,
+                    null,
+                    coreHeadPixels
+                );
             }
 
             tex.SetPixels(pixels);
@@ -195,10 +228,23 @@ namespace EquipmentSystem.Editor
         /// <summary>
         /// 将 UV 部位（头/身体）像素写入 UV Map
         /// </summary>
-        static void WriteRegionToUVMap(FrameData frame, CharacterBodyPart part, float partID,
-                                       Color[] pixels, int texWidth, int texHeight,
-                                       int frameOffsetX, int frameOffsetY, int frameH,
-                                       HashSet<Vector2Int> excludePositions = null)
+        /// <param name="excludePositions">需要排除的像素（例如手部像素，防止头覆盖手）</param>
+        /// <param name="coreHeadPositions">
+        ///  仅用于 Head：表示“核心头部区域”的像素集合。
+        ///  核心区域会写入 alpha=1，扩展区域 alpha=0；其它情况 alpha=1。
+        /// </param>
+        static void WriteRegionToUVMap(
+            FrameData frame,
+            CharacterBodyPart part,
+            float partID,
+            Color[] pixels,
+            int texWidth,
+            int texHeight,
+            int frameOffsetX,
+            int frameOffsetY,
+            int frameH,
+            HashSet<Vector2Int> excludePositions = null,
+            HashSet<Vector2Int> coreHeadPositions = null)
         {
             var region = frame.GetRegion(part);
             if (region == null || region.pixels.Count == 0) return;
@@ -219,7 +265,14 @@ namespace EquipmentSystem.Editor
 
                 if (px.HasUV)
                 {
-                    pixels[globalY * texWidth + globalX] = new Color(px.uv.x, px.uv.y, partID, 1f);
+                    float alpha = 1f;
+                    // 对 Head：若提供了核心区域集合，则用 alpha 区分核心/扩展
+                    if (part == CharacterBodyPart.Head && coreHeadPositions != null)
+                    {
+                        alpha = coreHeadPositions.Contains(px.position) ? 1f : 0f;
+                    }
+
+                    pixels[globalY * texWidth + globalX] = new Color(px.uv.x, px.uv.y, partID, alpha);
                 }
                 else
                 {
@@ -250,8 +303,11 @@ namespace EquipmentSystem.Editor
                 
                 if (globalX < 0 || globalX >= texWidth || globalY < 0 || globalY >= texHeight)
                     continue;
-
-                pixels[globalY * texWidth + globalX] = new Color(0, 0, partID, 1f);
+                int index = globalY * texWidth + globalX;
+                var prev = pixels[index];
+                // 保留原有的 UV（通常来自 Torso 区域），只更新部位 ID
+                // 这样同一像素既可以作为手脚进行颜色替换，又在需要时沿用躯干 UV 采样衣服
+                pixels[index] = new Color(prev.r, prev.g, partID, prev.a);
             }
         }
         

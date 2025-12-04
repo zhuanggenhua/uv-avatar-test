@@ -62,7 +62,25 @@ namespace EquipmentSystem.Data
         /// </summary>
         public Sprite TryGetSprite(CharacterFacing facing, int frameIndex)
         {
+            // 1. 先按精确方向查找 strip
             var strip = GetStrip(facing);
+
+            // 2. 若 NE/NW 缺失，按统一规则回退：
+            //    NE: 优先自身，其次 SE
+            //    NW: 优先自身，其次 SW，再其次 SE
+            if (strip == null)
+            {
+                switch (facing)
+                {
+                    case CharacterFacing.NorthEast:
+                        strip = GetStrip(CharacterFacing.SouthEast);
+                        break;
+                    case CharacterFacing.NorthWest:
+                        strip = GetStrip(CharacterFacing.SouthWest) ?? GetStrip(CharacterFacing.SouthEast);
+                        break;
+                }
+            }
+
             return strip?.GetFrame(frameIndex);
         }
         

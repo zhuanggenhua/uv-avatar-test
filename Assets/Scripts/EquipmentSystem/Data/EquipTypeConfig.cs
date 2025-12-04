@@ -26,6 +26,7 @@ namespace EquipmentSystem.Data
         public string TexProp, RectProp, EnableProp;   // Shader 属性名
         public string LeftColorProp, RightColorProp;   // Color 模式用
         public int RenderOrder;                 // 渲染顺序（同 BodyPart 内）
+        public bool HandInFrontForWeapon = true; // 仅 RenderMode=Weapon 时有效：true=手在前，false=武器在前（典型：盾牌）
         
         // 缓存的 Shader 属性 ID
         public int TexPropId { get; private set; }
@@ -124,6 +125,26 @@ namespace EquipmentSystem.Data
                 RenderOrder = 0,
             });
 
+            // 头部插槽的其他类型：帽子 / 面罩（与 Helmet 复用同一 Shader 通道）
+            Register(new EquipTypeConfig
+            {
+                Type = EquipmentType.Hat,
+                DisplayName = "帽子",
+                RenderMode = EquipRenderMode.Sprite,
+                BodyPart = CharacterBodyPart.Head,
+                TexProp = "_HelmetTex", RectProp = "_HelmetRect", EnableProp = "_EnableHelmet",
+                RenderOrder = 0,
+            });
+            Register(new EquipTypeConfig
+            {
+                Type = EquipmentType.Mask,
+                DisplayName = "面罩",
+                RenderMode = EquipRenderMode.Sprite,
+                BodyPart = CharacterBodyPart.Head,
+                TexProp = "_HelmetTex", RectProp = "_HelmetRect", EnableProp = "_EnableHelmet",
+                RenderOrder = 0,
+            });
+
             // 颜色类
             Register(new EquipTypeConfig
             {
@@ -148,6 +169,16 @@ namespace EquipmentSystem.Data
                 Type = EquipmentType.Weapon,
                 DisplayName = "武器",
                 RenderMode = EquipRenderMode.Weapon,
+                HandInFrontForWeapon = true,
+            });
+
+            // 盾牌（仍走武器渲染模式，使用武器锚点与深度规则）
+            Register(new EquipTypeConfig
+            {
+                Type = EquipmentType.Shield,
+                DisplayName = "盾牌",
+                RenderMode = EquipRenderMode.Weapon,
+                HandInFrontForWeapon = false,
             });
 
             // 背包（暂不渲染）

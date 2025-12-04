@@ -130,7 +130,8 @@ namespace EquipmentSystem.Editor
             HashSet<Vector2Int> regionPixels, 
             Dictionary<Vector2Int, Vector2> pixelUVs,
             int expandUp, int expandDown, int expandLeft, int expandRight,
-            Vector2Int frameSize, Vector2Int paletteSize)
+            Vector2Int frameSize, Vector2Int paletteSize,
+            int upStartStep = 1)
         {
             if (regionPixels.Count == 0) return;
             
@@ -169,7 +170,10 @@ namespace EquipmentSystem.Editor
                 }
             }
             
-            // 向上扩展
+            // 向上扩展：支持自定义起始步长（upStartStep）
+            // upStartStep 只影响 UV 采样的“起始行”，几何仍然从 minY-1 连续向上扩展
+            int clampedStartStep = Mathf.Max(1, upStartStep);
+            int uvOffset = clampedStartStep - 1;
             for (int i = 1; i <= expandUp; i++)
             {
                 int newY = minY - i;
@@ -179,8 +183,9 @@ namespace EquipmentSystem.Editor
                     var newPos = new Vector2Int(x, newY);
                     if (!regionPixels.Contains(newPos) && topBoundary.TryGetValue(x, out var uv))
                     {
+                        int uvStep = i + uvOffset;
                         regionPixels.Add(newPos);
-                        pixelUVs[newPos] = new Vector2(uv.x, uv.y + i * stepV);
+                        pixelUVs[newPos] = new Vector2(uv.x, uv.y + uvStep * stepV);
                     }
                 }
             }
@@ -201,7 +206,7 @@ namespace EquipmentSystem.Editor
                 }
             }
             
-            // 更新Y范围（用于左右扩展）
+            // 更新Y范围（用于左右扩展）——只与几何扩展高度有关，和 UV 偏移无关
             int expandedMinY = Mathf.Max(0, minY - expandUp);
             int expandedMaxY = Mathf.Min(frameSize.y - 1, maxY + expandDown);
             

@@ -11,12 +11,16 @@ namespace EquipmentSystem.Data
     {
         Gloves, //   手套 - 颜色替换手部像素
         Shoes, //   鞋子 - 颜色替换脚部像素 
-        Helmet, //   头盔 - UV 映射到头部 (Head 层)，覆盖在头发/胡子之上
         Clothing, //   服装 - UV 映射到躯干 (Body 层)
         Cloak, //   斗篷 - UV 映射到躯干 (Body 层)，渲染在服装前面
-        Weapon, //   武器 - 用锚点定位
-        Bag, //  背包 - 用锚点定位
         Pants, //   裤子 - UV 映射到躯干 (Body 层)，与服装共用 Body 区域
+        Helmet, //   头盔 - UV 映射到头部 (Head 层)，覆盖在头发/胡子之上
+        Hat,   //   帽子 - 使用头部插槽 (Head 层)
+        Mask,  //   面罩 - 使用头部插槽 (Head 层)
+        Weapon, //   武器 - 用锚点定位
+        Shield, //   盾牌 - Weapon 渲染模式，通常占用副手
+        Bag, //  背包 - 用锚点定位
+
     }
 
     /// <summary>
@@ -43,21 +47,7 @@ namespace EquipmentSystem.Data
 
         public Sprite GetByFacing(CharacterFacing facing)
         {
-            switch (facing)
-            {
-                case CharacterFacing.SouthEast:
-                    return se;
-                case CharacterFacing.SouthWest:
-                    return sw;
-                case CharacterFacing.NorthEast:
-                    // NE 优先使用自身；未配置时回退到 SE
-                    return ne != null ? ne : se;
-                case CharacterFacing.NorthWest:
-                    // NW 优先使用自身；未配置时回退到 SW
-                    return nw != null ? nw : sw;
-                default:
-                    return se;
-            }
+            return DirectionalSpriteHelper.GetByFacing(facing, se, sw, ne, nw);
         }
 
         public Sprite GetByRow(int rowIndex) => GetByFacing((CharacterFacing)rowIndex);
@@ -94,11 +84,14 @@ namespace EquipmentSystem.Data
                     result = sw;
                     break;
                 case CharacterFacing.NorthEast:
-                    result = ne;
+                    // NE 优先使用自身；未配置时回退到 SE
+                    result = ne != null ? ne : se;
                     break;
                 case CharacterFacing.NorthWest:
-                    result = nw;
-                    break;
+                    // NW 优先使用自身；未配置时先回退到 SW，SW 也为空时再回退到 SE
+                    if (nw != null) return nw;
+                    if (sw != null) return sw;
+                    return se;
                 default:
                     result = se;
                     break;
@@ -125,10 +118,7 @@ namespace EquipmentSystem.Data
         public string equipmentId;
         public EquipmentType type;
 
-        // 武器贴图 (单张)
-        public Sprite weaponSprite;
-
-        // 服装/头部装饰贴图 (4方向)
+        // 四向基础贴图（所有 Sprite/Weapon 类型统一使用）
         public Sprite spriteSE;
         public Sprite spriteSW;
         public Sprite spriteNE;
@@ -149,10 +139,10 @@ namespace EquipmentSystem.Data
         public Color32 leftColor = new Color32(150, 100, 50, 255);
         public Color32 rightColor = new Color32(150, 100, 50, 255);
         
-        [Header("头盔设置")]
-        [Tooltip("戴上头盔时隐藏头发")]
+        [Header("头部装备设置")]
+        [Tooltip("戴上此头部装备时隐藏头发")]
         public bool hideHair = false;
-        [Tooltip("戴上头盔时隐藏胡子")]
+        [Tooltip("戴上此头部装备时隐藏胡子")]
         public bool hideBeard = false;
 
         [Header("序列帧动画集（可选）")]
@@ -181,14 +171,10 @@ namespace EquipmentSystem.Data
         public bool HasAnimSet => animSet != null;
 
         /// <summary>
-        /// 根据方向获取对应的基础 Sprite (服装/头部装饰用)
+        /// 根据方向获取对应的基础 Sprite（所有类型统一使用四向贴图）
         /// </summary>
         public Sprite GetSprite(CharacterFacing facing)
         {
-            // 武器只有一张贴图
-            if (type == EquipmentType.Weapon)
-                return weaponSprite;
-
             return DirectionalSpriteHelper.GetByFacing(
                 facing,
                 spriteSE,
@@ -200,12 +186,14 @@ namespace EquipmentSystem.Data
 
         /// <summary>
         /// 根据方向和帧变体获取 Sprite
+        /// 武器：暂不区分变体，直接复用 GetSprite(facing)
+        /// 非武器：支持 Up/Down 变体
         /// </summary>
         public Sprite GetSprite(CharacterFacing facing, FrameVariant variant)
         {
-            // 武器只有一张贴图
-            if (type == EquipmentType.Weapon)
-                return weaponSprite;
+            var cfg = EquipTypeRegistry.Get(type);
+            if (cfg != null && cfg.RenderMode == EquipRenderMode.Weapon)
+                return GetSprite(facing);
             
             // 选择对应的变体贴图集
             DirectionalSpriteSet set = null;

@@ -36,18 +36,17 @@ namespace EquipmentSystem.Data
     
     /// <summary>
     /// 武器锚点朝向（仅用于武器旋转）
-    /// 角度表以 East 为 0°，逆时针为正：
-    /// East=0, NorthEast=45, North=90, NorthWest=135, West=180, SouthWest=-135, South=-90, SouthEast=-45
+    /// 以 South 为默认（枚举值 0），逆时针递增
     /// </summary>
     public enum AnchorDirection
     {
-        East = 0,
-        NorthEast = 1,
-        North = 2,
+        South = 0,      // 默认，武器朝下
+        SouthWest = 1,
+        West = 2,
         NorthWest = 3,
-        West = 4,
-        SouthWest = 5,
-        South = 6,
+        North = 4,
+        NorthEast = 5,
+        East = 6,
         SouthEast = 7
     }
     
@@ -69,21 +68,24 @@ namespace EquipmentSystem.Data
     {
         public AnchorType type;
         public Vector2Int position;
-        public AnchorDirection direction = AnchorDirection.East;
+        public AnchorDirection direction;  // 默认 South（枚举值 0）
         
+        /// <summary>
+        /// 获取旋转角度（以 South 为基准 0 度，逆时针为正）
+        /// </summary>
         public float GetRotationAngle()
         {
             switch (direction)
             {
-                case AnchorDirection.East: return 0f;
-                case AnchorDirection.NorthEast: return 45f;
-                case AnchorDirection.North: return 90f;
-                case AnchorDirection.NorthWest: return 135f;
-                case AnchorDirection.West: return 180f;
-                case AnchorDirection.SouthWest: return -135f;
-                case AnchorDirection.South: return -90f;
-                case AnchorDirection.SouthEast: return -45f;
-                default: return 0f;
+                case AnchorDirection.South: return 0f;
+                case AnchorDirection.SouthEast: return 45f;
+                case AnchorDirection.East: return 90f;
+                case AnchorDirection.NorthEast: return 135f;
+                case AnchorDirection.North: return 180f;
+                case AnchorDirection.NorthWest: return -135f;
+                case AnchorDirection.West: return -90f;
+                case AnchorDirection.SouthWest: return -45f;
+                default: return 0f; // South
             }
         }
     }
@@ -441,10 +443,6 @@ namespace EquipmentSystem.Data
         [Tooltip("身体检测目标区域大小")]
         public Vector2Int torsoDetectSize = new Vector2Int(3, 2);
         
-        [Header("武器握点（UV 画板像素）")]
-        public Vector2Int rightHandWeaponPivot = new Vector2Int(0, 0);
-        public Vector2Int leftHandWeaponPivot = new Vector2Int(0, 0);
-        
         [Header("头部区域扩展配置")]
         [Tooltip("头部向上扩展的像素数")]
         public int headExpandUp = 7;
@@ -456,6 +454,8 @@ namespace EquipmentSystem.Data
         [Header("身体区域扩展配置")]
         [Tooltip("身体向上扩展的像素数")]
         public int bodyExpandUp = 3;
+        [Tooltip("身体向上扩展的起始步长（1 表示紧贴身体向上，>1 表示跳过若干行再开始扩展）")]
+        public int bodyExpandUpStartStep = 1;
         [Tooltip("身体向左右扩展的像素数")]
         public int bodyExpandSide = 4;
         [Tooltip("身体向下扩展的像素数")]

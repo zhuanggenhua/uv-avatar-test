@@ -13,17 +13,15 @@ MonoBehaviour:
   m_Name: CharacterAppearance
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.CharacterAppearance
   hairSE: {fileID: 21300000, guid: a98564453f29f9242810cdf491f225f5, type: 3}
-  hairSW: {fileID: 0}
+  hairSW: {fileID: 21300000, guid: 5f6e2add9482c9d46bb141c2eaa7a3d6, type: 3}
   hairNE: {fileID: 21300000, guid: ed5b9b2e9c3d8124da00187e92dfed69, type: 3}
-  hairNW: {fileID: 0}
-  beardSE: {fileID: -7190417027915708161, guid: 4019206ee0199d64eb852c6d72b5f249, type: 3}
-  beardSW: {fileID: 0}
-  beardNE: {fileID: 4625305082006655371, guid: a3e4de7eacbb51f4f9d02eb7ac696fd8, type: 3}
-  beardNW: {fileID: 0}
+  hairNW: {fileID: 21300000, guid: 3d4e36a78ee326b41b4c4e996788d3e9, type: 3}
+  beardSE: {fileID: 21300000, guid: 4019206ee0199d64eb852c6d72b5f249, type: 3}
+  beardSW: {fileID: 21300000, guid: 78215b87ff49d03498ad754efab78d4f, type: 3}
+  beardNE: {fileID: 21300000, guid: a3e4de7eacbb51f4f9d02eb7ac696fd8, type: 3}
+  beardNW: {fileID: 21300000, guid: e690282462dd9a24f81ff9b8179cc4ef, type: 3}
   faceAccessorySE: {fileID: 21300000, guid: b394b2f5be6f63b4294dae19e1b700b6, type: 3}
   faceAccessorySW: {fileID: 21300000, guid: e3ef21738d8f72a499f58951319d428e, type: 3}
-  faceAccessoryNE: {fileID: 0}
-  faceAccessoryNW: {fileID: 0}
   skinColor: {r: 1, g: 0.85, b: 0.7, a: 1}
   leftEyeColor: {r: 0, g: 0, b: 0, a: 1}
   rightEyeColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}

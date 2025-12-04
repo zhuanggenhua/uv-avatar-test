@@ -28,7 +28,7 @@ namespace EquipmentSystem.Editor
         TabMode _tab = TabMode.BodyPaint;
         CharacterBodyPart _currentPart = CharacterBodyPart.Torso;
         AnchorType _anchorType = AnchorType.LeftWeapon;
-        AnchorDirection _anchorDirection = AnchorDirection.East;
+        AnchorDirection _anchorDirection;  // 默认 South（枚举值 0）
         bool _showSkinColors;
         bool _showHeadExpandConfig;
         bool _showBodyExpandConfig;
@@ -462,7 +462,7 @@ namespace EquipmentSystem.Editor
             GUILayout.Label($"当前: {GetPartName(_currentPart)} ({count}像素)", new GUIStyle(EditorStyles.boldLabel) { fontSize = 16 });
             GUI.contentColor = prevColor;
             
-            // 贴图方向与变体设置（只对 UV 部位：头/身体）
+            // 实际方向与变体设置（只对 UV 部位：头/身体）
             if (!IsLimbPart(_currentPart))
             {
                 // 确保有默认值
@@ -470,12 +470,12 @@ namespace EquipmentSystem.Editor
                     _partSpriteFacings[_currentPart] = GetDefaultSpriteFacing();
                 
                 EditorGUILayout.BeginHorizontal();
-                GUILayout.Label("贴图方向:", GUILayout.Width(60));
+                GUILayout.Label("实际方向:", GUILayout.Width(60));
                 var newFacing = (CharacterFacing)EditorGUILayout.EnumPopup(_partSpriteFacings[_currentPart]);
                 if (newFacing != _partSpriteFacings[_currentPart])
                 {
                     _partSpriteFacings[_currentPart] = newFacing;
-                    SaveWithUndo("设置贴图方向");
+                    SaveWithUndo("设置实际方向");
                 }
                 EditorGUILayout.EndHorizontal();
 
@@ -573,17 +573,48 @@ namespace EquipmentSystem.Editor
             
             GUILayout.Space(3);
             GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
+            
+            // 涂色清除
+            EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("清除当前帧涂色"))
             {
                 _partPixels.Clear();
                 _partUVs.Clear();
-                _partVariants.Clear();
                 SaveWithUndo("清除当前帧涂色");
             }
             if (GUILayout.Button("清除全部帧涂色"))
             {
                 ClearAllFramesPaint();
             }
+            EditorGUILayout.EndHorizontal();
+            
+            // 挂点清除
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("清除当前帧挂点"))
+            {
+                _anchors.Clear();
+                SaveWithUndo("清除当前帧挂点");
+            }
+            if (GUILayout.Button("清除全部帧挂点"))
+            {
+                ClearAllFramesAnchors();
+            }
+            EditorGUILayout.EndHorizontal();
+            
+            // 方向和贴图变体清除
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("清除当前帧方向和贴图"))
+            {
+                _partSpriteFacings.Clear();
+                _partVariants.Clear();
+                SaveWithUndo("清除当前帧方向和贴图");
+            }
+            if (GUILayout.Button("清除全部帧方向和贴图"))
+            {
+                ClearAllFramesFacingAndVariant();
+            }
+            EditorGUILayout.EndHorizontal();
+            
             GUI.backgroundColor = Color.white;
             
             // === 检测配置 ===
@@ -622,13 +653,6 @@ namespace EquipmentSystem.Editor
                 _data.headUVRegion = EditorGUILayout.RectIntField("头部UV", _data.headUVRegion);
                 _data.torsoUVRegion = EditorGUILayout.RectIntField("身体UV", _data.torsoUVRegion);
                 
-                // 武器握点配置（UV画板像素坐标）
-                EditorGUILayout.Space(5);
-                EditorGUILayout.LabelField("武器握点（UV画板像素）", EditorStyles.miniBoldLabel);
-                _data.rightHandWeaponPivot = EditorGUILayout.Vector2IntField("右手握点", _data.rightHandWeaponPivot);
-                _data.leftHandWeaponPivot = EditorGUILayout.Vector2IntField("左手握点", _data.leftHandWeaponPivot);
-                EditorGUILayout.HelpBox("武器贴图基于UV底图绘制，握点对应手部位置", MessageType.None);
-                
                 // 检测目标区域大小（角色实际区域）
                 EditorGUILayout.Space(5);
                 EditorGUILayout.LabelField("检测目标区域（角色）", EditorStyles.miniBoldLabel);
@@ -638,7 +662,7 @@ namespace EquipmentSystem.Editor
                 if (EditorGUI.EndChangeCheck())
                     EditorUtility.SetDirty(_data);
                 
-                EditorGUILayout.HelpBox("检测区域 > UV区域时，边缘UV会自动复制填充", MessageType.Info);
+                EditorGUILayout.HelpBox("检测区域 > UV区域时，边缘UV会自动复制填充\n左手在 UV 画板上的基准像素固定为 (15,16)，武器贴图绘制时请将握柄对齐到该像素（旋转仍以上下文默认的贴图中心为锚点）", MessageType.Info);
                 EditorGUI.indentLevel--;
             }
         }
@@ -649,7 +673,21 @@ namespace EquipmentSystem.Editor
             EditorGUILayout.HelpBox("用于挂件定位（头盔、武器等）", MessageType.Info);
             
             _anchorType = (AnchorType)EditorGUILayout.EnumPopup("锚点类型", _anchorType);
-            _anchorDirection = (AnchorDirection)EditorGUILayout.EnumPopup("武器方向", _anchorDirection);
+
+            // 修改武器方向时，立即同步到当前帧中对应类型的锚点
+            EditorGUI.BeginChangeCheck();
+            var newDirection = (AnchorDirection)EditorGUILayout.EnumPopup("武器方向", _anchorDirection);
+            if (EditorGUI.EndChangeCheck())
+            {
+                _anchorDirection = newDirection;
+                var existing = _anchors.Find(a => a.type == _anchorType);
+                if (existing != null)
+                {
+                    existing.direction = newDirection;
+                    SaveWithUndo("修改锚点方向");
+                }
+                Repaint();
+            }
             
             GUILayout.Space(5);
             GUILayout.Label("已有锚点:", EditorStyles.miniLabel);
@@ -708,7 +746,7 @@ namespace EquipmentSystem.Editor
         {
             GUILayout.Space(10);
             GUILayout.Label("批量操作", EditorStyles.boldLabel);
-            if (GUILayout.Button("🔧 修复所有帧贴图方向"))
+            if (GUILayout.Button("🔧 修复所有帧实际方向"))
                 FixAllFramesSpriteFacing();
             
             GUILayout.Space(5);
@@ -732,6 +770,8 @@ namespace EquipmentSystem.Editor
             {
                 EditorGUI.indentLevel++;
                 _data.bodyExpandUp = EditorGUILayout.IntSlider("向上扩展", _data.bodyExpandUp, 0, 10);
+                int upStart = _data.bodyExpandUpStartStep <= 0 ? 1 : _data.bodyExpandUpStartStep;
+                _data.bodyExpandUpStartStep = EditorGUILayout.IntSlider("上扩起始步长", upStart, 1, 10);
                 _data.bodyExpandSide = EditorGUILayout.IntSlider("左右扩展", _data.bodyExpandSide, 0, 10);
                 _data.bodyExpandDown = EditorGUILayout.IntSlider("向下扩展", _data.bodyExpandDown, 0, 10);
                 EditorGUI.indentLevel--;
@@ -753,7 +793,7 @@ namespace EquipmentSystem.Editor
             
             GUILayout.Space(5);
             GUILayout.Label("方向数据生成", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("从SE行数据生成其他行：\n• SW/NW = SE水平镜像（左右互换、贴图方向镜像）\n• NE = SE复制", MessageType.Info);
+            EditorGUILayout.HelpBox("从SE行数据生成其他行：\n• SW/NW = SE水平镜像（左右互换、实际方向镜像）\n• NE = SE复制", MessageType.Info);
             
             if (GUILayout.Button("📋 从SE生成所有行数据"))
                 GenerateAllRowsFromSE();
@@ -1312,53 +1352,24 @@ namespace EquipmentSystem.Editor
         
         /// <summary>
         /// 扩展所有部位的区域（当前帧）
-        /// 先身体后头部，身体向上扩展时避开本体正上方（形成凹字形）
+        /// 先身体后头部
         /// </summary>
         void ExpandAllPartsRegion()
         {
             if (_data == null) return;
             
-            // 记录身体本体的边界（扩展前）
-            int torsoMinX = int.MaxValue, torsoMaxX = int.MinValue, torsoMinY = int.MaxValue;
-            if (_partPixels.ContainsKey(CharacterBodyPart.Torso))
-            {
-                foreach (var pos in _partPixels[CharacterBodyPart.Torso])
-                {
-                    torsoMinX = Mathf.Min(torsoMinX, pos.x);
-                    torsoMaxX = Mathf.Max(torsoMaxX, pos.x);
-                    torsoMinY = Mathf.Min(torsoMinY, pos.y);
-                }
-            }
+            // 1. 先扩展身体（使用可配置的上扩起始步长，默认 1）
+            int bodyUpStartStep = Mathf.Max(1, _data.bodyExpandUpStartStep);
+            ExpandPartRegion(CharacterBodyPart.Torso, _data.bodyExpandUp, _data.bodyExpandDown, _data.bodyExpandSide, bodyUpStartStep);
             
-            // 1. 先扩展身体
-            ExpandPartRegion(CharacterBodyPart.Torso, _data.bodyExpandUp, _data.bodyExpandDown, _data.bodyExpandSide);
-            
-            // 2. 从身体中移除本体正上方的像素（形成凹字形）
-            if (_partPixels.ContainsKey(CharacterBodyPart.Torso) && torsoMinX != int.MaxValue)
-            {
-                var toRemove = new List<Vector2Int>();
-                foreach (var pos in _partPixels[CharacterBodyPart.Torso])
-                {
-                    // 在身体本体X范围内，且在身体本体上方
-                    if (pos.x >= torsoMinX && pos.x <= torsoMaxX && pos.y < torsoMinY)
-                        toRemove.Add(pos);
-                }
-                foreach (var pos in toRemove)
-                {
-                    _partPixels[CharacterBodyPart.Torso].Remove(pos);
-                    if (_partUVs.ContainsKey(CharacterBodyPart.Torso))
-                        _partUVs[CharacterBodyPart.Torso].Remove(pos);
-                }
-            }
-            
-            // 3. 再扩展头部
+            // 2. 再扩展头部（使用默认起始步长 1）
             ExpandPartRegion(CharacterBodyPart.Head, _data.headExpandUp, _data.headExpandDown, _data.headExpandSide);
             
             SaveWithUndo("扩展区域");
             Repaint();
         }
         
-        void ExpandPartRegion(CharacterBodyPart part, int expandUp, int expandDown, int expandSide)
+        void ExpandPartRegion(CharacterBodyPart part, int expandUp, int expandDown, int expandSide, int upStartStep = 1)
         {
             if (!_partPixels.ContainsKey(part) || _partPixels[part].Count == 0) return;
             if (expandUp == 0 && expandDown == 0 && expandSide == 0) return;
@@ -1369,7 +1380,7 @@ namespace EquipmentSystem.Editor
             var uvs = _partUVs[part];
             
             var paletteSize = _data != null ? _data.paletteSize : new Vector2Int(32, 32);
-            FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, expandUp, expandDown, expandSide, expandSide, _frameSize, paletteSize);
+            FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, expandUp, expandDown, expandSide, expandSide, _frameSize, paletteSize, upStartStep);
         }
         
         /// <summary>
@@ -1396,11 +1407,12 @@ namespace EquipmentSystem.Editor
             var paletteSize = _data.paletteSize;
             var expandParams = (_data.headExpandUp, _data.headExpandDown, _data.headExpandSide,
                                _data.bodyExpandUp, _data.bodyExpandDown, _data.bodyExpandSide);
+            int bodyUpStartStep = Mathf.Max(1, _data.bodyExpandUpStartStep);
             int expandedCount = 0;
             
             System.Threading.Tasks.Parallel.ForEach(frames, frame =>
             {
-                if (ExpandFrameDataDirectly(frame, paletteSize, expandParams))
+                if (ExpandFrameDataDirectly(frame, paletteSize, expandParams, bodyUpStartStep))
                     System.Threading.Interlocked.Increment(ref expandedCount);
             });
             
@@ -1411,24 +1423,13 @@ namespace EquipmentSystem.Editor
         }
         
         bool ExpandFrameDataDirectly(FrameData frame, Vector2Int paletteSize,
-            (int headUp, int headDown, int headSide, int bodyUp, int bodyDown, int bodySide) p)
+            (int headUp, int headDown, int headSide, int bodyUp, int bodyDown, int bodySide) p,
+            int bodyUpStartStep)
         {
             bool anyExpanded = false;
             
             var headRegion = frame.GetRegion(CharacterBodyPart.Head);
             var torsoRegion = frame.GetRegion(CharacterBodyPart.Torso);
-            
-            // 记录身体本体的边界（扩展前）
-            int torsoMinX = int.MaxValue, torsoMaxX = int.MinValue, torsoMinY = int.MaxValue;
-            if (torsoRegion != null)
-            {
-                foreach (var px in torsoRegion.pixels)
-                {
-                    torsoMinX = Mathf.Min(torsoMinX, px.position.x);
-                    torsoMaxX = Mathf.Max(torsoMaxX, px.position.x);
-                    torsoMinY = Mathf.Min(torsoMinY, px.position.y);
-                }
-            }
             
             // 1. 先扩展身体
             if (torsoRegion != null && (p.bodyUp > 0 || p.bodyDown > 0 || p.bodySide > 0))
@@ -1437,18 +1438,8 @@ namespace EquipmentSystem.Editor
                 var uvs = torsoRegion.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
                 int before = pixels.Count;
                 
-                FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, p.bodyUp, p.bodyDown, p.bodySide, p.bodySide, _frameSize, paletteSize);
-                
-                // 2. 从身体中移除本体正上方的像素（形成凹字形）
-                if (torsoMinX != int.MaxValue)
-                {
-                    var toRemove = pixels.Where(pos => pos.x >= torsoMinX && pos.x <= torsoMaxX && pos.y < torsoMinY).ToList();
-                    foreach (var pos in toRemove)
-                    {
-                        pixels.Remove(pos);
-                        uvs.Remove(pos);
-                    }
-                }
+                // 身体扩展使用配置的上扩起始步长（默认 1）
+                FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, p.bodyUp, p.bodyDown, p.bodySide, p.bodySide, _frameSize, paletteSize, bodyUpStartStep);
                 
                 if (pixels.Count != before)
                 {
@@ -2051,12 +2042,6 @@ namespace EquipmentSystem.Editor
             // 收集手脚像素（用于排除）
             // 注意：眼睛不排除！眼睛是头部的一部分，仍需参与头部 UV 映射（头发/胡子/头盔等）
             HashSet<Vector2Int> limbPixels = new HashSet<Vector2Int>();
-            foreach (var limbPart in new[] { CharacterBodyPart.LeftHand, CharacterBodyPart.RightHand, 
-                                              CharacterBodyPart.LeftFoot, CharacterBodyPart.RightFoot })
-            {
-                if (_partPixels.ContainsKey(limbPart))
-                    limbPixels.UnionWith(_partPixels[limbPart]);
-            }
             
             var variant = FrameVariant.Base;
             if (_partVariants.ContainsKey(part))
@@ -2143,6 +2128,28 @@ namespace EquipmentSystem.Editor
                     position = anchor.position,
                     direction = anchor.direction
                 });
+            }
+
+            // 同步当前锚点编辑状态：
+            // 1. 如果当前选择的类型在本帧存在，则沿用该类型并更新方向；
+            // 2. 否则如果本帧有任何锚点，则选中第一个锚点及其方向；
+            // 3. 否则回退到默认 East。
+            if (_anchors.Count > 0)
+            {
+                var selected = _anchors.Find(a => a.type == _anchorType);
+                if (selected != null)
+                {
+                    _anchorDirection = selected.direction;
+                }
+                else
+                {
+                    _anchorType = _anchors[0].type;
+                    _anchorDirection = _anchors[0].direction;
+                }
+            }
+            else
+            {
+                _anchorDirection = default;  // South
             }
             
             // 加载 UV 部位（头/身体）
@@ -2431,11 +2438,11 @@ namespace EquipmentSystem.Editor
             DetectLimb(p, CharacterBodyPart.LeftFoot, p.GetLeftFootColor());
             DetectLimb(p, CharacterBodyPart.RightFoot, p.GetRightFootColor());
             
-            // 锚点：默认使用 East 方向
+            // 锚点：使用默认方向（South）
             if (_partPixels.ContainsKey(CharacterBodyPart.LeftHand) && _partPixels[CharacterBodyPart.LeftHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First(), AnchorDirection.East);
+                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First());
             if (_partPixels.ContainsKey(CharacterBodyPart.RightHand) && _partPixels[CharacterBodyPart.RightHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[CharacterBodyPart.RightHand].First(), AnchorDirection.East);
+                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[CharacterBodyPart.RightHand].First());
             
         }
         
@@ -2576,6 +2583,8 @@ namespace EquipmentSystem.Editor
             {
                 Debug.LogWarning("Spritesheet 不可读，请在 Import Settings 中启用 Read/Write");
             }
+            // 重新加载数据以刷新 UI 状态（如 _anchorDirection）
+            LoadFrameData();
             Repaint();
         }
         
@@ -2589,7 +2598,7 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 清除全部帧的涂色数据
+        /// 清除全部帧的涂色数据（不包括挂点）
         /// </summary>
         void ClearAllFramesPaint()
         {
@@ -2609,7 +2618,6 @@ namespace EquipmentSystem.Editor
                     if (frameData != null)
                     {
                         frameData.bodyRegions.Clear();
-                        frameData.anchors.Clear();
                         if (frameData.limbMask != null)
                             frameData.limbMask.Clear();
                         cleared++;
@@ -2621,10 +2629,85 @@ namespace EquipmentSystem.Editor
             _partPixels.Clear();
             _partUVs.Clear();
             _partVariants.Clear();
-            _anchors.Clear();
             
             EditorUtility.SetDirty(_data);
             Debug.Log($"[清除] 已清除 {cleared} 帧的涂色数据");
+        }
+        
+        /// <summary>
+        /// 清除全部帧的挂点数据
+        /// </summary>
+        void ClearAllFramesAnchors()
+        {
+            if (_data == null) return;
+            
+            var anim = GetCurrentAnimation();
+            if (anim == null) return;
+            
+            Undo.RecordObject(_data, "清除全部帧挂点");
+            
+            int cleared = 0;
+            for (int row = 0; row < anim.rowCount; row++)
+            {
+                for (int frame = 0; frame < anim.framesPerRow; frame++)
+                {
+                    var frameData = anim.GetFrame(frame, row);
+                    if (frameData != null && frameData.anchors.Count > 0)
+                    {
+                        frameData.anchors.Clear();
+                        cleared++;
+                    }
+                }
+            }
+            
+            // 清除当前编辑状态
+            _anchors.Clear();
+            
+            EditorUtility.SetDirty(_data);
+            Debug.Log($"[清除] 已清除 {cleared} 帧的挂点数据");
+        }
+        
+        /// <summary>
+        /// 清除全部帧的方向和贴图变体数据
+        /// </summary>
+        void ClearAllFramesFacingAndVariant()
+        {
+            if (_data == null) return;
+            
+            var anim = GetCurrentAnimation();
+            if (anim == null) return;
+            
+            Undo.RecordObject(_data, "清除全部帧方向和贴图");
+            
+            int cleared = 0;
+            for (int row = 0; row < anim.rowCount; row++)
+            {
+                for (int frame = 0; frame < anim.framesPerRow; frame++)
+                {
+                    var frameData = anim.GetFrame(frame, row);
+                    if (frameData != null)
+                    {
+                        bool hasChange = false;
+                        foreach (var region in frameData.bodyRegions)
+                        {
+                            if (region.spriteFacing != CharacterFacing.South || region.variant != FrameVariant.Base)
+                            {
+                                region.spriteFacing = CharacterFacing.South;
+                                region.variant = FrameVariant.Base;
+                                hasChange = true;
+                            }
+                        }
+                        if (hasChange) cleared++;
+                    }
+                }
+            }
+            
+            // 清除当前编辑状态
+            _partSpriteFacings.Clear();
+            _partVariants.Clear();
+            
+            EditorUtility.SetDirty(_data);
+            Debug.Log($"[清除] 已清除 {cleared} 帧的方向和贴图变体数据");
         }
         
         /// <summary>
@@ -2690,14 +2773,14 @@ namespace EquipmentSystem.Editor
                     };
                     DetectLimb(p, targetPart, color);
                     
-                    // 设置武器挂点（默认 East）
+                    // 设置武器挂点
                     if (_partPixels.ContainsKey(targetPart) && _partPixels[targetPart].Count > 0)
                     {
                         var pos = _partPixels[targetPart].First();
                         if (targetPart == CharacterBodyPart.LeftHand)
-                            SetOrUpdateAnchor(AnchorType.LeftWeapon, pos, AnchorDirection.East);
+                            SetOrUpdateAnchor(AnchorType.LeftWeapon, pos);
                         else if (targetPart == CharacterBodyPart.RightHand)
-                            SetOrUpdateAnchor(AnchorType.RightWeapon, pos, AnchorDirection.East);
+                            SetOrUpdateAnchor(AnchorType.RightWeapon, pos);
                     }
                     break;
                     
@@ -3001,7 +3084,7 @@ namespace EquipmentSystem.Editor
             return fixedCount;
         }
         
-        void SetOrUpdateAnchor(AnchorType type, Vector2Int pos, AnchorDirection direction)
+        void SetOrUpdateAnchor(AnchorType type, Vector2Int pos, AnchorDirection direction = default)
         {
             var existing = _anchors.Find(a => a.type == type);
             if (existing != null)
@@ -3076,7 +3159,7 @@ namespace EquipmentSystem.Editor
         /// <param name="toNorth">是否转换为North方向（SE→NE）</param>
         /// <param name="translatePos">是否平移位置到镜像位置（形状不变，只平移）</param>
         void GenerateFrame(AnimationData anim, int frameIndex, FrameData sourceFrame, int targetRow,
-            bool mirrorFacing, bool toNorth, bool translatePos)
+            bool mirrorFacing, bool toNorth, bool translatePos, bool includeEyes)
         {
             var targetFrame = anim.GetOrCreateFrame(frameIndex, targetRow);
             targetFrame.bodyRegions.Clear();
@@ -3134,8 +3217,11 @@ namespace EquipmentSystem.Editor
                 CopyLimbMask(sourceFrame.limbMask.rightHand, targetFrame.limbMask.rightHand, translatePos);
                 CopyLimbMask(sourceFrame.limbMask.leftFoot, targetFrame.limbMask.leftFoot, translatePos);
                 CopyLimbMask(sourceFrame.limbMask.rightFoot, targetFrame.limbMask.rightFoot, translatePos);
-                CopyLimbMask(sourceFrame.limbMask.leftEye, targetFrame.limbMask.leftEye, translatePos);
-                CopyLimbMask(sourceFrame.limbMask.rightEye, targetFrame.limbMask.rightEye, translatePos);
+                if (includeEyes)
+                {
+                    CopyLimbMask(sourceFrame.limbMask.leftEye, targetFrame.limbMask.leftEye, translatePos);
+                    CopyLimbMask(sourceFrame.limbMask.rightEye, targetFrame.limbMask.rightEye, translatePos);
+                }
             }
             
             // 生成锚点
@@ -3160,15 +3246,15 @@ namespace EquipmentSystem.Editor
         // SE：源数据（直接使用，不生成）
         // SW：平移到镜像位置 + spriteFacing 镜像（SE→SW）
         void GenerateSWFrame(AnimationData anim, int f, FrameData seFrame)
-            => GenerateFrame(anim, f, seFrame, 1, mirrorFacing: true, toNorth: false, translatePos: true);
+            => GenerateFrame(anim, f, seFrame, 1, mirrorFacing: true, toNorth: false, translatePos: true, includeEyes: true);
         
         // NE：位置不变 + spriteFacing 转 North（SE→NE）
         void GenerateNEFrame(AnimationData anim, int f, FrameData seFrame)
-            => GenerateFrame(anim, f, seFrame, 2, mirrorFacing: false, toNorth: true, translatePos: false);
+            => GenerateFrame(anim, f, seFrame, 2, mirrorFacing: false, toNorth: true, translatePos: false, includeEyes: false);
         
         // NW：平移到镜像位置 + spriteFacing 镜像并转 North（SE→SW→NW）
         void GenerateNWFrame(AnimationData anim, int f, FrameData seFrame)
-            => GenerateFrame(anim, f, seFrame, 3, mirrorFacing: true, toNorth: true, translatePos: true);
+            => GenerateFrame(anim, f, seFrame, 3, mirrorFacing: true, toNorth: true, translatePos: true, includeEyes: false);
         
         // 算法委托到 FrameDataAlgorithms
         Vector2Int MirrorPosition(Vector2Int pos) => FrameDataAlgorithms.MirrorPosition(pos, _frameSize.x);

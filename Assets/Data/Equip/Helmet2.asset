@@ -13,17 +13,28 @@ MonoBehaviour:
   m_Name: Helmet2
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.EquipmentData
   equipmentId: 2
-  type: 2
-  weaponSprite: {fileID: 0}
+  type: 5
   spriteSE: {fileID: 461197340019467446, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
   spriteSW: {fileID: -5949199350038639316, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
   spriteNE: {fileID: 4643227416413941556, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
   spriteNW: {fileID: 8094058871704577632, guid: 309b1f141d99a824280abef37a6eece1, type: 3}
-  anchorType: 0
-  selfAnchor: {x: 0, y: 0}
+  upVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  downVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  weaponSlotType: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
   rightColor:
     serializedVersion: 2
     rgba: 4281492630
+  hideHair: 1
+  hideBeard: 0
+  animSet: {fileID: 0}

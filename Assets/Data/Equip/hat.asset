@@ -13,19 +13,28 @@ MonoBehaviour:
   m_Name: hat
   m_EditorClassIdentifier: EquipmentSystem::EquipmentSystem.Data.EquipmentData
   equipmentId: 1
-  type: 2
-  weaponSprite: {fileID: 0}
+  type: 6
   spriteSE: {fileID: 21300000, guid: 36e45e3177c57da448d24f496666d5ab, type: 3}
-  spriteSW: {fileID: -6309166271872316517, guid: 36e45e3177c57da448d24f496666d5ab, type: 3}
+  spriteSW: {fileID: 21300000, guid: 9abe25a517bcb66488632f6b2e5273f7, type: 3}
   spriteNE: {fileID: 21300000, guid: 02a8f83020d81924f9298f97c2fc397b, type: 3}
-  spriteNW: {fileID: 0}
-  spriteVariants: []
-  anchorType: 0
-  selfAnchor: {x: 14, y: 13}
+  spriteNW: {fileID: 21300000, guid: aae90bb0b33170b49bfa53f4f23c5079, type: 3}
+  upVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  downVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  weaponSlotType: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
   rightColor:
     serializedVersion: 2
     rgba: 4281492630
+  hideHair: 1
+  hideBeard: 0
   animSet: {fileID: 0}

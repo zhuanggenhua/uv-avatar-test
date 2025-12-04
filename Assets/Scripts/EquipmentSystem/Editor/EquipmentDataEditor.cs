@@ -13,7 +13,6 @@ namespace EquipmentSystem.Editor
     {
         SerializedProperty _equipmentId;
         SerializedProperty _type;
-        SerializedProperty _weaponSprite;
         SerializedProperty _spriteSE, _spriteSW, _spriteNE, _spriteNW;
         SerializedProperty _weaponSlotType;
         SerializedProperty _leftColor, _rightColor;
@@ -25,7 +24,6 @@ namespace EquipmentSystem.Editor
         {
             _equipmentId = serializedObject.FindProperty("equipmentId");
             _type = serializedObject.FindProperty("type");
-            _weaponSprite = serializedObject.FindProperty("weaponSprite");
             _spriteSE = serializedObject.FindProperty("spriteSE");
             _spriteSW = serializedObject.FindProperty("spriteSW");
             _spriteNE = serializedObject.FindProperty("spriteNE");
@@ -86,11 +84,11 @@ namespace EquipmentSystem.Editor
             DrawDirectionalSprites(layerName);
             DrawAnimSetField();
             
-            // 头盔特殊字段
-            if (cfg.Type == EquipmentType.Helmet)
+            // 头部装备共有字段：隐藏头发/胡子
+            if (cfg.BodyPart == CharacterBodyPart.Head)
             {
                 EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("头盔设置", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("头部装备设置", EditorStyles.boldLabel);
                 EditorGUILayout.PropertyField(_hideHair, new GUIContent("隐藏头发"));
                 EditorGUILayout.PropertyField(_hideBeard, new GUIContent("隐藏胡子"));
             }
@@ -115,13 +113,21 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 武器：单张贴图 + 槽位类型 + 动画集
+        /// 武器：四向基础贴图 + 槽位类型 + 动画集
         /// </summary>
         void DrawWeaponFields()
         {
-            EditorGUILayout.LabelField("基础贴图", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(_weaponSprite, new GUIContent("武器贴图"));
-            
+            // 基础四向贴图（与 Sprite 类型一致）
+            EditorGUILayout.LabelField("基础贴图 (4 向)", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_spriteSE, new GUIContent("SE 东南 (必填)"));
+            EditorGUILayout.PropertyField(_spriteSW, new GUIContent("SW 西南"));
+            EditorGUILayout.PropertyField(_spriteNE, new GUIContent("NE 东北"));
+            EditorGUILayout.PropertyField(_spriteNW, new GUIContent("NW 西北"));
+            EditorGUILayout.HelpBox(
+                "武器贴图基于 32x32 画布，\"虚拟左手\"基准点约为像素格 (15, 16)。\n" +
+                "运行时按 AnchorDirection + 当前行进行旋转/镜像，始终围绕虚拟左手 pivot 渲染。",
+                MessageType.Info);
+
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("武器槽位", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_weaponSlotType, new GUIContent("槽位类型"));

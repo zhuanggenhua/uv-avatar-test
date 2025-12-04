@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentSystem.Data.EquipmentData
   equipmentId: 
-  type: 5
-  weaponSprite: {fileID: 21300000, guid: 1d387f6eed313fd44acbcb39fc1b8724, type: 3}
-  spriteSE: {fileID: 0}
+  type: 8
+  spriteSE: {fileID: 21300000, guid: 1d387f6eed313fd44acbcb39fc1b8724, type: 3}
   spriteSW: {fileID: 0}
   spriteNE: {fileID: 0}
   spriteNW: {fileID: 0}
@@ -29,7 +28,7 @@ MonoBehaviour:
     sw: {fileID: 0}
     ne: {fileID: 0}
     nw: {fileID: 0}
-  anchorType: 0
+  weaponSlotType: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
