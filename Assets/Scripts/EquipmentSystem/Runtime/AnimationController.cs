@@ -1,7 +1,6 @@
 using UnityEngine;
-using EquipmentSystem.Data;
 
-namespace EquipmentSystem.Runtime
+namespace EquipmentSystem
 {
     /// <summary>
     /// 动画控制器组件

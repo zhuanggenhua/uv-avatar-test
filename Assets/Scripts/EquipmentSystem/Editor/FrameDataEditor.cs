@@ -1,82 +1,145 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-
-using EquipmentSystem.Data;
-
+using System.Linq; 
 using UnityEditor;
 using UnityEngine;
 
 // 使用别名避免与 UnityEditor.BodyPart 冲突
-using CharacterBodyPart = EquipmentSystem.Data.CharacterBodyPart;
 
 namespace EquipmentSystem.Editor
 {
-    public enum TabMode { BodyPaint, Anchor }
+    /// <summary>
+    /// 编辑器标签页模式
+    /// </summary>
+    public enum TabMode 
+    { 
+        /// <summary>部位涂色模式</summary>
+        BodyPaint, 
+        /// <summary>锚点编辑模式</summary>
+        Anchor 
+    }
 
+    /// <summary>
+    /// 帧数据编辑器主窗口
+    /// 用于编辑角色动画的帧数据，包括：
+    /// - 部位涂色（头部、身体、手脚等）
+    /// - UV映射（用于换装系统）
+    /// - 锚点设置（武器、装备挂载点）
+    /// - 批量操作（自动检测、扩展/收缩、方向生成等）
+    /// </summary>
     public class FrameDataEditor : EditorWindow
     {
         #region 字段
         
+        // ==================== 数据源 ====================
+        /// <summary>当前编辑的帧数据资源</summary>
         [SerializeField] CharacterFrameData _data;
+        /// <summary>当前动画的精灵表纹理</summary>
         [SerializeField] Texture2D _sprite;
         
-        // 编辑状态
+        // ==================== 编辑状态 ====================
+        /// <summary>当前选中的动画索引（对应动画数据库）</summary>
         [SerializeField] int _animIndex;
+        /// <summary>当前动画名称</summary>
         string _animName = "Idle";
-        int _row, _frame;
+        /// <summary>当前编辑的行（方向）：0=SE, 1=SW, 2=NE, 3=NW</summary>
+        int _row;
+        /// <summary>当前编辑的帧索引</summary>
+        int _frame;
+        /// <summary>当前标签页模式</summary>
         TabMode _tab = TabMode.BodyPaint;
+        /// <summary>当前选中的身体部位</summary>
         CharacterBodyPart _currentPart = CharacterBodyPart.Torso;
-        AnchorType _anchorType = AnchorType.LeftWeapon;
+        /// <summary>当前编辑的锚点类型</summary>
+        AnchorType _anchorType = AnchorType.MainHandWeapon;
+        /// <summary>当前锚点的方向</summary>
         AnchorDirection _anchorDirection;  // 默认 South（枚举值 0）
         bool _showSkinColors;
         bool _showHeadExpandConfig;
         bool _showBodyExpandConfig;
         int _paintDisplayMode = 2;  // 0=隐藏, 1=当前, 2=全部
         
-        // 视图
-        Vector2 _scroll, _pan;
+        // ==================== 视图控制 ====================
+        /// <summary>工具栏滚动位置</summary>
+        Vector2 _scroll;
+        /// <summary>画布平移偏移</summary>
+        Vector2 _pan;
+        /// <summary>画布缩放级别</summary>
         float _zoom = 10f;
+        /// <summary>单帧尺寸（像素）</summary>
         Vector2Int _frameSize = new Vector2Int(32, 32);
-        int _framesPerRow = 8, _rowCount = 4;
+        /// <summary>每行的帧数</summary>
+        int _framesPerRow = 8;
+        /// <summary>总行数</summary>
+        int _rowCount = 4;
+        /// <summary>是否正在平移视图</summary>
         bool _panning;
+        /// <summary>上一次的鼠标位置（用于拖动）</summary>
         Vector2 _lastMouse;
-        Rect _canvas, _display;
+        /// <summary>画布区域矩形</summary>
+        Rect _canvas;
+        /// <summary>显示区域矩形</summary>
+        Rect _display;
+        /// <summary>画布偏移量</summary>
         Vector2 _canvasOffset;
         
-        // UV 画板
-        float _paletteZoom = 8f;        // 画板缩放
-        Vector2 _palettePan;            // 画板平移
-        Rect _paletteDisplayRect;       // 画板显示区域
-        Rect _paletteCanvasRect;        // 画板画布区域（用于输入检测）
-        bool _showPalette = true;       // 是否显示画板
+        // ==================== UV 画板 ====================
+        /// <summary>UV画板缩放级别</summary>
+        float _paletteZoom = 8f;
+        /// <summary>UV画板平移偏移</summary>
+        Vector2 _palettePan;
+        /// <summary>UV画板显示区域矩形</summary>
+        Rect _paletteDisplayRect;
+        /// <summary>UV画板画布区域矩形（用于输入检测）</summary>
+        Rect _paletteCanvasRect;
+        /// <summary>是否显示UV画板</summary>
+        bool _showPalette = true;
         
-        // 选区
-        bool _isSelecting;              // 是否正在框选
-        bool _selectOnPalette;          // 选区在画板上还是画布上
-        bool _isErasing;                // 是否正在擦除模式
-        bool _isRightDragging;          // 是否正在右键拖动删除
-        Vector2Int _selectionStart;     // 选区起始点
-        Vector2Int _selectionEnd;       // 选区结束点
-        RectInt _paletteSelection;      // 画板选区（已确定）
-        RectInt _canvasSelection;       // 画布选区（已确定）
+        // ==================== 选区和编辑 ====================
+        /// <summary>是否正在框选</summary>
+        bool _isSelecting;
+        /// <summary>选区位置：true=画板上，false=画布上</summary>
+        bool _selectOnPalette;
+        /// <summary>是否正在擦除模式</summary>
+        bool _isErasing;
+        /// <summary>是否正在右键拖动删除</summary>
+        bool _isRightDragging;
+        /// <summary>选区起始点（像素坐标）</summary>
+        Vector2Int _selectionStart;
+        /// <summary>选区结束点（像素坐标）</summary>
+        Vector2Int _selectionEnd;
+        /// <summary>UV画板上的确定选区</summary>
+        RectInt _paletteSelection;
+        /// <summary>画布上的确定选区</summary>
+        RectInt _canvasSelection;
         
-        // 编辑模式
-        bool _editMode;                 // 编辑模式开关
-        bool _showPaletteConfig;        // UV画板配置折叠
-        bool _hideCanvasSprite;         // 隐藏画布角色原图
-        bool _hidePaletteSprite;        // 隐藏画板底图
-        Vector2Int? _hoverPalettePixel; // 当前鼠标悬停的画板像素
-        Vector2Int? _hoverCanvasPixel;  // 当前鼠标悬停的画布像素
+        // ==================== 编辑模式和显示选项 ====================
+        /// <summary>是否启用编辑模式（允许修改涂色）</summary>
+        bool _editMode;
+        /// <summary>是否展开UV画板配置面板</summary>
+        bool _showPaletteConfig;
+        /// <summary>是否隐藏画布上的角色原图</summary>
+        bool _hideCanvasSprite;
+        /// <summary>是否隐藏UV画板的参考底图</summary>
+        bool _hidePaletteSprite;
+        /// <summary>当前鼠标悬停的画板像素坐标</summary>
+        Vector2Int? _hoverPalettePixel;
+        /// <summary>当前鼠标悬停的画布像素坐标</summary>
+        Vector2Int? _hoverCanvasPixel;
         
-        // 编辑缓存
+        // ==================== 编辑缓存 ====================
+        /// <summary>各部位的像素集合（记录涂色位置）</summary>
         Dictionary<CharacterBodyPart, HashSet<Vector2Int>> _partPixels = new Dictionary<CharacterBodyPart, HashSet<Vector2Int>>();
+        /// <summary>各部位的UV映射（像素位置 -> UV坐标）</summary>
         Dictionary<CharacterBodyPart, Dictionary<Vector2Int, Vector2>> _partUVs = new Dictionary<CharacterBodyPart, Dictionary<Vector2Int, Vector2>>();
+        /// <summary>各部位的贴图朝向</summary>
         Dictionary<CharacterBodyPart, CharacterFacing> _partSpriteFacings = new Dictionary<CharacterBodyPart, CharacterFacing>();
+        /// <summary>各部位的贴图变体（基础/向上/向下）</summary>
         Dictionary<CharacterBodyPart, FrameVariant> _partVariants = new Dictionary<CharacterBodyPart, FrameVariant>();
+        /// <summary>当前帧的锚点列表</summary>
         List<AnchorPoint> _anchors = new List<AnchorPoint>();
         
-        // 脏标记 - 只在有修改时保存
+        /// <summary>数据脏标记 - 有修改时自动保存</summary>
         bool _isDirty;
         
         #endregion
@@ -670,7 +733,7 @@ namespace EquipmentSystem.Editor
         void DrawAnchorTab()
         {
             GUILayout.Label("锚点设置", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("用于挂件定位（头盔、武器等）", MessageType.Info);
+            EditorGUILayout.HelpBox("用于武器定位：主手/副手武器锚点", MessageType.Info);
             
             _anchorType = (AnchorType)EditorGUILayout.EnumPopup("锚点类型", _anchorType);
 
@@ -1391,93 +1454,12 @@ namespace EquipmentSystem.Editor
             if (_data == null) return;
             
             SaveIfDirty();
-            Undo.RecordObject(_data, "扩展全部帧区域");
-            
-            var anim = GetCurrentAnimation();
-            if (anim == null) return;
-            
-            // 收集所有帧
-            var frames = new List<FrameData>();
-            for (int r = 0; r < _rowCount; r++)
-                for (int f = 0; f < _framesPerRow; f++)
-                    if (anim.GetFrame(f, r) is FrameData frame && frame.bodyRegions.Count > 0)
-                        frames.Add(frame);
-            
-            // 并行扩展
-            var paletteSize = _data.paletteSize;
-            var expandParams = (_data.headExpandUp, _data.headExpandDown, _data.headExpandSide,
-                               _data.bodyExpandUp, _data.bodyExpandDown, _data.bodyExpandSide);
-            int bodyUpStartStep = Mathf.Max(1, _data.bodyExpandUpStartStep);
-            int expandedCount = 0;
-            
-            System.Threading.Tasks.Parallel.ForEach(frames, frame =>
-            {
-                if (ExpandFrameDataDirectly(frame, paletteSize, expandParams, bodyUpStartStep))
-                    System.Threading.Interlocked.Increment(ref expandedCount);
-            });
+            FrameDataEditorTools.ExpandAllPartsForAllFrames(_data);
             
             _isDirty = false;
             LoadFrameData();
-            EditorUtility.SetDirty(_data);
-            Debug.Log($"区域扩展完成: 扩展了 {expandedCount} 帧");
         }
         
-        bool ExpandFrameDataDirectly(FrameData frame, Vector2Int paletteSize,
-            (int headUp, int headDown, int headSide, int bodyUp, int bodyDown, int bodySide) p,
-            int bodyUpStartStep)
-        {
-            bool anyExpanded = false;
-            
-            var headRegion = frame.GetRegion(CharacterBodyPart.Head);
-            var torsoRegion = frame.GetRegion(CharacterBodyPart.Torso);
-            
-            // 1. 先扩展身体
-            if (torsoRegion != null && (p.bodyUp > 0 || p.bodyDown > 0 || p.bodySide > 0))
-            {
-                var pixels = new HashSet<Vector2Int>(torsoRegion.pixels.Select(px => px.position));
-                var uvs = torsoRegion.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
-                int before = pixels.Count;
-                
-                // 身体扩展使用配置的上扩起始步长（默认 1）
-                FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, p.bodyUp, p.bodyDown, p.bodySide, p.bodySide, _frameSize, paletteSize, bodyUpStartStep);
-                
-                if (pixels.Count != before)
-                {
-                    lock (torsoRegion.pixels)
-                    {
-                        torsoRegion.pixels.Clear();
-                        foreach (var pos in pixels)
-                            torsoRegion.pixels.Add(new BodyPartPixel { part = CharacterBodyPart.Torso, position = pos, 
-                                uv = uvs.TryGetValue(pos, out var uv) ? uv : default });
-                    }
-                    anyExpanded = true;
-                }
-            }
-            
-            // 3. 再扩展头部
-            if (headRegion != null && (p.headUp > 0 || p.headDown > 0 || p.headSide > 0))
-            {
-                var pixels = new HashSet<Vector2Int>(headRegion.pixels.Select(px => px.position));
-                var uvs = headRegion.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
-                int before = pixels.Count;
-                
-                FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, p.headUp, p.headDown, p.headSide, p.headSide, _frameSize, paletteSize);
-                
-                if (pixels.Count > before)
-                {
-                    lock (headRegion.pixels)
-                    {
-                        headRegion.pixels.Clear();
-                        foreach (var pos in pixels)
-                            headRegion.pixels.Add(new BodyPartPixel { part = CharacterBodyPart.Head, position = pos, 
-                                uv = uvs.TryGetValue(pos, out var uv) ? uv : default });
-                    }
-                    anyExpanded = true;
-                }
-            }
-            
-            return anyExpanded;
-        }
         
         /// <summary>
         /// 收缩所有部位的区域（当前帧）
@@ -1511,68 +1493,12 @@ namespace EquipmentSystem.Editor
             if (_data == null) return;
             
             SaveIfDirty();
-            Undo.RecordObject(_data, "收缩全部帧区域");
-            
-            var anim = GetCurrentAnimation();
-            if (anim == null) return;
-            
-            // 收集所有帧
-            var frames = new List<FrameData>();
-            for (int r = 0; r < _rowCount; r++)
-                for (int f = 0; f < _framesPerRow; f++)
-                    if (anim.GetFrame(f, r) is FrameData frame && frame.bodyRegions.Count > 0)
-                        frames.Add(frame);
-            
-            // 并行收缩
-            var shrinkParams = (_data.headExpandUp, _data.headExpandDown, _data.headExpandSide,
-                               _data.bodyExpandUp, _data.bodyExpandDown, _data.bodyExpandSide);
-            int shrunkCount = 0;
-            
-            System.Threading.Tasks.Parallel.ForEach(frames, frame =>
-            {
-                if (ShrinkFrameDataDirectly(frame, shrinkParams))
-                    System.Threading.Interlocked.Increment(ref shrunkCount);
-            });
+            FrameDataEditorTools.ShrinkAllPartsForAllFrames(_data);
             
             _isDirty = false;
             LoadFrameData();
-            EditorUtility.SetDirty(_data);
-            Debug.Log($"区域收缩完成: 收缩了 {shrunkCount} 帧");
         }
         
-        bool ShrinkFrameDataDirectly(FrameData frame,
-            (int headUp, int headDown, int headSide, int bodyUp, int bodyDown, int bodySide) p)
-        {
-            bool anyShrunk = false;
-            foreach (var region in frame.bodyRegions)
-            {
-                if (region.part != CharacterBodyPart.Head && region.part != CharacterBodyPart.Torso) continue;
-                
-                var (up, down, side) = region.part == CharacterBodyPart.Head
-                    ? (p.headUp, p.headDown, p.headSide)
-                    : (p.bodyUp, p.bodyDown, p.bodySide);
-                if (up == 0 && down == 0 && side == 0) continue;
-                
-                var pixels = new HashSet<Vector2Int>(region.pixels.Select(px => px.position));
-                var uvs = region.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
-                int before = pixels.Count;
-                
-                FrameDataAlgorithms.ShrinkRegion(pixels, uvs, up, down, side, side);
-                
-                if (pixels.Count < before)
-                {
-                    lock (region.pixels)
-                    {
-                        region.pixels.Clear();
-                        foreach (var pos in pixels)
-                            region.pixels.Add(new BodyPartPixel { part = region.part, position = pos, 
-                                uv = uvs.TryGetValue(pos, out var uv) ? uv : default });
-                    }
-                    anyShrunk = true;
-                }
-            }
-            return anyShrunk;
-        }
         
         // 部位颜色映射表 - 用于编辑器显示
         static readonly Dictionary<CharacterBodyPart, Color> PartColors = new Dictionary<CharacterBodyPart, Color>
@@ -2026,69 +1952,14 @@ namespace EquipmentSystem.Editor
         
         void SaveUVPartToFrame(FrameData frame, CharacterBodyPart part, Color32[] pixels)
         {
-            // 获取像素集合
-            HashSet<Vector2Int> partPixels = null;
-            if (_partPixels.ContainsKey(part))
-                partPixels = _partPixels[part];
+            var partPixels = _partPixels.ContainsKey(part) ? _partPixels[part] : null;
+            var partUVs = _partUVs.ContainsKey(part) ? _partUVs[part] : null;
             
-            // 如果没有像素、没有设置过贴图方向、也没有设置变体，跳过
-            bool hasPixels = partPixels != null && partPixels.Count > 0;
-            bool hasFacing = _partSpriteFacings.ContainsKey(part);
-            bool hasVariant = _partVariants.ContainsKey(part) && _partVariants[part] != FrameVariant.Base;
-            
-            if (!hasPixels && !hasFacing && !hasVariant)
-                return;
-            
-            // 收集手脚像素（用于排除）
-            // 注意：眼睛不排除！眼睛是头部的一部分，仍需参与头部 UV 映射（头发/胡子/头盔等）
-            HashSet<Vector2Int> limbPixels = new HashSet<Vector2Int>();
-            
-            var variant = FrameVariant.Base;
-            if (_partVariants.ContainsKey(part))
-                variant = _partVariants[part];
-
-            var region = new BodyPartRegion
-            {
-                part = part,
-                orientation = UVOrientation.UpRight,
-                spriteFacing = hasFacing ? _partSpriteFacings[part] : GetDefaultSpriteFacing(),
-                variant = variant
-            };
-            
-            // 保存像素（排除手脚像素，手脚有更高优先级）
-            if (hasPixels)
-            {
-                Dictionary<Vector2Int, Vector2> uvDict = null;
-                if (_partUVs.ContainsKey(part))
-                    uvDict = _partUVs[part];
-                
-                foreach (var pos in partPixels)
-                {
-                    // 跳过手脚像素（手脚优先级更高，保存在 limbMask 中）
-                    if (limbPixels.Contains(pos))
-                        continue;
-                    
-                    int gx = _frame * _frameSize.x + pos.x;
-                    int gy = _sprite.height - 1 - (_row * _frameSize.y + pos.y);
-                    
-                    if (gx >= 0 && gx < _sprite.width && gy >= 0 && gy < _sprite.height)
-                    {
-                        var pixel = new BodyPartPixel
-                        {
-                            part = part,
-                            position = pos,
-                            color = pixels[gy * _sprite.width + gx]
-                        };
-                        
-                        if (uvDict != null && uvDict.ContainsKey(pos))
-                            pixel.uv = uvDict[pos];
-                        
-                        region.pixels.Add(pixel);
-                    }
-                }
-            }
-            
-            frame.bodyRegions.Add(region);
+            FrameDataPersistence.SaveUVPartToFrame(
+                frame, part, partPixels, partUVs,
+                _partSpriteFacings, _partVariants,
+                pixels, _frame, _row, _frameSize, _sprite
+            );
         }
         
         /// <summary>
@@ -2304,147 +2175,8 @@ namespace EquipmentSystem.Editor
         
         #region 自动检测
         
-        /// <summary>
-        /// 获取检测参数（头部位置、颜色映射等）
-        /// </summary>
-        DetectParams GetDetectParams()
-        {
-            if (_sprite == null || !_sprite.isReadable || _data == null)
-                return null;
-            
-            var cfg = _data.detectConfig;
-            var pixels = _sprite.GetPixels32();
-            
-            // 判断朝向
-            bool facingRight = (_row == 0 || _row == 2);  // SE/NE
-            
-            // 查找第一个皮肤色像素（排除武器等非皮肤颜色）
-            Vector2Int? firstPixel = null;
-            for (int y = 0; y < _frameSize.y && !firstPixel.HasValue; y++)
-            {
-                for (int x = 0; x < _frameSize.x; x++)
-                {
-                    var c = GetPixelAt(pixels, x, y);
-                    if (cfg.IsSkinLike(c))
-                    {
-                        firstPixel = new Vector2Int(x, y);
-                        break;
-                    }
-                }
-            }
-            
-            if (!firstPixel.HasValue) return null;
-            
-            // 查找躯干起始点（在头部下面，使用配置的头部高度）
-            var headDetectSize = _data != null ? _data.headDetectSize : new Vector2Int(4, 3);
-            int torsoRowY = firstPixel.Value.y + headDetectSize.y;
-            int headLeft = firstPixel.Value.x;  // 头部最左列
-            Vector2Int? torsoStart = null;
-            
-            if (torsoRowY < _frameSize.y)
-            {
-                // 从头部最左列开始查找（躯干起点 >= 头部最左列）
-                for (int x = headLeft; x < _frameSize.x; x++)
-                {
-                    if (cfg.IsColoredPixel(GetPixelAt(pixels, x, torsoRowY)))
-                    {
-                        torsoStart = new Vector2Int(x, torsoRowY);
-                        break;
-                    }
-                }
-            }
-            
-            return new DetectParams
-            {
-                pixels = pixels,
-                cfg = cfg,
-                facingRight = facingRight,
-                firstPixel = firstPixel.Value,
-                torsoStart = torsoStart,
-                headLeft = headLeft,
-                headRight = headLeft + headDetectSize.x,
-                footMinY = torsoStart.HasValue ? torsoStart.Value.y + (_data != null ? _data.torsoDetectSize.y : 2) : _frameSize.y
-            };
-        }
         
-        class DetectParams
-        {
-            public Color32[] pixels;
-            public DetectConfig cfg;
-            public bool facingRight;
-            public Vector2Int firstPixel;
-            public Vector2Int? torsoStart;
-            public int headLeft, headRight, footMinY;
-            
-            // 颜色映射（SE方向固定，其他方向由SE生成）
-            public Color32 GetLeftHandColor() => cfg.leftHandColor;
-            public Color32 GetRightHandColor() => cfg.rightHandColor;
-            public Color32 GetLeftFootColor() => cfg.leftFootColor;
-            public Color32 GetRightFootColor() => cfg.rightFootColor;
-        }
         
-        void AutoDetectAllParts()
-        {
-            if (_sprite == null || _data == null)
-            {
-                Debug.LogWarning("需要 Spritesheet 和 CharacterFrameData");
-                return;
-            }
-            
-            if (!WithReadableTexture(AutoDetectAllPartsInternal))
-                Debug.LogWarning("Spritesheet 不可读，请在 Import Settings 中启用 Read/Write");
-        }
-        
-        void AutoDetectAllPartsInternal()
-        {
-            var p = GetDetectParams();
-            if (p == null)
-            {
-                Debug.LogWarning($"帧 [{_row},{_frame}] 找不到皮肤色像素，请检查 DetectConfig 中的颜色设置");
-                return;
-            }
-            
-            int palW = _data != null ? _data.paletteSize.x : 32;
-            int palH = _data != null ? _data.paletteSize.y : 32;
-            var defaultFacing = GetDefaultSpriteFacing();
-            
-            // 头部 + UV
-            var headFacing = _partSpriteFacings.ContainsKey(CharacterBodyPart.Head) ? _partSpriteFacings[CharacterBodyPart.Head] : defaultFacing;
-            var headDetectSize = _data != null ? _data.headDetectSize : new Vector2Int(4, 3);
-            var torsoDetectSize = _data != null ? _data.torsoDetectSize : new Vector2Int(3, 2);
-            var headUVRegion = _data != null ? _data.headUVRegion : new RectInt(0, 0, 4, 3);
-            var torsoUVRegion = _data != null ? _data.torsoUVRegion : new RectInt(0, 3, 3, 2);
-            
-            _partPixels[CharacterBodyPart.Head] = new HashSet<Vector2Int>();
-            _partUVs[CharacterBodyPart.Head] = new Dictionary<Vector2Int, Vector2>();
-            _partSpriteFacings[CharacterBodyPart.Head] = headFacing;
-            FillPartWithUV(p.firstPixel, headDetectSize, headUVRegion, CharacterBodyPart.Head, palW, palH);
-            // 自动检测眼睛：头部区域内的黑色像素
-            DetectEyesInHead(p, headDetectSize);
-            
-            // 身体 + UV
-            if (p.torsoStart.HasValue)
-            {
-                var torsoFacing = _partSpriteFacings.ContainsKey(CharacterBodyPart.Torso) ? _partSpriteFacings[CharacterBodyPart.Torso] : defaultFacing;
-                _partPixels[CharacterBodyPart.Torso] = new HashSet<Vector2Int>();
-                _partUVs[CharacterBodyPart.Torso] = new Dictionary<Vector2Int, Vector2>();
-                _partSpriteFacings[CharacterBodyPart.Torso] = torsoFacing;
-                FillPartWithUV(p.torsoStart.Value, torsoDetectSize, torsoUVRegion, CharacterBodyPart.Torso, palW, palH);
-            }
-            
-            // 手脚
-            DetectLimb(p, CharacterBodyPart.LeftHand, p.GetLeftHandColor());
-            DetectLimb(p, CharacterBodyPart.RightHand, p.GetRightHandColor());
-            DetectLimb(p, CharacterBodyPart.LeftFoot, p.GetLeftFootColor());
-            DetectLimb(p, CharacterBodyPart.RightFoot, p.GetRightFootColor());
-            
-            // 锚点：使用默认方向（South）
-            if (_partPixels.ContainsKey(CharacterBodyPart.LeftHand) && _partPixels[CharacterBodyPart.LeftHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.LeftWeapon, _partPixels[CharacterBodyPart.LeftHand].First());
-            if (_partPixels.ContainsKey(CharacterBodyPart.RightHand) && _partPixels[CharacterBodyPart.RightHand].Count > 0)
-                SetOrUpdateAnchor(AnchorType.RightWeapon, _partPixels[CharacterBodyPart.RightHand].First());
-            
-        }
         
         /// <summary>
         /// 用UV区域填充检测区域，支持不同大小的映射
@@ -2454,80 +2186,10 @@ namespace EquipmentSystem.Editor
         /// </summary>
         void FillPartWithUV(Vector2Int startPos, Vector2Int detectSize, RectInt uvRegion, CharacterBodyPart part, int palW, int palH)
         {
-            int detectW = detectSize.x, detectH = detectSize.y;
-            int uvW = uvRegion.width, uvH = uvRegion.height;
-            
-            bool isHead = (part == CharacterBodyPart.Head);
-            
-            // 头部：靠右对齐，多出的全放左边
-            // 身体：居中对齐，多出的左右分摊
-            int extraLeftX = isHead 
-                ? Mathf.Max(0, detectW - uvW)                    // 头部：全放左边
-                : Mathf.Max(0, (detectW - uvW + 1) / 2);         // 身体：居中
-            int extraTopY = Mathf.Max(0, (detectH - uvH + 1) / 2);
-            
-            // 身体：当UV高度 > 检测高度时，从UV的下部开始取
-            int uvOffsetY = isHead ? 0 : Mathf.Max(0, (uvH - detectH + 1) / 2);
-            
-            for (int dy = 0; dy < detectH; dy++)
-            {
-                for (int dx = 0; dx < detectW; dx++)
-                {
-                    int px = startPos.x + dx, py = startPos.y + dy;
-                    if (px >= _frameSize.x || py >= _frameSize.y) continue;
-                    
-                    var pos = new Vector2Int(px, py);
-                    _partPixels[part].Add(pos);
-                    
-                    // 计算对应的UV坐标
-                    int uvDx, uvDy;
-                    
-                    if (isHead)
-                    {
-                        // 头部特殊处理：
-                        // 第一列放最左边，然后复制第二列填充多出的空间
-                        // 例如 UV 4列 + 检测 5列 → 0,1,1,2,3
-                        if (dx == 0)
-                            uvDx = 0;  // 第一列
-                        else if (dx <= 1 + extraLeftX)
-                            uvDx = 1;  // 第二列（复制填充多出的空间）
-                        else
-                            uvDx = dx - extraLeftX;  // 剩余正常映射
-                        
-                        // Y方向：居中，多出的用边界行填充
-                        if (dy < extraTopY)
-                            uvDy = 0;
-                        else if (dy >= extraTopY + uvH)
-                            uvDy = uvH - 1;
-                        else
-                            uvDy = dy - extraTopY;
-                    }
-                    else
-                    {
-                        // 身体：居中对齐，边缘复制边界UV
-                        if (dx < extraLeftX)
-                            uvDx = 0;
-                        else if (dx >= extraLeftX + uvW)
-                            uvDx = uvW - 1;
-                        else
-                            uvDx = dx - extraLeftX;
-                        
-                        if (dy < extraTopY)
-                            uvDy = uvOffsetY;
-                        else if (dy >= extraTopY + uvH)
-                            uvDy = uvH - 1;
-                        else
-                            uvDy = Mathf.Min(dy - extraTopY + uvOffsetY, uvH - 1);
-                    }
-                    
-                    // UV是画板上的绝对坐标，和装备贴图布局一致
-                    int uvX = uvRegion.x + uvDx;
-                    int uvY = uvRegion.y + uvDy;
-                    float u = (uvX + 0.5f) / palW;
-                    float v = 1f - (uvY + 0.5f) / palH;
-                    _partUVs[part][pos] = new Vector2(u, v);
-                }
-            }
+            FrameDataPersistence.FillPartWithUV(
+                startPos, detectSize, uvRegion, part, palW, palH,
+                _frameSize, _partPixels[part], _partUVs[part]
+            );
         }
         
         /// <summary>
@@ -2573,7 +2235,6 @@ namespace EquipmentSystem.Editor
         {
             if (_sprite == null || _data == null) return;
             
-            // 检测和保存必须在同一个 WithReadableTexture 中执行
             if (!WithReadableTexture(() =>
             {
                 AutoDetectAllPartsInternal();
@@ -2583,9 +2244,75 @@ namespace EquipmentSystem.Editor
             {
                 Debug.LogWarning("Spritesheet 不可读，请在 Import Settings 中启用 Read/Write");
             }
-            // 重新加载数据以刷新 UI 状态（如 _anchorDirection）
             LoadFrameData();
             Repaint();
+        }
+        
+        void AutoDetectAllPartsInternal()
+        {
+            var p = FrameDataEditorTools.GetDetectParams(_sprite, _row, _frame, _frameSize, _data);
+            if (p == null)
+            {
+                Debug.LogWarning($"帧 [{_row},{_frame}] 找不到皮肤色像素");
+                return;
+            }
+            
+            int palW = _data.paletteSize.x;
+            int palH = _data.paletteSize.y;
+            var defaultFacing = GetDefaultSpriteFacing();
+            var headDetectSize = _data.headDetectSize;
+            var torsoDetectSize = _data.torsoDetectSize;
+            var headUVRegion = _data.headUVRegion;
+            var torsoUVRegion = _data.torsoUVRegion;
+            
+            // 头部 + UV
+            var headFacing = _partSpriteFacings.ContainsKey(CharacterBodyPart.Head) ? 
+                _partSpriteFacings[CharacterBodyPart.Head] : defaultFacing;
+            _partPixels[CharacterBodyPart.Head] = new HashSet<Vector2Int>();
+            _partUVs[CharacterBodyPart.Head] = new Dictionary<Vector2Int, Vector2>();
+            _partSpriteFacings[CharacterBodyPart.Head] = headFacing;
+            FillPartWithUV(p.firstPixel, headDetectSize, headUVRegion, CharacterBodyPart.Head, palW, palH);
+            
+            // 眼睛
+            FrameDataEditorTools.DetectEyes(p, headDetectSize, out var leftEye, out var rightEye);
+            if (leftEye.Count > 0)
+                _partPixels[CharacterBodyPart.LeftEye] = leftEye;
+            if (rightEye.Count > 0)
+                _partPixels[CharacterBodyPart.RightEye] = rightEye;
+            
+            // 身体 + UV
+            if (p.torsoStart.HasValue)
+            {
+                var torsoFacing = _partSpriteFacings.ContainsKey(CharacterBodyPart.Torso) ? 
+                    _partSpriteFacings[CharacterBodyPart.Torso] : defaultFacing;
+                _partPixels[CharacterBodyPart.Torso] = new HashSet<Vector2Int>();
+                _partUVs[CharacterBodyPart.Torso] = new Dictionary<Vector2Int, Vector2>();
+                _partSpriteFacings[CharacterBodyPart.Torso] = torsoFacing;
+                FillPartWithUV(p.torsoStart.Value, torsoDetectSize, torsoUVRegion, CharacterBodyPart.Torso, palW, palH);
+            }
+            
+            // 手脚
+            var leftHand = FrameDataEditorTools.DetectLimb(p, CharacterBodyPart.LeftHand, p.GetLeftHandColor(), _data);
+            if (leftHand.Count > 0)
+            {
+                _partPixels[CharacterBodyPart.LeftHand] = leftHand;
+                SetOrUpdateAnchor(AnchorType.MainHandWeapon, leftHand.First());
+            }
+            
+            var rightHand = FrameDataEditorTools.DetectLimb(p, CharacterBodyPart.RightHand, p.GetRightHandColor(), _data);
+            if (rightHand.Count > 0)
+            {
+                _partPixels[CharacterBodyPart.RightHand] = rightHand;
+                SetOrUpdateAnchor(AnchorType.OffHandWeapon, rightHand.First());
+            }
+            
+            var leftFoot = FrameDataEditorTools.DetectLimb(p, CharacterBodyPart.LeftFoot, p.GetLeftFootColor(), _data);
+            if (leftFoot.Count > 0)
+                _partPixels[CharacterBodyPart.LeftFoot] = leftFoot;
+            
+            var rightFoot = FrameDataEditorTools.DetectLimb(p, CharacterBodyPart.RightFoot, p.GetRightFootColor(), _data);
+            if (rightFoot.Count > 0)
+                _partPixels[CharacterBodyPart.RightFoot] = rightFoot;
         }
         
         /// <summary>
@@ -2690,9 +2417,9 @@ namespace EquipmentSystem.Editor
                         bool hasChange = false;
                         foreach (var region in frameData.bodyRegions)
                         {
-                            if (region.spriteFacing != CharacterFacing.South || region.variant != FrameVariant.Base)
+                            if (region.spriteFacing != CharacterFacing.SouthEast || region.variant != FrameVariant.Base)
                             {
-                                region.spriteFacing = CharacterFacing.South;
+                                region.spriteFacing = CharacterFacing.SouthEast;
                                 region.variant = FrameVariant.Base;
                                 hasChange = true;
                             }
@@ -2715,19 +2442,25 @@ namespace EquipmentSystem.Editor
         /// </summary>
         void AutoPaintPart(CharacterBodyPart targetPart)
         {
-            var p = GetDetectParams();
-            if (p == null)
+            if (!_sprite.isReadable || _data == null)
             {
-                Debug.LogWarning("需要可读的 Spritesheet");
+                Debug.LogWarning("需要可读的 Spritesheet 和 CharacterFrameData");
                 return;
             }
             
-            int palW = _data != null ? _data.paletteSize.x : 32;
-            int palH = _data != null ? _data.paletteSize.y : 32;
-            var headDetectSize = _data != null ? _data.headDetectSize : new Vector2Int(4, 3);
-            var torsoDetectSize = _data != null ? _data.torsoDetectSize : new Vector2Int(3, 2);
-            var headUVRegion = _data != null ? _data.headUVRegion : new RectInt(0, 0, 4, 3);
-            var torsoUVRegion = _data != null ? _data.torsoUVRegion : new RectInt(0, 3, 3, 2);
+            var p = FrameDataEditorTools.GetDetectParams(_sprite, _row, _frame, _frameSize, _data);
+            if (p == null)
+            {
+                Debug.LogWarning($"帧 [{_row},{_frame}] 找不到皮肤色像素，请检查 DetectConfig 中的颜色设置");
+                return;
+            }
+            
+            int palW = _data.paletteSize.x;
+            int palH = _data.paletteSize.y;
+            var headDetectSize = _data.headDetectSize;
+            var torsoDetectSize = _data.torsoDetectSize;
+            var headUVRegion = _data.headUVRegion;
+            var torsoUVRegion = _data.torsoUVRegion;
             
             switch (targetPart)
             {
@@ -2738,14 +2471,22 @@ namespace EquipmentSystem.Editor
                         _partSpriteFacings[CharacterBodyPart.Head] = GetDefaultSpriteFacing();
                     FillPartWithUV(p.firstPixel, headDetectSize, headUVRegion, CharacterBodyPart.Head, palW, palH);
                     
-                    // 自动检测眼睛：头部区域内的黑色像素
-                    DetectEyesInHead(p, headDetectSize);
+                    // 自动检测眼睛
+                    FrameDataEditorTools.DetectEyes(p, headDetectSize, out var leftEye, out var rightEye);
+                    if (leftEye.Count > 0)
+                        _partPixels[CharacterBodyPart.LeftEye] = leftEye;
+                    if (rightEye.Count > 0)
+                        _partPixels[CharacterBodyPart.RightEye] = rightEye;
                     break;
                     
                 case CharacterBodyPart.LeftEye:
                 case CharacterBodyPart.RightEye:
-                    // 眼睛单独检测时，基于已有的头部区域
-                    DetectEyesInHead(p, headDetectSize);
+                    // 眼睛单独检测时
+                    FrameDataEditorTools.DetectEyes(p, headDetectSize, out leftEye, out rightEye);
+                    if (targetPart == CharacterBodyPart.LeftEye && leftEye.Count > 0)
+                        _partPixels[CharacterBodyPart.LeftEye] = leftEye;
+                    if (targetPart == CharacterBodyPart.RightEye && rightEye.Count > 0)
+                        _partPixels[CharacterBodyPart.RightEye] = rightEye;
                     break;
                     
                 case CharacterBodyPart.Torso:
@@ -2763,7 +2504,7 @@ namespace EquipmentSystem.Editor
                 case CharacterBodyPart.RightHand:
                 case CharacterBodyPart.LeftFoot:
                 case CharacterBodyPart.RightFoot:
-                    // 手脚只需要位置，不需要UV（shader直接用颜色替换）
+                    // 手脚只需要位置，不需要UV
                     Color32 color = targetPart switch
                     {
                         CharacterBodyPart.LeftHand => p.GetLeftHandColor(),
@@ -2771,16 +2512,17 @@ namespace EquipmentSystem.Editor
                         CharacterBodyPart.LeftFoot => p.GetLeftFootColor(),
                         _ => p.GetRightFootColor()
                     };
-                    DetectLimb(p, targetPart, color);
-                    
-                    // 设置武器挂点
-                    if (_partPixels.ContainsKey(targetPart) && _partPixels[targetPart].Count > 0)
+                    var limbPixels = FrameDataEditorTools.DetectLimb(p, targetPart, color, _data);
+                    if (limbPixels.Count > 0)
                     {
-                        var pos = _partPixels[targetPart].First();
+                        _partPixels[targetPart] = limbPixels;
+                        
+                        // 设置武器挂点
+                        var pos = limbPixels.First();
                         if (targetPart == CharacterBodyPart.LeftHand)
-                            SetOrUpdateAnchor(AnchorType.LeftWeapon, pos);
+                            SetOrUpdateAnchor(AnchorType.MainHandWeapon, pos);
                         else if (targetPart == CharacterBodyPart.RightHand)
-                            SetOrUpdateAnchor(AnchorType.RightWeapon, pos);
+                            SetOrUpdateAnchor(AnchorType.OffHandWeapon, pos);
                     }
                     break;
                     
@@ -2789,187 +2531,8 @@ namespace EquipmentSystem.Editor
             }
         }
         
-        void DetectLimb(DetectParams p, CharacterBodyPart part, Color32 color)
-        {
-            bool isHand = part == CharacterBodyPart.LeftHand || part == CharacterBodyPart.RightHand;
-            bool isLeft = part == CharacterBodyPart.LeftHand || part == CharacterBodyPart.LeftFoot;
-            
-            // 先找到有色像素块的边界
-            int minX = _frameSize.x, maxX = -1, maxY = -1;
-            for (int y = 0; y < _frameSize.y; y++)
-            {
-                for (int x = 0; x < _frameSize.x; x++)
-                {
-                    if (p.cfg.IsColoredPixel(GetPixelAt(p.pixels, x, y)))
-                    {
-                        minX = Mathf.Min(minX, x);
-                        maxX = Mathf.Max(maxX, x);
-                        maxY = Mathf.Max(maxY, y);
-                    }
-                }
-            }
-            
-            if (maxX < 0) return;  // 没有有色像素
-            
-            int colCount = 2;  // 搜索两列/行
-            
-            if (isHand)
-            {
-                // 手部：从有色像素块的左/右边缘开始，限定两列范围
-                int xStart, xEnd, xStep;
-                
-                if (p.facingRight == isLeft)  // 左手在右边(SE/NE)或右手在左边(SW/NW)
-                {
-                    // 从有色块右边缘往左搜索
-                    xStart = maxX;
-                    xEnd = Mathf.Max(0, maxX - colCount);
-                    xStep = -1;
-                }
-                else
-                {
-                    // 从有色块左边缘往右搜索
-                    xStart = minX;
-                    xEnd = Mathf.Min(_frameSize.x, minX + colCount + 1);
-                    xStep = 1;
-                }
-                
-                // 头部底部Y（手部像素一般要低于这个位置）
-                var headDetectSize = _data != null ? _data.headDetectSize : new Vector2Int(4, 3);
-                int headBottomY = p.firstPixel.y + headDetectSize.y;
-                
-                // 按列扫描，每列从下往上
-                Vector2Int? result = null;
-                for (int x = xStart; x != xEnd && !result.HasValue; x += xStep)
-                {
-                    // 统计这一列匹配的像素
-                    var matchedYs = new List<int>();
-                    for (int y = _frameSize.y - 1; y >= 0; y--)
-                    {
-                        if (p.cfg.IsLimbColorMatch(GetPixelAt(p.pixels, x, y), color))
-                            matchedYs.Add(y);
-                    }
-                    
-                    if (matchedYs.Count == 1)
-                    {
-                        // 落单情况，直接返回（不限制位置）
-                        result = new Vector2Int(x, matchedYs[0]);
-                    }
-                    else if (matchedYs.Count > 1)
-                    {
-                        // 多个像素，只考虑低于头部区域的（Y >= headBottomY）
-                        foreach (int y in matchedYs)
-                        {
-                            if (y >= headBottomY)
-                            {
-                                result = new Vector2Int(x, y);
-                                break;
-                            }
-                        }
-                    }
-                }
-                
-                if (result.HasValue)
-                    _partPixels[part] = new HashSet<Vector2Int> { result.Value };
-            }
-            else
-            {
-                // 脚部：只看最底下一行，允许连续多个像素
-                int footY = maxY;
-                
-                // X方向：左脚从右到左，右脚从左到右
-                int xStart = isLeft ? maxX : minX;
-                int xEnd = isLeft ? minX - 1 : maxX + 1;
-                int xStep = isLeft ? -1 : 1;
-                
-                // 收集这一行所有匹配脚颜色的像素
-                var pixels = new HashSet<Vector2Int>();
-                for (int x = xStart; x != xEnd; x += xStep)
-                {
-                    if (p.cfg.IsLimbColorMatch(GetPixelAt(p.pixels, x, footY), color))
-                        pixels.Add(new Vector2Int(x, footY));
-                }
-                
-                if (pixels.Count > 0)
-                    _partPixels[part] = pixels;
-            }
-        }
         
-        /// <summary>
-        /// 检测头部区域内的眼睛（黑色/描边像素）
-        /// 注意：SE朝向（朝下）时，画面左边是角色右眼，画面右边是角色左眼
-        /// </summary>
-        void DetectEyesInHead(DetectParams p, Vector2Int headDetectSize)
-        {
-            var leftEyePixels = new HashSet<Vector2Int>();
-            var rightEyePixels = new HashSet<Vector2Int>();
-            
-            // 头部中心 X 坐标（用于区分左右眼）
-            float headCenterX = p.firstPixel.x + headDetectSize.x / 2.0f;
-            
-            // 在头部检测区域内扫描黑色像素
-            for (int dy = 0; dy < headDetectSize.y; dy++)
-            {
-                for (int dx = 0; dx < headDetectSize.x; dx++)
-                {
-                    int px = p.firstPixel.x + dx;
-                    int py = p.firstPixel.y + dy;
-                    
-                    if (px < 0 || px >= _frameSize.x || py < 0 || py >= _frameSize.y)
-                        continue;
-                    
-                    var c = GetPixelAt(p.pixels, px, py);
-                    
-                    // 使用 IsOutline 判断是否为黑色/描边像素
-                    if (p.cfg.IsOutline(c))
-                    {
-                        // SE朝向：画面左边（x < 中心）是角色右眼，画面右边（x >= 中心）是角色左眼
-                        if (px < headCenterX)
-                            rightEyePixels.Add(new Vector2Int(px, py));
-                        else
-                            leftEyePixels.Add(new Vector2Int(px, py));
-                    }
-                }
-            }
-            
-            if (leftEyePixels.Count > 0)
-                _partPixels[CharacterBodyPart.LeftEye] = leftEyePixels;
-            if (rightEyePixels.Count > 0)
-                _partPixels[CharacterBodyPart.RightEye] = rightEyePixels;
-        }
         
-        /// <summary>
-        /// 在限定范围内查找第一个匹配的手脚像素
-        /// </summary>
-        /// <param name="isHand">true=手部按列优先，false=脚部按行优先</param>
-        Vector2Int? FindFirstLimbPixel(Color32[] pixels, Color32 targetColor, DetectConfig cfg,
-            int xStart, int xEnd, int xStep, int yMin, int yMax, bool isHand)
-        {
-            if (isHand)
-            {
-                // 手部：按列扫描（X优先），每列从下往上
-                for (int x = xStart; x != xEnd; x += xStep)
-                {
-                    for (int y = yMax - 1; y >= yMin; y--)
-                    {
-                        if (cfg.IsLimbColorMatch(GetPixelAt(pixels, x, y), targetColor))
-                            return new Vector2Int(x, y);
-                    }
-                }
-            }
-            else
-            {
-                // 脚部：按行扫描（Y优先，从下往上），每行按X方向
-                for (int y = yMax - 1; y >= yMin; y--)
-                {
-                    for (int x = xStart; x != xEnd; x += xStep)
-                    {
-                        if (cfg.IsLimbColorMatch(GetPixelAt(pixels, x, y), targetColor))
-                            return new Vector2Int(x, y);
-                    }
-                }
-            }
-            return null;
-        }
         
         /// <summary>
         /// 确保 Texture 可读后执行操作，操作完成后自动恢复
@@ -3044,7 +2607,7 @@ namespace EquipmentSystem.Editor
             
             Undo.RecordObject(_data, "Fix All Frames SpriteFacing");
             
-            int fixedCount = FixAllFramesSpriteFacingInternal();
+            int fixedCount = FrameDataEditorTools.FixAllFramesSpriteFacing(_data);
             
             EditorUtility.SetDirty(_data);
             LoadFrameData();
@@ -3052,37 +2615,6 @@ namespace EquipmentSystem.Editor
             Debug.Log($"贴图方向修复完成: 修复了 {fixedCount} 个区域");
         }
         
-        /// <summary>
-        /// 修复所有帧的贴图方向（内部版本，不带 Undo）
-        /// </summary>
-        int FixAllFramesSpriteFacingInternal()
-        {
-            if (_data == null) return 0;
-            
-            int fixedCount = 0;
-            
-            foreach (var anim in _data.animations)
-            {
-                foreach (var frame in anim.frames)
-                {
-                    // 根据行索引确定正确的 spriteFacing
-                    CharacterFacing correctFacing = (CharacterFacing)frame.rowIndex;
-                    if (frame.rowIndex < 0 || frame.rowIndex > 3)
-                        correctFacing = CharacterFacing.SouthEast;
-                    
-                    foreach (var region in frame.bodyRegions)
-                    {
-                        if (region.spriteFacing != correctFacing)
-                        {
-                            region.spriteFacing = correctFacing;
-                            fixedCount++;
-                        }
-                    }
-                }
-            }
-            
-            return fixedCount;
-        }
         
         void SetOrUpdateAnchor(AnchorType type, Vector2Int pos, AnchorDirection direction = default)
         {
@@ -3124,137 +2656,12 @@ namespace EquipmentSystem.Editor
             var anim = GetCurrentAnimation();
             if (anim == null) return;
             
-            Undo.RecordObject(_data, "从SE生成所有行");
+            FrameDataEditorTools.GenerateAllRowsFromSE(_data, anim, _framesPerRow, _frameSize);
             
-            int savedFrame = _frame;
-            int savedRow = _row;
-            int totalGenerated = 0;
-            
-            // 遍历所有帧，从SE生成SW/NE/NW
-            for (int f = 0; f < _framesPerRow; f++)
-            {
-                var seFrame = anim.GetFrame(f, 0);
-                if (seFrame == null || seFrame.bodyRegions.Count == 0) continue;
-                
-                GenerateSWFrame(anim, f, seFrame);
-                GenerateNEFrame(anim, f, seFrame);
-                GenerateNWFrame(anim, f, seFrame);
-                
-                totalGenerated++;
-            }
-            
-            _frame = savedFrame;
-            _row = savedRow;
             _isDirty = false;
             LoadFrameData();
-            
-            EditorUtility.SetDirty(_data);
-            Debug.Log($"从SE生成所有行完成: 共处理 {totalGenerated} 帧 × 3行 = {totalGenerated * 3} 帧数据");
         }
         
-        /// <summary>
-        /// 生成帧数据的统一方法
-        /// </summary>
-        /// <param name="mirrorFacing">是否镜像贴图方向（SE↔SW）</param>
-        /// <param name="toNorth">是否转换为North方向（SE→NE）</param>
-        /// <param name="translatePos">是否平移位置到镜像位置（形状不变，只平移）</param>
-        void GenerateFrame(AnimationData anim, int frameIndex, FrameData sourceFrame, int targetRow,
-            bool mirrorFacing, bool toNorth, bool translatePos, bool includeEyes)
-        {
-            var targetFrame = anim.GetOrCreateFrame(frameIndex, targetRow);
-            targetFrame.bodyRegions.Clear();
-            targetFrame.anchors.Clear();
-            
-            // 生成 UV 部位区域（头/身体）
-            foreach (var sourceRegion in sourceFrame.bodyRegions)
-            {
-                var targetFacing = sourceRegion.spriteFacing;
-                if (mirrorFacing) targetFacing = MirrorSpriteFacing(targetFacing);
-                if (toNorth) targetFacing = SouthToNorth(targetFacing);
-                
-                var newRegion = new BodyPartRegion
-                {
-                    part = sourceRegion.part,
-                    orientation = sourceRegion.orientation,
-                    spriteFacing = targetFacing,
-                    variant = sourceRegion.variant
-                };
-                
-                // 头部/身体：每个部位单独计算偏移量
-                int offsetX = 0;
-                if (translatePos && sourceRegion.pixels.Count > 0)
-                {
-                    var positions = sourceRegion.pixels.Select(p => p.position);
-                    offsetX = FrameDataAlgorithms.CalculateMirrorTranslateOffset(positions, _frameSize.x);
-                }
-                
-                foreach (var px in sourceRegion.pixels)
-                {
-                    var newPos = translatePos 
-                        ? FrameDataAlgorithms.TranslatePosition(px.position, offsetX)
-                        : px.position;
-                    newRegion.pixels.Add(new BodyPartPixel
-                    {
-                        part = sourceRegion.part,
-                        position = newPos,
-                        color = px.color,
-                        uv = px.uv
-                    });
-                }
-                
-                targetFrame.bodyRegions.Add(newRegion);
-            }
-            
-            // 生成手脚蒙版
-            if (sourceFrame.limbMask != null)
-            {
-                if (targetFrame.limbMask == null)
-                    targetFrame.limbMask = new LimbMask();
-                else
-                    targetFrame.limbMask.Clear();
-                
-                CopyLimbMask(sourceFrame.limbMask.leftHand, targetFrame.limbMask.leftHand, translatePos);
-                CopyLimbMask(sourceFrame.limbMask.rightHand, targetFrame.limbMask.rightHand, translatePos);
-                CopyLimbMask(sourceFrame.limbMask.leftFoot, targetFrame.limbMask.leftFoot, translatePos);
-                CopyLimbMask(sourceFrame.limbMask.rightFoot, targetFrame.limbMask.rightFoot, translatePos);
-                if (includeEyes)
-                {
-                    CopyLimbMask(sourceFrame.limbMask.leftEye, targetFrame.limbMask.leftEye, translatePos);
-                    CopyLimbMask(sourceFrame.limbMask.rightEye, targetFrame.limbMask.rightEye, translatePos);
-                }
-            }
-            
-            // 生成锚点
-            foreach (var anchor in sourceFrame.anchors)
-            {
-                targetFrame.anchors.Add(new AnchorPoint
-                {
-                    type = anchor.type,
-                    position = translatePos ? MirrorPosition(anchor.position) : anchor.position,
-                    direction = anchor.direction
-                });
-            }
-        }
-        
-        void CopyLimbMask(List<Vector2Int> source, List<Vector2Int> target, bool mirror)
-        {
-            target.Clear();
-            foreach (var pos in source)
-                target.Add(mirror ? MirrorPosition(pos) : pos);
-        }
-        
-        // SE：源数据（直接使用，不生成）
-        // SW：平移到镜像位置 + spriteFacing 镜像（SE→SW）
-        void GenerateSWFrame(AnimationData anim, int f, FrameData seFrame)
-            => GenerateFrame(anim, f, seFrame, 1, mirrorFacing: true, toNorth: false, translatePos: true, includeEyes: true);
-        
-        // NE：位置不变 + spriteFacing 转 North（SE→NE）
-        void GenerateNEFrame(AnimationData anim, int f, FrameData seFrame)
-            => GenerateFrame(anim, f, seFrame, 2, mirrorFacing: false, toNorth: true, translatePos: false, includeEyes: false);
-        
-        // NW：平移到镜像位置 + spriteFacing 镜像并转 North（SE→SW→NW）
-        void GenerateNWFrame(AnimationData anim, int f, FrameData seFrame)
-            => GenerateFrame(anim, f, seFrame, 3, mirrorFacing: true, toNorth: true, translatePos: true, includeEyes: false);
         
         // 算法委托到 FrameDataAlgorithms
         Vector2Int MirrorPosition(Vector2Int pos) => FrameDataAlgorithms.MirrorPosition(pos, _frameSize.x);

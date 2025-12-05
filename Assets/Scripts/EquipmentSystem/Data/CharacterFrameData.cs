@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EquipmentSystem.Data
+namespace EquipmentSystem
 {
     #region 枚举
     
@@ -59,8 +59,8 @@ namespace EquipmentSystem.Data
     /// </summary>
     public enum AnchorType
     {
-        LeftWeapon,     // 左手武器
-        RightWeapon     // 右手武器
+        MainHandWeapon,     // 主手武器锚点
+        OffHandWeapon       // 副手武器锚点
     }
     
     [Serializable]

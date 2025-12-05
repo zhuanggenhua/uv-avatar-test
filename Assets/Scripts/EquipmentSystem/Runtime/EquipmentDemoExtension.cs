@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using EquipmentSystem.Data;
 
-namespace EquipmentSystem.Runtime
+namespace EquipmentSystem
 {
     /// <summary>
     /// 装备与动画测试工具
@@ -66,7 +65,7 @@ namespace EquipmentSystem.Runtime
             if (_currentEquipRenderer == null || !_currentEquipRenderer.gameObject.activeInHierarchy)
             {
                 // 查找场景中激活的 EquipmentRenderer
-                var renderer = FindObjectOfType<EquipmentRenderer>();
+                var renderer = FindFirstObjectByType<EquipmentRenderer>(FindObjectsInactive.Exclude);
                 if (renderer != null && renderer != _currentEquipRenderer)
                 {
                     SelectRenderer(renderer);

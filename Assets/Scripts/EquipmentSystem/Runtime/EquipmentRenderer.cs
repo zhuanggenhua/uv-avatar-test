@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EquipmentSystem.Data;
 using UnityEngine;
 
-namespace EquipmentSystem.Runtime
+namespace EquipmentSystem
 {
     /// <summary>
     /// 装备渲染器 (配置驱动版本)
@@ -12,8 +11,67 @@ namespace EquipmentSystem.Runtime
     [RequireComponent(typeof(SpriteRenderer))]
     public class EquipmentRenderer : MonoBehaviour
     {
+        #region 渲染层级配置
+        
+        /// <summary>
+        /// 渲染层类型
+        /// </summary>
+        public enum RenderLayer
+        {
+            LeftHandWeapon,   // 左手武器
+            LeftHand,         // 左手
+            RightHandWeapon,  // 右手武器
+            RightHand,        // 右手
+            Body,             // 身体（裤子->衣服->斗篷）
+            Head              // 头部（头盔->胡子）
+        }
+        
+        /// <summary>
+        /// 四向渲染顺序配置（从后到前）
+        /// </summary>
+        static readonly Dictionary<CharacterFacing, RenderLayer[]> RenderOrderConfig = new Dictionary<CharacterFacing, RenderLayer[]>
+        {
+            // SE: 左手武器 → 左手 → 身体 → 头部 → 右手 → 右手武器
+            [CharacterFacing.SouthEast] = new[] 
+            { 
+                RenderLayer.LeftHandWeapon, RenderLayer.LeftHand, 
+                RenderLayer.Body, RenderLayer.Head, 
+                RenderLayer.RightHand, RenderLayer.RightHandWeapon 
+            },
+            
+            // SW: 右手武器 → 右手 → 身体 → 头部 → 左手 → 左手武器
+            [CharacterFacing.SouthWest] = new[] 
+            { 
+                RenderLayer.RightHandWeapon, RenderLayer.RightHand, 
+                RenderLayer.Body, RenderLayer.Head, 
+                RenderLayer.LeftHand, RenderLayer.LeftHandWeapon 
+            },
+            
+            // NE: 左手武器 → 左手 → 头部 → 身体 → 右手 → 右手武器
+            [CharacterFacing.NorthEast] = new[] 
+            { 
+                RenderLayer.LeftHandWeapon, RenderLayer.LeftHand, 
+                RenderLayer.Head, RenderLayer.Body, 
+                RenderLayer.RightHand, RenderLayer.RightHandWeapon 
+            },
+            
+            // NW: 右手武器 → 右手 → 头部 → 身体 → 左手 → 左手武器
+            [CharacterFacing.NorthWest] = new[] 
+            { 
+                RenderLayer.RightHandWeapon, RenderLayer.RightHand, 
+                RenderLayer.Head, RenderLayer.Body, 
+                RenderLayer.LeftHand, RenderLayer.LeftHandWeapon 
+            }
+        };
+        
+        #endregion
         [Header("数据")]
         public CharacterFrameData frameData;
+        
+        [Header("主副手映射")]
+        [SerializeField]
+        [Tooltip("东南时主手在左手\n西南时主手在右手\n东北时主手在右手\n西北时主手在左手")]
+        bool _mainHandOnLeftSE = true;
 
         [Header("角色外观")]
         public CharacterAppearance appearance;
@@ -797,20 +855,20 @@ namespace EquipmentSystem.Runtime
                 // 双持：同一装备在两个锚点显示
                 if (_mainHandWeapon.weaponSlotType == WeaponSlotType.DualWield)
                 {
-                    RenderWeaponSlot(_mainHandWeapon, AnchorType.LeftWeapon, 0);
-                    RenderWeaponSlot(_mainHandWeapon, AnchorType.RightWeapon, 1);
+                    RenderWeaponSlot(_mainHandWeapon, AnchorType.MainHandWeapon, 0);
+                    RenderWeaponSlot(_mainHandWeapon, AnchorType.OffHandWeapon, 1);
                 }
                 else
                 {
-                    // 单手/双手：仅使用左手锚点
-                    RenderWeaponSlot(_mainHandWeapon, AnchorType.LeftWeapon, 0);
+                    // 单手/双手：仅使用主手锚点
+                    RenderWeaponSlot(_mainHandWeapon, AnchorType.MainHandWeapon, 0);
                 }
             }
 
             // 副手武器
             if (_offHandWeapon != null)
             {
-                RenderWeaponSlot(_offHandWeapon, AnchorType.RightWeapon, 1);
+                RenderWeaponSlot(_offHandWeapon, AnchorType.OffHandWeapon, 1);
             }
         }
 
@@ -896,7 +954,43 @@ namespace EquipmentSystem.Runtime
         int GetWeaponSortOffset(AnchorType anchorType, int rowIndex)
         {
             var cfg = GetWeaponConfig(rowIndex);
-            return anchorType == AnchorType.LeftWeapon ? cfg.LeftSortDelta : -cfg.LeftSortDelta;
+            // 根据当前朝向和主副手映射决定排序
+            var facing = (CharacterFacing)rowIndex;
+            var physicalHand = GetPhysicalHand(anchorType, facing);
+            
+            // 左手武器使用正偏移，右手武器使用负偏移
+            return physicalHand == PhysicalHand.Left ? cfg.LeftSortDelta : -cfg.LeftSortDelta;
+        }
+        
+        /// <summary>
+        /// 物理手枚举
+        /// </summary>
+        enum PhysicalHand { Left, Right }
+        
+        /// <summary>
+        /// 根据锚点类型和朝向获取物理手
+        /// </summary>
+        PhysicalHand GetPhysicalHand(AnchorType anchorType, CharacterFacing facing)
+        {
+            bool isMainHand = (anchorType == AnchorType.MainHandWeapon);
+            bool mainOnLeft = GetMainHandOnLeft(facing);
+            bool isLeft = (isMainHand == mainOnLeft);
+            return isLeft ? PhysicalHand.Left : PhysicalHand.Right;
+        }
+        
+        /// <summary>
+        /// 根据朝向获取主手是否在左
+        /// </summary>
+        bool GetMainHandOnLeft(CharacterFacing facing)
+        {
+            switch (facing)
+            {
+                case CharacterFacing.SouthEast: return _mainHandOnLeftSE;
+                case CharacterFacing.SouthWest: return !_mainHandOnLeftSE;
+                case CharacterFacing.NorthEast: return !_mainHandOnLeftSE;
+                case CharacterFacing.NorthWest: return _mainHandOnLeftSE;
+                default: return _mainHandOnLeftSE;
+            }
         }
 
         #endregion
@@ -917,6 +1011,9 @@ namespace EquipmentSystem.Runtime
             // 当前槽位相对角色的前后：排序偏移 >0 表示在角色前，<0 表示在角色后
             int sortOffset = GetWeaponSortOffset(anchorType, weaponRowIndex);
             bool slotIsFront = sortOffset > 0;
+            
+            // 判断武器类型（后面处理盾牌特殊逻辑）
+            bool isShield = (equip.type == EquipmentType.Shield);
 
             // 1. 优先使用序列帧
             var seqSprite = GetEquipSequenceSprite(equip, weaponFacing);
@@ -987,10 +1084,21 @@ namespace EquipmentSystem.Runtime
             float angleRad = angleDeg * Mathf.Deg2Rad;
             var rotCosSin = new Vector4(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f, 0f);
 
-            // 根据全局配置决定手部遮挡：
-            // 1）优先按装备类型的 EquipTypeConfig.HandInFrontForWeapon 决定；
-            // 2）若未配置, 则按槽位类型的默认规则（副手=武器在前，其余=手在前）。
-            bool handInFront = GetWeaponHandInFront(equip);
+            // 根据武器类型决定手部遮挡：
+            // 盾牌特殊处理：朝南时盾牌在前，朝北时手在前
+            // 其他武器：手在前（可以看到手握着武器）
+            bool handInFront;
+            if (isShield)
+            {
+                // 盾牌：朝南时盾在前，朝北时手在前
+                bool isSouth = (weaponFacing == CharacterFacing.SouthEast || weaponFacing == CharacterFacing.SouthWest);
+                handInFront = !isSouth;
+            }
+            else
+            {
+                // 普通武器：手在前
+                handInFront = true;
+            }
 
             // 设置 Shader 参数
             SetWeaponShaderParams(
@@ -1002,35 +1110,6 @@ namespace EquipmentSystem.Runtime
                 slotIsFront,
                 handInFront
             );
-        }
-
-        /// <summary>
-        /// 按全局规则决定“手在前/武器在前”
-        /// 优先级：
-        /// 1）先看槽位类型：副手 (OffHand) 默认武器在前（手在后）；
-        /// 2）否则若有 EquipTypeConfig 且为 Weapon 模式，则使用 HandInFrontForWeapon 作为类型级默认；
-        /// 3）都没有命中时，默认手在前。
-        /// </summary>
-        bool GetWeaponHandInFront(EquipmentData equip)
-        {
-            if (equip != null)
-            {
-                // 副手优先：无论具体类型，只要是 OffHand 就默认武器在前挡手
-                if (equip.weaponSlotType == WeaponSlotType.OffHand)
-                    return false;
-
-                var typeCfg = EquipTypeRegistry.Get(equip.type);
-                if (typeCfg != null && typeCfg.RenderMode == EquipRenderMode.Weapon)
-                {
-                    // 按装备类型配置决定：true=手在前，false=武器在前
-                    return typeCfg.HandInFrontForWeapon;
-                }
-
-                // 其他（主手/双手/双持、或非 Weapon 渲染模式）：默认手在前
-                return true;
-            }
-
-            return true;
         }
 
         /// <summary>
@@ -1055,6 +1134,27 @@ namespace EquipmentSystem.Runtime
             _shaderMaterial.SetFloat(depthProp, isFront ? 1f : 0f);
             _shaderMaterial.SetFloat(handInFrontProp, handInFront ? 1f : 0f);
             _shaderMaterial.SetFloat(enableProp, 1f);
+        }
+
+        void WriteAllEquipShaderParams()
+        {
+            if (_shaderMaterial == null)
+                return;
+            
+            // 设置身体朝向参数（用于 Shader 判断渲染顺序）
+            var facing = GetSpriteFacingForPart(CharacterBodyPart.Torso);
+            bool isSouth = (facing == CharacterFacing.SouthEast || facing == CharacterFacing.SouthWest);
+            _shaderMaterial.SetFloat("_BodyInFront", isSouth ? 1f : 0f);
+
+            // 启用标记
+            foreach (var cfg in EquipTypeRegistry.All)
+            {
+                bool enabled = _slots.ContainsKey(cfg.Type) && _slots[cfg.Type] != null;
+                if (cfg.RenderMode == EquipRenderMode.Sprite || cfg.RenderMode == EquipRenderMode.Color)
+                {
+                    _shaderMaterial.SetFloat(cfg.EnableProp, enabled ? 1f : 0f);
+                }
+            }
         }
 
 #if UNITY_EDITOR
