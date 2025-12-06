@@ -268,25 +268,13 @@ Shader "EquipmentSystem/EquipmentUV"
                 p.isHead      = IsPartID(headPartID, ID_HEAD);
                 return p;
             }
-            
-            // 通用贴图采样：采样成功返回 true 并写入颜色
-            // 注意：HLSL 不支持 swizzle 作为 inout 参数，改用 out 参数
-            bool TrySampleEquip(float2 uv, float4 rect, sampler2D tex, out fixed3 outColor)
-            {
-                float2 coord = TransformUV(uv, rect);
-                fixed4 c = tex2D(tex, coord);
-                outColor = c.rgb;
-                if (c.a > CUTOFF)
-                    return true;
-                return false;
-            }
 
             // 通用武器采样函数（支持主手/副手）
             // 说明：
             // - anchorFrameUV.xy：角色帧内的手点 UV（0~1），由 C# 根据 AnchorPoint.position/frameSize 计算
-            // - anchorFrameUV.zw：武器贴图中的“虚拟左手”局部 UV（0~1），作为旋转/镜像的 pivot
+            // - anchorFrameUV.zw：武器贴图中的"虚拟左手"局部 UV（0~1），作为旋转/镜像的 pivot
             // - rotCosSin：武器局部坐标的旋转（cos,sin），围绕虚拟左手进行旋转
-            // - flipX：是否对武器贴图做“绕虚拟左手的水平镜像”。
+            // - flipX：是否对武器贴图做"绕虚拟左手的水平镜像"。
             bool TrySampleWeaponGeneric(float2 mainUV, sampler2D weaponTex, float4 weaponRect,
                 float4 anchorFrameUV, float4 rotCosSin, float flipX, float enabled, out fixed4 outColor)
             {
@@ -305,7 +293,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 if (frameUV.x < 0 || frameUV.x > 1 || frameUV.y < 0 || frameUV.y > 1)
                     return false;
 
-                // 相对于角色帧中“手点”的偏移（帧内局部 UV 空间）
+                // 相对于角色帧中"手点"的偏移（帧内局部 UV 空间）
                 float2 handFrameUV = anchorFrameUV.xy;
                 float2 handLocalUV = anchorFrameUV.zw;
                 float2 offset = frameUV - handFrameUV;
@@ -349,7 +337,49 @@ Shader "EquipmentSystem/EquipmentUV"
                 return TrySampleWeaponGeneric(mainUV, _Weapon1Tex, _Weapon1Rect,
                     _Weapon1AnchorFrameUV, _Weapon1RotCosSin, _Weapon1FlipX, _Weapon1Enabled, outColor);
             }
+
+            // Mode0 地面阴影判断（简化版：只看本体 _MainTex）
+            bool IsGroundShadowMode0(float2 uv)
+            {
+                int basePixelY = (int)(_ShadowBaseY * _FrameSize.y);
+                int pixelY = (int)(uv.y * _FrameSize.y);
+
+                // 只在基线当前排和下一排绘制地面阴影
+                if (pixelY != basePixelY && pixelY != basePixelY - 1)
+                    return false;
+
+                int pixelX = (int)(uv.x * _FrameSize.x);
+
+                // 检查当前列、左列、右列的本体像素
+                float2 uvCenter = float2((pixelX + 0.5) / _FrameSize.x, _ShadowBaseY);
+                if (tex2D(_MainTex, uvCenter).a > 0.001)
+                    return true;
+
+                // 左侧一列
+                float2 uvLeft = float2((pixelX - 0.5) / _FrameSize.x, _ShadowBaseY);
+                if (pixelX > 0 && tex2D(_MainTex, uvLeft).a > 0.001)
+                    return true;
+
+                // 右侧一列
+                float2 uvRight = float2((pixelX + 1.5) / _FrameSize.x, _ShadowBaseY);
+                if (pixelX < (int)_FrameSize.x - 1 && tex2D(_MainTex, uvRight).a > 0.001)
+                    return true;
+
+                return false;
+            }
             
+            // 通用贴图采样：采样成功返回 true 并写入颜色
+            // 注意：HLSL 不支持 swizzle 作为 inout 参数，改用 out 参数
+            bool TrySampleEquip(float2 uv, float4 rect, sampler2D tex, out fixed3 outColor)
+            {
+                float2 coord = TransformUV(uv, rect);
+                fixed4 c = tex2D(tex, coord);
+                outColor = c.rgb;
+                if (c.a > CUTOFF)
+                    return true;
+                return false;
+            }
+
             v2f vert(appdata v)
             {
                 v2f o;
@@ -620,15 +650,29 @@ Shader "EquipmentSystem/EquipmentUV"
                 finalColor.a = finalAlpha;
 
                 // ========== 像素级阴影系统 ==========
-                if (finalAlpha <= CUTOFF)
+                if (finalAlpha <= CUTOFF && _ShadowEnabled > 0.5)
                 {
-                    fixed4 shadowColor = SamplePixelShadow(
-                        i.uv, _MainTex,
-                        _ShadowMode,
-                        _ShadowLeftX, _ShadowRightX,
-                        _ShadowCenterX, _ShadowBaseY,
-                        _ShadowColor, _ShadowEnabled);
-                    
+                    fixed4 shadowColor = fixed4(0, 0, 0, 0);
+
+                    if (_ShadowMode < 0.5)
+                    {
+                        // Mode0：地面阴影（只在基线下一排，根据基线左右三列是否有像素）
+                        if (IsGroundShadowMode0(i.uv))
+                        {
+                            shadowColor = _ShadowColor;
+                        }
+                    }
+                    else
+                    {
+                        // Mode1~3：继续使用 PixelShadow.cginc 中的实现
+                        shadowColor = SamplePixelShadow(
+                            i.uv,
+                            _ShadowMode,
+                            _ShadowLeftX, _ShadowRightX,
+                            _ShadowCenterX, _ShadowBaseY,
+                            _ShadowColor, _ShadowEnabled);
+                    }
+
                     if (shadowColor.a > 0)
                     {
                         finalColor = shadowColor;

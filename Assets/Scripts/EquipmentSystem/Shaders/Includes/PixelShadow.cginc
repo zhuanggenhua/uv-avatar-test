@@ -20,63 +20,33 @@
 // fixed4 _ShadowColor;
 // float _ShadowEnabled;
 
-// 像素大小（假设32x32，可调整）
-static const float PIXEL_SIZE = 1.0 / 32.0;
+// 帧尺寸（像素），由 C# 通过 _FrameSize 属性传入（x=宽，y=高）
+float2 _FrameSize;
 
 // 检查UV是否在像素格子内
-bool IsInPixel(float2 uv, int pixelX, int pixelY, int frameSizeX, int frameSizeY)
+bool IsInPixel(float2 uv, int pixelX, int pixelY)
 {
-    float2 pixelMin = float2(pixelX * PIXEL_SIZE, pixelY * PIXEL_SIZE);
-    float2 pixelMax = pixelMin + PIXEL_SIZE;
+    float2 texelSize = 1.0 / _FrameSize;          // (1/width, 1/height)
+    float2 pixelMin = float2(pixelX, pixelY) * texelSize;
+    float2 pixelMax = pixelMin + texelSize;
     return uv.x >= pixelMin.x && uv.x < pixelMax.x && 
            uv.y >= pixelMin.y && uv.y < pixelMax.y;
-}
-
-// Mode 0: 地面状态阴影
-// 基线上有色像素连成线，左右扩1格，下扩1格（下扩不包括左右新扩展的）
-bool IsGroundShadow(float2 uv, float baseY, sampler2D mainTex)
-{
-    int basePixelY = (int)(baseY * 32);
-    
-    // 扫描基线上的有色像素
-    for (int x = 0; x < 32; x++)
-    {
-        float2 testUV = float2(x * PIXEL_SIZE + PIXEL_SIZE * 0.5, baseY);
-        fixed4 col = tex2D(mainTex, testUV);
-        
-        if (col.a > 0.001)
-        {
-            // 找到有色像素，检查是否在其阴影范围内
-            int px = x;
-            int py = basePixelY;
-            
-            // 原始像素
-            if (IsInPixel(uv, px, py, 32, 32)) return true;
-            // 左右扩展
-            if (IsInPixel(uv, px - 1, py, 32, 32)) return true;
-            if (IsInPixel(uv, px + 1, py, 32, 32)) return true;
-            // 下扩展（仅原始像素正下方）
-            if (IsInPixel(uv, px, py - 1, 32, 32)) return true;
-        }
-    }
-    
-    return false;
 }
 
 // Mode 1: 离地渲染阴影
 // 从左脚到右脚的范围，上下左右各扩1格
 bool IsOffGroundShadow(float2 uv, float leftX, float rightX, float baseY)
 {
-    int basePixelY = (int)(baseY * 32);
-    int leftPixelX = (int)(leftX * 32);
-    int rightPixelX = (int)(rightX * 32);
+    int basePixelY = (int)(baseY * _FrameSize.y);
+    int leftPixelX = (int)(leftX * _FrameSize.x);
+    int rightPixelX = (int)(rightX * _FrameSize.x);
     
     // 检查是否在扩展后的矩形范围内
     for (int x = leftPixelX - 1; x <= rightPixelX + 1; x++)
     {
         for (int y = basePixelY - 1; y <= basePixelY + 1; y++)
         {
-            if (IsInPixel(uv, x, y, 32, 32)) return true;
+            if (IsInPixel(uv, x, y)) return true;
         }
     }
     
@@ -87,8 +57,8 @@ bool IsOffGroundShadow(float2 uv, float leftX, float rightX, float baseY)
 // 以下方脚的特定边缘为基准，形成缺四角的4x3矩形
 bool IsAirShadow(float2 uv, float centerX, float baseY)
 {
-    int basePixelY = (int)(baseY * 32);
-    int centerPixelX = (int)(centerX * 32);
+    int basePixelY = (int)(baseY * _FrameSize.y);
+    int centerPixelX = (int)(centerX * _FrameSize.x);
     
     // 4x3矩形，缺四角
     for (int dx = -1; dx <= 2; dx++)
@@ -102,7 +72,7 @@ bool IsAirShadow(float2 uv, float centerX, float baseY)
             int px = centerPixelX + dx;
             int py = basePixelY + dy;
             
-            if (IsInPixel(uv, px, py, 32, 32)) return true;
+            if (IsInPixel(uv, px, py)) return true;
         }
     }
     
@@ -113,24 +83,24 @@ bool IsAirShadow(float2 uv, float centerX, float baseY)
 // 十字形：中心点上下左右各扩1格
 bool IsHighAirShadow(float2 uv, float centerX, float baseY)
 {
-    int basePixelY = (int)(baseY * 32);
-    int centerPixelX = (int)(centerX * 32);
+    int basePixelY = (int)(baseY * _FrameSize.y);
+    int centerPixelX = (int)(centerX * _FrameSize.x);
     
     // 中心点
-    if (IsInPixel(uv, centerPixelX, basePixelY, 32, 32)) return true;
+    if (IsInPixel(uv, centerPixelX, basePixelY)) return true;
     // 上下左右
-    if (IsInPixel(uv, centerPixelX, basePixelY + 1, 32, 32)) return true;
-    if (IsInPixel(uv, centerPixelX, basePixelY - 1, 32, 32)) return true;
-    if (IsInPixel(uv, centerPixelX - 1, basePixelY, 32, 32)) return true;
-    if (IsInPixel(uv, centerPixelX + 1, basePixelY, 32, 32)) return true;
+    if (IsInPixel(uv, centerPixelX, basePixelY + 1)) return true;
+    if (IsInPixel(uv, centerPixelX, basePixelY - 1)) return true;
+    if (IsInPixel(uv, centerPixelX - 1, basePixelY)) return true;
+    if (IsInPixel(uv, centerPixelX + 1, basePixelY)) return true;
     
     return false;
 }
 
-// 主阴影采样函数
+// 主阴影采样函数（Mode1~3）
+// Mode0 的地面阴影在主 Shader 中单独实现，这里不再处理
 fixed4 SamplePixelShadow(
     float2 uv,
-    sampler2D mainTex,
     float shadowMode,
     float shadowLeftX,
     float shadowRightX,
@@ -139,17 +109,12 @@ fixed4 SamplePixelShadow(
     fixed4 shadowColor,
     float shadowEnabled)
 {
-    if (shadowEnabled < 0.5 || shadowMode < 0)
+    if (shadowEnabled < 0.5 || shadowMode < 0.5)
         return fixed4(0, 0, 0, 0);
-    
+
     bool inShadow = false;
-    
-    if (shadowMode < 0.5)
-    {
-        // Mode 0: 地面状态
-        inShadow = IsGroundShadow(uv, shadowBaseY, mainTex);
-    }
-    else if (shadowMode < 1.5)
+
+    if (shadowMode < 1.5)
     {
         // Mode 1: 离地渲染
         inShadow = IsOffGroundShadow(uv, shadowLeftX, shadowRightX, shadowBaseY);
@@ -164,7 +129,7 @@ fixed4 SamplePixelShadow(
         // Mode 3: 完全离地
         inShadow = IsHighAirShadow(uv, shadowCenterX, shadowBaseY);
     }
-    
+
     return inShadow ? shadowColor : fixed4(0, 0, 0, 0);
 }
 

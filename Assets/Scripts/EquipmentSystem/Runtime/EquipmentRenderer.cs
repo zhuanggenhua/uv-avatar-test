@@ -90,6 +90,9 @@ namespace EquipmentSystem
         static readonly int ShadowCenterXProp = Shader.PropertyToID("_ShadowCenterX");
         static readonly int ShadowBaseYProp = Shader.PropertyToID("_ShadowBaseY");
 
+        // 帧尺寸（像素）：用于 Shader 中的像素网格换算
+        static readonly int FrameSizeProp = Shader.PropertyToID("_FrameSize");
+
         // 武器通用参数
         static readonly int CharFrameRectProp = Shader.PropertyToID("_CharFrameRect");
 
@@ -692,6 +695,9 @@ namespace EquipmentSystem
             // 获取帧尺寸
             int frameSizeX = _currentAnimData?.frameSize.x ?? 32;
             int frameSizeY = _currentAnimData?.frameSize.y ?? 32;
+
+            // 将帧尺寸传入 Shader，供像素级阴影计算使用
+            _shaderMaterial.SetVector(FrameSizeProp, new Vector4(frameSizeX, frameSizeY, 0f, 0f));
 
             // 根据高度差确定阴影模式
             float shadowMode;
