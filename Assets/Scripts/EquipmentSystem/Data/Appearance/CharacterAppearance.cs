@@ -32,8 +32,8 @@ namespace EquipmentSystem
         public Color skinColor = new Color(1f, 0.85f, 0.7f, 1f);
         
         [Header("眼睛颜色")]
-        public Color leftEyeColor = new Color(0.6f, 0.2f, 0.8f, 1f);   // 紫色
-        public Color rightEyeColor = new Color(0.6f, 0.2f, 0.8f, 1f);  // 紫色
+        public Color leftEyeColor = Color.black;
+        public Color rightEyeColor = Color.black;
         
         /// <summary>
         /// 获取指定方向的头发贴图

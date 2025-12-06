@@ -134,6 +134,9 @@ namespace EquipmentSystem
         // 武器设置
         [Tooltip("武器槽位类型：主手/双手/双持/副手")]
         public WeaponSlotType weaponSlotType = WeaponSlotType.MainHand;
+        
+        [Tooltip("勾选后武器使用副手锚点（右手侧）而非默认的主手锚点（左手侧）")]
+        public bool useOffHandAnchor = false;
 
         // 颜色替换 (手套/鞋子)
         public Color32 leftColor = new Color32(150, 100, 50, 255);

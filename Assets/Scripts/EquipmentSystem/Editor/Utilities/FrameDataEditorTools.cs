@@ -513,16 +513,16 @@ namespace EquipmentSystem.Editor
         #region 帧生成辅助
 
         static void GenerateSWFrame(AnimationData anim, int f, FrameData seFrame, Vector2Int frameSize)
-            => GenerateFrame(anim, f, seFrame, 1, true, false, true, true, frameSize);
+            => GenerateFrame(anim, f, seFrame, 1, true, true, frameSize);
         
         static void GenerateNEFrame(AnimationData anim, int f, FrameData seFrame, Vector2Int frameSize)
-            => GenerateFrame(anim, f, seFrame, 2, false, true, false, false, frameSize);
+            => GenerateFrame(anim, f, seFrame, 2, false, false, frameSize);
         
         static void GenerateNWFrame(AnimationData anim, int f, FrameData seFrame, Vector2Int frameSize)
-            => GenerateFrame(anim, f, seFrame, 3, true, true, true, true, frameSize);
+            => GenerateFrame(anim, f, seFrame, 3, true, false, frameSize);
 
         static void GenerateFrame(AnimationData anim, int frameIndex, FrameData sourceFrame, int targetRow,
-            bool mirrorFacing, bool toNorth, bool translatePos, bool includeEyes, Vector2Int frameSize)
+            bool translatePos, bool includeEyes, Vector2Int frameSize)
         {
             var targetFrame = anim.GetOrCreateFrame(frameIndex, targetRow);
             targetFrame.bodyRegions.Clear();
@@ -531,9 +531,7 @@ namespace EquipmentSystem.Editor
             // 生成 UV 部位区域（头/身体）
             foreach (var sourceRegion in sourceFrame.bodyRegions)
             {
-                var targetFacing = sourceRegion.spriteFacing;
-                if (mirrorFacing) targetFacing = FrameDataAlgorithms.MirrorSpriteFacing(targetFacing);
-                if (toNorth) targetFacing = FrameDataAlgorithms.SouthToNorth(targetFacing);
+                var targetFacing = MapFacingForGeneratedFrame(sourceRegion.spriteFacing, targetRow);
                 
                 var newRegion = new BodyPartRegion
                 {
@@ -596,6 +594,41 @@ namespace EquipmentSystem.Editor
                     direction = anchor.direction
                 });
             }
+        }
+
+        /// <summary>
+        /// 根据 SE 行的 spriteFacing 和目标行索引，计算目标行的 spriteFacing
+        /// 
+        /// 规则（以 SE=0, SW=1, NE=2, NW=3 为编号）：
+        /// - SE 填 SE(0)：恒等 → SW=SW, NE=NE, NW=NW
+        /// - SE 填 SW(1)：左右对称 → SW=SE, NE=NW, NW=NE
+        /// - SE 填 NE(2)：北向对位 → SW=NE, NE=SW, NW=SE
+        /// - SE 填 NW(3)：北向对位 → SW=NE, NE=SW, NW=SE
+        /// </summary>
+        static CharacterFacing MapFacingForGeneratedFrame(CharacterFacing sourceFacing, int targetRow)
+        {
+            // 变换表：transformTable[变换类型][行索引] = 目标朝向
+            // 行索引：SE=0, SW=1, NE=2, NW=3
+            // 
+            // 规则总结：
+            // - SE 填南向（SE/SW）：用"恒等"或"左右对称"
+            // - SE 填北向（NE/NW）：SW/NE/NW 三行都按"对位"取相对
+            int[][] transformTable = 
+            {
+                new[] {0, 1, 2, 3}, // 恒等：SE→SE, SW→SW, NE→NE, NW→NW
+                new[] {1, 0, 3, 2}, // 左右对称：SE→SW, SW→SE, NE→NW, NW→NE
+                new[] {2, 2, 1, 0}, // SE填NE：SE→NE, SW→NE, NE→SW, NW→SE
+                new[] {3, 2, 1, 0}, // SE填NW：SE→NW, SW→NE, NE→SW, NW→SE
+            };
+            
+            int transformType = (int)sourceFacing;
+            int rowIndex = targetRow;
+            
+            // 边界检查
+            if (transformType < 0 || transformType > 3) transformType = 0;
+            if (rowIndex < 0 || rowIndex > 3) rowIndex = 0;
+            
+            return (CharacterFacing)transformTable[transformType][rowIndex];
         }
 
         static void CopyLimbMask(List<Vector2Int> source, List<Vector2Int> target, bool mirror, Vector2Int frameSize)

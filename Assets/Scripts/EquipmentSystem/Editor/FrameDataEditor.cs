@@ -698,7 +698,8 @@ namespace EquipmentSystem.Editor
                 EditorGUI.BeginChangeCheck();
                 
                 _data.paletteSize = EditorGUILayout.Vector2IntField("画板尺寸", _data.paletteSize);
-                _data.paletteRefSprite = (Sprite)EditorGUILayout.ObjectField("参考底图", _data.paletteRefSprite, typeof(Sprite), false);
+                _data.groundPixelY = EditorGUILayout.IntField("阴影地面Y (像素)", _data.groundPixelY);
+                 _data.paletteRefSprite = (Sprite)EditorGUILayout.ObjectField("参考底图", _data.paletteRefSprite, typeof(Sprite), false);
                 
                 if (_data.paletteRefSprite != null)
                 {

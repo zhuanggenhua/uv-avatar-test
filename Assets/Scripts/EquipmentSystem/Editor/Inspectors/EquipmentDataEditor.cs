@@ -15,6 +15,7 @@ namespace EquipmentSystem.Editor
         SerializedProperty _type;
         SerializedProperty _spriteSE, _spriteSW, _spriteNE, _spriteNW;
         SerializedProperty _weaponSlotType;
+        SerializedProperty _useOffHandAnchor;
         SerializedProperty _leftColor, _rightColor;
         SerializedProperty _animSet;
         SerializedProperty _upVariant, _downVariant;
@@ -29,6 +30,7 @@ namespace EquipmentSystem.Editor
             _spriteNE = serializedObject.FindProperty("spriteNE");
             _spriteNW = serializedObject.FindProperty("spriteNW");
             _weaponSlotType = serializedObject.FindProperty("weaponSlotType");
+            _useOffHandAnchor = serializedObject.FindProperty("useOffHandAnchor");
             _leftColor = serializedObject.FindProperty("leftColor");
             _rightColor = serializedObject.FindProperty("rightColor");
             _animSet = serializedObject.FindProperty("animSet");
@@ -131,9 +133,20 @@ namespace EquipmentSystem.Editor
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("武器槽位", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_weaponSlotType, new GUIContent("槽位类型"));
+            
+            // 双手武器显示锚点选择
+            var slotType = (WeaponSlotType)_weaponSlotType.enumValueIndex;
+            if (slotType == WeaponSlotType.TwoHand)
+            {
+                EditorGUILayout.PropertyField(_useOffHandAnchor, new GUIContent("使用副手锚点"));
+                EditorGUILayout.HelpBox(
+                    "默认使用主手锚点（左手侧）\n勾选后使用副手锚点（右手侧）", 
+                    MessageType.Info);
+            }
+            
             EditorGUILayout.HelpBox(
                 "• 主手: 单手武器，可搭配副手\n" +
-                "• 双手: 双手武器，禁止副手\n" +
+                "• 双手: 双手武器，禁止副手，可选择锚点\n" +
                 "• 双持: 一件装备两个锚点显示，禁止副手\n" +
                 "• 副手: 盾牌等，只能装备在副手槽", 
                 MessageType.Info);

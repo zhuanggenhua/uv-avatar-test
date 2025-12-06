@@ -5,7 +5,7 @@ using UnityEngine;
 namespace EquipmentSystem
 {
     #region 枚举
-    
+
     public enum CharacterFacing
     {
         SouthEast = 0,
@@ -14,7 +14,11 @@ namespace EquipmentSystem
         NorthWest = 3
     }
 
-    public enum FacingDirection { Front, Back }
+    public enum FacingDirection
+    {
+        Front,
+        Back
+    }
 
     public enum FrameVariant
     {
@@ -22,7 +26,7 @@ namespace EquipmentSystem
         Up = 1,
         Down = 2
     }
-    
+
     /// <summary>
     /// UV 空间方向配置（部位 UV 用）
     /// </summary>
@@ -33,14 +37,14 @@ namespace EquipmentSystem
         UpLeft = 2,
         DownRight = 3
     }
-    
+
     /// <summary>
     /// 武器锚点朝向（仅用于武器旋转）
     /// 以 South 为默认（枚举值 0），逆时针递增
     /// </summary>
     public enum AnchorDirection
     {
-        South = 0,      // 默认，武器朝下
+        South = 0, // 默认，武器朝下
         SouthWest = 1,
         West = 2,
         NorthWest = 3,
@@ -49,27 +53,27 @@ namespace EquipmentSystem
         East = 6,
         SouthEast = 7
     }
-    
+
     #endregion
 
     #region 锚点 - 武器挂点
-    
+
     /// <summary>
     /// 锚点类型 - 只用于武器
     /// </summary>
     public enum AnchorType
     {
-        MainHandWeapon,     // 主手武器锚点
-        OffHandWeapon       // 副手武器锚点
+        MainHandWeapon, // 主手武器锚点
+        OffHandWeapon // 副手武器锚点
     }
-    
+
     [Serializable]
     public class AnchorPoint
     {
         public AnchorType type;
         public Vector2Int position;
-        public AnchorDirection direction;  // 默认 South（枚举值 0）
-        
+        public AnchorDirection direction; // 默认 South（枚举值 0）
+
         /// <summary>
         /// 获取旋转角度（以 South 为基准 0 度，逆时针为正）
         /// </summary>
@@ -77,38 +81,79 @@ namespace EquipmentSystem
         {
             switch (direction)
             {
-                case AnchorDirection.South: return 0f;
-                case AnchorDirection.SouthEast: return 45f;
-                case AnchorDirection.East: return 90f;
-                case AnchorDirection.NorthEast: return 135f;
-                case AnchorDirection.North: return 180f;
-                case AnchorDirection.NorthWest: return -135f;
-                case AnchorDirection.West: return -90f;
-                case AnchorDirection.SouthWest: return -45f;
-                default: return 0f; // South
+                case AnchorDirection.South:
+                    return 0f;
+                case AnchorDirection.SouthEast:
+                    return 45f;
+                case AnchorDirection.East:
+                    return 90f;
+                case AnchorDirection.NorthEast:
+                    return 135f;
+                case AnchorDirection.North:
+                    return 180f;
+                case AnchorDirection.NorthWest:
+                    return -135f;
+                case AnchorDirection.West:
+                    return -90f;
+                case AnchorDirection.SouthWest:
+                    return -45f;
+                default:
+                    return 0f; // South
             }
         }
     }
-    
+
+    #endregion
+
+    #region 锚点映射
+
+    public static class AnchorFacingConfig
+    {
+        /// <summary>
+        /// 判断指定锚点在当前朝向下是否位于角色左侧
+        /// </summary>
+        public static bool IsAnchorOnLeftSide(AnchorType anchorType, CharacterFacing facing)
+        {
+            bool mainHandOnLeft = IsMainHandAnchorOnLeft(facing);
+            return (anchorType == AnchorType.MainHandWeapon) == mainHandOnLeft;
+        }
+
+        /// <summary>
+        /// 判断主手锚点在当前朝向下是否位于角色左侧（内部用）
+        // SE：主手在左，副手在右 
+        // SW：主手在右，副手在左 
+        // NE：主手在右，副手在左 
+        // NW：主手在左，副手在右 
+        // SE：右手在前，左手在后
+        // SW：右手在后，左手在前 
+        // NE：右手在前，左手在后 
+        // NW：右手在后，左手在前 
+        /// </summary>
+        static bool IsMainHandAnchorOnLeft(CharacterFacing facing)
+        {
+            return facing == CharacterFacing.SouthEast || facing == CharacterFacing.NorthWest;
+        }
+    }
+
     #endregion
 
     #region 部位涂色 - 服装/手套/鞋子用
-    
+
     /// <summary>
     /// 身体部位类型
     /// </summary>
     public enum CharacterBodyPart
     {
-        Head,       // 头部 4x3
-        Torso,      // 身体 2x3 (衣服映射)
-        LeftHand,   // 左手 1px
-        RightHand,  // 右手 1px
-        LeftFoot,   // 左脚 1px
-        RightFoot,  // 右脚 1px
-        LeftEye,    // 左眼（头部区域内的黑色像素）
-        RightEye    // 右眼（头部区域内的黑色像素）
+        Head, // 头部 4x3
+        Torso, // 身体 2x3 (衣服映射)
+        LeftHand, // 左手 1px
+        RightHand, // 右手 1px
+        LeftFoot, // 左脚 1px
+        RightFoot, // 右脚 1px
+        LeftEye, // 左眼（头部区域内的黑色像素）
+        RightEye // 右眼（头部区域内的黑色像素）
     }
-    
+
     /// <summary>
     /// 部位像素标记（单个像素）
     /// </summary>
@@ -117,20 +162,20 @@ namespace EquipmentSystem
     {
         public CharacterBodyPart part;
         public Vector2Int position;
-        public Color32 color;  // 原始颜色（用于匹配）
-        
+        public Color32 color; // 原始颜色（用于匹配）
+
         /// <summary>
         /// UV 坐标：直接存储要采样装备贴图的 UV 位置
         /// 从 UV 画板拷贝而来，或由扩展算法从边界像素复制
         /// </summary>
-        public Vector2 uv = new Vector2(-1, -1);  // -1 表示未设置
-        
+        public Vector2 uv = new Vector2(-1, -1); // -1 表示未设置
+
         /// <summary>
         /// UV 是否已设置
         /// </summary>
         public bool HasUV => uv.x >= 0 && uv.y >= 0;
     }
-    
+
     /// <summary>
     /// 部位区域
     /// </summary>
@@ -139,19 +184,19 @@ namespace EquipmentSystem
     {
         public CharacterBodyPart part;
         public UVOrientation orientation = UVOrientation.UpRight;
-        
+
         /// <summary>
         /// 贴图方向（用于转头等场景，指定该部位使用哪个方向的装备贴图）
         /// </summary>
         public CharacterFacing spriteFacing = CharacterFacing.SouthEast;
-        
+
         /// <summary>
         /// 贴图变体（基础/向上/向下 等）
         /// </summary>
         public FrameVariant variant = FrameVariant.Base;
-        
+
         public List<BodyPartPixel> pixels = new List<BodyPartPixel>();
-        
+
         /// <summary>
         /// 获取实际使用的装备贴图方向
         /// </summary>
@@ -159,16 +204,19 @@ namespace EquipmentSystem
         {
             return spriteFacing;
         }
-        
+
         /// <summary>
         /// 获取区域的包围盒
         /// </summary>
         public RectInt GetBounds()
         {
-            if (pixels.Count == 0) return new RectInt(0, 0, 0, 0);
-            
-            int minX = int.MaxValue, maxX = int.MinValue;
-            int minY = int.MaxValue, maxY = int.MinValue;
+            if (pixels.Count == 0)
+                return new RectInt(0, 0, 0, 0);
+
+            int minX = int.MaxValue,
+                maxX = int.MinValue;
+            int minY = int.MaxValue,
+                maxY = int.MinValue;
             foreach (var px in pixels)
             {
                 minX = Mathf.Min(minX, px.position.x);
@@ -179,7 +227,7 @@ namespace EquipmentSystem
             return new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
         }
     }
-    
+
     /// <summary>
     /// 手脚蒙版数据（用于颜色替换，不需要UV映射）
     /// </summary>
@@ -192,21 +240,28 @@ namespace EquipmentSystem
         public List<Vector2Int> rightFoot = new List<Vector2Int>();
         public List<Vector2Int> leftEye = new List<Vector2Int>();
         public List<Vector2Int> rightEye = new List<Vector2Int>();
-        
+
         public List<Vector2Int> GetPixels(CharacterBodyPart part)
         {
             switch (part)
             {
-                case CharacterBodyPart.LeftHand: return leftHand;
-                case CharacterBodyPart.RightHand: return rightHand;
-                case CharacterBodyPart.LeftFoot: return leftFoot;
-                case CharacterBodyPart.RightFoot: return rightFoot;
-                case CharacterBodyPart.LeftEye: return leftEye;
-                case CharacterBodyPart.RightEye: return rightEye;
-                default: return null;
+                case CharacterBodyPart.LeftHand:
+                    return leftHand;
+                case CharacterBodyPart.RightHand:
+                    return rightHand;
+                case CharacterBodyPart.LeftFoot:
+                    return leftFoot;
+                case CharacterBodyPart.RightFoot:
+                    return rightFoot;
+                case CharacterBodyPart.LeftEye:
+                    return leftEye;
+                case CharacterBodyPart.RightEye:
+                    return rightEye;
+                default:
+                    return null;
             }
         }
-        
+
         public void SetPixels(CharacterBodyPart part, IEnumerable<Vector2Int> pixels)
         {
             var list = GetPixels(part);
@@ -216,7 +271,7 @@ namespace EquipmentSystem
                 list.AddRange(pixels);
             }
         }
-        
+
         public void Clear()
         {
             leftHand.Clear();
@@ -226,33 +281,37 @@ namespace EquipmentSystem
             leftEye.Clear();
             rightEye.Clear();
         }
-        
-        public bool IsEmpty => leftHand.Count == 0 && rightHand.Count == 0 && 
-                               leftFoot.Count == 0 && rightFoot.Count == 0 &&
-                               leftEye.Count == 0 && rightEye.Count == 0;
+
+        public bool IsEmpty =>
+            leftHand.Count == 0
+            && rightHand.Count == 0
+            && leftFoot.Count == 0
+            && rightFoot.Count == 0
+            && leftEye.Count == 0
+            && rightEye.Count == 0;
     }
 
     #endregion
 
     #region 帧数据
-    
+
     [Serializable]
     public class FrameData
     {
         public int frameIndex;
         public int rowIndex;
-        
+
         [Header("锚点 - 挂件")]
         public List<AnchorPoint> anchors = new List<AnchorPoint>();
-        
+
         [Header("部位区域 - UV贴图（头/身体）")]
         public List<BodyPartRegion> bodyRegions = new List<BodyPartRegion>();
-        
+
         [Header("手脚蒙版 - 颜色替换")]
         public LimbMask limbMask = new LimbMask();
-        
+
         public AnchorPoint GetAnchor(AnchorType type) => anchors.Find(a => a.type == type);
-        
+
         /// <summary>
         /// 获取指定部位区域
         /// </summary>
@@ -260,7 +319,7 @@ namespace EquipmentSystem
         {
             return bodyRegions.Find(r => r.part == part);
         }
-        
+
         /// <summary>
         /// 获取或创建部位区域
         /// </summary>
@@ -274,7 +333,7 @@ namespace EquipmentSystem
             }
             return r;
         }
-        
+
         /// <summary>
         /// 检查部位是否可见（有涂色像素）
         /// </summary>
@@ -290,7 +349,7 @@ namespace EquipmentSystem
             var r = GetRegion(part);
             return r != null && r.pixels.Count > 0;
         }
-        
+
         /// <summary>
         /// 获取手脚蒙版像素
         /// </summary>
@@ -298,14 +357,16 @@ namespace EquipmentSystem
         {
             return limbMask?.GetPixels(part);
         }
-        
+
         /// <summary>
         /// 判断是否为手脚部位
         /// </summary>
         public static bool IsLimbPart(CharacterBodyPart part)
         {
-            return part == CharacterBodyPart.LeftHand || part == CharacterBodyPart.RightHand ||
-                   part == CharacterBodyPart.LeftFoot || part == CharacterBodyPart.RightFoot;
+            return part == CharacterBodyPart.LeftHand
+                || part == CharacterBodyPart.RightHand
+                || part == CharacterBodyPart.LeftFoot
+                || part == CharacterBodyPart.RightFoot;
         }
     }
 
@@ -314,31 +375,32 @@ namespace EquipmentSystem
     {
         [Tooltip("动画类型")]
         public AnimationTypeItem animationType;
-        
+
         /// <summary>
         /// 获取动画类型名
         /// </summary>
         public string GetKey() => animationType != null ? animationType.name : null;
-        
+
         [Header("Spritesheet 配置")]
         public Texture2D spritesheet;
         public Vector2Int frameSize = new Vector2Int(32, 32);
         public int framesPerRow = 8;
         public int rowCount = 4;
-        
+
         [Header("GPU 换装 - 双层 UV Map")]
         [Tooltip("身体层 UV Map (衣服、手套、鞋子)")]
         public Texture2D bodyUVMap;
+
         [Tooltip("头部层 UV Map (头盔、胡子、头发)")]
         public Texture2D headUVMap;
-        
+
         public List<FrameData> frames = new List<FrameData>();
-        
+
         public FrameData GetFrame(int frameIndex, int rowIndex)
         {
             return frames.Find(f => f.frameIndex == frameIndex && f.rowIndex == rowIndex);
         }
-        
+
         public FrameData GetOrCreateFrame(int frameIndex, int rowIndex)
         {
             var f = GetFrame(frameIndex, rowIndex);
@@ -354,7 +416,7 @@ namespace EquipmentSystem
     #endregion
 
     #region 检测配置
-    
+
     /// <summary>
     /// 自动检测配置
     /// 手脚颜色是固定的阴影色，不受朝向影响
@@ -365,51 +427,57 @@ namespace EquipmentSystem
     {
         [Header("手脚阴影色 (用于自动检测，与朝向无关)")]
         [Tooltip("左手的阴影色，不论朝向如何，左手始终使用此颜色")]
-        public Color32 leftHandColor = new Color32(221,183,143, 255);
+        public Color32 leftHandColor = new Color32(221, 183, 143, 255);
+
         [Tooltip("右手的阴影色，不论朝向如何，右手始终使用此颜色")]
-        public Color32 rightHandColor = new Color32(250,203,166, 255);
+        public Color32 rightHandColor = new Color32(250, 203, 166, 255);
+
         [Tooltip("左脚的阴影色，不论朝向如何，左脚始终使用此颜色")]
-        public Color32 leftFootColor = new Color32(205,172,133, 255);
+        public Color32 leftFootColor = new Color32(205, 172, 133, 255);
+
         [Tooltip("右脚的阴影色，不论朝向如何，右脚始终使用此颜色")]
-        public Color32 rightFootColor = new Color32(238,195,154, 255);
-        
+        public Color32 rightFootColor = new Color32(238, 195, 154, 255);
+
         [Header("检测参数")]
         [Tooltip("描边检测阈值：RGB之和小于此值视为描边（建议50-100）")]
         public int outlineThreshold = 80;
+
         [Tooltip("手脚颜色匹配容差（RGB差值之和，默认30可容忍轻微色差）")]
         public int limbColorThreshold = 30;
-        
+
         /// <summary>
         /// 是否为描边/黑色像素
         /// </summary>
         public bool IsOutline(Color32 c) => (c.r + c.g + c.b) < outlineThreshold && c.a > 0;
-        
+
         /// <summary>
         /// 手脚颜色是否匹配（带容差）
         /// </summary>
         public bool IsLimbColorMatch(Color32 pixel, Color32 limbColor)
         {
-            if (pixel.a == 0 || IsOutline(pixel)) return false;
+            if (pixel.a == 0 || IsOutline(pixel))
+                return false;
             return ColorSimilar(pixel, limbColor, limbColorThreshold);
         }
-        
+
         /// <summary>
         /// 是否为有色非黑色像素
         /// </summary>
         public bool IsColoredPixel(Color32 c) => c.a > 0 && !IsOutline(c);
-        
+
         /// <summary>
         /// 判断颜色是否与皮肤色相近（用手部颜色作为参考）
         /// </summary>
         public bool IsSkinLike(Color32 c)
         {
-            if (c.a == 0 || IsOutline(c)) return false;
-            
+            if (c.a == 0 || IsOutline(c))
+                return false;
+
             // 与任一手部颜色相近即可，复用 limbColorThreshold
-            return ColorSimilar(c, leftHandColor, limbColorThreshold) || 
-                   ColorSimilar(c, rightHandColor, limbColorThreshold);
+            return ColorSimilar(c, leftHandColor, limbColorThreshold)
+                || ColorSimilar(c, rightHandColor, limbColorThreshold);
         }
-        
+
         /// <summary>
         /// 判断两个颜色是否相近
         /// </summary>
@@ -424,101 +492,130 @@ namespace EquipmentSystem
 
     #endregion
 
-    [CreateAssetMenu(fileName = "CharacterFrameData", menuName = "Equipment System/Character Frame Data")]
+    [CreateAssetMenu(
+        fileName = "CharacterFrameData",
+        menuName = "Equipment System/Character Frame Data"
+    )]
     public class CharacterFrameData : ScriptableObject
     {
         [Header("编辑器配置")]
         [Tooltip("动画类型数据库")]
         public AnimationTypeDatabase animDatabase;
+
         [Tooltip("UV 画板参考底图")]
         public Sprite paletteRefSprite;
+
         [Tooltip("UV 画板尺寸")]
         public Vector2Int paletteSize = new Vector2Int(32, 32);
+
         [Tooltip("头部 UV 源区域（画板上）")]
         public RectInt headUVRegion = new RectInt(0, 0, 4, 3);
+
         [Tooltip("身体 UV 源区域（画板上）")]
         public RectInt torsoUVRegion = new RectInt(0, 3, 3, 2);
+
         [Tooltip("头部检测目标区域大小")]
         public Vector2Int headDetectSize = new Vector2Int(4, 3);
+
         [Tooltip("身体检测目标区域大小")]
         public Vector2Int torsoDetectSize = new Vector2Int(3, 2);
-        
+
         [Header("头部区域扩展配置")]
         [Tooltip("头部向上扩展的像素数")]
         public int headExpandUp = 7;
+
         [Tooltip("头部向左右扩展的像素数")]
         public int headExpandSide = 7;
+
         [Tooltip("头部向下扩展的像素数")]
         public int headExpandDown = 3;
-        
+
         [Header("身体区域扩展配置")]
         [Tooltip("身体向上扩展的像素数")]
         public int bodyExpandUp = 3;
+
         [Tooltip("身体向上扩展的起始步长（1 表示紧贴身体向上，>1 表示跳过若干行再开始扩展）")]
         public int bodyExpandUpStartStep = 1;
+
         [Tooltip("身体向左右扩展的像素数")]
         public int bodyExpandSide = 4;
+
         [Tooltip("身体向下扩展的像素数")]
         public int bodyExpandDown = 2;
-        
+
+        [Header("阴影配置")]
+        [Tooltip("帧内地面Y坐标（像素），所有角色共用同一基准线")]
+        public int groundPixelY = 8;
+
         [Header("UV 参考帧配置")]
         [Tooltip("是否已设置参考帧（头部装备贴图的绘制基准）")]
         public bool hasReferenceFrame = false;
+
         [Tooltip("参考帧的头部区域中心（帧内坐标），所有帧的 UV 都基于此位置计算")]
         public Vector2 referenceHeadCenter;
-        
+
         [Header("检测配置")]
         public DetectConfig detectConfig = new DetectConfig();
-        
+
         [Header("动画列表")]
         public List<AnimationData> animations = new List<AnimationData>();
-        
+
         /// <summary>
         /// 获取动画数据（按类型）
         /// </summary>
         public AnimationData GetAnimation(AnimationTypeItem animType)
         {
-            if (animType == null) return null;
+            if (animType == null)
+                return null;
             return animations.Find(x => x.animationType == animType);
         }
-        
+
         /// <summary>
         /// 获取动画数据（按 Key，用于与 Animator 参数匹配）
         /// </summary>
         public AnimationData GetAnimationByKey(string key)
         {
-            if (string.IsNullOrEmpty(key)) return null;
-            return animations.Find(x => 
-                x.animationType != null && 
-                string.Equals(x.animationType.name, key, System.StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrEmpty(key))
+                return null;
+            return animations.Find(x =>
+                x.animationType != null
+                && string.Equals(
+                    x.animationType.name,
+                    key,
+                    System.StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
-        
+
         /// <summary>
         /// 获取帧数据（按动画类型）
         /// </summary>
         public FrameData GetFrameData(AnimationTypeItem animType, int rowIndex, int frame)
         {
             var a = GetAnimation(animType);
-            if (a == null) return null;
+            if (a == null)
+                return null;
             return a.GetFrame(frame, rowIndex);
         }
-        
+
         /// <summary>
         /// 获取帧数据（按 Key）
         /// </summary>
         public FrameData GetFrameDataByKey(string key, int rowIndex, int frame)
         {
             var a = GetAnimationByKey(key);
-            if (a == null) return null;
+            if (a == null)
+                return null;
             return a.GetFrame(frame, rowIndex);
         }
-        
+
         /// <summary>
         /// 获取或创建动画数据
         /// </summary>
         public AnimationData GetOrCreateAnimation(AnimationTypeItem animType)
         {
-            if (animType == null) return null;
+            if (animType == null)
+                return null;
             var a = GetAnimation(animType);
             if (a == null)
             {
@@ -527,7 +624,7 @@ namespace EquipmentSystem
             }
             return a;
         }
-        
+
         /// <summary>
         /// 获取所有动画类型
         /// </summary>
@@ -541,8 +638,10 @@ namespace EquipmentSystem
             }
             return types;
         }
-        
-        public static FacingDirection GetFacingDirection(CharacterFacing f)
-            => (f == CharacterFacing.SouthEast || f == CharacterFacing.SouthWest) ? FacingDirection.Front : FacingDirection.Back;
+
+        public static FacingDirection GetFacingDirection(CharacterFacing f) =>
+            (f == CharacterFacing.SouthEast || f == CharacterFacing.SouthWest)
+                ? FacingDirection.Front
+                : FacingDirection.Back;
     }
 }

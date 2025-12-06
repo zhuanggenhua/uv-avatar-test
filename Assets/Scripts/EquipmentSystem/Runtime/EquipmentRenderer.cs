@@ -11,68 +11,9 @@ namespace EquipmentSystem
     [RequireComponent(typeof(SpriteRenderer))]
     public class EquipmentRenderer : MonoBehaviour
     {
-        #region 渲染层级配置
-        
-        /// <summary>
-        /// 渲染层类型
-        /// </summary>
-        public enum RenderLayer
-        {
-            LeftHandWeapon,   // 左手武器
-            LeftHand,         // 左手
-            RightHandWeapon,  // 右手武器
-            RightHand,        // 右手
-            Body,             // 身体（裤子->衣服->斗篷）
-            Head              // 头部（头盔->胡子）
-        }
-        
-        /// <summary>
-        /// 四向渲染顺序配置（从后到前）
-        /// </summary>
-        static readonly Dictionary<CharacterFacing, RenderLayer[]> RenderOrderConfig = new Dictionary<CharacterFacing, RenderLayer[]>
-        {
-            // SE: 左手武器 → 左手 → 身体 → 头部 → 右手 → 右手武器
-            [CharacterFacing.SouthEast] = new[] 
-            { 
-                RenderLayer.LeftHandWeapon, RenderLayer.LeftHand, 
-                RenderLayer.Body, RenderLayer.Head, 
-                RenderLayer.RightHand, RenderLayer.RightHandWeapon 
-            },
-            
-            // SW: 右手武器 → 右手 → 身体 → 头部 → 左手 → 左手武器
-            [CharacterFacing.SouthWest] = new[] 
-            { 
-                RenderLayer.RightHandWeapon, RenderLayer.RightHand, 
-                RenderLayer.Body, RenderLayer.Head, 
-                RenderLayer.LeftHand, RenderLayer.LeftHandWeapon 
-            },
-            
-            // NE: 左手武器 → 左手 → 头部 → 身体 → 右手 → 右手武器
-            [CharacterFacing.NorthEast] = new[] 
-            { 
-                RenderLayer.LeftHandWeapon, RenderLayer.LeftHand, 
-                RenderLayer.Head, RenderLayer.Body, 
-                RenderLayer.RightHand, RenderLayer.RightHandWeapon 
-            },
-            
-            // NW: 右手武器 → 右手 → 头部 → 身体 → 左手 → 左手武器
-            [CharacterFacing.NorthWest] = new[] 
-            { 
-                RenderLayer.RightHandWeapon, RenderLayer.RightHand, 
-                RenderLayer.Head, RenderLayer.Body, 
-                RenderLayer.LeftHand, RenderLayer.LeftHandWeapon 
-            }
-        };
-        
-        #endregion
         [Header("数据")]
         public CharacterFrameData frameData;
         
-        [Header("主副手映射")]
-        [SerializeField]
-        [Tooltip("东南时主手在左手\n西南时主手在右手\n东北时主手在右手\n西北时主手在左手")]
-        bool _mainHandOnLeftSE = true;
-
         [Header("角色外观")]
         public CharacterAppearance appearance;
 
@@ -141,6 +82,13 @@ namespace EquipmentSystem
         static readonly int EnableLeftEyeProp = Shader.PropertyToID("_EnableLeftEye");
         static readonly int EnableRightEyeProp = Shader.PropertyToID("_EnableRightEye");
         static readonly int BodyInFrontProp = Shader.PropertyToID("_BodyInFront");
+        
+        // 像素级阴影参数
+        static readonly int ShadowModeProp = Shader.PropertyToID("_ShadowMode");
+        static readonly int ShadowLeftXProp = Shader.PropertyToID("_ShadowLeftX");
+        static readonly int ShadowRightXProp = Shader.PropertyToID("_ShadowRightX");
+        static readonly int ShadowCenterXProp = Shader.PropertyToID("_ShadowCenterX");
+        static readonly int ShadowBaseYProp = Shader.PropertyToID("_ShadowBaseY");
 
         // 武器通用参数
         static readonly int CharFrameRectProp = Shader.PropertyToID("_CharFrameRect");
@@ -570,6 +518,8 @@ namespace EquipmentSystem
             if (_currentAnimData == null)
                 return;
 
+            UpdateShadowHeight();
+
             UpdateUVMapTexture();
 
             // 重置所有装备层（包括武器）
@@ -681,6 +631,119 @@ namespace EquipmentSystem
 
             bool bodyInFront = row >= 2;
             _shaderMaterial.SetFloat(BodyInFrontProp, bodyInFront ? 1f : 0f);
+        }
+
+        void UpdateShadowHeight()
+        {
+            if (_shaderMaterial == null)
+                return;
+
+            if (frameData == null || _cachedFrame == null)
+            {
+                _shaderMaterial.SetFloat(ShadowModeProp, -1f); // 无阴影
+                return;
+            }
+
+            var leftFoot = _cachedFrame.GetLimbPixels(CharacterBodyPart.LeftFoot);
+            var rightFoot = _cachedFrame.GetLimbPixels(CharacterBodyPart.RightFoot);
+
+            bool hasLeft = leftFoot != null && leftFoot.Count > 0;
+            bool hasRight = rightFoot != null && rightFoot.Count > 0;
+
+            if (!hasLeft && !hasRight)
+            {
+                _shaderMaterial.SetFloat(ShadowModeProp, -1f); // 无阴影
+                return;
+            }
+
+            // 计算脚部边界
+            int minY = int.MaxValue;
+            int leftMinX = int.MaxValue, leftMaxX = int.MinValue;
+            int rightMinX = int.MaxValue, rightMaxX = int.MinValue;
+            int leftFootY = int.MaxValue, rightFootY = int.MaxValue;
+
+            if (hasLeft)
+            {
+                for (int i = 0; i < leftFoot.Count; i++)
+                {
+                    var p = leftFoot[i];
+                    if (p.y < minY) minY = p.y;
+                    if (p.y < leftFootY) leftFootY = p.y;
+                    if (p.x < leftMinX) leftMinX = p.x;
+                    if (p.x > leftMaxX) leftMaxX = p.x;
+                }
+            }
+
+            if (hasRight)
+            {
+                for (int i = 0; i < rightFoot.Count; i++)
+                {
+                    var p = rightFoot[i];
+                    if (p.y < minY) minY = p.y;
+                    if (p.y < rightFootY) rightFootY = p.y;
+                    if (p.x < rightMinX) rightMinX = p.x;
+                    if (p.x > rightMaxX) rightMaxX = p.x;
+                }
+            }
+
+            int groundY = frameData.groundPixelY;
+            int heightDiff = groundY - minY;
+            
+            // 获取帧尺寸
+            int frameSizeX = _currentAnimData?.frameSize.x ?? 32;
+            int frameSizeY = _currentAnimData?.frameSize.y ?? 32;
+
+            // 根据高度差确定阴影模式
+            float shadowMode;
+            float leftX = 0, rightX = 0, centerX = 0;
+
+            if (heightDiff <= 0)
+            {
+                // Mode 0: 地面状态 - 脚在基线上或更低
+                shadowMode = 0;
+            }
+            else if (heightDiff <= 2)
+            {
+                // Mode 1: 离地渲染 - 脚在基线y-1到y-2位置
+                shadowMode = 1;
+                // 计算左脚到右脚的范围
+                int overallMinX = Mathf.Min(hasLeft ? leftMinX : 999, hasRight ? rightMinX : 999);
+                int overallMaxX = Mathf.Max(hasLeft ? leftMaxX : -999, hasRight ? rightMaxX : -999);
+                leftX = overallMinX / (float)frameSizeX;
+                rightX = overallMaxX / (float)frameSizeX;
+            }
+            else if (heightDiff <= 9)
+            {
+                // Mode 2: 空中模式 - 脚高于基线3-9格
+                shadowMode = 2;
+                
+                // 判断哪只脚在下方
+                bool leftLower = leftFootY <= rightFootY;
+                if (leftLower && hasLeft)
+                {
+                    // 左脚在下，取右边像素
+                    centerX = leftMaxX / (float)frameSizeX;
+                }
+                else if (hasRight)
+                {
+                    // 右脚在下，取左边像素
+                    centerX = rightMinX / (float)frameSizeX;
+                }
+            }
+            else
+            {
+                // Mode 3: 完全离地 - 脚高于基线10格以上
+                shadowMode = 3;
+                // 使用帧中心
+                centerX = 0.5f;
+            }
+
+            // 写入Shader参数
+            _shaderMaterial.SetFloat(ShadowModeProp, shadowMode);
+            _shaderMaterial.SetFloat(ShadowLeftXProp, leftX);
+            _shaderMaterial.SetFloat(ShadowRightXProp, rightX);
+            _shaderMaterial.SetFloat(ShadowCenterXProp, centerX);
+            _shaderMaterial.SetFloat(ShadowBaseYProp, groundY / (float)frameSizeY);
         }
 
         /// <summary>
@@ -819,10 +882,12 @@ namespace EquipmentSystem
             }
 
             // 设置眼睛颜色
+            var headFacingDir = CharacterFrameData.GetFacingDirection(headFacing);
+            bool eyesVisible = headFacingDir == FacingDirection.Front;
             _shaderMaterial.SetColor(LeftEyeColorProp, appearance.leftEyeColor);
             _shaderMaterial.SetColor(RightEyeColorProp, appearance.rightEyeColor);
-            _shaderMaterial.SetFloat(EnableLeftEyeProp, 1);
-            _shaderMaterial.SetFloat(EnableRightEyeProp, 1);
+            _shaderMaterial.SetFloat(EnableLeftEyeProp, eyesVisible ? 1f : 0f);
+            _shaderMaterial.SetFloat(EnableRightEyeProp, eyesVisible ? 1f : 0f);
         }
 
         /// <summary>
@@ -858,9 +923,15 @@ namespace EquipmentSystem
                     RenderWeaponSlot(_mainHandWeapon, AnchorType.MainHandWeapon, 0);
                     RenderWeaponSlot(_mainHandWeapon, AnchorType.OffHandWeapon, 1);
                 }
+                else if (_mainHandWeapon.weaponSlotType == WeaponSlotType.TwoHand)
+                {
+                    // 双手武器：根据配置选择锚点
+                    var anchor = _mainHandWeapon.useOffHandAnchor ? AnchorType.OffHandWeapon : AnchorType.MainHandWeapon;
+                    RenderWeaponSlot(_mainHandWeapon, anchor, 0);
+                }
                 else
                 {
-                    // 单手/双手：仅使用主手锚点
+                    // 单手：使用主手锚点
                     RenderWeaponSlot(_mainHandWeapon, AnchorType.MainHandWeapon, 0);
                 }
             }
@@ -903,15 +974,16 @@ namespace EquipmentSystem
         ///   像素画镜像限制：东向虚拟左手在(15,16)，西向在(16,16)
         ///   X: 东向 -1（像素15），西向 0（像素16）
         ///   Y: 统一 0（像素16）
-        /// LeftSortDelta 的符号用于决定当前朝向下左右手哪一侧更靠近玩家：
-        ///   >0: 左锚点（LeftWeapon）在前，<0: 右锚点（RightWeapon）在前。
+        /// LeftSortDelta 用于主手锚点（MainHandWeapon）的排序偏移：
+        ///   >0: 主手锚点在前（SW/NW），<0: 主手锚点在后（SE/NE）
+        ///   副手锚点（OffHandWeapon）使用 -LeftSortDelta
         /// </summary>
         static readonly WeaponFacingConfig[] WeaponConfigByRow =
         {
-            new WeaponFacingConfig(-0.5f, -0.5f, true,  -1), // SE: 东向(15,16)，右手在前（左武器在后）
-            new WeaponFacingConfig( -0.5f, -0.5f, true,  +1), // SW: 西向(16,16)，左手在前（左武器在前）
-            new WeaponFacingConfig(-0.5f, -0.5f, false, -1), // NE: 东向(15,16)，右手在前（左武器在后）
-            new WeaponFacingConfig( -0.5f, -0.5f, false, +1), // NW: 西向(16,16)，左手在前（左武器在前）
+            new WeaponFacingConfig(-0.5f, -0.5f, true,  -1), // SE: 东向，主手锚点在后
+            new WeaponFacingConfig(-0.5f, -0.5f, true,  +1), // SW: 西向，主手锚点在前
+            new WeaponFacingConfig(-0.5f, -0.5f, false, -1), // NE: 东向，主手锚点在后
+            new WeaponFacingConfig(-0.5f, -0.5f, false, +1), // NW: 西向，主手锚点在前
         };
 
         readonly struct WeaponFacingConfig
@@ -950,47 +1022,19 @@ namespace EquipmentSystem
 
         /// <summary>
         /// 获取武器排序偏移
+        /// 根据当前朝向下“物理左手/右手”的前后关系以及锚点类型(Main/Off)决定：
+        ///   1. LeftSortDelta 表示当前朝向下“左手侧武器”的排序偏移
+        ///   2. 通过朝向判断主手锚点是在左手还是右手
+        ///   3. 再根据 AnchorType 判断当前锚点是不是左手侧锚点
         /// </summary>
         int GetWeaponSortOffset(AnchorType anchorType, int rowIndex)
         {
             var cfg = GetWeaponConfig(rowIndex);
-            // 根据当前朝向和主副手映射决定排序
             var facing = (CharacterFacing)rowIndex;
-            var physicalHand = GetPhysicalHand(anchorType, facing);
-            
-            // 左手武器使用正偏移，右手武器使用负偏移
-            return physicalHand == PhysicalHand.Left ? cfg.LeftSortDelta : -cfg.LeftSortDelta;
-        }
-        
-        /// <summary>
-        /// 物理手枚举
-        /// </summary>
-        enum PhysicalHand { Left, Right }
-        
-        /// <summary>
-        /// 根据锚点类型和朝向获取物理手
-        /// </summary>
-        PhysicalHand GetPhysicalHand(AnchorType anchorType, CharacterFacing facing)
-        {
-            bool isMainHand = (anchorType == AnchorType.MainHandWeapon);
-            bool mainOnLeft = GetMainHandOnLeft(facing);
-            bool isLeft = (isMainHand == mainOnLeft);
-            return isLeft ? PhysicalHand.Left : PhysicalHand.Right;
-        }
-        
-        /// <summary>
-        /// 根据朝向获取主手是否在左
-        /// </summary>
-        bool GetMainHandOnLeft(CharacterFacing facing)
-        {
-            switch (facing)
-            {
-                case CharacterFacing.SouthEast: return _mainHandOnLeftSE;
-                case CharacterFacing.SouthWest: return !_mainHandOnLeftSE;
-                case CharacterFacing.NorthEast: return !_mainHandOnLeftSE;
-                case CharacterFacing.NorthWest: return _mainHandOnLeftSE;
-                default: return _mainHandOnLeftSE;
-            }
+
+            bool isLeft = AnchorFacingConfig.IsAnchorOnLeftSide(anchorType, facing);
+
+            return isLeft ? cfg.LeftSortDelta : -cfg.LeftSortDelta;
         }
 
         #endregion
@@ -1008,7 +1052,12 @@ namespace EquipmentSystem
             var weaponFacing = GetSpriteFacingForPart(CharacterBodyPart.Torso);
             int weaponRowIndex = (int)weaponFacing;
 
-            // 当前槽位相对角色的前后：排序偏移 >0 表示在角色前，<0 表示在角色后
+            // 从当前帧数据中获取对应锚点（后面用于定位与旋转）
+            var anchor = _cachedFrame.GetAnchor(anchorType);
+            if (anchor == null) return;
+
+            // 当前槽位相对角色的前后：根据朝向下“主/副手锚点”对应的左/右手关系来决定
+            // 排序偏移 >0 表示在角色前，<0 表示在角色后
             int sortOffset = GetWeaponSortOffset(anchorType, weaponRowIndex);
             bool slotIsFront = sortOffset > 0;
             
@@ -1035,9 +1084,6 @@ namespace EquipmentSystem
             var weaponSprite = equip.GetSpriteByRow(weaponRowIndex);
             var charSprite = _charRenderer.sprite;
             if (weaponSprite == null || weaponSprite.texture == null || charSprite == null) return;
-
-            var anchor = _cachedFrame.GetAnchor(anchorType);
-            if (anchor == null) return;
 
             // 更新子对象 Transform（用于挂特效）
             if (sr != null)
