@@ -493,6 +493,13 @@ namespace EquipmentSystem.Editor
         
         void DrawTabContent()
         {
+            // 涂色显示 - 移到标签页前，所有模式均可用
+            GUILayout.Space(10);
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("涂色:", GUILayout.Width(35));
+            _paintDisplayMode = GUILayout.Toolbar(_paintDisplayMode, new[] { "隐藏", "当前", "全部" });
+            EditorGUILayout.EndHorizontal();
+            
             GUILayout.Space(10);
             EditorGUI.BeginChangeCheck();
             _tab = (TabMode)GUILayout.Toolbar((int)_tab, new string[] { "部位上色", "锚点" });
@@ -565,14 +572,8 @@ namespace EquipmentSystem.Editor
             GUI.backgroundColor = Color.white;
             EditorGUILayout.EndHorizontal();
             
-            // === 涂色显示 ===
-            GUILayout.Space(10);
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("涂色:", GUILayout.Width(35));
-            _paintDisplayMode = GUILayout.Toolbar(_paintDisplayMode, new[] { "隐藏", "当前", "全部" });
-            EditorGUILayout.EndHorizontal();
-            
             // 当前部位信息（大字体 + 部位颜色，提亮显示）
+            GUILayout.Space(10);
             int count = _partPixels.ContainsKey(_currentPart) ? _partPixels[_currentPart].Count : 0;
             var partColor = GetPartColor(_currentPart);
             // 提亮颜色：将颜色向白色混合，使其更明亮
