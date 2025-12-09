@@ -192,34 +192,23 @@ namespace EquipmentSystem.Editor
             {
                 int frameOffsetX = frame.frameIndex * frameW;
                 int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
-
-                // 计算“核心头部区域”像素集合：在当前 Head 区域基础上按 headExpand 参数做一次收缩
+                
+                // 计算“核心头部区域”像素集合：直接使用 BodyPartPixel.isCore 标记
                 HashSet<Vector2Int> coreHeadPixels = null;
                 var headRegion = frame.GetRegion(CharacterBodyPart.Head);
                 if (headRegion != null && headRegion.pixels.Count > 0)
                 {
-                    // 拷贝当前位置和UV，避免修改原数据
-                    var allPositions = new HashSet<Vector2Int>();
-                    var uvDict = new Dictionary<Vector2Int, Vector2>();
+                    var corePositions = new HashSet<Vector2Int>();
                     foreach (var px in headRegion.pixels)
                     {
-                        allPositions.Add(px.position);
-                        if (px.HasUV)
-                            uvDict[px.position] = px.uv;
+                        if (px.isCore)
+                            corePositions.Add(px.position);
                     }
 
-                    coreHeadPixels = new HashSet<Vector2Int>(allPositions);
-                    var coreUVs = new Dictionary<Vector2Int, Vector2>(uvDict);
-
-                    // 使用与扩展相同的参数进行一次收缩，得到更“小”的核心区域
-                    FrameDataAlgorithms.ShrinkRegion(
-                        coreHeadPixels,
-                        coreUVs,
-                        data.headExpandUp,
-                        data.headExpandDown,
-                        data.headExpandSide,
-                        data.headExpandSide
-                    );
+                    // 如果至少有一个像素被标记为核心，则使用该集合；
+                    // 否则保持 null，表示所有头像素按默认 alpha=1 处理。
+                    if (corePositions.Count > 0)
+                        coreHeadPixels = corePositions;
                 }
 
                 WriteRegionToUVMap(

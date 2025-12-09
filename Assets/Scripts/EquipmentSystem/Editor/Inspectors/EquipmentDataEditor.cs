@@ -8,7 +8,7 @@ namespace EquipmentSystem.Editor
     /// EquipmentData 自定义编辑器（配置驱动）
     /// 根据 EquipTypeRegistry 的 RenderMode 决定显示内容
     /// </summary>
-    [CustomEditor(typeof(EquipmentData))]
+    [CustomEditor(typeof(EquipmentRenderData))]
     public class EquipmentDataEditor : UnityEditor.Editor
     {
         SerializedProperty _equipmentId;
@@ -17,10 +17,10 @@ namespace EquipmentSystem.Editor
         SerializedProperty _weaponSlotType;
         SerializedProperty _useOffHandAnchor;
         SerializedProperty _leftColor, _rightColor;
-        SerializedProperty _animSet;
-        SerializedProperty _upVariant, _downVariant;
+        SerializedProperty _animSequences;
+        SerializedProperty _upVariant, _downVariant, _leftVariant, _rightVariant;
         SerializedProperty _hideHair, _hideBeard;
-        
+
         void OnEnable()
         {
             _equipmentId = serializedObject.FindProperty("equipmentId");
@@ -33,9 +33,11 @@ namespace EquipmentSystem.Editor
             _useOffHandAnchor = serializedObject.FindProperty("useOffHandAnchor");
             _leftColor = serializedObject.FindProperty("leftColor");
             _rightColor = serializedObject.FindProperty("rightColor");
-            _animSet = serializedObject.FindProperty("animSet");
+            _animSequences = serializedObject.FindProperty("animSequences");
             _upVariant = serializedObject.FindProperty("upVariant");
             _downVariant = serializedObject.FindProperty("downVariant");
+            _leftVariant = serializedObject.FindProperty("leftVariant");
+            _rightVariant = serializedObject.FindProperty("rightVariant");
             _hideHair = serializedObject.FindProperty("hideHair");
             _hideBeard = serializedObject.FindProperty("hideBeard");
         }
@@ -173,16 +175,18 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 绘制变体配置（向上/向下）
+        /// 绘制变体配置（向上/向下/向左/向右）
         /// </summary>
         void DrawSpriteVariants()
         {
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("贴图变体（可选）", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("按帧配置的语义化变体：基础 / 向上 / 向下。SE 不为空时视为启用该变体。", MessageType.Info);
+            EditorGUILayout.HelpBox("按帧配置的语义化变体：基础 / 向上 / 向下 / 向左 / 向右。SE 不为空时视为启用该变体。", MessageType.Info);
 
             DrawDirectionalSet("向上变体 (Up)", _upVariant);
             DrawDirectionalSet("向下变体 (Down)", _downVariant);
+            DrawDirectionalSet("向左变体 (Left)", _leftVariant);
+            DrawDirectionalSet("向右变体 (Right)", _rightVariant);
         }
         
         /// <summary>
@@ -215,22 +219,28 @@ namespace EquipmentSystem.Editor
         }
         
         /// <summary>
-        /// 绘制动画集字段
+        /// 绘制内嵌序列帧动画字段
         /// </summary>
         void DrawAnimSetField()
         {
             EditorGUILayout.Space(10);
-            EditorGUILayout.PropertyField(_animSet, new GUIContent("动画集", "一整套动画，可被多个装备共享"));
-            
-            var animSetObj = _animSet.objectReferenceValue as EquipAnimSetAsset;
-            if (animSetObj != null && animSetObj.animations != null && animSetObj.animations.Count > 0)
+            if (_animSequences == null)
+                return;
+
+            EditorGUILayout.PropertyField(
+                _animSequences,
+                new GUIContent("序列帧动画", "内嵌的序列帧动画列表"),
+                true
+            );
+
+            // 打开专用编辑器窗口的按钮
+            if (GUILayout.Button("打开动画序列编辑器"))
             {
-                EditorGUILayout.BeginVertical("helpbox");
-                EditorGUILayout.LabelField("包含的动画:", EditorStyles.miniLabel);
-                var animTypes = animSetObj.GetAnimationTypes();
-                var displayNames = animTypes.ConvertAll(t => t != null ? t.name : "(空)");
-                EditorGUILayout.LabelField(string.Join(", ", displayNames), EditorStyles.wordWrappedMiniLabel);
-                EditorGUILayout.EndVertical();
+                var data = target as EquipmentRenderData;
+                if (data != null)
+                    EquipmentAnimSequenceEditor.ShowWindowFor(data);
+                else
+                    EquipmentAnimSequenceEditor.ShowWindow();
             }
         }
     }

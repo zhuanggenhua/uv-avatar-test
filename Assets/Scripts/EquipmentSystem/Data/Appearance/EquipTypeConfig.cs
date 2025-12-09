@@ -26,7 +26,6 @@ namespace EquipmentSystem
         public string TexProp, RectProp, EnableProp;   // Shader 属性名
         public string LeftColorProp, RightColorProp;   // Color 模式用
         public int RenderOrder;                 // 渲染顺序（同 BodyPart 内）
-        public bool HandInFrontForWeapon = true; // 仅 RenderMode=Weapon 时有效：true=手在前，false=武器在前（典型：盾牌）
         
         // 缓存的 Shader 属性 ID
         public int TexPropId { get; private set; }
@@ -169,7 +168,6 @@ namespace EquipmentSystem
                 Type = EquipmentType.Weapon,
                 DisplayName = "武器",
                 RenderMode = EquipRenderMode.Weapon,
-                HandInFrontForWeapon = true,
             });
 
             // 盾牌（仍走武器渲染模式，使用武器锚点与深度规则）
@@ -178,7 +176,6 @@ namespace EquipmentSystem
                 Type = EquipmentType.Shield,
                 DisplayName = "盾牌",
                 RenderMode = EquipRenderMode.Weapon,
-                HandInFrontForWeapon = false,
             });
 
             // 背包（暂不渲染）
@@ -186,7 +183,10 @@ namespace EquipmentSystem
             {
                 Type = EquipmentType.Bag,
                 DisplayName = "背包",
-                RenderMode = EquipRenderMode.None,
+                RenderMode = EquipRenderMode.Sprite,
+                BodyPart = CharacterBodyPart.Torso,
+                TexProp = "_BagTex", RectProp = "_BagRect", EnableProp = "_EnableBag",
+                RenderOrder = 3,
             });
         }
 

@@ -18,7 +18,7 @@ namespace EquipmentSystem
         public CharacterAppearance appearance;
 
         [Header("初始装备（可选）")]
-        public List<EquipmentData> initialEquipments = new List<EquipmentData>();
+        public List<EquipmentRenderData> initialEquipments = new List<EquipmentRenderData>();
 
         [Header("调试")]
         public Shader overrideShader;
@@ -37,17 +37,19 @@ namespace EquipmentSystem
         bool _debugHasHeadUVMap = false;
 
         // ========== 槽位：统一用字典管理 ==========
-        readonly Dictionary<EquipmentType, EquipmentData> _slots =
-            new Dictionary<EquipmentType, EquipmentData>();
+        readonly Dictionary<EquipmentType, EquipmentRenderData> _slots =
+            new Dictionary<EquipmentType, EquipmentRenderData>();
 
         // ========== 武器槽位：主手 + 副手 ==========
-        EquipmentData _mainHandWeapon;
-        EquipmentData _offHandWeapon;
+        EquipmentRenderData _mainHandWeapon;
+        EquipmentRenderData _offHandWeapon;
 
         // 渲染器缓存
         SpriteRenderer _charRenderer;
-        readonly Dictionary<EquipmentData, SpriteRenderer> _weaponRenderers =
-            new Dictionary<EquipmentData, SpriteRenderer>();
+        readonly Dictionary<EquipmentRenderData, SpriteRenderer> _weaponRenderers =
+            new Dictionary<EquipmentRenderData, SpriteRenderer>();
+        readonly Dictionary<EquipmentType, SpriteRenderer> _equipSequenceRenderers =
+            new Dictionary<EquipmentType, SpriteRenderer>();
 
         // 动画同步
         Animator _animator;
@@ -61,6 +63,11 @@ namespace EquipmentSystem
         int _rowIndex;
         FrameData _cachedFrame;
         AnimationData _currentAnimData;
+        
+        // 眼部装饰位置缓存（用于无数据帧的回退）
+        Vector2 _lastValidLeftEyePos = Vector2.zero;
+        Vector2 _lastValidRightEyePos = Vector2.zero;
+        CharacterFacing _lastEyeFacing = CharacterFacing.SouthEast;
 
         // Shader
         Material _shaderMaterial;
@@ -82,6 +89,13 @@ namespace EquipmentSystem
         static readonly int EnableLeftEyeProp = Shader.PropertyToID("_EnableLeftEye");
         static readonly int EnableRightEyeProp = Shader.PropertyToID("_EnableRightEye");
         static readonly int BodyInFrontProp = Shader.PropertyToID("_BodyInFront");
+        static readonly int BodyInEastProp = Shader.PropertyToID("_BodyInEast");
+        
+        // 眼部装饰参数
+        static readonly int EyeDecoModeProp = Shader.PropertyToID("_EyeDecoMode");
+        static readonly int EyeDecoColorProp = Shader.PropertyToID("_EyeDecoColor");
+        static readonly int LeftEyePosProp = Shader.PropertyToID("_LeftEyePos");
+        static readonly int RightEyePosProp = Shader.PropertyToID("_RightEyePos");
         
         // 像素级阴影参数
         static readonly int ShadowModeProp = Shader.PropertyToID("_ShadowMode");
@@ -92,6 +106,13 @@ namespace EquipmentSystem
 
         // 帧尺寸（像素）：用于 Shader 中的像素网格换算
         static readonly int FrameSizeProp = Shader.PropertyToID("_FrameSize");
+
+        static readonly int HitOutlineProp = Shader.PropertyToID("_HitOutline");
+
+        // 肤色调色板参数（Key/Palette 查表式）
+        static readonly int SkinPaletteEnabledProp = Shader.PropertyToID("_SkinPaletteEnabled");
+        static readonly int SkinKeyTexProp = Shader.PropertyToID("_SkinKeyTex");
+        static readonly int SkinPaletteTexProp = Shader.PropertyToID("_SkinPaletteTex");
 
         // 武器通用参数
         static readonly int CharFrameRectProp = Shader.PropertyToID("_CharFrameRect");
@@ -223,6 +244,16 @@ namespace EquipmentSystem
                 _currentAnimName = newAnimData.GetKey();
                 _debugCurrentAnim = _currentAnimName ?? "(null)";
 
+                // 动画切换时立即更新 UVMap 贴图
+                UpdateUVMapTexture();
+            }
+            else if (newAnimData == null && !string.IsNullOrEmpty(activeParam) && activeParam != _currentAnimName)
+            {
+                // Animator 切换到了一个在 frameData 中没有配置的状态：
+                // 记录当前动画名，并清空当前动画数据，后续在 Refresh 中按“无 FrameData”处理
+                _currentAnimData = null;
+                _currentAnimName = activeParam;
+                _debugCurrentAnim = _currentAnimName + " (no FrameData)";
                 UpdateUVMapTexture();
             }
         }
@@ -235,16 +266,9 @@ namespace EquipmentSystem
             if (frameData == null)
                 return null;
 
-            // 精确匹配
+            // 只做精确匹配：未在 CharacterFrameData 中配置的动画一律视为"无帧数据"
             var exact = frameData.GetAnimationByKey(key);
-            if (exact != null)
-                return exact;
-
-            // 默认返回第一个
-            if (frameData.animations.Count > 0)
-                return frameData.animations[0];
-
-            return null;
+            return exact;
         }
 
         void OnDestroy()
@@ -302,7 +326,7 @@ namespace EquipmentSystem
         /// <summary>
         /// 装备（配置驱动，无 switch）
         /// </summary>
-        public void Equip(EquipmentData equip, bool autoRefresh = true)
+        public void Equip(EquipmentRenderData equip, bool autoRefresh = true)
         {
             if (equip == null)
                 return;
@@ -327,7 +351,7 @@ namespace EquipmentSystem
         /// <summary>
         /// 装备武器（根据 WeaponSlotType 自动分配到主手/副手）
         /// </summary>
-        void EquipWeapon(EquipmentData equip)
+        void EquipWeapon(EquipmentRenderData equip)
         {
             switch (equip.weaponSlotType)
             {
@@ -369,7 +393,7 @@ namespace EquipmentSystem
         /// <summary>
         /// 卸下装备
         /// </summary>
-        public void Unequip(EquipmentData equip, bool autoRefresh = true)
+        public void Unequip(EquipmentRenderData equip, bool autoRefresh = true)
         {
             if (equip == null)
                 return;
@@ -395,7 +419,7 @@ namespace EquipmentSystem
         /// <summary>
         /// 内部卸下武器（不触发 Refresh）
         /// </summary>
-        void UnequipWeaponInternal(EquipmentData equip)
+        void UnequipWeaponInternal(EquipmentRenderData equip)
         {
             if (equip == null)
                 return;
@@ -444,7 +468,7 @@ namespace EquipmentSystem
         /// <summary>
         /// 获取指定类型当前装备（武器返回主手）
         /// </summary>
-        public EquipmentData GetEquipped(EquipmentType type)
+        public EquipmentRenderData GetEquipped(EquipmentType type)
         {
             var cfg = EquipTypeRegistry.Get(type);
             if (cfg == null)
@@ -459,17 +483,17 @@ namespace EquipmentSystem
         /// <summary>
         /// 获取主手武器
         /// </summary>
-        public EquipmentData GetMainHandWeapon() => _mainHandWeapon;
+        public EquipmentRenderData GetMainHandWeapon() => _mainHandWeapon;
 
         /// <summary>
         /// 获取副手武器
         /// </summary>
-        public EquipmentData GetOffHandWeapon() => _offHandWeapon;
+        public EquipmentRenderData GetOffHandWeapon() => _offHandWeapon;
 
         /// <summary>
         /// 获取当前头部插槽装备（Helmet / Hat / Mask，按优先级）
         /// </summary>
-        public EquipmentData GetHeadSlotEquipment()
+        public EquipmentRenderData GetHeadSlotEquipment()
         {
             // 按优先级检查：Helmet > Hat > Mask
             if (_slots.TryGetValue(EquipmentType.Helmet, out var helmet) && helmet != null)
@@ -491,7 +515,7 @@ namespace EquipmentSystem
             return _mainHandWeapon.weaponSlotType == WeaponSlotType.MainHand;
         }
 
-        void CreateWeaponRenderer(EquipmentData equip)
+        void CreateWeaponRenderer(EquipmentRenderData equip)
         {
             if (_weaponRenderers.ContainsKey(equip))
                 return;
@@ -505,21 +529,83 @@ namespace EquipmentSystem
             _weaponRenderers[equip] = sr;
         }
 
+        SpriteRenderer EnsureEquipSequenceRenderer(EquipmentType type)
+        {
+            if (_equipSequenceRenderers.TryGetValue(type, out var existing) && existing != null)
+                return existing;
+
+            var go = new GameObject($"EquipSeq_{type}");
+            go.transform.SetParent(transform);
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localScale = Vector3.one;
+
+            var sr = go.AddComponent<SpriteRenderer>();
+            if (_charRenderer != null)
+            {
+                sr.sortingLayerID = _charRenderer.sortingLayerID;
+                sr.sortingOrder = _charRenderer.sortingOrder;
+            }
+
+            _equipSequenceRenderers[type] = sr;
+            return sr;
+        }
+
         public void Refresh()
         {
+            foreach (var kv in _equipSequenceRenderers)
+            {
+                if (kv.Value != null)
+                    kv.Value.enabled = false;
+            }
+
             if (frameData == null)
             {
                 Debug.LogWarning("[EquipmentRenderer] frameData 未设置");
+                // 没有帧数据时，重置所有装备相关开关，避免残留上一次的装备渲染
+                ResetEquipmentState();
                 return;
             }
-
-            _cachedFrame = frameData.GetFrameDataByKey(_currentAnimName, _rowIndex, _frameIndex);
 
             if (_currentAnimData == null)
                 _currentAnimData = frameData.GetAnimationByKey(_currentAnimName);
 
-            if (_currentAnimData == null)
+            _cachedFrame = frameData.GetFrameDataByKey(_currentAnimName, _rowIndex, _frameIndex);
+
+            // 当当前动画帧缺少 FrameData/UVMap 时，不做任何装备相关 Shader 处理
+            bool hasAnimData = _currentAnimData != null;
+            bool hasFrame = _cachedFrame != null;
+            bool hasBodyUV = _currentAnimData != null && _currentAnimData.bodyUVMap != null;
+            bool hasHeadUV = _currentAnimData != null && _currentAnimData.headUVMap != null;
+
+            if (!hasAnimData || !hasFrame || !hasBodyUV || !hasHeadUV)
+            {
+                ResetEquipmentState();
+
+                if (_shaderMaterial != null)
+                {
+                    _shaderMaterial.SetTexture(BodyUVMapProp, null);
+                    _shaderMaterial.SetTexture(HeadUVMapProp, null);
+                }
+
+                RenderWeapons();
+
+                foreach (var cfg in EquipTypeRegistry.All)
+                {
+                    if (
+                        cfg.RenderMode == EquipRenderMode.None
+                        || cfg.RenderMode == EquipRenderMode.Weapon
+                    )
+                        continue;
+
+                    if (!_slots.TryGetValue(cfg.Type, out var equip) || equip == null)
+                        continue;
+
+                    if (cfg.RenderMode == EquipRenderMode.Sprite && equip.HasSequenceForKey(_currentAnimName))
+                        ApplySpriteEquipment(equip, cfg);
+                }
+
                 return;
+            }
 
             UpdateShadowHeight();
 
@@ -527,6 +613,12 @@ namespace EquipmentSystem
 
             // 重置所有装备层（包括武器）
             ResetEquipmentState();
+
+            if (_shaderMaterial != null)
+            {
+                float hitOutlineValue = _cachedFrame != null && _cachedFrame.hitOutlineFrame ? 1f : 0f;
+                _shaderMaterial.SetFloat(HitOutlineProp, hitOutlineValue);
+            }
 
             // 身体/头部前后关系（基于躯干部位的实际方向）
             UpdateBodyDepthMode();
@@ -593,6 +685,7 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(EnableBeardProp, 0);
             _shaderMaterial.SetFloat(EnableLeftEyeProp, 0);
             _shaderMaterial.SetFloat(EnableRightEyeProp, 0);
+            _shaderMaterial.SetFloat(HitOutlineProp, 0);
             // 双武器
             _shaderMaterial.SetFloat(Weapon0EnabledProp, 0);
             _shaderMaterial.SetFloat(Weapon1EnabledProp, 0);
@@ -632,8 +725,14 @@ namespace EquipmentSystem
             if (row < 0 || row > 3)
                 row = 0;
 
+            var safeFacing = (CharacterFacing)row;
+
             bool bodyInFront = row >= 2;
             _shaderMaterial.SetFloat(BodyInFrontProp, bodyInFront ? 1f : 0f);
+
+            // 东向：SouthEast / NorthEast；西向：SouthWest / NorthWest
+            bool bodyInEast = safeFacing == CharacterFacing.SouthEast || safeFacing == CharacterFacing.NorthEast;
+            _shaderMaterial.SetFloat(BodyInEastProp, bodyInEast ? 1f : 0f);
         }
 
         void UpdateShadowHeight()
@@ -749,44 +848,95 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(ShadowLeftXProp, leftX);
             _shaderMaterial.SetFloat(ShadowRightXProp, rightX);
             _shaderMaterial.SetFloat(ShadowCenterXProp, centerX);
-            _shaderMaterial.SetFloat(ShadowBaseYProp, groundY / (float)frameSizeY);
+            float shadowBaseY01 = 1f - (groundY + 0.5f) / frameSizeY;
+            _shaderMaterial.SetFloat(ShadowBaseYProp, shadowBaseY01);
         }
 
         /// <summary>
-        /// 根据 facing 获取当前动画的装备序列帧（若无动画集则返回 null）
+        /// 根据 facing 获取当前动画的装备序列帧（若无动画则返回 null），同时返回该帧的深度模式
         /// </summary>
-        Sprite GetEquipSequenceSprite(EquipmentData equip, CharacterFacing facing)
+        Sprite GetEquipSequenceSprite(EquipmentRenderData equip, CharacterFacing facing, out FrameDepthMode depthMode)
         {
+            depthMode = FrameDepthMode.Front;
             if (equip == null)
                 return null;
 
-            return equip.TryGetSequenceSpriteByKey(
+            return equip.TryGetSequenceSpriteByKeyWithDepth(
                 _currentAnimName,
                 (int)facing,
-                _frameIndex
+                _frameIndex,
+                out depthMode
             );
+        }
+
+        Sprite GetEquipSequenceSprite(EquipmentRenderData equip, CharacterFacing facing)
+        {
+            FrameDepthMode _;
+            return GetEquipSequenceSprite(equip, facing, out _);
         }
 
         /// <summary>
         /// Sprite 装备应用（配置驱动）
         /// </summary>
-        void ApplySpriteEquipment(EquipmentData equip, EquipTypeConfig cfg)
+        void ApplySpriteEquipment(EquipmentRenderData equip, EquipTypeConfig cfg)
         {
+            if (equip == null)
+                return;
+
+            bool hasSequence = equip.HasSequenceForKey(_currentAnimName);
+            var facing = GetSpriteFacingForPart(cfg.BodyPart);
+
+            if (hasSequence)
+            {
+                FrameDepthMode depthMode;
+                var seqSprite = GetEquipSequenceSprite(equip, facing, out depthMode);
+
+                var sr = EnsureEquipSequenceRenderer(cfg.Type);
+                if (sr == null)
+                    return;
+
+                if (seqSprite == null)
+                {
+                    sr.enabled = false;
+                    return;
+                }
+
+                sr.enabled = true;
+                sr.sprite = seqSprite;
+
+                if (_charRenderer != null)
+                {
+                    sr.sortingLayerID = _charRenderer.sortingLayerID;
+                    int baseOrder = _charRenderer.sortingOrder;
+                    int bodyBase = 0;
+                    if (cfg.BodyPart == CharacterBodyPart.Head)
+                        bodyBase = 10;
+                    int typeBase = cfg.RenderOrder * 2;
+                    int depthOffset = depthMode == FrameDepthMode.Back ? -1 : 1;
+                    sr.sortingOrder = baseOrder + bodyBase + typeBase + depthOffset;
+                }
+
+                var localPos = Vector3.zero;
+                var charSprite = _charRenderer != null ? _charRenderer.sprite : null;
+                if (_cachedFrame != null && charSprite != null)
+                {
+                    var offset = _cachedFrame.sequenceOffset;
+                    float ppu = charSprite.pixelsPerUnit;
+                    localPos += new Vector3(offset.x / ppu, -offset.y / ppu, 0f);
+                }
+
+                sr.transform.localPosition = localPos;
+                sr.transform.localRotation = Quaternion.identity;
+                sr.flipX = false;
+
+                return;
+            }
+
             if (_shaderMaterial == null)
                 return;
 
-            var facing = GetSpriteFacingForPart(cfg.BodyPart);
-
-            // 1. 序列帧
-            var seqSprite = GetEquipSequenceSprite(equip, facing);
-            Sprite finalSprite = seqSprite;
-
-            // 2. 帧变体 → 基础贴图
-            if (finalSprite == null)
-            {
-                var variant = GetVariantForPart(cfg.BodyPart);
-                finalSprite = equip.GetSprite(facing, variant);
-            }
+            var variant = GetVariantForPart(cfg.BodyPart);
+            var finalSprite = equip.GetSprite(facing, variant);
 
             if (finalSprite == null || finalSprite.texture == null)
                 return;
@@ -890,16 +1040,136 @@ namespace EquipmentSystem
             // 设置眼睛颜色
             var headFacingDir = CharacterFrameData.GetFacingDirection(headFacing);
             bool eyesVisible = headFacingDir == FacingDirection.Front;
+            bool leftClosed = false;
+            bool rightClosed = false;
+            if (_cachedFrame != null)
+            {
+                leftClosed = _cachedFrame.leftEyeClosed;
+                rightClosed = _cachedFrame.rightEyeClosed;
+            }
+            bool enableLeftEye = eyesVisible && !leftClosed;
+            bool enableRightEye = eyesVisible && !rightClosed;
             _shaderMaterial.SetColor(LeftEyeColorProp, appearance.leftEyeColor);
             _shaderMaterial.SetColor(RightEyeColorProp, appearance.rightEyeColor);
-            _shaderMaterial.SetFloat(EnableLeftEyeProp, eyesVisible ? 1f : 0f);
-            _shaderMaterial.SetFloat(EnableRightEyeProp, eyesVisible ? 1f : 0f);
+            _shaderMaterial.SetFloat(EnableLeftEyeProp, enableLeftEye ? 1f : 0f);
+            _shaderMaterial.SetFloat(EnableRightEyeProp, enableRightEye ? 1f : 0f);
+            
+            // 设置眼部装饰
+            ApplyEyeDecoration(headFacing, eyesVisible);
+            
+            // 设置肤色调色板（Palette Swap）
+            ApplySkinPalette();
+        }
+        
+        /// <summary>
+        /// 设置肤色调色板参数（Key/Palette 查表式换肤）
+        /// </summary>
+        void ApplySkinPalette()
+        {
+            if (_shaderMaterial == null)
+                return;
+
+            // 没有外观数据或没有 Key/Palette 贴图时，关闭调色板
+            if (appearance == null || appearance.skinKeyMap == null || appearance.skinPaletteMap == null)
+            {
+                _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 0f);
+                return;
+            }
+
+            // 设置 Key/Palette 贴图
+            _shaderMaterial.SetTexture(SkinKeyTexProp, appearance.skinKeyMap);
+            _shaderMaterial.SetTexture(SkinPaletteTexProp, appearance.skinPaletteMap);
+            
+            // 打开开关
+            _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 1f);
+        }
+        
+        /// <summary>
+        /// 设置眼部装饰参数
+        /// </summary>
+        void ApplyEyeDecoration(CharacterFacing headFacing, bool eyesVisible)
+        {
+            // 默认关闭
+            _shaderMaterial.SetFloat(EyeDecoModeProp, 0);
+            
+            // 背面不显示眼部装饰
+            if (!eyesVisible)
+                return;
+            
+            // 方向改变时清除缓存（不同方向的眼睛位置不能复用）
+            if (headFacing != _lastEyeFacing)
+            {
+                _lastValidLeftEyePos = Vector2.zero;
+                _lastValidRightEyePos = Vector2.zero;
+                _lastEyeFacing = headFacing;
+            }
+            
+            // 获取眼睛像素位置
+            if (_cachedFrame == null || _cachedFrame.limbMask == null)
+                return;
+            
+            var leftEyePixels = _cachedFrame.GetLimbPixels(CharacterBodyPart.LeftEye);
+            var rightEyePixels = _cachedFrame.GetLimbPixels(CharacterBodyPart.RightEye);
+            
+            bool hasLeftEye = leftEyePixels != null && leftEyePixels.Count > 0;
+            bool hasRightEye = rightEyePixels != null && rightEyePixels.Count > 0;
+            
+            // 获取帧尺寸
+            int frameSizeX = _currentAnimData?.frameSize.x ?? 32;
+            int frameSizeY = _currentAnimData?.frameSize.y ?? 32;
+            
+            // 计算眼睛中心的帧内 UV（像素中心）
+            Vector2 leftEyePos = _lastValidLeftEyePos;  // 回退到上次有效位置
+            Vector2 rightEyePos = _lastValidRightEyePos;
+            
+            if (hasLeftEye)
+            {
+                float sumX = 0, sumY = 0;
+                foreach (var p in leftEyePixels)
+                {
+                    sumX += p.x + 0.5f;
+                    sumY += p.y + 0.5f;
+                }
+                leftEyePos = new Vector2(
+                    sumX / leftEyePixels.Count / frameSizeX,
+                    1f - (sumY / leftEyePixels.Count / frameSizeY)
+                );
+                _lastValidLeftEyePos = leftEyePos;
+            }
+            
+            if (hasRightEye)
+            {
+                float sumX = 0, sumY = 0;
+                foreach (var p in rightEyePixels)
+                {
+                    sumX += p.x + 0.5f;
+                    sumY += p.y + 0.5f;
+                }
+                rightEyePos = new Vector2(
+                    sumX / rightEyePixels.Count / frameSizeX,
+                    1f - (sumY / rightEyePixels.Count / frameSizeY)
+                );
+                _lastValidRightEyePos = rightEyePos;
+            }
+            
+            // 如果当前帧和回退都没有眼睛数据，则不启用装饰
+            if (leftEyePos == Vector2.zero && rightEyePos == Vector2.zero)
+                return;
+            
+            _shaderMaterial.SetVector(LeftEyePosProp, leftEyePos);
+            _shaderMaterial.SetVector(RightEyePosProp, rightEyePos);
+
+            if (appearance != null && appearance.eyeDecorationType != EyeDecorationType.None)
+            {
+                _shaderMaterial.SetFloat(EyeDecoModeProp, (float)appearance.eyeDecorationType);
+                _shaderMaterial.SetColor(EyeDecoColorProp, appearance.eyeDecorationColor);
+            }
         }
 
         /// <summary>
         /// 颜色装备应用（配置驱动）
         /// </summary>
-        void ApplyColorEquipment(EquipmentData equip, EquipTypeConfig cfg)
+        void ApplyColorEquipment(EquipmentRenderData equip, EquipTypeConfig cfg)
         {
             if (_shaderMaterial == null)
                 return;
@@ -1048,7 +1318,7 @@ namespace EquipmentSystem
         /// <summary>
         /// 渲染单个武器槽位
         /// </summary>
-        void RenderWeaponSlot(EquipmentData equip, AnchorType anchorType, int shaderSlot)
+        void RenderWeaponSlot(EquipmentRenderData equip, AnchorType anchorType, int shaderSlot)
         {
             if (equip == null) return;
 
@@ -1058,43 +1328,83 @@ namespace EquipmentSystem
             var weaponFacing = GetSpriteFacingForPart(CharacterBodyPart.Torso);
             int weaponRowIndex = (int)weaponFacing;
 
-            // 从当前帧数据中获取对应锚点（后面用于定位与旋转）
-            var anchor = _cachedFrame.GetAnchor(anchorType);
-            if (anchor == null) return;
+            // 从当前帧数据中获取对应锚点（用于 Shader 模式定位与旋转）；
+            // 序列帧模式不强制要求锚点，仅在有锚点时用于微调 SpriteRenderer 位置
+            var anchor = _cachedFrame != null ? _cachedFrame.GetAnchor(anchorType) : null;
 
             // 当前槽位相对角色的前后：根据朝向下“主/副手锚点”对应的左/右手关系来决定
             // 排序偏移 >0 表示在角色前，<0 表示在角色后
-            int sortOffset = GetWeaponSortOffset(anchorType, weaponRowIndex);
-            bool slotIsFront = sortOffset > 0;
+            int baseSortOffset = GetWeaponSortOffset(anchorType, weaponRowIndex);
+            bool slotIsFront = baseSortOffset > 0;
             
             // 判断武器类型（后面处理盾牌特殊逻辑）
             bool isShield = (equip.type == EquipmentType.Shield);
 
-            // 1. 优先使用序列帧
-            var seqSprite = GetEquipSequenceSprite(equip, weaponFacing);
+            // 1. 优先使用序列帧（不强制要求有锚点）
+            FrameDepthMode depthMode;
+            var seqSprite = GetEquipSequenceSprite(equip, weaponFacing, out depthMode);
             if (seqSprite != null && sr != null)
             {
                 sr.sprite = seqSprite;
                 sr.enabled = true;
-                sr.transform.localPosition = Vector3.zero;
-                sr.transform.localRotation = Quaternion.identity;
+                // 有锚点时，以锚点为基准进行微调，否则保持在角色中心；
+                // 同时叠加帧数据中的武器序列帧偏移（像素）
+                var localPos = Vector3.zero;
+                var localRot = Quaternion.identity;
+                var charSprite = _charRenderer.sprite;
+
+                if (_cachedFrame != null && charSprite != null)
+                {
+                    var offset = _cachedFrame.sequenceOffset;
+                    float ppu = charSprite.pixelsPerUnit;
+                    localPos += new Vector3(offset.x / ppu, -offset.y / ppu, 0f);
+                }
+
+                if (anchor != null && charSprite != null)
+                {
+                    float ppu = charSprite.pixelsPerUnit;
+                    float cx = (_currentAnimData != null ? _currentAnimData.frameSize.x : (int)charSprite.rect.width) * 0.5f;
+                    float cy = (_currentAnimData != null ? _currentAnimData.frameSize.y : (int)charSprite.rect.height) * 0.5f;
+                    localPos += new Vector3((anchor.position.x - cx) / ppu, -(anchor.position.y - cy) / ppu, 0f);
+
+                    localRot = Quaternion.Euler(0, 0, anchor.GetRotationAngle());
+                }
+
+                sr.transform.localPosition = localPos;
+                sr.transform.localRotation = localRot;
                 sr.flipX = false;
                 sr.sortingLayerID = _charRenderer.sortingLayerID;
-                sr.sortingOrder = _charRenderer.sortingOrder + sortOffset;
+                int frontOffset = Mathf.Abs(baseSortOffset);
+                if (frontOffset == 0)
+                    frontOffset = 1;
+                int backOffset = -frontOffset;
+                int finalOffset;
+
+                switch (depthMode)
+                {
+                    case FrameDepthMode.Back:
+                        finalOffset = backOffset;
+                        break;
+                    default:
+                        finalOffset = frontOffset;
+                        break;
+                }
+
+                sr.sortingOrder = _charRenderer.sortingOrder + finalOffset;
                 return;
             }
 
-            // 2. Shader 武器层
-            if (_shaderMaterial == null || _cachedFrame == null) return;
+            // 2. Shader 武器层（此模式仍然要求有锚点，否则无法确定位置/旋转）
+            if (_shaderMaterial == null || _cachedFrame == null || anchor == null) return;
 
             var weaponSprite = equip.GetSpriteByRow(weaponRowIndex);
-            var charSprite = _charRenderer.sprite;
-            if (weaponSprite == null || weaponSprite.texture == null || charSprite == null) return;
+            var charSpriteShader = _charRenderer.sprite;
+            if (weaponSprite == null || weaponSprite.texture == null || charSpriteShader == null) return;
 
             // 更新子对象 Transform（用于挂特效）
             if (sr != null)
             {
-                float ppu = charSprite.pixelsPerUnit;
+                float ppu = charSpriteShader.pixelsPerUnit;
                 float cx = weaponSprite.rect.width * 0.5f;
                 float cy = weaponSprite.rect.height * 0.5f;
                 sr.transform.localPosition = new Vector3((anchor.position.x - cx) / ppu, -(anchor.position.y - cy) / ppu, 0);
@@ -1112,7 +1422,7 @@ namespace EquipmentSystem
             bool flipX = isWestFacing && !hasWestSprite;
 
             // 帧尺寸
-            var charRect = charSprite.rect;
+            var charRect = charSpriteShader.rect;
             int frameW = _currentAnimData != null ? _currentAnimData.frameSize.x : (int)charRect.width;
             int frameH = _currentAnimData != null ? _currentAnimData.frameSize.y : (int)charRect.height;
             frameW = Mathf.Max(frameW, 1);
@@ -1186,27 +1496,6 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(depthProp, isFront ? 1f : 0f);
             _shaderMaterial.SetFloat(handInFrontProp, handInFront ? 1f : 0f);
             _shaderMaterial.SetFloat(enableProp, 1f);
-        }
-
-        void WriteAllEquipShaderParams()
-        {
-            if (_shaderMaterial == null)
-                return;
-            
-            // 设置身体朝向参数（用于 Shader 判断渲染顺序）
-            var facing = GetSpriteFacingForPart(CharacterBodyPart.Torso);
-            bool isSouth = (facing == CharacterFacing.SouthEast || facing == CharacterFacing.SouthWest);
-            _shaderMaterial.SetFloat("_BodyInFront", isSouth ? 1f : 0f);
-
-            // 启用标记
-            foreach (var cfg in EquipTypeRegistry.All)
-            {
-                bool enabled = _slots.ContainsKey(cfg.Type) && _slots[cfg.Type] != null;
-                if (cfg.RenderMode == EquipRenderMode.Sprite || cfg.RenderMode == EquipRenderMode.Color)
-                {
-                    _shaderMaterial.SetFloat(cfg.EnableProp, enabled ? 1f : 0f);
-                }
-            }
         }
 
 #if UNITY_EDITOR

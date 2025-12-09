@@ -1,33 +1,35 @@
-# 装备换装系统文档
+# 装备换装系统文档（当前实现版）
 
 ## 概述
 
-这是一个 **配置驱动** 的像素风格角色换装系统，基于 UV Map + Shader 实现，支持：
+这是一个 **配置驱动** 的像素风角色换装系统，核心特点：
 
-- **武器**: 主手 + 副手双武器系统，锚点定位 + Shader 深度处理
-- **服装/裤子/斗篷**: Shader UV 重映射到躯干，按层级叠加
-- **头部装备**: 头发 → 面部装饰 → 胡子 → 头盔（四层叠加）
-- **手套/鞋子**: 颜色替换
+- **双层 UV Map 换装**：身体层 / 头部层分离，通过 UV Map 在 Shader 中重定向采样位置。
+- **双武器管线**：主手 + 副手两把武器，支持双持、双手武器、手在前/武器在前等深度规则。
+- **像素级脚底阴影**：基于 `groundPixelY + 脚部像素` 实时计算阴影模式和形状。
+- **头部 4 层叠加 + 眼部系统**：头发 → 面部装饰 → 胡子 → 头盔，并带有眼睛颜色与眼部装饰（黑眼圈/刀疤）。
 
 ### 核心特性
 
-- **配置驱动渲染**: 通过 `EquipTypeConfig` + `EquipTypeRegistry` 管理装备类型，新增类型无需修改 Renderer 代码
-- **武器槽位系统**: `WeaponSlotType` 定义武器类型（主手/双手/双持/副手），自动处理装备规则
-- **双武器 Shader**: 支持主手 + 副手同时渲染，双持武器在两个锚点显示
+- **配置驱动渲染**：`EquipTypeConfig + EquipTypeRegistry` 定义每种装备的渲染模式（Sprite/Color/Weapon）、绑定到哪个 `CharacterBodyPart`、使用哪些 Shader 属性以及渲染顺序。新增装备类型无需改 Renderer 逻辑。
+- **武器槽位系统**：`WeaponSlotType` 控制主手/双手/双持/副手规则，自动阻止非法组合（例如双手武器禁止副手）。
+- **四向朝向 + 转头支持**：Spritesheet 行 0~3 分别表示 SE/SW/NE/NW，`BodyPartRegion.spriteFacing` 允许头部独立于身体转向。
+- **编辑器工作流完整闭环**：从帧涂色、自动检测手脚/眼睛、生成 UV Map，到运行时 `EquipmentRenderer` 一次性串起来。
 
-#### 当前版本要点总览
-- 使用 `CharacterFrameData + DualUVMap` 描述每一帧的锚点、部位区域、UV 与检测配置。
-- 使用 `EquipmentData + EquipTypeConfig/EquipTypeRegistry` 配置每一种装备的渲染模式（Sprite/Color/Weapon）、Shader 属性和头部遮挡规则（如隐藏头发/胡子、手在前还是武器在前等）。
-- 运行时由 `EquipmentRenderer`：
-  - 根据 Animator Bool 参数 + `AnimationTypeDatabase` 推导当前动画 Key（如 Idle/Walk/Attack）。
-  - 通过角色 `Sprite.rect` 计算 `_rowIndex`（朝向行：SE/SW/NE/NW）和 `_frameIndex`（列内帧号）。
-  - 从 `CharacterFrameData` 取出当前帧的 `FrameData`（锚点、部位区域、手脚蒙版等）。
-  - 先渲染武器，再按配置遍历所有装备类型，将贴图 / 颜色写入 Shader 参数。
-- 序列帧优先：若 `EquipmentData.animSet` 存在，优先通过 `EquipAnimSetAsset` 使用该装备自己的序列帧；若某方向/动画缺失，则自动回退到该装备的 4 向基础贴图。
-- 武器方向与镜像（详见下文专节）：
-  - 武器方向始终跟随躯干 `BodyPartRegion.spriteFacing`，而不是简单使用 `_rowIndex`；
-  - NE/NW 缺失时统一回退：NE → SE，NW → SW → SE（静态贴图与序列帧行为一致）；
-  - 只有在「西向行(SW/NW) 且没有 SW 基础贴图」时，才会从 SE 通过 `flipX + 角度取反` 镜像生成西向武器。
+### 当前版本要点总览
+
+- 使用 `CharacterFrameData` 描述每一帧的：
+  - `FrameData.bodyRegions`：UV 区域（Head/Torso 等）和 `spriteFacing / variant`；
+  - `FrameData.limbMask`：手脚 + 眼睛像素蒙版（Left/Right Hand/Foot/Eye）；
+  - `FrameData.anchors`：武器等挂点。
+- `AnimationData.bodyUVMap / headUVMap`：通过 `DualUVMapGenerator` 离线生成双层 UV Map 纹理，运行时只在 Shader 中采样。
+- `EquipmentRenderer` 在运行时负责：
+  - 根据当前 `SpriteRenderer.sprite` 计算行列索引 (`_rowIndex / _frameIndex`) 和动画名；
+  - 从 `CharacterFrameData` 中取出 `_cachedFrame` 和 `_currentAnimData`；
+  - 更新阴影、UVMap、身体/头部深度模式；
+  - 渲染武器（主手 + 副手）；
+  - 应用角色外观（头发/胡子/眼睛/眼部装饰）；
+  - 按 `EquipTypeRegistry` 遍历所有装备类型，写入 Shader 纹理/颜色/开关。
 
 ## 系统架构
 
@@ -36,20 +38,20 @@ EquipmentSystem/
 ├── Data/                        # 数据定义
 │   ├── CharacterFrameData.cs        # 帧数据（锚点、部位区域、UV方向等）
 │   ├── CharacterAppearance.cs       # 角色外观（头发、胡子、眼睛颜色）
-│   ├── EquipmentData.cs             # 装备数据（4方向贴图、武器槽位类型）
+│   ├── EquipmentRenderData.cs       # 装备渲染数据（4方向贴图、武器槽位、内嵌序列帧）
 │   ├── EquipTypeConfig.cs           # 装备类型配置（渲染模式、Shader属性）
-│   └── EquipAnimSequenceAsset.cs    # 装备序列帧动画资产
+│   └── EquipmentAnimSequenceData.cs # 装备序列帧数据结构（DirectionalStrip/AnimSequenceEntry）
 ├── Editor/                      # 编辑器工具
 │   ├── FrameDataEditor.cs           # 帧数据编辑器窗口
 │   ├── DualUVMapGenerator.cs        # UV Map 生成器
-│   ├── EquipmentDataEditor.cs       # 装备数据编辑器
-│   └── EquipAnimSequenceEditor.cs   # 序列帧动画编辑器
+│   ├── EquipmentDataEditor.cs       # 装备数据编辑器（基础字段 + 打开动画序列编辑器按钮）
+│   └── EquipmentAnimSequenceEditor.cs # 装备动画序列编辑器窗口
 ├── Runtime/                     # 运行时组件
 │   ├── EquipmentRenderer.cs         # 装备渲染器（配置驱动）
 │   ├── AnimationController.cs       # 动画控制器
 │   └── EquipmentDemoExtension.cs    # 测试工具（主手/副手UI）
 └── Shaders/                     # Shader
-    └── EquipmentUV.shader           # 装备渲染 Shader（双武器支持）
+    └── EquipmentUV.shader           # 装备渲染 Shader（双武器 + 像素阴影 + 眼部装饰）
 ```
 
 ---
@@ -84,6 +86,29 @@ EquipmentSystem/
 - **转头场景**: 身体朝 SE，但头转向 SW
 - **特殊动作**: 某些帧需要显示不同方向的装备
 
+### 4. 区域扩展姿态 (RegionExpandPose)
+
+控制 **编辑器中区域扩展/收缩时，角色头相对于屏幕的方向**，影响几何扩展轴与 UV 采样方向。
+
+```csharp
+public enum RegionExpandPose
+{
+    HeadUp   = 0, // 头在上（默认站立）
+    HeadLeft = 1, // 头在左（向左躺）
+    HeadRight= 2, // 头在右（向右躺）
+    HeadDown = 3  // 头在下（倒立）
+}
+```
+
+- 在 `FrameDataEditor` 中通过「扩展姿态」下拉框设置。
+- `headExpandUp/Down/Side` 与 `bodyExpandUp/Down/Side` 始终按**身体坐标系**理解：
+  - Up = 朝头方向扩展
+  - Down = 朝脚方向扩展
+  - Side = 左右对称扩展
+- `FrameDataAlgorithms.MapExpandByPose` 会根据 `RegionExpandPose` 把这些“身体方向”的扩展量旋转到 **屏幕坐标的 up/down/left/right**，无论角色是站立、躺左/躺右还是倒立，配置含义都保持一致。
+- `ExpandRegionWithBoundaryUV` 在做几何扩展的同时，会按同一姿态旋转 UV 采样方向，保证扩出来的像素颜色梯度与角色实际朝向一致。
+- `ShrinkRegionByPoseAndDetectSize` 使用同一套姿态映射 + `headDetectSize/torsoDetectSize`，使「扩展一次 → 立即收缩」能够在正常数据下精确还原到原始检测区域。
+
 ---
 
 ## 数据结构
@@ -116,13 +141,13 @@ CharacterFrameData
 存储装备数据：
 
 ```csharp
-EquipmentData
+EquipmentRenderData
 ├── equipmentId: string
-├── type: EquipmentType           // Weapon/Clothing/Cloak/Helmet/Gloves/Shoes/Pants
-├── spriteSE/SW/NE/NW: Sprite     // 4方向贴图
-├── weaponSlotType: WeaponSlotType // 武器槽位类型（仅武器）
-├── leftColor/rightColor: Color32  // 手套/鞋子颜色
-└── animSet: EquipAnimSetAsset    // 序列帧动画集（可选）
+├── type: EquipmentType              // Weapon/Clothing/Cloak/Helmet/Gloves/Shoes/Pants
+├── spriteSE/SW/NE/NW: Sprite        // 4方向贴图
+├── weaponSlotType: WeaponSlotType   // 武器槽位类型（仅武器）
+├── leftColor/rightColor: Color32    // 手套/鞋子颜色
+└── animSequences: List<AnimSequenceEntry> // 内嵌的序列帧动画列表（可选）
 ```
 
 ### WeaponSlotType（武器槽位类型）
@@ -159,10 +184,36 @@ public class EquipTypeConfig
 ```
 
 **渲染模式**:
-- `Sprite`: UV 贴图映射（服装、裤子、斗篷、头盔）
+- `Sprite`: UV 贴图映射（服装、裤子、斗篷、头盔、背包 Bag）
 - `Color`: 颜色替换（手套、鞋子）
 - `Weapon`: 武器专用渲染（锚点 + Shader 深度处理）
 - `None`: 不渲染
+
+当前内置的 `Sprite` 类装备类型中，`Bag` 的配置为：
+
+- `Type = EquipmentType.Bag`
+- `RenderMode = Sprite`
+- `BodyPart = CharacterBodyPart.Torso`（使用身体 UV）
+- Shader 属性：`_BagTex / _BagRect / _EnableBag`
+- `RenderOrder = 3`，与衣服/裤子/斗篷同属躯干链路
+
+Bag 具有额外的方向相关深度逻辑：
+
+- **朝南 (SouthEast/SouthWest)**:
+  - 在身体层中作为 **最底层** 采样（先于裤子/衣服/斗篷）；
+  - 仅在主贴图 `_MainTex` 该像素 **透明** 时绘制包体，这样身体像素始终挡在前面；
+  - 实际效果：包被身体/衣服/斗篷遮挡，只在角色轮廓后侧或下方露出一部分。
+- **朝北 (NorthEast/NorthWest)**:
+  - Shader 在角色+武器全部合成完成后，再次以躯干 UV 采样背包；
+  - 将采样结果覆盖到最终颜色上，使背包处于 **包括武器在内的最前层**。
+
+此外，Bag 也参与受击描边：
+
+- Shader 内为背包定义了单独的来源 ID：`SRC_BAG`；
+- 南向身体层和北向最终覆盖时，命中的背包像素会被标记为 `SRC_BAG`；
+- 受击描边分支中，会在 `srcId == SRC_BAG` 时，
+  通过 `_BagTex/_BagRect` + UVMap 检测该像素是否为背包自身的黑色轮廓边缘，
+  若是，则将其替换为 `_HitOutlineColor`，与斗篷/头盔/武器等其他图层的描边行为保持一致。
 
 ### BodyPartRegion
 
@@ -173,7 +224,7 @@ BodyPartRegion
 ├── part: CharacterBodyPart  // Head/Torso/LeftHand/RightHand/LeftFoot/RightFoot
 ├── orientation: UVOrientation   // UV 旋转方向
 ├── spriteFacing: CharacterFacing // 贴图方向（选择哪张贴图）
-├── variant: FrameVariant          // 帧变体（Base/Up/Down 等），用于同一方向下的姿态区分
+├── variant: FrameVariant          // 帧变体（Base/Up/Down/Left/Right 等），用于同一方向下的姿态区分
 └── pixels: List<BodyPartPixel>   // 像素列表
 ```
 
@@ -305,37 +356,107 @@ BodyPartRegion
    equipmentRenderer.Refresh();
    ```
 
-### 阴影（当前实现状态）
+### 阴影（当前实现）
 
-- 当前 Demo 中阴影是一个单独的 `Shadow` 子对象，由 `AnimationController.SetShadowEnabled(bool)` 控制启/停。
-- `EquipmentDemoExtension` 的「显示阴影」开关也是调用上述 API，仅切换 Shadow 对象的激活状态。
-- 主体 Shader `EquipmentUV.shader` 目前只负责角色与装备的合成渲染，尚未集成多 Pass 阴影；后续阴影 Pass 设计见《装备系统多 Pass 阴影与武器渲染设计文档》。
+- 阴影逻辑已经 **集成到 `EquipmentUV.shader` 单 Pass 中**，不再依赖单独的 Shadow 子对象。
+- 在 `CharacterFrameData` 中配置全局地面基准：
+  - `groundPixelY`：脚站在地面时，帧内 y 像素坐标（与 `BodyPartPixel.position.y` 同坐标系）。
+- 运行时由 `EquipmentRenderer.UpdateShadowHeight()` 完成：
+  - 从 `_cachedFrame.limbMask` 获取 `LeftFoot/RightFoot` 像素列表；
+  - 计算当前帧脚部最低像素相对 `groundPixelY` 的高度差 `heightDiff`；
+  - 根据高度差自动选择阴影模式：
+    - **Mode 0**：脚在地面或以下 → 贴合脚底的基础阴影；
+    - **Mode 1**：离地 1~2 像素 → 宽度为左右脚范围的矩形阴影；
+    - **Mode 2**：离地 3~9 像素 → 以下方那只脚为中心的 4×3 缺角矩形阴影；
+    - **Mode 3**：离地 ≥10 像素 → 帧中心十字形阴影；
+  - 将 `_ShadowMode/_ShadowLeftX/_ShadowRightX/_ShadowCenterX/_ShadowBaseY/_FrameSize` 写入 Shader。
+- Shader 端在像素级根据 `_ShadowMode` 和 `_FrameSize`，在帧内 UV 空间绘制精确阴影形状，确保阴影紧贴角色轮廓且始终贴地。
 
 ---
+
+## 眼睛与眼部装饰系统
+
+### 1. 眼睛蒙版、闭眼与颜色
+
+- **眼睛像素与闭眼状态由帧编辑器自动检测**：
+  - `FrameDataEditorTools.DetectEyes` 仅在 **头部检测区域的中间一行** 扫描像素；
+  - **第一步：查找黑色眼睛像素**（由 `DetectConfig` 的相关阈值决定，通常是画眼睛用的黑色）：
+    - 若这一行上能找到黑色像素簇，则按水平方向分成左右两只眼；
+    - 屏幕左边的簇视为角色 **右眼**，屏幕右边的簇视为角色 **左眼**；
+    - 此时会将 `FrameData.leftEyeClosed / rightEyeClosed` 置为 `false`（睁眼）。
+  - **第二步：查找闭眼颜色**：
+    - 只有在这一行 **完全找不到任何黑色眼睛像素** 时，才会使用 `DetectConfig.closedEyeColor` 和 `closedEyeColorThreshold` 在同一行上查找闭眼颜色；
+    - 同样按左右位置分成左右眼，并将对应的 `leftEyeClosed / rightEyeClosed` 置为 `true`（闭眼）；
+    - 目前不做“一只睁眼、一只闭眼”的特殊自动识别，如果需要这种效果，建议手动编辑遮挡或贴图。
+- **眼睛像素与闭眼状态的存储**：
+  - `FrameData.limbMask.leftEye / rightEye` 保存每帧左右眼的像素位置；
+  - `FrameData.leftEyeClosed / rightEyeClosed` 记录当前帧左右眼是否处于闭眼状态；
+  - 从 SE 行生成 SW/NE/NW 行时，会同时镜像眼睛位置并同步闭眼标记，保证 SE/SW 都满足“**右眼在屏幕左边**”的约定。
+- **UV 与 Shader 行为**：
+  - `DualUVMapGenerator` 在生成 `bodyUVMap` 时，将眼睛像素写入 Body UVMap 的 B 通道：
+    - `ID_LEFTEYE = 0.3`，`ID_RIGHTEYE = 0.35`；
+  - Shader 中：
+    - `ComputePartIDs` 根据 B 通道判断当前像素是否为左眼/右眼区域；
+    - `ApplyBodyLayers` 在眼睛像素处，根据 `_EnableLeftEye/_EnableRightEye` 决定是否用 `_LeftEyeColor/_RightEyeColor` 替换颜色；
+  - 运行时 `EquipmentRenderer.ApplyAppearanceToShader()`：
+    - 始终将 `appearance.leftEyeColor/rightEyeColor` 写入 `_LeftEyeColor/_RightEyeColor`；
+    - 仅在正面（`FacingDirection.Front`，即 SE/SW）并且对应眼睛 **未被标记为闭眼** 时，才启用 `_EnableLeftEye/_EnableRightEye`；
+    - 背面 NE/NW 或被标记为闭眼的眼睛都不会渲染眼睛颜色，但其像素位置仍会被用于眼部装饰（黑眼圈、刀疤等）。
+
+### 2. 眼部装饰（黑眼圈 & 刀疤）
+
+- 新增枚举 `EyeDecorationType`：
+  - `None`：无装饰；
+  - `DarkCircle`：黑眼圈；
+  - `Scar`：刀疤；
+- 在 `CharacterAppearance` 中配置：
+  - `eyeDecorationType`：装饰类型；
+  - `eyeDecorationColor`：装饰颜色；
+- 运行时 `EquipmentRenderer.ApplyEyeDecoration()`：
+  - 仅在正面（SE/SW）且 `eyeDecorationType != None` 时生效；
+  - 从 `_cachedFrame.limbMask` 读取 `LeftEye/RightEye` 像素，计算帧内中心 UV；
+  - 若当前帧无眼睛数据，则使用上一帧缓存位置，按方向切换时清空缓存；
+  - 将 `_EyeDecoMode/_EyeDecoColor/_LeftEyePos/_RightEyePos` 传给 Shader。
+
+Shader `EquipmentUV.shader` 中：
+
+- `ApplyEyeDecoration(frameUV, headUVLocal, parts, inout color)` 完成眼部装饰绘制：
+  - 仅在头部区域 (`parts.isHead`) 且未被头盔覆盖时生效；
+  - **Mode 1（黑眼圈）**：
+    - 在两只眼睛下方一格（`offset = (0,-1)`）涂上 `_EyeDecoColor`；
+  - **Mode 2（刀疤）**：
+    - 根据 `_BodyInEast` 判断朝向：
+      - 朝东（SE/NE）：使用 `_RightEyePos`；
+      - 朝西（SW/NW）：使用 `_LeftEyePos`；
+    - 在目标眼睛上方一格和下方一格（`offset = (0,1)` 与 `(0,-1)`）绘制刀疤色；
+- 同时提供 `IsWeaponBlackOutlineNearEyes`，用于避免武器黑描边在眼睛附近时盖住眼部细节。
 
 ## Shader 说明
 
 ### EquipmentUV.shader
 
 主要功能：
-1. 采样 UV Map 获取部位信息和 UV 坐标
-2. 根据部位 ID 选择对应的装备贴图采样
-3. 支持多层叠加（身体层 + 头部层 + 武器层）
-4. **双武器支持**: 主手 (`_Weapon0*`) + 副手 (`_Weapon1*`) 独立渲染
+1. 采样双层 UV Map 获取部位信息和 UV 坐标；
+2. 根据部位 ID 选择对应装备贴图或颜色（衣服/裤子/斗篷/手套/鞋子/眼睛）；
+3. 支持身体层 + 头部层 + 双武器层的深度叠加；
+4. 集成像素级脚底阴影绘制；
+5. 支持眼睛颜色与眼部装饰（黑眼圈/刀疤）。
 
 #### 渲染层级
 
 **身体层** (`ApplyBodyLayers`):
 - 裤子 (`_PantsTex`) → 服装 (`_ClothTex`) → 斗篷 (`_CloakTex`)
-- 手套/鞋子: 颜色替换
+- 手套/鞋子：根据部位 ID 直接用 `_LeftHandColor/_RightHandColor/_LeftFootColor/_RightFootColor` 替换颜色；
+- 眼睛：在眼睛区域用 `_LeftEyeColor/_RightEyeColor` 替换颜色。
 
 **头部层** (`ApplyHeadLayers`):
-- 头发 → 面部装饰 → 胡子 → 头盔（顶层）
+- 头发 → 面部装饰 → 胡子 → 头盔（顶层）；
+- 若当前像素同时属于前手且头部区域，则跳过头部层，保留手部颜色，避免头发/头盔遮挡手。
 
-**武器层** (无武器区域方案):
-- 朝北: 武器在身体后面
-- 朝南: 武器在身体前面，但手脚始终在武器前面
-- 主手在副手前面
+**武器层**:
+- 朝北：武器在角色后面（有角色像素时由角色遮挡）；
+- 朝南：武器在角色前面，但脚始终在所有武器前面，手是否挡住武器由每把武器的 `HandInFront` 决定；
+- 主手与副手使用 `_Weapon0* / _Weapon1*` 两套独立参数，主手在视觉上优先生效。
 
 #### 武器参数（每把武器独立）
 
@@ -407,9 +528,9 @@ void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, 
 
 ### 为装备增加动画序列
 
-- 在 `EquipAnimSequenceAsset` 中为对应的动画 Key 新建 `AnimSequenceEntry`。
-- 为需要支持的方向（SE/SW/NE/NW）配置 `DirectionalStrip`，NE/NW 可按需留空，系统会自动回退到 SE / SW。
-- 在 `EquipmentData` 上挂载该 `animSet` 资产，即可在运行时优先使用序列帧渲染此装备。
+- 打开 `EquipmentAnimSequenceEditor` 窗口，在左侧列表中选择目标 `EquipmentRenderData`。
+- 在右侧“自动生成工具”中选择动画类型和 Spritesheet，点击“生成/覆盖动画”，会向 `animSequences` 中添加或更新 `AnimSequenceEntry`。
+- 如需手动微调，可直接在右侧列表或 `EquipmentRenderData` 的 Inspector 中编辑 `animSequences` 里的 `DirectionalStrip` 与逐帧前后层。
 
 ---
 
@@ -504,35 +625,38 @@ public AnimationData GetAnimationByKey(string key);
 public List<AnimationTypeItem> GetAnimationTypes();
 ```
 
-### EquipmentData
+### EquipmentRenderData
 
 ```csharp
-// 是否包含序列帧动画集
-public bool HasAnimSet { get; }
-
 // 根据方向获取基础 4 向贴图（带 NE/NW 回退）
 public Sprite GetSprite(CharacterFacing facing);
 
-// 根据方向和帧变体获取贴图（非武器支持 Up/Down 变体）
+// 根据方向和帧变体获取贴图（非武器支持 Up/Down/Left/Right 变体）
 public Sprite GetSprite(CharacterFacing facing, FrameVariant variant);
 
-// 根据行索引获取基础贴图 (0=SE,1=SW,2=NE,3=NW)
-public Sprite GetSpriteByRow(int rowIndex);
+// 尝试获取序列帧 Sprite（按动画类型）
+public Sprite TryGetSequenceSprite(AnimationTypeItem animType, int rowIndex, int frameIndex);
 
-// 按动画 Key 尝试获取序列帧（与 Animator Bool 同名）
+// 尝试获取序列帧 Sprite（按 Key，与 Animator 参数同名）
 public Sprite TryGetSequenceSpriteByKey(string key, int rowIndex, int frameIndex);
+
+// 尝试获取序列帧 Sprite，并返回该帧的深度模式（用于武器身前/背后层）
+public Sprite TryGetSequenceSpriteByKeyWithDepth(
+    string key,
+    int rowIndex,
+    int frameIndex,
+    out FrameDepthMode depthMode);
 ```
 
  ## 版本历史
 
 - **v1.0**: 初始版本，基础换装功能
 - **v1.1**: 添加双层 UV Map，分离头部和身体渲染
-- **v1.2**: 添加参考帧系统，解决头部抖动问题
+- **v1.2**: 添加参考帧系统
 - **v1.3**: 添加 spriteFacing 支持，用于转头场景
 - **v1.4**: 添加从 SE 方向自动生成其他方向数据的功能
 - **v1.5**: 添加斗篷(Cloak)装备类型
 - **v1.6**: 添加面部装饰(FaceAccessory)外观层
-- **v1.7**: 添加裤子(Pants)装备类型，渲染层级在服装下面
 - **v2.0**: 配置驱动渲染系统重构
   - 引入 `EquipTypeConfig` + `EquipTypeRegistry`，新增装备类型无需修改 Renderer 代码
   - 移除 `hideLeftWeapon`/`hideRightWeapon` 配置，武器渲染由序列帧优先原则控制
@@ -542,4 +666,10 @@ public Sprite TryGetSequenceSpriteByKey(string key, int rowIndex, int frameIndex
   - Shader 支持双武器独立渲染（`_Weapon0*` + `_Weapon1*`）
   - 双持武器在两个锚点同时显示
   - 测试 UI 拆分为主手/副手两个下拉框
+
+- **v2.2**: 区域扩展姿态与对称收缩
+  - 新增 `RegionExpandPose`（HeadUp/HeadLeft/HeadRight/HeadDown）统一描述角色头相对屏幕的方向
+  - 区域扩展逻辑通过 `MapExpandByPose` 将「向头/向脚/左右」的身体坐标扩展量旋转到屏幕坐标
+  - `ExpandRegionWithBoundaryUV` 依据姿态旋转 UV 采样方向，保持扩展颜色梯度与姿态一致
+  - `ShrinkRegionByPoseAndDetectSize` 利用 `headDetectSize/torsoDetectSize` 与姿态信息，将扩展区域精确收缩回检测区域，实现「扩一次 → 收一次」近似可逆
 

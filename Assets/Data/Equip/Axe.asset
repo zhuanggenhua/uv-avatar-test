@@ -28,8 +28,18 @@ MonoBehaviour:
     sw: {fileID: 0}
     ne: {fileID: 0}
     nw: {fileID: 0}
-  weaponSlotType: 1
-  useOffHandAnchor: 1
+  leftVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  rightVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  weaponSlotType: 0
+  useOffHandAnchor: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
@@ -38,4 +48,34 @@ MonoBehaviour:
     rgba: 4281492630
   hideHair: 0
   hideBeard: 0
-  animSet: {fileID: 0}
+  animSequences:
+  - animationType: {fileID: 11400000, guid: 8a13398d894013e4a81bfbe6f6f5ff70, type: 2}
+    strips:
+    - facing: 0
+      frames:
+      - {fileID: -8856380046396690585, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: -4214533609981744155, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: 3556765037724767281, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: 5303524628448658866, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      depthModes: 00000000000000000000000000000000
+    - facing: 1
+      frames:
+      - {fileID: -8448364821645939574, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: -5070818664823380801, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: 6346826995699654337, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: 3659354252344944306, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      depthModes: 00000000000000000000000000000000
+    - facing: 2
+      frames:
+      - {fileID: 544660992, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: 244114434, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: -308820812597511980, guid: 9aca8fc187b1bd34da7ceb376e2d843e, type: 3}
+      - {fileID: -3252543344925849580, guid: 9aca8fc187b1bd34da7ceb376e2d843e, type: 3}
+      depthModes: 00000000000000000100000001000000
+    - facing: 3
+      frames:
+      - {fileID: 1449179226, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: -1831142471, guid: 6bededc5ab2f9ea4f98b3699ef8fe67b, type: 3}
+      - {fileID: -2033588453, guid: 9aca8fc187b1bd34da7ceb376e2d843e, type: 3}
+      - {fileID: 900401127, guid: 9aca8fc187b1bd34da7ceb376e2d843e, type: 3}
+      depthModes: 00000000000000000100000001000000

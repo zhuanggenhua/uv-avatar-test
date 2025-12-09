@@ -183,7 +183,7 @@ namespace EquipmentSystem.Editor
                 else
                 {
                     xStart = minX;
-                    xEnd = Mathf.Min(p.frameSize.x, minX + colCount + 1);
+                    xEnd = Mathf.Min(p.frameSize.x, minX + colCount);
                     xStep = 1;
                 }
 
@@ -199,12 +199,7 @@ namespace EquipmentSystem.Editor
                             matchedYs.Add(y);
                     }
 
-                    if (matchedYs.Count == 1)
-                    {
-                        result.Add(new Vector2Int(x, matchedYs[0]));
-                        break;
-                    }
-                    else if (matchedYs.Count > 1)
+                    if (matchedYs.Count > 0)
                     {
                         foreach (int y in matchedYs)
                         {
@@ -236,45 +231,171 @@ namespace EquipmentSystem.Editor
             return result;
         }
 
+#region 找眼睛
         /// <summary>
         /// 检测头部区域内的眼睛
         /// 
         /// 检测原理：
-        /// 1. 在头部区域内扫描黑色/描边像素
-        /// 2. 根据头部中心划分左右眼
-        /// 3. SE朝向时：画面左边是角色右眼，画面右边是角色左眼
+        /// 1. 在头部检测区域中间一行扫描黑色眼睛像素（优先使用黑色）
+        /// 2. 若该行没有任何黑色眼睛像素，则使用闭眼颜色再次扫描
+        /// 3. 根据头部中心划分左右眼：SE朝向时，画面左边是角色右眼，画面右边是角色左眼
         /// </summary>
-        public static void DetectEyes(DetectParams p, Vector2Int headDetectSize, 
-            out HashSet<Vector2Int> leftEye, out HashSet<Vector2Int> rightEye)
+        public static void DetectEyes(DetectParams p, Vector2Int headDetectSize,
+            out HashSet<Vector2Int> leftEye, out HashSet<Vector2Int> rightEye,
+            out bool leftEyeClosed, out bool rightEyeClosed)
         {
             leftEye = new HashSet<Vector2Int>();
             rightEye = new HashSet<Vector2Int>();
+            leftEyeClosed = false;
+            rightEyeClosed = false;
 
-            float headCenterX = p.firstPixel.x + headDetectSize.x / 2.0f;
+            int width = headDetectSize.x;
+            int height = headDetectSize.y;
+            if (width <= 0 || height <= 0)
+                return;
 
-            for (int dy = 0; dy < headDetectSize.y; dy++)
-            {
-                for (int dx = 0; dx < headDetectSize.x; dx++)
-                {
-                    int px = p.firstPixel.x + dx;
-                    int py = p.firstPixel.y + dy;
+            float headLeft = p.firstPixel.x;
+            float headRight = p.firstPixel.x + width - 1;
+            float headCenterX = (headLeft + headRight) * 0.5f;
 
-                    if (px < 0 || px >= p.frameSize.x || py < 0 || py >= p.frameSize.y)
-                        continue;
+            var outlineClusters = CollectEyeClusters(p, headDetectSize, c => p.cfg.IsOutline(c));
+            if (AssignEyesFromClusters(outlineClusters, headCenterX, leftEye, rightEye, false,
+                out leftEyeClosed, out rightEyeClosed))
+                return;
 
-                    var c = GetPixelFromParams(p, px, py);
-
-                    if (p.cfg.IsOutline(c))
-                    {
-                        // SE朝向：画面左边（x < 中心）是角色右眼，画面右边（x >= 中心）是角色左眼
-                        if (px < headCenterX)
-                            rightEye.Add(new Vector2Int(px, py));
-                        else
-                            leftEye.Add(new Vector2Int(px, py));
-                    }
-                }
-            }
+            var closedClusters = CollectEyeClusters(p, headDetectSize, c => p.cfg.IsClosedEyeColor(c));
+            AssignEyesFromClusters(closedClusters, headCenterX, leftEye, rightEye, true,
+                out leftEyeClosed, out rightEyeClosed);
         }
+
+        static List<List<Vector2Int>> CollectEyeClusters(DetectParams p, Vector2Int headDetectSize, Func<Color32, bool> matchPredicate)
+        {
+            var result = new List<List<Vector2Int>>();
+
+            int width = headDetectSize.x;
+            int height = headDetectSize.y;
+            if (width <= 0 || height <= 0)
+                return result;
+
+            int midLocalY = height / 2;
+            int py = p.firstPixel.y + midLocalY;
+            if (py < 0 || py >= p.frameSize.y)
+                return result;
+
+            List<Vector2Int> current = null;
+            for (int dx = 0; dx < width; dx++)
+            {
+                int px = p.firstPixel.x + dx;
+
+                bool match = false;
+                if (px >= 0 && px < p.frameSize.x)
+                {
+                    var c = GetPixelFromParams(p, px, py);
+                    match = matchPredicate(c);
+                }
+
+                if (!match)
+                {
+                    if (current != null && current.Count > 0)
+                    {
+                        result.Add(current);
+                        current = null;
+                    }
+                    continue;
+                }
+
+                if (current == null)
+                    current = new List<Vector2Int>();
+                current.Add(new Vector2Int(px, py));
+            }
+
+            if (current != null && current.Count > 0)
+                result.Add(current);
+
+            return result;
+        }
+
+        static bool AssignEyesFromClusters(List<List<Vector2Int>> clusters, float headCenterX,
+            HashSet<Vector2Int> leftEye, HashSet<Vector2Int> rightEye,
+            bool closed,
+            out bool leftEyeClosed, out bool rightEyeClosed)
+        {
+            leftEyeClosed = false;
+            rightEyeClosed = false;
+
+            if (clusters == null || clusters.Count == 0)
+                return false;
+
+            int clusterCount = clusters.Count;
+            var centersX = new float[clusterCount];
+            for (int i = 0; i < clusterCount; i++)
+            {
+                float sumX = 0f;
+                var list = clusters[i];
+                for (int j = 0; j < list.Count; j++)
+                    sumX += list[j].x;
+                centersX[i] = sumX / Mathf.Max(1, list.Count);
+            }
+
+            var candidateIndices = new List<int>();
+            for (int i = 0; i < clusterCount; i++)
+                candidateIndices.Add(i);
+
+            candidateIndices.Sort((a, b) =>
+            {
+                float da = Mathf.Abs(centersX[a] - headCenterX);
+                float db = Mathf.Abs(centersX[b] - headCenterX);
+                return da.CompareTo(db);
+            });
+
+            if (candidateIndices.Count == 1)
+            {
+                int idx = candidateIndices[0];
+                float cx = centersX[idx];
+
+                if (cx < headCenterX)
+                {
+                    foreach (var pos in clusters[idx])
+                        rightEye.Add(pos);
+                    rightEyeClosed = closed;
+                }
+                else
+                {
+                    foreach (var pos in clusters[idx])
+                        leftEye.Add(pos);
+                    leftEyeClosed = closed;
+                }
+
+                return leftEye.Count > 0 || rightEye.Count > 0;
+            }
+
+            int idx0 = candidateIndices[0];
+            int idx1 = candidateIndices[1];
+
+            // 屏幕左边的是角色右眼，右边的是角色左眼
+            if (centersX[idx0] <= centersX[idx1])
+            {
+                foreach (var pos in clusters[idx0])
+                    rightEye.Add(pos);
+                foreach (var pos in clusters[idx1])
+                    leftEye.Add(pos);
+            }
+            else
+            {
+                foreach (var pos in clusters[idx1])
+                    rightEye.Add(pos);
+                foreach (var pos in clusters[idx0])
+                    leftEye.Add(pos);
+            }
+
+            if (rightEye.Count > 0)
+                rightEyeClosed = closed;
+            if (leftEye.Count > 0)
+                leftEyeClosed = closed;
+
+            return leftEye.Count > 0 || rightEye.Count > 0;
+        }
+        #endregion
 
         static Color32 GetPixelFromParams(DetectParams p, int x, int y)
         {
@@ -298,11 +419,9 @@ namespace EquipmentSystem.Editor
         /// 支持并行处理以提高性能
         /// </summary>
         /// <param name="data">要处理的帧数据</param>
-        public static void ExpandAllPartsForAllFrames(CharacterFrameData data)
+        public static void ExpandAllPartsForAllFrames(CharacterFrameData data, AnimationData anim, RegionExpandPose pose)
         {
-            if (data == null) return;
-
-            Undo.RecordObject(data, "扩展所有帧");
+            if (data == null || anim == null) return;
 
             var paletteSize = data.paletteSize;
             var expandParams = new ExpandParams
@@ -313,36 +432,55 @@ namespace EquipmentSystem.Editor
                 bodyUp = data.bodyExpandUp,
                 bodyDown = data.bodyExpandDown,
                 bodySide = data.bodyExpandSide,
-                bodyUpStartStep = data.bodyExpandUpStartStep <= 0 ? 1 : data.bodyExpandUpStartStep
+                bodyUpStartStep = data.bodyExpandUpStartStep <= 0 ? 1 : data.bodyExpandUpStartStep,
+                bodyDownStartStep = data.bodyExpandDownStartStep <= 0 ? 1 : data.bodyExpandDownStartStep
             };
 
             int expandedCount = 0;
 
-            foreach (var anim in data.animations)
+            foreach (var frame in anim.frames)
             {
-                foreach (var frame in anim.frames)
-                {
-                    bool expanded = false;
+                bool expanded = false;
 
                     // 扩展身体
                     var torsoRegion = frame.bodyRegions.FirstOrDefault(r => r.part == CharacterBodyPart.Torso);
                     if (torsoRegion != null)
                     {
-                        var pixels = new HashSet<Vector2Int>(torsoRegion.pixels.Select(px => px.position));
-                        var uvs = torsoRegion.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
+                        var originalPixels = torsoRegion.pixels;
+                        var originalPositions = new HashSet<Vector2Int>(originalPixels.Select(px => px.position));
+                        var originalCore = new HashSet<Vector2Int>(originalPixels.Where(px => px.isCore).Select(px => px.position));
+
+                        var pixels = new HashSet<Vector2Int>(originalPositions);
+                        var uvs = originalPixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
                         int before = pixels.Count;
 
                         var frameSize = anim.frameSize;
+
+                        // 根据姿态把“身体坐标系”的扩展量映射到屏幕坐标的 up/down/left/right
+                        int bodyUp = expandParams.bodyUp;
+                        int bodyDown = expandParams.bodyDown;
+                        int bodyLeft = expandParams.bodySide;
+                        int bodyRight = expandParams.bodySide;
+                        FrameDataAlgorithms.MapExpandByPose(pose, expandParams.bodyUp, expandParams.bodyDown, expandParams.bodySide,
+                            out bodyUp, out bodyDown, out bodyLeft, out bodyRight);
+
                         FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs, 
-                            expandParams.bodyUp, expandParams.bodyDown, expandParams.bodySide, expandParams.bodySide, 
-                            frameSize, paletteSize, expandParams.bodyUpStartStep);
+                            bodyUp, bodyDown, bodyLeft, bodyRight, 
+                            frameSize, paletteSize, expandParams.bodyUpStartStep, expandParams.bodyDownStartStep, pose);
 
                         if (pixels.Count != before)
                         {
                             torsoRegion.pixels.Clear();
                             foreach (var pos in pixels)
                             {
-                                var pixel = new BodyPartPixel { part = CharacterBodyPart.Torso, position = pos };
+                                bool wasOriginal = originalPositions.Contains(pos);
+                                bool isCore = wasOriginal && originalCore.Contains(pos);
+                                var pixel = new BodyPartPixel
+                                {
+                                    part = CharacterBodyPart.Torso,
+                                    position = pos,
+                                    isCore = isCore
+                                };
                                 if (uvs.TryGetValue(pos, out var uv))
                                     pixel.uv = uv;
                                 torsoRegion.pixels.Add(pixel);
@@ -355,21 +493,41 @@ namespace EquipmentSystem.Editor
                     var headRegion = frame.bodyRegions.FirstOrDefault(r => r.part == CharacterBodyPart.Head);
                     if (headRegion != null)
                     {
-                        var pixels = new HashSet<Vector2Int>(headRegion.pixels.Select(px => px.position));
-                        var uvs = headRegion.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
+                        var originalPixels = headRegion.pixels;
+                        var originalPositions = new HashSet<Vector2Int>(originalPixels.Select(px => px.position));
+                        var originalCore = new HashSet<Vector2Int>(originalPixels.Where(px => px.isCore).Select(px => px.position));
+
+                        var pixels = new HashSet<Vector2Int>(originalPositions);
+                        var uvs = originalPixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
                         int before = pixels.Count;
 
                         var frameSize = anim.frameSize;
+
+                        // 根据姿态把“头部坐标系”的扩展量映射到屏幕坐标的 up/down/left/right
+                        int headUp = expandParams.headUp;
+                        int headDown = expandParams.headDown;
+                        int headLeft = expandParams.headSide;
+                        int headRight = expandParams.headSide;
+                        FrameDataAlgorithms.MapExpandByPose(pose, expandParams.headUp, expandParams.headDown, expandParams.headSide,
+                            out headUp, out headDown, out headLeft, out headRight);
+
                         FrameDataAlgorithms.ExpandRegionWithBoundaryUV(pixels, uvs,
-                            expandParams.headUp, expandParams.headDown, expandParams.headSide, expandParams.headSide, 
-                            frameSize, paletteSize);
+                            headUp, headDown, headLeft, headRight, 
+                            frameSize, paletteSize, 1, 1, pose);
 
                         if (pixels.Count > before)
                         {
                             headRegion.pixels.Clear();
                             foreach (var pos in pixels)
                             {
-                                var pixel = new BodyPartPixel { part = CharacterBodyPart.Head, position = pos };
+                                bool wasOriginal = originalPositions.Contains(pos);
+                                bool isCore = wasOriginal && originalCore.Contains(pos);
+                                var pixel = new BodyPartPixel
+                                {
+                                    part = CharacterBodyPart.Head,
+                                    position = pos,
+                                    isCore = isCore
+                                };
                                 if (uvs.TryGetValue(pos, out var uv))
                                     pixel.uv = uv;
                                 headRegion.pixels.Add(pixel);
@@ -380,7 +538,6 @@ namespace EquipmentSystem.Editor
 
                     if (expanded) expandedCount++;
                 }
-            }
 
             EditorUtility.SetDirty(data);
             Debug.Log($"[扩展] 已扩展 {expandedCount} 帧的区域");
@@ -395,48 +552,87 @@ namespace EquipmentSystem.Editor
         /// 支持并行处理以提高性能
         /// </summary>
         /// <param name="data">要处理的帧数据</param>
-        public static void ShrinkAllPartsForAllFrames(CharacterFrameData data)
+        public static void ShrinkAllPartsForAllFrames(CharacterFrameData data, AnimationData anim, RegionExpandPose pose)
         {
-            if (data == null) return;
-
-            Undo.RecordObject(data, "收缩所有帧");
+            if (data == null || anim == null) return;
 
             int shrunkCount = 0;
 
-            foreach (var anim in data.animations)
+            foreach (var frame in anim.frames)
             {
-                foreach (var frame in anim.frames)
+                bool shrunk = false;
+
+                foreach (var region in frame.bodyRegions)
                 {
-                    bool shrunk = false;
+                    if (region.part != CharacterBodyPart.Head && region.part != CharacterBodyPart.Torso)
+                        continue;
 
-                    foreach (var region in frame.bodyRegions)
+                    var originalPixels = region.pixels;
+                    if (originalPixels == null || originalPixels.Count == 0)
+                        continue;
+
+                    // 优先：若存在核心像素，则按 isCore 进行收缩
+                    bool hasCore = originalPixels.Any(px => px.isCore);
+                    if (hasCore)
                     {
-                        if (region.part != CharacterBodyPart.Head && region.part != CharacterBodyPart.Torso)
-                            continue;
-
-                        var pixels = new HashSet<Vector2Int>(region.pixels.Select(px => px.position));
-                        var uvs = region.pixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
-                        int before = pixels.Count;
-
-                        // 固定收缩1像素
-                        FrameDataAlgorithms.ShrinkRegion(pixels, uvs, 1, 1, 1, 1);
-
-                        if (pixels.Count < before)
-                        {
-                            region.pixels.Clear();
-                            foreach (var pos in pixels)
-                            {
-                                var pixel = new BodyPartPixel { part = region.part, position = pos };
-                                if (uvs.TryGetValue(pos, out var uv))
-                                    pixel.uv = uv;
-                                region.pixels.Add(pixel);
-                            }
+                        int beforeCount = originalPixels.Count;
+                        region.pixels = originalPixels.Where(px => px.isCore).ToList();
+                        if (region.pixels.Count < beforeCount)
                             shrunk = true;
-                        }
+                        continue;
                     }
 
-                    if (shrunk) shrunkCount++;
+                    // 否则退回旧的几何收缩逻辑，兼容无 isCore 的旧数据
+                    int shrinkUp, shrinkDown, shrinkSide;
+                    if (region.part == CharacterBodyPart.Head)
+                    {
+                        shrinkUp = data.headExpandUp;
+                        shrinkDown = data.headExpandDown;
+                        shrinkSide = data.headExpandSide;
+                    }
+                    else
+                    {
+                        shrinkUp = data.bodyExpandUp;
+                        shrinkDown = data.bodyExpandDown;
+                        shrinkSide = data.bodyExpandSide;
+                    }
+
+                    if (shrinkUp == 0 && shrinkDown == 0 && shrinkSide == 0)
+                        continue;
+
+                    var positions = new HashSet<Vector2Int>(originalPixels.Select(px => px.position));
+                    var uvs = originalPixels.Where(px => px.HasUV).ToDictionary(px => px.position, px => px.uv);
+                    int before = positions.Count;
+
+                    Vector2Int detectSize = region.part == CharacterBodyPart.Head
+                        ? data.headDetectSize
+                        : data.torsoDetectSize;
+
+                    FrameDataAlgorithms.ShrinkRegionByPoseAndDetectSize(
+                        positions, uvs,
+                        detectSize,
+                        pose,
+                        shrinkUp, shrinkDown, shrinkSide);
+
+                    if (positions.Count < before)
+                    {
+                        region.pixels.Clear();
+                        foreach (var pos in positions)
+                        {
+                            var pixel = new BodyPartPixel
+                            {
+                                part = region.part,
+                                position = pos
+                            };
+                            if (uvs.TryGetValue(pos, out var uv))
+                                pixel.uv = uv;
+                            region.pixels.Add(pixel);
+                        }
+                        shrunk = true;
+                    }
                 }
+
+                if (shrunk) shrunkCount++;
             }
 
             EditorUtility.SetDirty(data);
@@ -558,7 +754,8 @@ namespace EquipmentSystem.Editor
                         part = sourceRegion.part,
                         position = newPos,
                         color = px.color,
-                        uv = px.uv
+                        uv = px.uv,
+                        isCore = px.isCore
                     });
                 }
                 
@@ -579,10 +776,41 @@ namespace EquipmentSystem.Editor
                 CopyLimbMask(sourceFrame.limbMask.rightFoot, targetFrame.limbMask.rightFoot, translatePos, frameSize);
                 if (includeEyes)
                 {
-                    CopyLimbMask(sourceFrame.limbMask.leftEye, targetFrame.limbMask.leftEye, translatePos, frameSize);
-                    CopyLimbMask(sourceFrame.limbMask.rightEye, targetFrame.limbMask.rightEye, translatePos, frameSize);
+                    // 眼睛：位置镜像 + 交换类型，保证 SE/SW 都是"右眼在屏幕左边"
+                    if (translatePos)
+                    {
+                        CopyLimbMask(sourceFrame.limbMask.leftEye, targetFrame.limbMask.rightEye, true, frameSize);
+                        CopyLimbMask(sourceFrame.limbMask.rightEye, targetFrame.limbMask.leftEye, true, frameSize);
+                    }
+                    else
+                    {
+                        CopyLimbMask(sourceFrame.limbMask.leftEye, targetFrame.limbMask.leftEye, false, frameSize);
+                        CopyLimbMask(sourceFrame.limbMask.rightEye, targetFrame.limbMask.rightEye, false, frameSize);
+                    }
                 }
             }
+
+            if (includeEyes)
+            {
+                if (translatePos)
+                {
+                    targetFrame.leftEyeClosed = sourceFrame.rightEyeClosed;
+                    targetFrame.rightEyeClosed = sourceFrame.leftEyeClosed;
+                }
+                else
+                {
+                    targetFrame.leftEyeClosed = sourceFrame.leftEyeClosed;
+                    targetFrame.rightEyeClosed = sourceFrame.rightEyeClosed;
+                }
+            }
+            else
+            {
+                targetFrame.leftEyeClosed = false;
+                targetFrame.rightEyeClosed = false;
+            }
+            
+            // 受击描边帧：直接拷贝
+            targetFrame.hitOutlineFrame = sourceFrame.hitOutlineFrame;
             
             // 生成锚点
             foreach (var anchor in sourceFrame.anchors)
@@ -645,7 +873,7 @@ namespace EquipmentSystem.Editor
         struct ExpandParams
         {
             public int headUp, headDown, headSide;
-            public int bodyUp, bodyDown, bodySide, bodyUpStartStep;
+            public int bodyUp, bodyDown, bodySide, bodyUpStartStep, bodyDownStartStep;
         }
 
         #endregion

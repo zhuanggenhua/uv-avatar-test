@@ -24,7 +24,20 @@ namespace EquipmentSystem
     {
         Base = 0,
         Up = 1,
-        Down = 2
+        Down = 2,
+        Left = 3,
+        Right = 4
+    }
+
+    /// <summary>
+    /// 区域扩展姿态（控制头/身体区域扩展轴相对于屏幕的方向）
+    /// </summary>
+    public enum RegionExpandPose
+    {
+        HeadUp = 0,    // 头在上：扩展轴不旋转（默认站立）
+        HeadLeft = 1,  // 头在左：扩展轴逆时针旋转 90 度
+        HeadRight = 2, // 头在右：扩展轴顺时针旋转 90 度
+        HeadDown = 3   // 头在下：扩展轴旋转 180 度（倒立）
     }
 
     /// <summary>
@@ -163,6 +176,8 @@ namespace EquipmentSystem
         public CharacterBodyPart part;
         public Vector2Int position;
         public Color32 color; // 原始颜色（用于匹配）
+
+        public bool isCore;
 
         /// <summary>
         /// UV 坐标：直接存储要采样装备贴图的 UV 位置
@@ -310,6 +325,13 @@ namespace EquipmentSystem
         [Header("手脚蒙版 - 颜色替换")]
         public LimbMask limbMask = new LimbMask();
 
+        public bool leftEyeClosed;
+        public bool rightEyeClosed;
+        public bool hitOutlineFrame;
+
+        // 武器序列帧渲染时的额外偏移（像素），仅用于在无锚点或需要细调时调整武器位置
+        public Vector2Int sequenceOffset;
+
         public AnchorPoint GetAnchor(AnchorType type) => anchors.Find(a => a.type == type);
 
         /// <summary>
@@ -445,6 +467,9 @@ namespace EquipmentSystem
         [Tooltip("手脚颜色匹配容差（RGB差值之和，默认30可容忍轻微色差）")]
         public int limbColorThreshold = 30;
 
+        public Color32 closedEyeColor = new Color32(0, 0, 0, 0);
+        public int closedEyeColorThreshold = 30;
+
         /// <summary>
         /// 是否为描边/黑色像素
         /// </summary>
@@ -462,8 +487,19 @@ namespace EquipmentSystem
 
         /// <summary>
         /// 是否为有色非黑色像素
+        /// 额外约定：纯白 (255,255,255) 不视为有效有色像素，用于避免高光/辅助标记干扰自动检测
         /// </summary>
-        public bool IsColoredPixel(Color32 c) => c.a > 0 && !IsOutline(c);
+        public bool IsColoredPixel(Color32 c)
+        {
+            if (c.a == 0)
+                return false;
+
+            // 忽略纯白像素
+            if (c.r == 255 && c.g == 255 && c.b == 255)
+                return false;
+
+            return !IsOutline(c);
+        }
 
         /// <summary>
         /// 判断颜色是否与皮肤色相近（用手部颜色作为参考）
@@ -476,6 +512,15 @@ namespace EquipmentSystem
             // 与任一手部颜色相近即可，复用 limbColorThreshold
             return ColorSimilar(c, leftHandColor, limbColorThreshold)
                 || ColorSimilar(c, rightHandColor, limbColorThreshold);
+        }
+
+        public bool IsClosedEyeColor(Color32 pixel)
+        {
+            if (closedEyeColor.a == 0)
+                return false;
+            if (pixel.a == 0 || IsOutline(pixel))
+                return false;
+            return ColorSimilar(pixel, closedEyeColor, closedEyeColorThreshold);
         }
 
         /// <summary>
@@ -522,26 +567,33 @@ namespace EquipmentSystem
 
         [Header("头部区域扩展配置")]
         [Tooltip("头部向上扩展的像素数")]
-        public int headExpandUp = 7;
+        public int headExpandUp = 10;
 
         [Tooltip("头部向左右扩展的像素数")]
-        public int headExpandSide = 7;
+        public int headExpandSide = 10;
 
         [Tooltip("头部向下扩展的像素数")]
         public int headExpandDown = 3;
 
         [Header("身体区域扩展配置")]
         [Tooltip("身体向上扩展的像素数")]
-        public int bodyExpandUp = 3;
+        public int bodyExpandUp = 20;
 
         [Tooltip("身体向上扩展的起始步长（1 表示紧贴身体向上，>1 表示跳过若干行再开始扩展）")]
         public int bodyExpandUpStartStep = 1;
 
         [Tooltip("身体向左右扩展的像素数")]
-        public int bodyExpandSide = 4;
+        public int bodyExpandSide = 10;
 
         [Tooltip("身体向下扩展的像素数")]
         public int bodyExpandDown = 2;
+
+        [Tooltip("身体向下扩展的起始步长（1 表示紧贴身体向下，>1 表示跳过若干行再开始扩展）")]
+        public int bodyExpandDownStartStep = 1;
+
+        [Header("区域扩展姿态")]
+        [Tooltip("控制区域扩展时角色头相对于屏幕的方向：头在上/左/右/下，对应扩展轴旋转 0°/±90°/180°")]
+        public RegionExpandPose regionExpandPose = RegionExpandPose.HeadUp;
 
         [Header("阴影配置")]
         [Tooltip("帧内地面Y坐标（像素），所有角色共用同一基准线")]

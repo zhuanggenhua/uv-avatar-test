@@ -28,7 +28,18 @@ MonoBehaviour:
     sw: {fileID: 0}
     ne: {fileID: 0}
     nw: {fileID: 0}
-  weaponSlotType: 3
+  leftVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  rightVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
+  weaponSlotType: 0
+  useOffHandAnchor: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
@@ -37,4 +48,4 @@ MonoBehaviour:
     rgba: 4281492630
   hideHair: 0
   hideBeard: 0
-  animSet: {fileID: 0}
+  animSequences: []

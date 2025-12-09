@@ -47,22 +47,53 @@ namespace EquipmentSystem.Editor
             int palH,
             Vector2Int frameSize,
             HashSet<Vector2Int> partPixels,
-            Dictionary<Vector2Int, Vector2> partUVs)
+            Dictionary<Vector2Int, Vector2> partUVs,
+            CharacterFacing facing)
         {
             int detectW = detectSize.x, detectH = detectSize.y;
             int uvW = uvRegion.width, uvH = uvRegion.height;
-            
-            bool isHead = (part == CharacterBodyPart.Head);
-            
-            // 头部：靠右对齐，多出的全放左边
-            // 身体：居中对齐，多出的左右分摊
-            int extraLeftX = isHead 
-                ? Mathf.Max(0, detectW - uvW)                    // 头部：全放左边
-                : Mathf.Max(0, (detectW - uvW + 1) / 2);         // 身体：居中
+
+            // 垂直方向：统一使用一套逻辑
+            // detectH > uvH 时：居中，多出的用上下边界行填充
+            // detectH == uvH 时：一一对应
+            // detectH < uvH 时：从UV顶部开始裁剪，优先使用上方行
             int extraTopY = Mathf.Max(0, (detectH - uvH + 1) / 2);
-            
-            // 身体：当UV高度 > 检测高度时，从UV的下部开始取
-            int uvOffsetY = isHead ? 0 : Mathf.Max(0, (uvH - detectH + 1) / 2);
+
+            // 水平方向：统一使用一套逻辑，并根据朝向在无法完美居中时略微偏向朝向一侧
+            bool isEast = (facing == CharacterFacing.SouthEast || facing == CharacterFacing.NorthEast);
+            bool expandX = detectW >= uvW;
+            int coreStartX = 0, coreEndX = 0;
+            int leftGapX = 0, rightGapX = 0;
+            int leftCropX = 0;
+
+            if (expandX)
+            {
+                int diff = detectW - uvW;
+                if (diff > 0)
+                {
+                    int half = diff / 2;
+                    int rem = diff % 2;
+                    if (isEast)
+                    {
+                        leftGapX = half + rem;
+                        rightGapX = diff - leftGapX;
+                    }
+                    else
+                    {
+                        rightGapX = half + rem;
+                        leftGapX = diff - rightGapX;
+                    }
+                }
+
+                coreStartX = leftGapX;
+                coreEndX = coreStartX + uvW;
+            }
+            else
+            {
+                int diff = uvW - detectW; // > 0
+                int baseCrop = diff / 2;
+                leftCropX = baseCrop + (isEast ? diff % 2 : 0);
+            }
             
             for (int dy = 0; dy < detectH; dy++)
             {
@@ -74,44 +105,32 @@ namespace EquipmentSystem.Editor
                     var pos = new Vector2Int(px, py);
                     partPixels.Add(pos);
                     
-                    // 计算对应的UV坐标
+                    // 计算对应的UV坐标（头部和身体使用统一算法）
                     int uvDx, uvDy;
-                    
-                    if (isHead)
+
+                    // 水平：扩展或裁剪，左右空缺分别用最左列和最右列
+                    if (expandX)
                     {
-                        // 头部特殊处理
-                        if (dx == 0)
-                            uvDx = 0;  // 第一列
-                        else if (dx <= 1 + extraLeftX)
-                            uvDx = 1;  // 第二列（复制填充多出的空间）
+                        if (dx < coreStartX)
+                            uvDx = 0;              // 左边空缺：用最左列
+                        else if (dx >= coreEndX)
+                            uvDx = uvW - 1;        // 右边空缺：用最右列
                         else
-                            uvDx = dx - extraLeftX;  // 剩余正常映射
-                        
-                        // Y方向：居中，多出的用边界行填充
-                        if (dy < extraTopY)
-                            uvDy = 0;
-                        else if (dy >= extraTopY + uvH)
-                            uvDy = uvH - 1;
-                        else
-                            uvDy = dy - extraTopY;
+                            uvDx = dx - coreStartX; // 中间正常映射
                     }
                     else
                     {
-                        // 身体：居中对齐，边缘复制边界UV
-                        if (dx < extraLeftX)
-                            uvDx = 0;
-                        else if (dx >= extraLeftX + uvW)
-                            uvDx = uvW - 1;
-                        else
-                            uvDx = dx - extraLeftX;
-                        
-                        if (dy < extraTopY)
-                            uvDy = uvOffsetY;
-                        else if (dy >= extraTopY + uvH)
-                            uvDy = uvH - 1;
-                        else
-                            uvDy = Mathf.Min(dy - extraTopY + uvOffsetY, uvH - 1);
+                        // UV 比检测区域更宽时：从中间裁剪，多出的行根据朝向略微偏移
+                        uvDx = Mathf.Clamp(dx + leftCropX, 0, uvW - 1);
                     }
+
+                    // 垂直：居中，多出的用上下边界行填充；当 UV 高度 > 检测高度时，从UV顶部开始取
+                    if (dy < extraTopY)
+                        uvDy = 0;
+                    else if (dy >= extraTopY + uvH)
+                        uvDy = uvH - 1;
+                    else
+                        uvDy = dy - extraTopY;
                     
                     // UV是画板上的绝对坐标，和装备贴图布局一致
                     int uvX = uvRegion.x + uvDx;
@@ -193,6 +212,7 @@ namespace EquipmentSystem.Editor
         /// 2. UV坐标映射
         /// 3. 贴图朝向和变体
         /// 4. 部位类型和方向
+        /// 5. 核心/扩展标记（isCore）
         /// 
         /// 特殊处理：
         /// - 即使没有像素，但设置了朝向或变体也会保存区域
@@ -203,6 +223,7 @@ namespace EquipmentSystem.Editor
             CharacterBodyPart part,
             HashSet<Vector2Int> partPixels,
             Dictionary<Vector2Int, Vector2> partUVs,
+            HashSet<Vector2Int> corePixels,
             Dictionary<CharacterBodyPart, CharacterFacing> partSpriteFacings,
             Dictionary<CharacterBodyPart, FrameVariant> partVariants,
             Color32[] pixels,
@@ -232,7 +253,7 @@ namespace EquipmentSystem.Editor
                 variant = partVariants.ContainsKey(part) ? partVariants[part] : FrameVariant.Base
             };
             
-            // 保存像素（包括颜色和UV）
+            // 保存像素（包括颜色 / UV / 核心标记）
             if (partPixels != null)
             {
                 foreach (var pos in partPixels.OrderBy(p => p.y).ThenBy(p => p.x))
@@ -242,7 +263,8 @@ namespace EquipmentSystem.Editor
                     {
                         part = part,
                         position = pos,
-                        color = color
+                        color = color,
+                        isCore = corePixels != null && corePixels.Contains(pos)
                     };
                     
                     // 如果有UV映射，添加UV

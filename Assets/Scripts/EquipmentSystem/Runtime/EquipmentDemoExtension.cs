@@ -12,7 +12,7 @@ namespace EquipmentSystem
     public class EquipmentDemoExtension : MonoBehaviour
     {
         [Header("装备库")]
-        public List<EquipmentData> availableEquipments = new List<EquipmentData>();
+        public List<EquipmentRenderData> availableEquipments = new List<EquipmentRenderData>();
         
         [Header("外观库")]
         public List<CharacterAppearance> availableAppearances = new List<CharacterAppearance>();
@@ -26,12 +26,12 @@ namespace EquipmentSystem
         AnimationController _currentAnimController;
         
         // 按类型分组的装备
-        Dictionary<EquipmentType, List<EquipmentData>> _equipmentsByType;
+        Dictionary<EquipmentType, List<EquipmentRenderData>> _equipmentsByType;
         Dictionary<EquipmentType, int> _selectedIndex;  // 每个类型的当前选择 (0=无)
         
         // 武器分组（主手/副手）
-        List<EquipmentData> _mainHandWeapons = new List<EquipmentData>();
-        List<EquipmentData> _offHandWeapons = new List<EquipmentData>();
+        List<EquipmentRenderData> _mainHandWeapons = new List<EquipmentRenderData>();
+        List<EquipmentRenderData> _offHandWeapons = new List<EquipmentRenderData>();
         int _selectedMainHandIndex = 0;  // 0 = 无
         int _selectedOffHandIndex = 0;   // 0 = 无
         
@@ -41,7 +41,7 @@ namespace EquipmentSystem
         void Start()
         {
             // 按类型分组装备
-            _equipmentsByType = new Dictionary<EquipmentType, List<EquipmentData>>();
+            _equipmentsByType = new Dictionary<EquipmentType, List<EquipmentRenderData>>();
             _selectedIndex = new Dictionary<EquipmentType, int>();
             
             foreach (EquipmentType type in System.Enum.GetValues(typeof(EquipmentType)))
@@ -357,6 +357,9 @@ namespace EquipmentSystem
             // 获取动画选项
             string[] animOptions = GetAnimationDisplayNames(_currentAnimController);
             string[] dirOptions = _currentAnimController?.GetDirectionNames() ?? DirectionNames;
+
+            // 数字键快捷切换动画（1~9）
+            HandleAnimHotkeys(animOptions);
             
             bool hasAnimDropdownOpen = _openAnimDropdown != 0;
             
@@ -647,6 +650,55 @@ namespace EquipmentSystem
                 return System.Array.Empty<string>();
             
             return controller.animDatabase.GetAllDisplayNames();
+        }
+
+        /// <summary>
+        /// 数字键快捷切换动画（1~9 映射到索引 0~8）
+        /// </summary>
+        void HandleAnimHotkeys(string[] animOptions)
+        {
+            var e = Event.current;
+            if (e == null || e.type != EventType.KeyDown)
+                return;
+
+            if (_currentAnimController == null || animOptions == null || animOptions.Length == 0)
+                return;
+
+            // 任意下拉框打开时，不响应快捷键，避免干扰选择
+            if (_openAnimDropdown != 0 || _openDropdown != null || _openAppearanceDropdown || _openMainHandDropdown || _openOffHandDropdown)
+                return;
+
+            int targetIndex = -1;
+            switch (e.keyCode)
+            {
+                case KeyCode.Alpha1:
+                case KeyCode.Keypad1: targetIndex = 0; break;
+                case KeyCode.Alpha2:
+                case KeyCode.Keypad2: targetIndex = 1; break;
+                case KeyCode.Alpha3:
+                case KeyCode.Keypad3: targetIndex = 2; break;
+                case KeyCode.Alpha4:
+                case KeyCode.Keypad4: targetIndex = 3; break;
+                case KeyCode.Alpha5:
+                case KeyCode.Keypad5: targetIndex = 4; break;
+                case KeyCode.Alpha6:
+                case KeyCode.Keypad6: targetIndex = 5; break;
+                case KeyCode.Alpha7:
+                case KeyCode.Keypad7: targetIndex = 6; break;
+                case KeyCode.Alpha8:
+                case KeyCode.Keypad8: targetIndex = 7; break;
+                case KeyCode.Alpha9:
+                case KeyCode.Keypad9: targetIndex = 8; break;
+                default:
+                    return;
+            }
+
+            if (targetIndex < 0 || targetIndex >= animOptions.Length)
+                return;
+
+            _selectedAnimIndex = targetIndex;
+            ApplyAnimation(targetIndex);
+            e.Use();
         }
         
         GUIStyle GetTitleStyle()

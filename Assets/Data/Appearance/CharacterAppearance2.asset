@@ -20,10 +20,12 @@ MonoBehaviour:
   beardSW: {fileID: 0}
   beardNE: {fileID: 0}
   beardNW: {fileID: 0}
-  faceAccessorySE: {fileID: 21300000, guid: b394b2f5be6f63b4294dae19e1b700b6, type: 3}
-  faceAccessorySW: {fileID: 21300000, guid: e3ef21738d8f72a499f58951319d428e, type: 3}
+  faceAccessorySE: {fileID: 0}
+  faceAccessorySW: {fileID: 0}
   faceAccessoryNE: {fileID: 0}
   faceAccessoryNW: {fileID: 0}
   skinColor: {r: 1, g: 0.968804, b: 0, a: 1}
   leftEyeColor: {r: 0.481953, g: 0.47011784, b: 0.48787057, a: 1}
   rightEyeColor: {r: 0, g: 0, b: 0, a: 1}
+  eyeDecorationType: 0
+  eyeDecorationColor: {r: 0.3, g: 0.2, b: 0.2, a: 1}

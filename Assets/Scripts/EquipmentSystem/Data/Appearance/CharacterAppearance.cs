@@ -3,6 +3,16 @@ using UnityEngine;
 namespace EquipmentSystem
 {
     /// <summary>
+    /// 眼部装饰类型
+    /// </summary>
+    public enum EyeDecorationType
+    {
+        None = 0,       // 无装饰
+        DarkCircle = 1, // 黑眼圈：两只眼睛下方一格
+        Scar = 2        // 刀疤：SE时右眼上下一格，SW时左眼上下一格
+    }
+
+    /// <summary>
     /// 角色外观数据 - 用于捏人系统
     /// 包含头发、胡子等角色基础外观（非装备）
     /// </summary>
@@ -27,13 +37,28 @@ namespace EquipmentSystem
         [Tooltip("只在朝南(SE/SW)时显示，朝北不显示")]
         public Sprite faceAccessorySE;
         public Sprite faceAccessorySW;
+        public Sprite faceAccessoryNE;
+        public Sprite faceAccessoryNW;
         
         [Header("肤色")]
         public Color skinColor = new Color(1f, 0.85f, 0.7f, 1f);
         
+        [Header("肤色调色板（Key/Palette 查表式换肤）")]
+        [Tooltip("皮肤索引贴图：与角色 spritesheet 同尺寸，alpha 存储颜色索引（由 PixelSkinMap 工具生成）")]
+        public Texture2D skinKeyMap;
+        
+        [Tooltip("皮肤调色板贴图：宽度=颜色数量，高度=1，每个像素是一种目标肤色")]
+        public Texture2D skinPaletteMap;
+        
         [Header("眼睛颜色")]
         public Color leftEyeColor = Color.black;
         public Color rightEyeColor = Color.black;
+        
+        [Header("眼部装饰")]
+        [Tooltip("眼部装饰类型：None=无, DarkCircle=黑眼圈, Scar=刀疤")]
+        public EyeDecorationType eyeDecorationType = EyeDecorationType.None;
+        [Tooltip("眼部装饰颜色")]
+        public Color eyeDecorationColor = new Color(0.3f, 0.2f, 0.2f, 1f);
         
         /// <summary>
         /// 获取指定方向的头发贴图
@@ -57,12 +82,13 @@ namespace EquipmentSystem
         /// </summary>
         public Sprite GetFaceAccessorySprite(CharacterFacing facing)
         {
-            switch (facing)
-            {
-                case CharacterFacing.SouthEast: return faceAccessorySE;
-                case CharacterFacing.SouthWest: return faceAccessorySW;
-                default: return null;
-            }
+            return DirectionalSpriteHelper.GetByFacing(
+                facing,
+                faceAccessorySE,
+                faceAccessorySW,
+                faceAccessoryNE,
+                faceAccessoryNW
+            );
         }
         
         /// <summary>
@@ -78,6 +104,10 @@ namespace EquipmentSystem
         /// <summary>
         /// 是否有面部装饰（任一方向有即可）
         /// </summary>
-        public bool HasFaceAccessory => faceAccessorySE != null || faceAccessorySW != null;
+        public bool HasFaceAccessory =>
+            faceAccessorySE != null
+            || faceAccessorySW != null
+            || faceAccessoryNE != null
+            || faceAccessoryNW != null;
     }
 }

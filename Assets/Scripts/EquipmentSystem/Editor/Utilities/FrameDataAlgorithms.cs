@@ -132,7 +132,99 @@ namespace EquipmentSystem.Editor
         #endregion
         
         #region 区域扩展/收缩算法
-        
+
+        public static void MapExpandByPose(RegionExpandPose pose, int logicalUp, int logicalDown, int logicalSide,
+            out int up, out int down, out int left, out int right)
+        {
+            switch (pose)
+            {
+                case RegionExpandPose.HeadLeft:
+                    // 头在左：身体坐标系逆时针旋转 90°
+                    up = logicalSide;
+                    down = logicalSide;
+                    left = logicalUp;
+                    right = logicalDown;
+                    break;
+                case RegionExpandPose.HeadRight:
+                    // 头在右：身体坐标系顺时针旋转 90°
+                    up = logicalSide;
+                    down = logicalSide;
+                    left = logicalDown;
+                    right = logicalUp;
+                    break;
+                case RegionExpandPose.HeadDown:
+                    // 头在下：身体坐标系旋转 180°（上下对调，左右不变）
+                    up = logicalDown;
+                    down = logicalUp;
+                    left = logicalSide;
+                    right = logicalSide;
+                    break;
+                default:
+                    // HeadUp：不旋转
+                    up = logicalUp;
+                    down = logicalDown;
+                    left = logicalSide;
+                    right = logicalSide;
+                    break;
+            }
+        }
+
+        public static void ShrinkRegionByPoseAndDetectSize(
+            HashSet<Vector2Int> regionPixels,
+            Dictionary<Vector2Int, Vector2> pixelUVs,
+            Vector2Int detectSize,
+            RegionExpandPose pose,
+            int logicalUp, int logicalDown, int logicalSide)
+        {
+            if (regionPixels == null || regionPixels.Count == 0)
+                return;
+
+            int minX = int.MaxValue, maxX = int.MinValue;
+            int minY = int.MaxValue, maxY = int.MinValue;
+            foreach (var p in regionPixels)
+            {
+                if (p.x < minX) minX = p.x;
+                if (p.x > maxX) maxX = p.x;
+                if (p.y < minY) minY = p.y;
+                if (p.y > maxY) maxY = p.y;
+            }
+
+            int width = maxX - minX + 1;
+            int height = maxY - minY + 1;
+
+            int up, down, left, right;
+            MapExpandByPose(pose, logicalUp, logicalDown, logicalSide, out up, out down, out left, out right);
+
+            bool hasDetect = detectSize.x > 0 && detectSize.y > 0;
+            int expectedWidth = detectSize.x + left + right;
+            int expectedHeight = detectSize.y + up + down;
+
+            if (hasDetect && width == expectedWidth && height == expectedHeight)
+            {
+                int coreMinX = minX + left;
+                int coreMaxX = coreMinX + detectSize.x - 1;
+                int coreMinY = minY + up;
+                int coreMaxY = coreMinY + detectSize.y - 1;
+
+                var toRemove = new List<Vector2Int>();
+                foreach (var p in regionPixels)
+                {
+                    if (p.x < coreMinX || p.x > coreMaxX || p.y < coreMinY || p.y > coreMaxY)
+                        toRemove.Add(p);
+                }
+
+                foreach (var p in toRemove)
+                {
+                    regionPixels.Remove(p);
+                    pixelUVs?.Remove(p);
+                }
+            }
+            else
+            {
+                ShrinkRegion(regionPixels, pixelUVs, up, down, left, right);
+            }
+        }
+
         /// <summary>
         /// 基于边界像素 UV 进行四边扩展（优化版：单次遍历获取边界）
         /// </summary>
@@ -141,7 +233,8 @@ namespace EquipmentSystem.Editor
             Dictionary<Vector2Int, Vector2> pixelUVs,
             int expandUp, int expandDown, int expandLeft, int expandRight,
             Vector2Int frameSize, Vector2Int paletteSize,
-            int upStartStep = 1)
+            int upStartStep = 1, int downStartStep = 1,
+            RegionExpandPose pose = RegionExpandPose.HeadUp)
         {
             if (regionPixels.Count == 0) return;
             
@@ -182,8 +275,8 @@ namespace EquipmentSystem.Editor
             
             // 向上扩展：支持自定义起始步长（upStartStep）
             // upStartStep 只影响 UV 采样的“起始行”，几何仍然从 minY-1 连续向上扩展
-            int clampedStartStep = Mathf.Max(1, upStartStep);
-            int uvOffset = clampedStartStep - 1;
+            int clampedUpStartStep = Mathf.Max(1, upStartStep);
+            int upUvOffset = clampedUpStartStep - 1;
             for (int i = 1; i <= expandUp; i++)
             {
                 int newY = minY - i;
@@ -193,14 +286,41 @@ namespace EquipmentSystem.Editor
                     var newPos = new Vector2Int(x, newY);
                     if (!regionPixels.Contains(newPos) && topBoundary.TryGetValue(x, out var uv))
                     {
-                        int uvStep = i + uvOffset;
+                        int uvStep = i + upUvOffset;
+                        float u = uv.x;
+                        float v = uv.y;
+                        switch (pose)
+                        {
+                            case RegionExpandPose.HeadLeft:
+                                // 头在左：屏幕向上使用原来的“向右”UV 步长
+                                u = uv.x + uvStep * stepU;
+                                v = uv.y;
+                                break;
+                            case RegionExpandPose.HeadRight:
+                                // 头在右：屏幕向上使用原来的“向左”UV 步长
+                                u = uv.x - uvStep * stepU;
+                                v = uv.y;
+                                break;
+                            case RegionExpandPose.HeadDown:
+                                // 头在下：屏幕向上对应纹理向下（v 减小）
+                                u = uv.x;
+                                v = uv.y - uvStep * stepV;
+                                break;
+                            default:
+                                // 头在上：屏幕向上对应纹理向上（v 增大）
+                                u = uv.x;
+                                v = uv.y + uvStep * stepV;
+                                break;
+                        }
                         regionPixels.Add(newPos);
-                        pixelUVs[newPos] = new Vector2(uv.x, uv.y + uvStep * stepV);
+                        pixelUVs[newPos] = new Vector2(u, v);
                     }
                 }
             }
             
             // 向下扩展
+            int clampedDownStartStep = Mathf.Max(1, downStartStep);
+            int downUvOffset = clampedDownStartStep - 1;
             for (int i = 1; i <= expandDown; i++)
             {
                 int newY = maxY + i;
@@ -210,8 +330,34 @@ namespace EquipmentSystem.Editor
                     var newPos = new Vector2Int(x, newY);
                     if (!regionPixels.Contains(newPos) && bottomBoundary.TryGetValue(x, out var uv))
                     {
+                        int uvStep = i + downUvOffset;
+                        float u = uv.x;
+                        float v = uv.y;
+                        switch (pose)
+                        {
+                            case RegionExpandPose.HeadLeft:
+                                // 头在左：屏幕向下使用原来的“向左”UV 步长
+                                u = uv.x - uvStep * stepU;
+                                v = uv.y;
+                                break;
+                            case RegionExpandPose.HeadRight:
+                                // 头在右：屏幕向下使用原来的“向右”UV 步长
+                                u = uv.x + uvStep * stepU;
+                                v = uv.y;
+                                break;
+                            case RegionExpandPose.HeadDown:
+                                // 头在下：屏幕向下对应纹理向上（v 增大）
+                                u = uv.x;
+                                v = uv.y + uvStep * stepV;
+                                break;
+                            default:
+                                // 头在上：屏幕向下对应纹理向下（v 减小）
+                                u = uv.x;
+                                v = uv.y - uvStep * stepV;
+                                break;
+                        }
                         regionPixels.Add(newPos);
-                        pixelUVs[newPos] = new Vector2(uv.x, uv.y - i * stepV);
+                        pixelUVs[newPos] = new Vector2(u, v);
                     }
                 }
             }
@@ -219,46 +365,122 @@ namespace EquipmentSystem.Editor
             // 更新Y范围（用于左右扩展）——只与几何扩展高度有关，和 UV 偏移无关
             int expandedMinY = Mathf.Max(0, minY - expandUp);
             int expandedMaxY = Mathf.Min(frameSize.y - 1, maxY + expandDown);
-            
-            // 重新收集左右边界（包含新扩展的像素）
-            leftBoundary.Clear();
-            rightBoundary.Clear();
+
+            // 按行收集局部左右边界（包含新扩展的像素），而不是只用全局 minX/maxX
+            var rowLeftX = new Dictionary<int, int>();
+            var rowLeftUV = new Dictionary<int, Vector2>();
+            var rowRightX = new Dictionary<int, int>();
+            var rowRightUV = new Dictionary<int, Vector2>();
+
             foreach (var p in regionPixels)
             {
-                if (p.x == minX && pixelUVs.TryGetValue(p, out var uvL))
-                    leftBoundary[p.y] = uvL;
-                if (p.x == maxX && pixelUVs.TryGetValue(p, out var uvR))
-                    rightBoundary[p.y] = uvR;
+                if (p.y < expandedMinY || p.y > expandedMaxY)
+                    continue;
+
+                if (!pixelUVs.TryGetValue(p, out var uv))
+                    continue;
+
+                // 行内最左
+                if (!rowLeftX.TryGetValue(p.y, out var lx) || p.x < lx)
+                {
+                    rowLeftX[p.y] = p.x;
+                    rowLeftUV[p.y] = uv;
+                }
+
+                // 行内最右
+                if (!rowRightX.TryGetValue(p.y, out var rx) || p.x > rx)
+                {
+                    rowRightX[p.y] = p.x;
+                    rowRightUV[p.y] = uv;
+                }
             }
-            
-            // 向左扩展
+
+            // 向左扩展（按每一行的局部左边界）
             for (int i = 1; i <= expandLeft; i++)
             {
-                int newX = minX - i;
-                if (newX < 0) break;
                 for (int y = expandedMinY; y <= expandedMaxY; y++)
                 {
+                    if (!rowLeftX.TryGetValue(y, out var boundaryX))
+                        continue;
+
+                    int newX = boundaryX - i;
+                    if (newX < 0) continue;
+
                     var newPos = new Vector2Int(newX, y);
-                    if (!regionPixels.Contains(newPos) && leftBoundary.TryGetValue(y, out var uv))
+                    if (!regionPixels.Contains(newPos) && rowLeftUV.TryGetValue(y, out var uv))
                     {
+                        float u = uv.x;
+                        float v = uv.y;
+                        switch (pose)
+                        {
+                            case RegionExpandPose.HeadLeft:
+                                // 头在左：屏幕向左使用原来的“向上”UV 步长
+                                u = uv.x;
+                                v = uv.y + i * stepV;
+                                break;
+                            case RegionExpandPose.HeadRight:
+                                // 头在右：屏幕向左使用原来的“向下”UV 步长
+                                u = uv.x;
+                                v = uv.y - i * stepV;
+                                break;
+                            case RegionExpandPose.HeadDown:
+                                // 头在下：屏幕向左对应纹理向右（u 增大）
+                                u = uv.x + i * stepU;
+                                v = uv.y;
+                                break;
+                            default:
+                                // 头在上：屏幕向左对应纹理向左（u 减小）
+                                u = uv.x - i * stepU;
+                                v = uv.y;
+                                break;
+                        }
                         regionPixels.Add(newPos);
-                        pixelUVs[newPos] = new Vector2(uv.x - i * stepU, uv.y);
+                        pixelUVs[newPos] = new Vector2(u, v);
                     }
                 }
             }
-            
-            // 向右扩展
+
+            // 向右扩展（按每一行的局部右边界）
             for (int i = 1; i <= expandRight; i++)
             {
-                int newX = maxX + i;
-                if (newX >= frameSize.x) break;
                 for (int y = expandedMinY; y <= expandedMaxY; y++)
                 {
+                    if (!rowRightX.TryGetValue(y, out var boundaryX))
+                        continue;
+
+                    int newX = boundaryX + i;
+                    if (newX >= frameSize.x) continue;
+
                     var newPos = new Vector2Int(newX, y);
-                    if (!regionPixels.Contains(newPos) && rightBoundary.TryGetValue(y, out var uv))
+                    if (!regionPixels.Contains(newPos) && rowRightUV.TryGetValue(y, out var uv))
                     {
+                        float u = uv.x;
+                        float v = uv.y;
+                        switch (pose)
+                        {
+                            case RegionExpandPose.HeadLeft:
+                                // 头在左：屏幕向右使用原来的“向下”UV 步长
+                                u = uv.x;
+                                v = uv.y - i * stepV;
+                                break;
+                            case RegionExpandPose.HeadRight:
+                                // 头在右：屏幕向右使用原来的“向上”UV 步长
+                                u = uv.x;
+                                v = uv.y + i * stepV;
+                                break;
+                            case RegionExpandPose.HeadDown:
+                                // 头在下：屏幕向右对应纹理向左（u 减小）
+                                u = uv.x - i * stepU;
+                                v = uv.y;
+                                break;
+                            default:
+                                // 头在上：屏幕向右对应纹理向右（u 增大）
+                                u = uv.x + i * stepU;
+                                v = uv.y;
+                                break;
+                        }
                         regionPixels.Add(newPos);
-                        pixelUVs[newPos] = new Vector2(uv.x + i * stepU, uv.y);
+                        pixelUVs[newPos] = new Vector2(u, v);
                     }
                 }
             }
@@ -427,6 +649,62 @@ namespace EquipmentSystem.Editor
             }
             
             // 更新原字典
+            uvs.Clear();
+            foreach (var kv in newUVs)
+                uvs[kv.Key] = kv.Value;
+        }
+        
+        /// <summary>
+        /// 将 UV 在像素区域包围盒内旋转 90 度
+        /// 顺时针或逆时针，仅重排 UV，对像素位置本身不做变动
+        /// </summary>
+        public static void RotateUV90(HashSet<Vector2Int> pixels, Dictionary<Vector2Int, Vector2> uvs, bool clockwise)
+        {
+            if (pixels.Count == 0) return;
+
+            int minX = int.MaxValue, maxX = int.MinValue;
+            int minY = int.MaxValue, maxY = int.MinValue;
+            foreach (var p in pixels)
+            {
+                if (p.x < minX) minX = p.x;
+                if (p.x > maxX) maxX = p.x;
+                if (p.y < minY) minY = p.y;
+                if (p.y > maxY) maxY = p.y;
+            }
+
+            int w = maxX - minX;
+            int h = maxY - minY;
+
+            var newUVs = new Dictionary<Vector2Int, Vector2>();
+            foreach (var p in pixels)
+            {
+                int dx = p.x - minX;
+                int dy = p.y - minY;
+
+                int srcLocalX;
+                int srcLocalY;
+
+                if (clockwise)
+                {
+                    // 顺时针：dest(dx,dy) ← src(dy, h - dx)
+                    srcLocalX = dy;
+                    srcLocalY = h - dx;
+                }
+                else
+                {
+                    // 逆时针：dest(dx,dy) ← src(w - dy, dx)
+                    srcLocalX = w - dy;
+                    srcLocalY = dx;
+                }
+
+                var srcPos = new Vector2Int(minX + srcLocalX, minY + srcLocalY);
+
+                if (uvs.TryGetValue(srcPos, out var uv))
+                    newUVs[p] = uv;
+                else if (uvs.TryGetValue(p, out var selfUv))
+                    newUVs[p] = selfUv;
+            }
+
             uvs.Clear();
             foreach (var kv in newUVs)
                 uvs[kv.Key] = kv.Value;
