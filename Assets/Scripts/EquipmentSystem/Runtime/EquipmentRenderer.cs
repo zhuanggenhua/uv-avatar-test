@@ -109,10 +109,11 @@ namespace EquipmentSystem
 
         static readonly int HitOutlineProp = Shader.PropertyToID("_HitOutline");
 
-        // 肤色调色板参数（Key/Palette 查表式）
+        // 肤色映射参数（颜色表查表）
         static readonly int SkinPaletteEnabledProp = Shader.PropertyToID("_SkinPaletteEnabled");
-        static readonly int SkinKeyTexProp = Shader.PropertyToID("_SkinKeyTex");
-        static readonly int SkinPaletteTexProp = Shader.PropertyToID("_SkinPaletteTex");
+        static readonly int SkinColorCountProp = Shader.PropertyToID("_SkinColorCount");
+        static readonly int SkinSrcColorsProp = Shader.PropertyToID("_SkinSrcColors");
+        static readonly int SkinDstColorsProp = Shader.PropertyToID("_SkinDstColors");
 
         // 武器通用参数
         static readonly int CharFrameRectProp = Shader.PropertyToID("_CharFrameRect");
@@ -1056,32 +1057,67 @@ namespace EquipmentSystem
             
             // 设置眼部装饰
             ApplyEyeDecoration(headFacing, eyesVisible);
-            
-            // 设置肤色调色板（Palette Swap）
+
+            // 设置肤色映射（基于颜色表的查表换肤）
             ApplySkinPalette();
         }
         
         /// <summary>
-        /// 设置肤色调色板参数（Key/Palette 查表式换肤）
+        /// 设置肤色映射参数（颜色数组查表换肤）
         /// </summary>
         void ApplySkinPalette()
         {
             if (_shaderMaterial == null)
                 return;
 
-            // 没有外观数据或没有 Key/Palette 贴图时，关闭调色板
-            if (appearance == null || appearance.skinKeyMap == null || appearance.skinPaletteMap == null)
+            if (appearance == null || appearance.skinSrcColors == null || appearance.skinDstColors == null)
             {
                 _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 0f);
+                _shaderMaterial.SetFloat(SkinColorCountProp, 0f);
                 return;
             }
 
-            // 设置 Key/Palette 贴图
-            _shaderMaterial.SetTexture(SkinKeyTexProp, appearance.skinKeyMap);
-            _shaderMaterial.SetTexture(SkinPaletteTexProp, appearance.skinPaletteMap);
-            
-            // 打开开关
+            const int MaxSkinColors = 16; // 必须与 Shader 中的 MAX_SKIN_COLORS 保持一致
+
+            int count = Mathf.Min(
+                appearance.skinSrcColors.Length,
+                appearance.skinDstColors.Length,
+                MaxSkinColors);
+
+            if (count <= 0)
+            {
+                _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 0f);
+                _shaderMaterial.SetFloat(SkinColorCountProp, 0f);
+                return;
+            }
+
+            var srcArray = new Vector4[count];
+            var dstArray = new Vector4[count];
+
+            // Unity 在 Linear 色彩空间下会在采样 sRGB 纹理时自动做 Gamma->Linear，
+            // 但通过 SetVectorArray 传入的颜色不会自动转换。
+            // 这里根据当前项目 ColorSpace 做一次显式统一，保证 Shader 里比较的是“同一空间”的颜色。
+            bool useLinear = QualitySettings.activeColorSpace == ColorSpace.Linear;
+
+            for (int i = 0; i < count; i++)
+            {
+                Color src = appearance.skinSrcColors[i];
+                Color dst = appearance.skinDstColors[i];
+
+                if (useLinear)
+                {
+                    src = src.linear;
+                    dst = dst.linear;
+                }
+
+                srcArray[i] = src;
+                dstArray[i] = dst;
+            }
+
             _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 1f);
+            _shaderMaterial.SetFloat(SkinColorCountProp, count);
+            _shaderMaterial.SetVectorArray(SkinSrcColorsProp, srcArray);
+            _shaderMaterial.SetVectorArray(SkinDstColorsProp, dstArray);
         }
         
         /// <summary>

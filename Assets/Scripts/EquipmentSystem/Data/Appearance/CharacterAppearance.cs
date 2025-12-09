@@ -40,15 +40,11 @@ namespace EquipmentSystem
         public Sprite faceAccessoryNE;
         public Sprite faceAccessoryNW;
         
-        [Header("肤色")]
-        public Color skinColor = new Color(1f, 0.85f, 0.7f, 1f);
-        
-        [Header("肤色调色板（Key/Palette 查表式换肤）")]
-        [Tooltip("皮肤索引贴图：与角色 spritesheet 同尺寸，alpha 存储颜色索引（由 PixelSkinMap 工具生成）")]
-        public Texture2D skinKeyMap;
-        
-        [Tooltip("皮肤调色板贴图：宽度=颜色数量，高度=1，每个像素是一种目标肤色")]
-        public Texture2D skinPaletteMap;
+        [Header("肤色映射（颜色表）")]
+        [Tooltip("源肤色数组：在角色原始贴图中出现的肤色，用于 Editor 自动生成映射")]
+        public Color[] skinSrcColors;
+        [Tooltip("目标肤色数组：与源肤色一一对应，用于运行时将 src 映射为 dst 颜色")]
+        public Color[] skinDstColors;
         
         [Header("眼睛颜色")]
         public Color leftEyeColor = Color.black;

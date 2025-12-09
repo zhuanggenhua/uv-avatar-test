@@ -28,7 +28,18 @@ MonoBehaviour:
     sw: {fileID: 0}
     ne: {fileID: 0}
     nw: {fileID: 0}
+  leftVariant:
+    se: {fileID: 21300000, guid: ccc3ae7b9b1e37a40b111e44ec0607f1, type: 3}
+    sw: {fileID: 21300000, guid: d28ae094be8d3a84297f7e9aa6646b6b, type: 3}
+    ne: {fileID: 21300000, guid: c46d8466f30726c4e8497d64a977a26b, type: 3}
+    nw: {fileID: 21300000, guid: 7efd31b604e44b0438114300f978b497, type: 3}
+  rightVariant:
+    se: {fileID: 0}
+    sw: {fileID: 0}
+    ne: {fileID: 0}
+    nw: {fileID: 0}
   weaponSlotType: 0
+  useOffHandAnchor: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
@@ -37,4 +48,4 @@ MonoBehaviour:
     rgba: 4281492630
   hideHair: 0
   hideBeard: 0
-  animSet: {fileID: 0}
+  animSequences: []

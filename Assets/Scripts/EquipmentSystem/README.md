@@ -8,6 +8,8 @@
 - **双武器管线**：主手 + 副手两把武器，支持双持、双手武器、手在前/武器在前等深度规则。
 - **像素级脚底阴影**：基于 `groundPixelY + 脚部像素` 实时计算阴影模式和形状。
 - **头部 4 层叠加 + 眼部系统**：头发 → 面部装饰 → 胡子 → 头盔，并带有眼睛颜色与眼部装饰（黑眼圈/刀疤）。
+- **精确受击描边系统**：只在黑色轮廓边缘像素上高亮描边，并按来源区分主体/斗篷/头盔/面饰/胡子/头发/双武器/背包。
+- **肤色映射系统**：基于颜色数组查表的多种族换肤（编辑器自动生成肤色映射表，Shader 端按最近颜色映射）。
 
 ### 核心特性
 
@@ -15,6 +17,8 @@
 - **武器槽位系统**：`WeaponSlotType` 控制主手/双手/双持/副手规则，自动阻止非法组合（例如双手武器禁止副手）。
 - **四向朝向 + 转头支持**：Spritesheet 行 0~3 分别表示 SE/SW/NE/NW，`BodyPartRegion.spriteFacing` 允许头部独立于身体转向。
 - **编辑器工作流完整闭环**：从帧涂色、自动检测手脚/眼睛、生成 UV Map，到运行时 `EquipmentRenderer` 一次性串起来。
+- **受击描边系统（Hit Outline）**：帧数据 `hitOutlineFrame` 标记受击帧，`EquipmentRenderer` 将 `_HitOutline` 传入 Shader；Shader 内基于像素来源 ID（`srcId`）+ `IsNearBlack` + 邻域采样，仅对真实黑色轮廓边缘像素应用 `_HitOutlineColor`，并区分主体/装备/武器/背包来源。
+- **肤色映射系统（Skin Palette）**：编辑器 `PixelSkinMapWindow` 从 Base/Target 贴图分析肤色，生成 `skinSrcColors/skinDstColors` 数组写入 `CharacterAppearance`；运行时由 `EquipmentRenderer.ApplySkinPalette` 将颜色表推入 Shader，Shader 在主体贴图上按最近颜色映射实现整套肤色替换（保留描边与阴影）。
 
 ### 当前版本要点总览
 
@@ -437,10 +441,12 @@ Shader `EquipmentUV.shader` 中：
 
 主要功能：
 1. 采样双层 UV Map 获取部位信息和 UV 坐标；
-2. 根据部位 ID 选择对应装备贴图或颜色（衣服/裤子/斗篷/手套/鞋子/眼睛）；
-3. 支持身体层 + 头部层 + 双武器层的深度叠加；
+2. 根据部位 ID 选择对应装备贴图或颜色（衣服/裤子/斗篷/手套/鞋子/眼睛等）；
+3. 支持身体层 + 头部层 + 双武器层 + 背包层的深度叠加；
 4. 集成像素级脚底阴影绘制；
-5. 支持眼睛颜色与眼部装饰（黑眼圈/刀疤）。
+5. 支持眼睛颜色与眼部装饰（黑眼圈/刀疤）；
+6. 支持精确受击描边（Hit Outline），只对黑色轮廓边缘像素着色，并按像素来源区分主体/装备/武器/背包；
+7. 支持基于颜色数组查表的肤色映射（Skin Palette），在主体贴图上做多种族换肤。
 
 #### 渲染层级
 
@@ -491,6 +497,64 @@ void ApplyBodyLayers(fixed4 bodyUV, bool isHeadCore, inout fixed4 ioColor, out f
 
 // 头部层装备
 void ApplyHeadLayers(float2 baseHeadUV, float headPartID, inout fixed4 ioColor, out float headLayerAlpha)
+```
+
+#### 受击描边（Hit Outline）
+
+- **编辑器端**：
+  - `FrameData.hitOutlineFrame`：在 `FrameDataEditor` 中为某些帧勾选“受击描边帧”。
+  - 从 SE 生成其它方向数据时，`FrameDataEditorTools.CopyFrameData` 会同步复制 `hitOutlineFrame` 标记。
+- **运行时 C#**：
+  - `EquipmentRenderer.Refresh()` 中，根据当前 `_cachedFrame.hitOutlineFrame` 计算：
+    - `float hitOutlineValue = hitOutlineFrame ? 1f : 0f;`
+    - 通过 `_HitOutline` 属性传入 Shader：`_shaderMaterial.SetFloat("_HitOutline", hitOutlineValue);`。
+- **Shader 端总体流程**：
+  - 在合成角色像素时，记录当前像素的主要来源 ID：
+    - `SRC_MAIN / SRC_CLOAK / SRC_HELMET / SRC_FACE / SRC_BEARD / SRC_HAIR / SRC_WEAPON0 / SRC_WEAPON1 / SRC_BAG / SRC_OTHER`；
+    - `ApplyBodyLayers/ApplyHeadLayers` 在写入像素时设置 `bodySrcId/headSrcId`，最后合成出 `srcId`。
+  - 受击描边入口：
+    - 仅当 `_HitOutline > 0.5 && finalAlpha > CUTOFF && canHitOutline && IsNearBlack(finalColor.rgb)` 时才进入描边逻辑；
+    - `canHitOutline` 只允许上述几种需要描边的来源 ID 进入，过滤掉裤子/鞋子/眼睛等 `SRC_OTHER` 与透明像素；
+    - `IsNearBlack` 使用 `sumRGB < 80/255` 的阈值，仅将非常接近黑色的像素视为描边候选。
+  - 针对不同来源执行各自的“黑色轮廓边缘检测”：
+    - 主体贴图：`IsMainTexOutlineAtFrameUV(frameUV, frameMin, frameSizeUV)`；
+    - 斗篷/头盔/面饰/胡子/头发/背包：
+      - `IsEquipOutlineAtUVLocal(uvLocal, rect, tex, finalRGB)`：
+        - 先确认当前像素来自该贴图、是近黑色、且颜色与最终像素近似一致（`IsVisibleOutlineFromColor`）；
+        - 再在该贴图自身局部 UV 空间做 4 邻域采样，判断是否至少有一个邻居是透明/越界像素，只有这种才视为“轮廓边缘像素”。
+    - 主手/副手武器：
+      - `IsWeaponHitOutline(index, hasWeapon, weaponColor, frameUV, frameMin, frameSizeUV, finalRGB)` 封装：
+        - 先用 `IsVisibleOutlineFromColor` 判定当前像素确实是该武器的可见黑描边；
+        - 再调用 `IsWeaponOutlineAtFrameUV` 在帧内 UV 空间进行 4 邻域武器采样，只在自身轮廓边缘返回 true。
+  - 若某来源的检测结果为 true，则将 `finalColor.rgb` 替换为 `_HitOutlineColor.rgb`，实现只对黑色边缘的受击描边效果。
+
+#### 肤色映射（Skin Palette / Skin Color Mapping）
+
+- **编辑器端**：
+  - `PixelSkinMapWindow`：
+    - 输入一张 Base 贴图（源肤色）和一张 Target 贴图（目标肤色），布局一致；
+    - 扫描所有非透明像素，过滤近黑色描边（`gray < 0.15`）等非肤色；
+    - 统计成对的 Base/Target 颜色，生成 `skinSrcColors[] / skinDstColors[]` 数组；
+    - 将颜色表写入 `CharacterAppearance` 资源，用于运行时查表换肤。
+- **运行时 C#（EquipmentRenderer.ApplySkinPalette）**：
+  - 若 `appearance.skinSrcColors/skinDstColors` 为空，则关闭 `_SkinPaletteEnabled`；
+  - 否则：
+    - 取 `count = min(srcLen, dstLen, MAX_SKIN_COLORS)`；
+    - 根据项目色彩空间（Linear / Gamma）统一将数组转换到同一空间；
+    - 通过 `SetVectorArray(_SkinSrcColors/_SkinDstColors)` 与 `_SkinColorCount` 传入 Shader，并将 `_SkinPaletteEnabled` 设为 1。
+- **Shader 端（frag 中，武器采样之前）**：
+  - 仅在以下条件成立时尝试换肤：
+    - `_SkinPaletteEnabled > 0.5`；
+    - 当前像素来源为主体贴图：`srcId == SRC_MAIN`；
+    - `charColor.a > CUTOFF`；
+  - 过滤非肤色：
+    - 计算亮度 `gray = dot(charColor.rgb, float3(0.299, 0.587, 0.114));`
+    - 若 `gray <= 0.15`，视为近黑色描边/线稿，不参与换肤；
+  - 在 `_SkinSrcColors[0 .. _SkinColorCount-1]` 中，查找与当前像素颜色欧氏距离最近的一项：
+    - 使用 `dist = dot(diff, diff)` 作为距离度量；
+    - 永远选择最近的一项，避免因为压缩/色彩空间误差导致“匹配不到任何肤色”；
+  - 使用对应的 `_SkinDstColors[bestIndex].rgb` 覆盖 `charColor.rgb`，实现整套肤色替换。
+  - 该逻辑只作用于主体贴图 SRC_MAIN，不会影响斗篷/头盔/武器等装备与描边/阴影颜色。
 ```
 
 ### 调试模式
@@ -672,4 +736,19 @@ public Sprite TryGetSequenceSpriteByKeyWithDepth(
   - 区域扩展逻辑通过 `MapExpandByPose` 将「向头/向脚/左右」的身体坐标扩展量旋转到屏幕坐标
   - `ExpandRegionWithBoundaryUV` 依据姿态旋转 UV 采样方向，保持扩展颜色梯度与姿态一致
   - `ShrinkRegionByPoseAndDetectSize` 利用 `headDetectSize/torsoDetectSize` 与姿态信息，将扩展区域精确收缩回检测区域，实现「扩一次 → 收一次」近似可逆
+ 
+- **v2.3**: 像素级阴影系统整合
+  - 在 `EquipmentUV.shader` 中集成像素级脚底阴影绘制逻辑（4 种 ShadowMode），不再依赖单独 Shadow 子对象；
+  - 通过 `groundPixelY + LimbMask` 精确计算脚部高度差，在 Shader 中以帧内 UV 空间绘制矩形/十字形阴影；
+ 
+- **v2.4**: 受击描边系统与背包 (Bag)
+  - 为 `FrameData` 添加 `hitOutlineFrame` 标记，编辑器可单独指定受击帧；
+  - `EquipmentRenderer` 将受击帧标记转换为 `_HitOutline` Shader 参数，驱动受击描边效果；
+  - Shader 内引入像素来源 ID（`SRC_MAIN/SRC_CLOAK/SRC_HELMET/.../SRC_BAG`），只对黑色轮廓边缘像素执行描边检测，支持主贴图/斗篷/头盔/面饰/胡子/头发/双武器/背包的精确描边；
+  - 新增 `Bag` 装备类型与方向相关深度逻辑：朝南时作为躯干最底层且仅在主体透明处显示，朝北时在包括武器在内的最前层覆盖；Bag 的黑色轮廓同样参与受击描边。
+
+- **v2.5**: 肤色映射系统（Skin Palette）
+  - 引入 `PixelSkinMapWindow`，可从 Base/Target 贴图分析并生成 `skinSrcColors/skinDstColors` 肤色映射表；
+  - 在 `CharacterAppearance` 中保存肤色数组，`EquipmentRenderer.ApplySkinPalette` 在运行时将颜色表推入 Shader；
+  - Shader 端在主体贴图上基于最近颜色查表实现整套肤色替换，并过滤近黑色描边像素，保证描边与阴影不被误改色。
 

@@ -109,8 +109,6 @@ Shader "EquipmentSystem/EquipmentUV"
         
         [Header(Skin Palette)]
         _SkinPaletteEnabled ("Skin Palette Enabled", Float) = 0
-        _SkinKeyTex ("Skin Key Map", 2D) = "white" {}
-        _SkinPaletteTex ("Skin Palette Map", 2D) = "white" {}
         
         _Color ("Tint", Color) = (1,1,1,1)
     }
@@ -254,9 +252,11 @@ Shader "EquipmentSystem/EquipmentUV"
             float _HitOutline;
             fixed4 _HitOutlineColor;
 
-            // 肤色调色板（Key/Palette 查表式）
-            sampler2D _SkinKeyTex;
-            sampler2D _SkinPaletteTex;
+            // 肤色映射（颜色数组查表）
+            static const int MAX_SKIN_COLORS = 16;
+            fixed4 _SkinSrcColors[MAX_SKIN_COLORS];
+            fixed4 _SkinDstColors[MAX_SKIN_COLORS];
+            float _SkinColorCount;
             float _SkinPaletteEnabled;
 
             fixed4 _Color;
@@ -1167,29 +1167,42 @@ Shader "EquipmentSystem/EquipmentUV"
                 if (srcId == SRC_NONE && baseColor.a > CUTOFF)
                     srcId = SRC_MAIN;
 
-                // ========== 肤色调色板替换：Key/Palette 查表式 ==========
-                if (_SkinPaletteEnabled > 0.5 && srcId == SRC_MAIN)
+                // ========== 肤色映射替换：基于颜色数组查表 ==========
+                // 只限定在主体贴图 SRC_MAIN 上：避免装备/武器被误改色
+                if (_SkinPaletteEnabled > 0.5 && srcId == SRC_MAIN && charColor.a > CUTOFF)
                 {
-                    // 判断是否是皮肤部位（头/手/脚/躯干）
-                    bool isSkinPart =
-                        parts.isHead ||
-                        parts.isLeftHand || parts.isRightHand ||
-                        parts.isLeftFoot || parts.isRightFoot ||
-                        parts.isTorso;
-
-                    // 只处理皮肤区域的非黑色像素（避免动描边）
-                    if (isSkinPart && charColor.a > CUTOFF && !IsNearBlack(charColor.rgb))
+                    // 先过滤近黑像素（描边/线稿），与 Editor 侧一致：gray < 0.15 视为非肤色
+                    float gray = dot(charColor.rgb, float3(0.299, 0.587, 0.114));
+                    if (gray > 0.15)
                     {
-                        // 从 KeyTex 读取颜色索引（存在 alpha 通道）
-                        fixed4 keySample = tex2D(_SkinKeyTex, i.uv);
-                        float key = keySample.a;
-                        
-                        // key > 0 表示该像素有调色板映射
-                        if (key > 0.001)
+                        int colorCount = (int)_SkinColorCount;
+                        colorCount = clamp(colorCount, 0, MAX_SKIN_COLORS);
+
+                        if (colorCount > 0)
                         {
-                            // 用 key 作为 U 坐标采样 PaletteTex，获取目标颜色
-                            fixed4 paletteColor = tex2D(_SkinPaletteTex, float2(key, 0.5));
-                            charColor.rgb = paletteColor.rgb;
+                            fixed3 src = charColor.rgb;
+
+                            // 始终在 srcColors 中找到最近的一条映射，避免因为颜色空间/纹理压缩造成“完全匹配不到”。
+                            int   bestIndex = 0;
+                            float bestDist  = 1e9;
+
+                            for (int i = 0; i < MAX_SKIN_COLORS; i++)
+                            {
+                                if (i >= colorCount)
+                                    break;
+
+                                fixed3 srcColor = _SkinSrcColors[i].rgb;
+                                fixed3 diff     = src - srcColor;
+                                float  dist     = dot(diff, diff); // 欧氏距离平方
+
+                                if (dist < bestDist)
+                                {
+                                    bestDist  = dist;
+                                    bestIndex = i;
+                                }
+                            }
+
+                            charColor.rgb = _SkinDstColors[bestIndex].rgb;
                         }
                     }
                 }
