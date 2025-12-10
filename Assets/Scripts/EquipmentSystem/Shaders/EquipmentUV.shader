@@ -290,6 +290,32 @@ Shader "EquipmentSystem/EquipmentUV"
             #define SRC_BAG     10
             #define SRC_MASK    11
             
+            // 层级优先级（越大越在前面），集中了所有层级规则
+            // 描边逻辑只用这个函数判断优先级，不再重复写规则
+            float GetLayerPriority(float sid)
+            {
+                // 背包：朝北时最前面，朝南时最后面
+                if (sid == SRC_BAG)
+                    return (_BodyInFront > 0.5) ? 100.0 : 0.0;
+                
+                // 武器0：朝南（DepthMode > 0.5）时在前面，手在前时优先级降低
+                if (sid == SRC_WEAPON0)
+                    return (_Weapon0DepthMode > 0.5) ? 80.0 : 10.0;
+                
+                // 武器1：朝南（DepthMode > 0.5）时在前面
+                if (sid == SRC_WEAPON1)
+                    return (_Weapon1DepthMode > 0.5) ? 70.0 : 5.0;
+                
+                // 人本体（各种装备）：中间优先级
+                if (sid == SRC_MAIN || sid == SRC_OTHER || sid == SRC_CLOAK ||
+                    sid == SRC_HELMET || sid == SRC_BEARD || sid == SRC_FACE ||
+                    sid == SRC_HAIR || sid == SRC_MASK)
+                    return 50.0;
+                
+                // 空
+                return -1.0;
+            }
+            
             // Body Part ID 定义 (对应 B 通道值)
             // 0.0        = 非换装区域
             // 0.1 (25)   = Head (面部装饰)
@@ -388,8 +414,11 @@ Shader "EquipmentSystem/EquipmentUV"
             bool TrySampleWeapon0(float2 mainUV, out fixed4 outColor);
             bool TrySampleWeapon1(float2 mainUV, out fixed4 outColor);
 
-            // 前向声明：基于最终轮廓 alpha 的采样函数（在后面实现）
-            float GetFinalAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax);
+            // 前向声明：本体描边 / 阴影用轮廓 alpha 采样函数（在后面实现）
+            // 描边：使用 GetOutlineAlphaAtFrameUV（本体 + 身体装备 + 头部装备，不含武器/背包）
+            // Mode0 阴影：使用 GetShadowCasterAlphaAtFrameUV（本体 + 身体装备 + 头部装备 + 武器，不含背包）
+            float GetOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax);
+            float GetShadowCasterAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax);
 
             // 通用武器采样函数（支持主手/副手）
             // 说明：
@@ -652,21 +681,21 @@ Shader "EquipmentSystem/EquipmentUV"
                 float2 frameUV = float2(xOnFrame, _ShadowBaseY);
                 if (frameUV.x >= 0.0 && frameUV.x <= 1.0)
                 {
-                    alpha = max(alpha, GetFinalAlphaAtFrameUV(frameUV, frameMin, frameMax));
+                    alpha = max(alpha, GetShadowCasterAlphaAtFrameUV(frameUV, frameMin, frameMax));
                 }
 
                 // 右侧一格：x + 1 像素
                 frameUV = float2(xOnFrame + step.x, _ShadowBaseY);
                 if (frameUV.x >= 0.0 && frameUV.x <= 1.0)
                 {
-                    alpha = max(alpha, GetFinalAlphaAtFrameUV(frameUV, frameMin, frameMax));
+                    alpha = max(alpha, GetShadowCasterAlphaAtFrameUV(frameUV, frameMin, frameMax));
                 }
 
                 // 左侧一格：x - 1 像素
                 frameUV = float2(xOnFrame - step.x, _ShadowBaseY);
                 if (frameUV.x >= 0.0 && frameUV.x <= 1.0)
                 {
-                    alpha = max(alpha, GetFinalAlphaAtFrameUV(frameUV, frameMin, frameMax));
+                    alpha = max(alpha, GetShadowCasterAlphaAtFrameUV(frameUV, frameMin, frameMax));
                 }
 
                 return alpha;
@@ -859,13 +888,10 @@ Shader "EquipmentSystem/EquipmentUV"
                 if (wrote) headLayerAlpha = 1.0;
             }
 
-            // 计算指定帧内 UV 位置在当前帧上的“近似最终 alpha”（底图 + 身体装备 + 武器 + 背包）
-            // 为了避免编译器崩溃，这里仍然不重复整套身体/头部图层叠加逻辑，只取轮廓相关的信息：
-            // - _MainTex：基础身体轮廓
-            // - 身体装备：裤子 / 衣服 / 披风（通过 BodyUVMap + TrySampleEquip）
-            // - 双武器：任意武器像素都视为占据轮廓
-            // - 朝北时背包：只要有像素就记为轮廓
-            float GetFinalAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            // 计算指定帧内 UV 位置在当前帧上的“本体轮廓 alpha”
+            // 描边：只关心 角色本体 + 身体装备(裤子/衣服/披风) + 头部装备(头盔/头发/胡子/面饰/面罩)
+            // - 不包含武器/背包，它们有各自的描边
+            float GetOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
             {
                 // 将帧内 UV 映射回整张 _MainTex 的 UV
                 float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
@@ -874,7 +900,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 fixed4 baseColorSample = tex2D(_MainTex, uvSample);
                 float alphaSample = baseColorSample.a;
 
-                // 2）身体装备轮廓（裤子 / 上衣 / 披风 / 背包）
+                // 2）身体装备轮廓（裤子 / 上衣 / 披风）
                 fixed4 bodyUVSample = tex2D(_BodyUVMap, uvSample);
                 fixed3 equipSample;
 
@@ -891,17 +917,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     alphaSample = max(alphaSample, 1.0);
                 }
 
-                // 朝北时：背包在最前层，轮廓也要包含在内
-                if (_BodyInFront > 0.5 && _EnableBag > 0.5)
-                {
-                    fixed3 bagSample;
-                    if (TrySampleEquip(bodyUVSample.rg, _BagRect, _BagTex, bagSample))
-                    {
-                        alphaSample = max(alphaSample, 1.0);
-                    }
-                }
-
-                // 2.5）头部装备轮廓（头盔 / 头发 / 面饰 / 胡子 / 面罩）
+                // 3）头部装备轮廓（头盔 / 头发 / 面饰 / 胡子 / 面罩）
                 fixed4 headUVSample = tex2D(_HeadUVMap, uvSample);
                 fixed3 headEquipSample;
 
@@ -926,7 +942,62 @@ Shader "EquipmentSystem/EquipmentUV"
                     alphaSample = max(alphaSample, 1.0);
                 }
 
-                // 3）叠加武器 alpha（不区分前后，只要有像素就记为不透明，以获得全局轮廓）
+                return alphaSample;
+            }
+
+            // Mode0 阴影用的 caster alpha：本体 + 身体装备 + 头部装备 + 武器（不含背包）
+            float GetShadowCasterAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            {
+                // 将帧内 UV 映射回整张 _MainTex 的 UV
+                float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
+
+                // 1）底图 alpha 直接来自 _MainTex（角色本体轮廓）
+                fixed4 baseColorSample = tex2D(_MainTex, uvSample);
+                float alphaSample = baseColorSample.a;
+
+                // 2）身体装备轮廓（裤子 / 上衣 / 披风）
+                fixed4 bodyUVSample = tex2D(_BodyUVMap, uvSample);
+                fixed3 equipSample;
+
+                if (_EnablePants > 0.5 && TrySampleEquip(bodyUVSample.rg, _PantsRect, _PantsTex, equipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableCloth > 0.5 && TrySampleEquip(bodyUVSample.rg, _ClothRect, _ClothTex, equipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableCloak > 0.5 && TrySampleEquip(bodyUVSample.rg, _CloakRect, _CloakTex, equipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+
+                // 3）头部装备轮廓
+                fixed4 headUVSample = tex2D(_HeadUVMap, uvSample);
+                fixed3 headEquipSample;
+
+                if (_EnableHelmet > 0.5 && TrySampleEquip(headUVSample.rg, _HelmetRect, _HelmetTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableHair > 0.5 && TrySampleEquip(headUVSample.rg, _HairRect, _HairTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableBeard > 0.5 && TrySampleEquip(headUVSample.rg, _BeardRect, _BeardTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableFaceAccessory > 0.5 && TrySampleEquip(headUVSample.rg, _FaceAccessoryRect, _FaceAccessoryTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableMask > 0.5 && TrySampleEquip(headUVSample.rg, _MaskRect, _MaskTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+
+                // 4）叠加武器 alpha（不区分前后，只要有像素就记为不透明，以获得全局阴影宽度）
                 fixed4 weapon0ColorSample, weapon1ColorSample;
                 bool hasWeapon0Sample = TrySampleWeapon0(uvSample, weapon0ColorSample);
                 bool hasWeapon1Sample = TrySampleWeapon1(uvSample, weapon1ColorSample);
@@ -937,6 +1008,31 @@ Shader "EquipmentSystem/EquipmentUV"
                     alphaSample = max(alphaSample, weapon1ColorSample.a);
 
                 return alphaSample;
+            }
+
+            // 武器专用轮廓 alpha（主手/副手任何有像素即视为占据轮廓）
+            float GetWeaponOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            {
+                float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
+                float alphaSample = 0.0;
+                fixed4 weapon0ColorSample, weapon1ColorSample;
+                if (TrySampleWeapon0(uvSample, weapon0ColorSample))
+                    alphaSample = max(alphaSample, weapon0ColorSample.a);
+                if (TrySampleWeapon1(uvSample, weapon1ColorSample))
+                    alphaSample = max(alphaSample, weapon1ColorSample.a);
+                return alphaSample;
+            }
+
+            // 背包专用轮廓 alpha（通过 BodyUVMap 采样 BagRect）
+            float GetBagOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            {
+                if (_EnableBag < 0.5) return 0.0;
+                float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
+                fixed4 bodyUVSample = tex2D(_BodyUVMap, uvSample);
+                fixed3 bagSample;
+                if (TrySampleEquip(bodyUVSample.rg, _BagRect, _BagTex, bagSample))
+                    return 1.0;
+                return 0.0;
             }
 
             fixed4 frag(v2f i) : SV_Target
@@ -1199,76 +1295,123 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                 }
 
-                // 基于“最终合成 alpha 外部一圈”的程序描边：只在角色/装备/武器/背包的外侧透明区域画一圈线
-                // 逻辑：当前像素透明(finalAlpha <= CUTOFF)，且四邻域中存在“最终合成 alpha > CUTOFF”的像素，则在当前像素绘制描边。
-                // 颜色优先级：Hit > Extra > 默认黑描边（Hit/Extra 只改这圈线的颜色，本体颜色不变）
+                // ========== 程序描边 ==========
+                // 使用 GetLayerPriority 函数判断层级，不在此处重复写规则
+                // 层级规则全部集中在 GetLayerPriority 里
+                // 颜色优先级：Hit > Extra > 默认黑
                 bool hitOutlineRequested   = _HitOutline > 0.5;
                 bool extraOutlineRequested = _ExtraOutlineEnabled > 0.5;
 
-                // 仅在当前像素属于本帧区域内，且自身是透明像素，且不在地面基线以下时考虑描边生成
                 float2 step = 1.0 / _FrameSize;
-                if (frameUV.x >= 0 && frameUV.x <= 1 && frameUV.y >= 0 && frameUV.y <= 1 && finalAlpha <= CUTOFF && frameUV.y + 0.5 * step.y >= _ShadowBaseY)
+                bool isOutline = false;
+
+                // 各层的 center alpha
+                float centerWeaponAlpha = GetWeaponOutlineAlphaAtFrameUV(frameUV, frameMin, frameMax);
+                float centerBodyAlpha   = GetOutlineAlphaAtFrameUV(frameUV, frameMin, frameMax);
+                float centerBagAlpha    = GetBagOutlineAlphaAtFrameUV(frameUV, frameMin, frameMax);
+
+                // 基线之上才考虑描边
+                bool aboveBaseline = frameUV.y + 0.5 * step.y >= _ShadowBaseY;
+                
+                // 当前像素的优先级
+                float currentPriority = GetLayerPriority(srcId);
+
+                if (aboveBaseline)
                 {
-                    bool isOutline = false;
+                    float2 neighbors[4];
+                    neighbors[0] = frameUV + float2(step.x, 0);
+                    neighbors[1] = frameUV + float2(-step.x, 0);
+                    neighbors[2] = frameUV + float2(0, step.y);
+                    neighbors[3] = frameUV + float2(0, -step.y);
 
-                    // 右：邻居是“最终合成后不透明” => 当前透明像素是外轮廓一圈
-                    if (!isOutline)
+                    float bestPriority = -1.0;
+                    
+                    // 检查每个邻居，找出优先级最高的可画描边
+                    for (int i = 0; i < 4; i++)
                     {
-                        float2 n = frameUV + float2(step.x, 0);
-                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
+                        float2 n = neighbors[i];
+                        
+                        // 检查武器（不在头部）
+                        if (!isHeadCore && centerWeaponAlpha <= CUTOFF)
                         {
-                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
-                            if (a > CUTOFF) isOutline = true;
+                            float aW = GetWeaponOutlineAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (aW > CUTOFF)
+                            {
+                                float weaponPriority = max(GetLayerPriority(SRC_WEAPON0), GetLayerPriority(SRC_WEAPON1));
+                                
+                                // 如果邻居也有角色像素，且角色优先级更高（朝北时），不画武器描边
+                                // 因为武器在角色后面，武器描边不应该出现在角色外围
+                                float neighborBodyAlpha = GetOutlineAlphaAtFrameUV(n, frameMin, frameMax);
+                                float bodyPriority = GetLayerPriority(SRC_MAIN);
+                                bool weaponBlockedByBody = (neighborBodyAlpha > CUTOFF) && (bodyPriority > weaponPriority);
+                                
+                                if (!weaponBlockedByBody && weaponPriority >= currentPriority && weaponPriority > bestPriority)
+                                {
+                                    bestPriority = weaponPriority;
+                                }
+                            }
+                        }
+                        
+                        // 检查人本体
+                        if (centerBodyAlpha <= CUTOFF)
+                        {
+                            float aB = GetOutlineAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (aB > CUTOFF)
+                            {
+                                // 检查邻居是否是手部区域
+                                float2 nUV = lerp(frameMin, frameMax, n);
+                                float neighborBodyPartID = tex2D(_BodyUVMap, nUV).b;
+                                bool neighborIsHand = IsPartID(neighborBodyPartID, ID_LEFTHAND) ||
+                                                      IsPartID(neighborBodyPartID, ID_RIGHTHAND);
+                                
+                                // 如果邻居是手部，且当前像素有武器颜色，不画手部描边（避免遮挡武器）
+                                bool handOutlineBlockedByWeapon = neighborIsHand &&
+                                                                  (srcId == SRC_WEAPON0 || srcId == SRC_WEAPON1);
+                                
+                                if (!handOutlineBlockedByWeapon)
+                                {
+                                    float bodyPriority = GetLayerPriority(SRC_MAIN);
+                                    if (bodyPriority >= currentPriority && bodyPriority > bestPriority)
+                                    {
+                                        bestPriority = bodyPriority;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // 检查背包
+                        if (centerBagAlpha <= CUTOFF)
+                        {
+                            float aBag = GetBagOutlineAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (aBag > CUTOFF)
+                            {
+                                float bagPriority = GetLayerPriority(SRC_BAG);
+                                if (bagPriority >= currentPriority && bagPriority > bestPriority)
+                                {
+                                    bestPriority = bagPriority;
+                                }
+                            }
                         }
                     }
-                    // 左
-                    if (!isOutline)
+                    
+                    isOutline = (bestPriority >= 0);
+                }
+
+                if (isOutline)
+                {
+                    fixed3 outlineColor = fixed3(0.0, 0.0, 0.0);
+                    if (hitOutlineRequested)
                     {
-                        float2 n = frameUV + float2(-step.x, 0);
-                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
-                        {
-                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
-                            if (a > CUTOFF) isOutline = true;
-                        }
+                        outlineColor = _HitOutlineColor.rgb;
                     }
-                    // 上
-                    if (!isOutline)
+                    else if (extraOutlineRequested)
                     {
-                        float2 n = frameUV + float2(0, step.y);
-                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
-                        {
-                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
-                            if (a > CUTOFF) isOutline = true;
-                        }
-                    }
-                    // 下
-                    if (!isOutline)
-                    {
-                        float2 n = frameUV + float2(0, -step.y);
-                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
-                        {
-                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
-                            if (a > CUTOFF) isOutline = true;
-                        }
+                        outlineColor = _ExtraOutlineColor.rgb;
                     }
 
-                    if (isOutline)
-                    {
-                        // 受击描边优先，其次是通用描边；都未开启时保留默认黑描边
-                        fixed3 outlineColor = fixed3(0.0, 0.0, 0.0);
-                        if (hitOutlineRequested)
-                        {
-                            outlineColor = _HitOutlineColor.rgb;
-                        }
-                        else if (extraOutlineRequested)
-                        {
-                            outlineColor = _ExtraOutlineColor.rgb;
-                        }
-
-                        finalColor.rgb = outlineColor;
-                        finalAlpha = 1.0;
-                        finalColor.a = finalAlpha;
-                    }
+                    finalColor.rgb = outlineColor;
+                    finalAlpha = 1.0;
+                    finalColor.a = finalAlpha;
                 }
 
                 // ========== 眼部装饰（在角色和武器之上、阴影之前）==========
