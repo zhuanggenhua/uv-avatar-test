@@ -318,29 +318,14 @@ Shader "EquipmentSystem/EquipmentUV"
                 return abs(id - target) < 0.025;
             }
 
-            // 判断颜色是否接近黑色，用于识别描边/黑块
-            // 与编辑器侧 DetectConfig.IsOutline 保持思路一致：使用 RGB 之和阈值（默认约 80）
+            // 判断颜色是否接近黑色（当前仅用于少量逻辑，如地面黑线过滤）
             bool IsNearBlack(fixed3 rgb)
             {
-                // rgb 为 0~1，sumRGB 相当于 (r+g+b)/255
-                // 在线性色彩空间下，需要先近似还原到 Gamma 空间再做阈值判断，
-                // 否则会导致像 83,36,11 这类深棕色在运行时被当成“更黑”的颜色。
-
-                float3 c;
-                #if defined(UNITY_COLORSPACE_GAMMA)
-                    c = rgb;
-                #else
-                    // Linear -> Gamma 的近似转换：使用 sqrt 代替 pow(x,1/2.2)，
-                    // 性能更好且在暗色区域足够接近。
-                    c = sqrt(rgb);
-                #endif
-
-                float sumRGB = c.r + c.g + c.b;
-                // 80 / 255 ≈ 0.314：只有非常接近黑色的像素才视为描边
+                float sumRGB = rgb.r + rgb.g + rgb.b;
                 return sumRGB < (80.0 / 255.0);
             }
 
-            // 颜色近似相等（用于判断当前像素是否来自某一装备纹理）
+            // 颜色近似相等（用于肤色映射查表）
             bool ColorApproxEqual(fixed3 a, fixed3 b, float eps)
             {
                 return abs(a.r - b.r) < eps
@@ -348,66 +333,6 @@ Shader "EquipmentSystem/EquipmentUV"
                     && abs(a.b - b.b) < eps;
             }
 
-            // 判断某个纹理采样是否代表当前像素的可见黑色描边
-            bool IsVisibleOutlineFromColor(fixed4 sampleColor, fixed3 finalRGB)
-            {
-                if (sampleColor.a <= CUTOFF)
-                    return false;
-                if (!IsNearBlack(sampleColor.rgb))
-                    return false;
-                return ColorApproxEqual(sampleColor.rgb, finalRGB, 0.01);
-            }
-
-            fixed4 SampleMainTexAtFrameUV(float2 frameUV, float2 frameMin, float2 frameSizeUV)
-            {
-                float2 uv = frameMin + frameSizeUV * frameUV;
-                return tex2D(_MainTex, uv);
-            }
-
-            bool IsMainTexOutlineAtFrameUV(float2 frameUV, float2 frameMin, float2 frameSizeUV)
-            {
-                fixed4 c = SampleMainTexAtFrameUV(frameUV, frameMin, frameSizeUV);
-                if (c.a <= CUTOFF)
-                    return false;
-                if (!IsNearBlack(c.rgb))
-                    return false;
-
-                float2 step = 1.0 / _FrameSize;
-
-                float2 n;
-                fixed4 nc;
-
-                n = frameUV + float2(step.x, 0);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                nc = SampleMainTexAtFrameUV(n, frameMin, frameSizeUV);
-                if (nc.a <= CUTOFF)
-                    return true;
-
-                n = frameUV + float2(-step.x, 0);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                nc = SampleMainTexAtFrameUV(n, frameMin, frameSizeUV);
-                if (nc.a <= CUTOFF)
-                    return true;
-
-                n = frameUV + float2(0, step.y);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                nc = SampleMainTexAtFrameUV(n, frameMin, frameSizeUV);
-                if (nc.a <= CUTOFF)
-                    return true;
-
-                n = frameUV + float2(0, -step.y);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                nc = SampleMainTexAtFrameUV(n, frameMin, frameSizeUV);
-                if (nc.a <= CUTOFF)
-                    return true;
-
-                return false;
-            }
-            
             // 预计算的部位ID结构体
             struct PartIDs
             {
@@ -450,7 +375,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 return false;
             }
 
-            // 通用贴图采样（保留 alpha），用于受击描边检测
+            // 通用贴图采样（保留 alpha）
             bool TrySampleEquipFull(float2 uv, float4 rect, sampler2D tex, out fixed4 outColor)
             {
                 float2 coord = TransformUV(uv, rect);
@@ -459,156 +384,12 @@ Shader "EquipmentSystem/EquipmentUV"
                 return c.a > CUTOFF;
             }
 
-            // 判断给定局部 UV 下，某装备贴图是否在当前像素提供了“可见黑色轮廓边缘”
-            // 要求：
-            // 1）当前像素来自该装备，且是可见的近黑色像素
-            // 2）其四邻域中至少有一个是“非装备像素”（透明或越界）
-            bool IsEquipOutlineAtUVLocal(float2 uvLocal, float4 rect, sampler2D tex, fixed3 finalRGB)
-            {
-                fixed4 c;
-                if (!TrySampleEquipFull(uvLocal, rect, tex, c))
-                    return false;
-
-                // 先确认当前像素本身是可见黑描边且颜色来自该装备
-                if (!IsVisibleOutlineFromColor(c, finalRGB))
-                    return false;
-
-                // 再检查四邻域是否有“非装备像素”，只有这种才算真正的轮廓边缘
-                float2 step = 1.0 / _FrameSize;
-                float2 n;
-                fixed4 nc;
-
-                // 右邻
-                n = uvLocal + float2(step.x, 0);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                if (!TrySampleEquipFull(n, rect, tex, nc) || nc.a <= CUTOFF)
-                    return true;
-
-                // 左邻
-                n = uvLocal + float2(-step.x, 0);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                if (!TrySampleEquipFull(n, rect, tex, nc) || nc.a <= CUTOFF)
-                    return true;
-
-                // 上邻
-                n = uvLocal + float2(0, step.y);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                if (!TrySampleEquipFull(n, rect, tex, nc) || nc.a <= CUTOFF)
-                    return true;
-
-                // 下邻
-                n = uvLocal + float2(0, -step.y);
-                if (n.x < 0 || n.x > 1 || n.y < 0 || n.y > 1)
-                    return true;
-                if (!TrySampleEquipFull(n, rect, tex, nc) || nc.a <= CUTOFF)
-                    return true;
-
-                // 四个方向都还是该装备的实心像素，则视为内部像素，不算描边
-                return false;
-            }
-
             // 前向声明：主手 / 副手武器采样函数（在下方实现）
             bool TrySampleWeapon0(float2 mainUV, out fixed4 outColor);
             bool TrySampleWeapon1(float2 mainUV, out fixed4 outColor);
 
-            // 在帧内 UV 空间下，判断武器像素是否处于自身轮廓边缘
-            // weaponIndex: 0=主手, 1=副手
-            bool IsWeaponOutlineAtFrameUV(float2 frameUV, float2 frameMin, float2 frameSizeUV, int weaponIndex)
-            {
-                float2 step = 1.0 / _FrameSize;
-                float2 nFrameUV;
-                float2 nUV;
-                fixed4 c;
-
-                // 右邻
-                nFrameUV = frameUV + float2(step.x, 0);
-                if (nFrameUV.x < 0 || nFrameUV.x > 1 || nFrameUV.y < 0 || nFrameUV.y > 1)
-                    return true;
-                nUV = frameMin + frameSizeUV * nFrameUV;
-                if (weaponIndex == 0)
-                {
-                    if (!TrySampleWeapon0(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-                else
-                {
-                    if (!TrySampleWeapon1(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-
-                // 左邻
-                nFrameUV = frameUV + float2(-step.x, 0);
-                if (nFrameUV.x < 0 || nFrameUV.x > 1 || nFrameUV.y < 0 || nFrameUV.y > 1)
-                    return true;
-                nUV = frameMin + frameSizeUV * nFrameUV;
-                if (weaponIndex == 0)
-                {
-                    if (!TrySampleWeapon0(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-                else
-                {
-                    if (!TrySampleWeapon1(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-
-                // 上邻
-                nFrameUV = frameUV + float2(0, step.y);
-                if (nFrameUV.x < 0 || nFrameUV.x > 1 || nFrameUV.y < 0 || nFrameUV.y > 1)
-                    return true;
-                nUV = frameMin + frameSizeUV * nFrameUV;
-                if (weaponIndex == 0)
-                {
-                    if (!TrySampleWeapon0(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-                else
-                {
-                    if (!TrySampleWeapon1(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-
-                // 下邻
-                nFrameUV = frameUV + float2(0, -step.y);
-                if (nFrameUV.x < 0 || nFrameUV.x > 1 || nFrameUV.y < 0 || nFrameUV.y > 1)
-                    return true;
-                nUV = frameMin + frameSizeUV * nFrameUV;
-                if (weaponIndex == 0)
-                {
-                    if (!TrySampleWeapon0(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-                else
-                {
-                    if (!TrySampleWeapon1(nUV, c) || c.a <= CUTOFF)
-                        return true;
-                }
-
-                // 四个方向都有武器实心像素，则为内部像素，不是描边
-                return false;
-            }
-
-            // 组合武器受击描边条件：颜色来自该武器的近黑色像素，且位于该武器自身的轮廓边缘
-            bool IsWeaponHitOutline(
-                int weaponIndex,
-                bool hasWeapon,
-                fixed4 weaponColor,
-                float2 frameUV,
-                float2 frameMin,
-                float2 frameSizeUV,
-                fixed3 finalRGB)
-            {
-                if (!hasWeapon)
-                    return false;
-
-                if (!IsVisibleOutlineFromColor(weaponColor, finalRGB))
-                    return false;
-
-                return IsWeaponOutlineAtFrameUV(frameUV, frameMin, frameSizeUV, weaponIndex);
-            }
+            // 前向声明：基于最终轮廓 alpha 的采样函数（在后面实现）
+            float GetFinalAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax);
 
             // 通用武器采样函数（支持主手/副手）
             // 说明：
@@ -858,33 +639,37 @@ Shader "EquipmentSystem/EquipmentUV"
             }
 
             // 在帧内 UV 空间下，采样基线 y = _ShadowBaseY 上、x=xOnFrame 处的
-            // （本体/披风/武器）alpha，用于决定该 X 处是否有可投射阴影的像素。
+            // “加上黑边后”的近似轮廓 alpha：在基线附近对 X 轴做一次 3 像素（x, x±1）膨胀，效果接近原先依赖黑描边时的阴影宽度。
             float SampleCasterAlphaAtGroundX(float xOnFrame)
             {
-                float2 frameUV = float2(xOnFrame, _ShadowBaseY);
                 float2 frameMin = _CharFrameRect.xy;
                 float2 frameMax = _CharFrameRect.zw;
-                float2 uvGround = lerp(frameMin, frameMax, frameUV);
-                fixed4 col = tex2D(_MainTex, uvGround);
-                if (col.a > 0.001)
-                    return col.a;
+                float2 step = 1.0 / _FrameSize;
 
-                if (_EnableCloak > 0.5)
+                float alpha = 0.0;
+
+                // 中心：x
+                float2 frameUV = float2(xOnFrame, _ShadowBaseY);
+                if (frameUV.x >= 0.0 && frameUV.x <= 1.0)
                 {
-                    fixed4 bodyUV = tex2D(_BodyUVMap, uvGround);
-                    float2 cloakUV = TransformUV(bodyUV.rg, _CloakRect);
-                    col = tex2D(_CloakTex, cloakUV);
-                    if (col.a > 0.001)
-                        return col.a;
+                    alpha = max(alpha, GetFinalAlphaAtFrameUV(frameUV, frameMin, frameMax));
                 }
 
-                fixed4 weaponCol;
-                if (TrySampleWeapon0(uvGround, weaponCol))
-                    return weaponCol.a;
-                if (TrySampleWeapon1(uvGround, weaponCol))
-                    return weaponCol.a;
+                // 右侧一格：x + 1 像素
+                frameUV = float2(xOnFrame + step.x, _ShadowBaseY);
+                if (frameUV.x >= 0.0 && frameUV.x <= 1.0)
+                {
+                    alpha = max(alpha, GetFinalAlphaAtFrameUV(frameUV, frameMin, frameMax));
+                }
 
-                return 0;
+                // 左侧一格：x - 1 像素
+                frameUV = float2(xOnFrame - step.x, _ShadowBaseY);
+                if (frameUV.x >= 0.0 && frameUV.x <= 1.0)
+                {
+                    alpha = max(alpha, GetFinalAlphaAtFrameUV(frameUV, frameMin, frameMax));
+                }
+
+                return alpha;
             }
 
             // Mode0 地面阴影判断
@@ -1068,11 +853,90 @@ Shader "EquipmentSystem/EquipmentUV"
                 if (_EnableMask > 0.5 && TrySampleEquip(baseHeadUV, _MaskRect, _MaskTex, sampled))
                 {
                     ioColor.rgb = sampled;
-                    wrote = true;
                     headSrcId = SRC_MASK;
                 }
                 
                 if (wrote) headLayerAlpha = 1.0;
+            }
+
+            // 计算指定帧内 UV 位置在当前帧上的“近似最终 alpha”（底图 + 身体装备 + 武器 + 背包）
+            // 为了避免编译器崩溃，这里仍然不重复整套身体/头部图层叠加逻辑，只取轮廓相关的信息：
+            // - _MainTex：基础身体轮廓
+            // - 身体装备：裤子 / 衣服 / 披风（通过 BodyUVMap + TrySampleEquip）
+            // - 双武器：任意武器像素都视为占据轮廓
+            // - 朝北时背包：只要有像素就记为轮廓
+            float GetFinalAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            {
+                // 将帧内 UV 映射回整张 _MainTex 的 UV
+                float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
+
+                // 1）底图 alpha 直接来自 _MainTex（角色本体轮廓）
+                fixed4 baseColorSample = tex2D(_MainTex, uvSample);
+                float alphaSample = baseColorSample.a;
+
+                // 2）身体装备轮廓（裤子 / 上衣 / 披风 / 背包）
+                fixed4 bodyUVSample = tex2D(_BodyUVMap, uvSample);
+                fixed3 equipSample;
+
+                if (_EnablePants > 0.5 && TrySampleEquip(bodyUVSample.rg, _PantsRect, _PantsTex, equipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableCloth > 0.5 && TrySampleEquip(bodyUVSample.rg, _ClothRect, _ClothTex, equipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableCloak > 0.5 && TrySampleEquip(bodyUVSample.rg, _CloakRect, _CloakTex, equipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+
+                // 朝北时：背包在最前层，轮廓也要包含在内
+                if (_BodyInFront > 0.5 && _EnableBag > 0.5)
+                {
+                    fixed3 bagSample;
+                    if (TrySampleEquip(bodyUVSample.rg, _BagRect, _BagTex, bagSample))
+                    {
+                        alphaSample = max(alphaSample, 1.0);
+                    }
+                }
+
+                // 2.5）头部装备轮廓（头盔 / 头发 / 面饰 / 胡子 / 面罩）
+                fixed4 headUVSample = tex2D(_HeadUVMap, uvSample);
+                fixed3 headEquipSample;
+
+                if (_EnableHelmet > 0.5 && TrySampleEquip(headUVSample.rg, _HelmetRect, _HelmetTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableHair > 0.5 && TrySampleEquip(headUVSample.rg, _HairRect, _HairTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableBeard > 0.5 && TrySampleEquip(headUVSample.rg, _BeardRect, _BeardTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableFaceAccessory > 0.5 && TrySampleEquip(headUVSample.rg, _FaceAccessoryRect, _FaceAccessoryTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+                if (_EnableMask > 0.5 && TrySampleEquip(headUVSample.rg, _MaskRect, _MaskTex, headEquipSample))
+                {
+                    alphaSample = max(alphaSample, 1.0);
+                }
+
+                // 3）叠加武器 alpha（不区分前后，只要有像素就记为不透明，以获得全局轮廓）
+                fixed4 weapon0ColorSample, weapon1ColorSample;
+                bool hasWeapon0Sample = TrySampleWeapon0(uvSample, weapon0ColorSample);
+                bool hasWeapon1Sample = TrySampleWeapon1(uvSample, weapon1ColorSample);
+
+                if (hasWeapon0Sample)
+                    alphaSample = max(alphaSample, weapon0ColorSample.a);
+                if (hasWeapon1Sample)
+                    alphaSample = max(alphaSample, weapon1ColorSample.a);
+
+                return alphaSample;
             }
 
             fixed4 frag(v2f i) : SV_Target
@@ -1084,7 +948,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 fixed4 bodyUV = tex2D(_BodyUVMap, uvFrame);
                 fixed4 headUV = tex2D(_HeadUVMap, uvFrame);
 
-                // 将顶点 UV（整张角色贴图坐标）映射到“当前帧”的局部 UV（0~1，左下为原点）
+                // 将顶点 UV（整张角色贴图坐标）映射到"当前帧"的局部 UV（0~1，左下为原点）
                 float2 frameMin = _CharFrameRect.xy;
                 float2 frameMax = _CharFrameRect.zw;
                 float2 frameSizeUV = frameMax - frameMin;
@@ -1335,76 +1199,75 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                 }
 
-                // 统一描边开关：同一时间只启用一种描边
+                // 基于“最终合成 alpha 外部一圈”的程序描边：只在角色/装备/武器/背包的外侧透明区域画一圈线
+                // 逻辑：当前像素透明(finalAlpha <= CUTOFF)，且四邻域中存在“最终合成 alpha > CUTOFF”的像素，则在当前像素绘制描边。
+                // 颜色优先级：Hit > Extra > 默认黑描边（Hit/Extra 只改这圈线的颜色，本体颜色不变）
                 bool hitOutlineRequested   = _HitOutline > 0.5;
                 bool extraOutlineRequested = _ExtraOutlineEnabled > 0.5;
-                bool anyOutlineRequested   = hitOutlineRequested || extraOutlineRequested;
 
-                // 只有最终颜色本身接近黑色时，才有可能是描边像素，才进入描边检测逻辑
-                if (anyOutlineRequested && finalAlpha > CUTOFF && IsNearBlack(finalColor.rgb))
+                // 仅在当前像素属于本帧区域内，且自身是透明像素，且不在地面基线以下时考虑描边生成
+                float2 step = 1.0 / _FrameSize;
+                if (frameUV.x >= 0 && frameUV.x <= 1 && frameUV.y >= 0 && frameUV.y <= 1 && finalAlpha <= CUTOFF && frameUV.y + 0.5 * step.y >= _ShadowBaseY)
                 {
-                    bool isOutlineEdge = false;
+                    bool isOutline = false;
 
-                    // 根据最终像素来源，仅对对应图层执行一次描边检测，避免无关采样
-                    if (srcId == SRC_MAIN)
+                    // 右：邻居是“最终合成后不透明” => 当前透明像素是外轮廓一圈
+                    if (!isOutline)
                     {
-                        isOutlineEdge = IsMainTexOutlineAtFrameUV(frameUV, frameMin, frameSizeUV);
+                        float2 n = frameUV + float2(step.x, 0);
+                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
+                        {
+                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (a > CUTOFF) isOutline = true;
+                        }
                     }
-                    else if (srcId == SRC_CLOAK)
+                    // 左
+                    if (!isOutline)
                     {
-                        if (_EnableCloak > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(bodyUV.rg, _CloakRect, _CloakTex, finalColor.rgb);
+                        float2 n = frameUV + float2(-step.x, 0);
+                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
+                        {
+                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (a > CUTOFF) isOutline = true;
+                        }
                     }
-                    else if (srcId == SRC_HELMET)
+                    // 上
+                    if (!isOutline)
                     {
-                        if (_EnableHelmet > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _HelmetRect, _HelmetTex, finalColor.rgb);
+                        float2 n = frameUV + float2(0, step.y);
+                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
+                        {
+                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (a > CUTOFF) isOutline = true;
+                        }
                     }
-                    else if (srcId == SRC_FACE)
+                    // 下
+                    if (!isOutline)
                     {
-                        if (_EnableFaceAccessory > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _FaceAccessoryRect, _FaceAccessoryTex, finalColor.rgb);
-                    }
-                    else if (srcId == SRC_BEARD)
-                    {
-                        if (_EnableBeard > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _BeardRect, _BeardTex, finalColor.rgb);
-                    }
-                    else if (srcId == SRC_HAIR)
-                    {
-                        if (_EnableHair > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _HairRect, _HairTex, finalColor.rgb);
-                    }
-                    else if (srcId == SRC_WEAPON0)
-                    {
-                        isOutlineEdge = IsWeaponHitOutline(0, hasWeapon0, weapon0Color, frameUV, frameMin, frameSizeUV, finalColor.rgb);
-                    }
-                    else if (srcId == SRC_WEAPON1)
-                    {
-                        isOutlineEdge = IsWeaponHitOutline(1, hasWeapon1, weapon1Color, frameUV, frameMin, frameSizeUV, finalColor.rgb);
-                    }
-                    else if (srcId == SRC_BAG)
-                    {
-                        if (_EnableBag > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(bodyUV.rg, _BagRect, _BagTex, finalColor.rgb);
-                    }
-                    else if (srcId == SRC_MASK)
-                    {
-                        if (_EnableMask > 0.5)
-                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _MaskRect, _MaskTex, finalColor.rgb);
+                        float2 n = frameUV + float2(0, -step.y);
+                        if (n.x >= 0 && n.x <= 1 && n.y >= 0 && n.y <= 1)
+                        {
+                            float a = GetFinalAlphaAtFrameUV(n, frameMin, frameMax);
+                            if (a > CUTOFF) isOutline = true;
+                        }
                     }
 
-                    if (isOutlineEdge)
+                    if (isOutline)
                     {
-                        // 受击描边优先，其次是通用描边：同一时间只会有一种颜色
+                        // 受击描边优先，其次是通用描边；都未开启时保留默认黑描边
+                        fixed3 outlineColor = fixed3(0.0, 0.0, 0.0);
                         if (hitOutlineRequested)
                         {
-                            finalColor.rgb = _HitOutlineColor.rgb;
+                            outlineColor = _HitOutlineColor.rgb;
                         }
                         else if (extraOutlineRequested)
                         {
-                            finalColor.rgb = _ExtraOutlineColor.rgb;
+                            outlineColor = _ExtraOutlineColor.rgb;
                         }
+
+                        finalColor.rgb = outlineColor;
+                        finalAlpha = 1.0;
+                        finalColor.a = finalAlpha;
                     }
                 }
 

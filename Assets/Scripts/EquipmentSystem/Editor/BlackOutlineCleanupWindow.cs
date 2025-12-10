@@ -209,28 +209,11 @@ namespace EquipmentSystem.EditorTools
         }
 
         /// <summary>
-        /// 迭代剥离黑边：每轮清除当前最外层黑边，直到没有新像素被清除
+        /// 只执行一轮外圈黑边清理：仅移除当前贴图最外层的黑色描边
         /// </summary>
         private static bool RemoveBlackOutlinePixels(Color32[] pixels, int width, int height, float grayThreshold)
         {
-            bool anyChanged = false;
-            int iteration = 0;
-            const int maxIterations = 32; // 防止无限循环
-
-            while (iteration < maxIterations)
-            {
-                bool changedThisRound = RemoveOneLayerOfBlackOutline(pixels, width, height, grayThreshold);
-                if (!changedThisRound)
-                    break;
-
-                anyChanged = true;
-                iteration++;
-            }
-
-            if (iteration > 0)
-                Debug.Log($"[BlackOutlineCleanup] 迭代剥离黑边完成，共 {iteration} 轮");
-
-            return anyChanged;
+            return RemoveOneLayerOfBlackOutline(pixels, width, height, grayThreshold);
         }
 
         /// <summary>
