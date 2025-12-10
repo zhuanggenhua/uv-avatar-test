@@ -687,6 +687,11 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(EnableLeftEyeProp, 0);
             _shaderMaterial.SetFloat(EnableRightEyeProp, 0);
             _shaderMaterial.SetFloat(HitOutlineProp, 0);
+            _shaderMaterial.SetFloat(EyeDecoModeProp, 0);
+            _shaderMaterial.SetVector(LeftEyePosProp, Vector2.zero);
+            _shaderMaterial.SetVector(RightEyePosProp, Vector2.zero);
+            _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 0);
+            _shaderMaterial.SetFloat(SkinColorCountProp, 0);
             // 双武器
             _shaderMaterial.SetFloat(Weapon0EnabledProp, 0);
             _shaderMaterial.SetFloat(Weapon1EnabledProp, 0);

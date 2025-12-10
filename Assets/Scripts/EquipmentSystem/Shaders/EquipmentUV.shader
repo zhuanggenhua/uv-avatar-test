@@ -35,6 +35,7 @@ Shader "EquipmentSystem/EquipmentUV"
         _FaceAccessoryTex ("Face Accessory Texture", 2D) = "white" {}
         _BeardTex ("Beard Texture", 2D) = "white" {}
         _HelmetTex ("Helmet Texture", 2D) = "white" {}
+        _MaskTex ("Mask Texture", 2D) = "white" {}
         
         [Header(Glove Colors)]
         [HDR] _LeftHandColor ("Left Hand Color", Color) = (0.6, 0.4, 0.2, 1)
@@ -74,6 +75,7 @@ Shader "EquipmentSystem/EquipmentUV"
         _EnableFaceAccessory ("Enable Face Accessory", Float) = 0
         _EnableBeard ("Enable Beard", Float) = 0
         _EnableHelmet ("Enable Helmet", Float) = 0
+        _EnableMask ("Enable Mask", Float) = 0
         _EnableCloth ("Enable Clothing", Float) = 0
         _EnableCloak ("Enable Cloak", Float) = 0
         _EnableBag ("Enable Bag", Float) = 0
@@ -106,6 +108,9 @@ Shader "EquipmentSystem/EquipmentUV"
         [Header(Hit Outline)]
         _HitOutline ("Hit Outline", Float) = 0
         [HDR] _HitOutlineColor ("Hit Outline Color", Color) = (0.7059, 0.0353, 0.0353, 1)
+        [Header(Extra Outline)]
+        _ExtraOutlineEnabled ("Extra Outline Enabled", Float) = 0
+        [HDR] _ExtraOutlineColor ("Extra Outline Color", Color) = (1,1,1,1)
         
         [Header(Skin Palette)]
         _SkinPaletteEnabled ("Skin Palette Enabled", Float) = 0
@@ -175,6 +180,7 @@ Shader "EquipmentSystem/EquipmentUV"
             sampler2D _FaceAccessoryTex;
             sampler2D _BeardTex;
             sampler2D _HelmetTex;
+            sampler2D _MaskTex;
             sampler2D _Weapon0Tex;
             sampler2D _Weapon1Tex;
             
@@ -189,6 +195,7 @@ Shader "EquipmentSystem/EquipmentUV"
             float4 _FaceAccessoryRect;
             float4 _BeardRect;
             float4 _HelmetRect;
+            float4 _MaskRect;
             float4 _CharFrameRect;      // 当前角色帧在 _MainTex 中的 Rect
             
             // 主手武器参数
@@ -220,6 +227,7 @@ Shader "EquipmentSystem/EquipmentUV"
             float _EnableFaceAccessory;
             float _EnableBeard;
             float _EnableHelmet;
+            float _EnableMask;
             float _EnableCloth;
             float _EnablePants;
             float _EnableCloak;
@@ -252,6 +260,9 @@ Shader "EquipmentSystem/EquipmentUV"
             float _HitOutline;
             fixed4 _HitOutlineColor;
 
+            float _ExtraOutlineEnabled;
+            fixed4 _ExtraOutlineColor;
+
             // 肤色映射（颜色数组查表）
             static const int MAX_SKIN_COLORS = 16;
             fixed4 _SkinSrcColors[MAX_SKIN_COLORS];
@@ -277,6 +288,7 @@ Shader "EquipmentSystem/EquipmentUV"
             #define SRC_WEAPON1  8
             #define SRC_OTHER    9
             #define SRC_BAG     10
+            #define SRC_MASK    11
             
             // Body Part ID 定义 (对应 B 通道值)
             // 0.0        = 非换装区域
@@ -311,7 +323,19 @@ Shader "EquipmentSystem/EquipmentUV"
             bool IsNearBlack(fixed3 rgb)
             {
                 // rgb 为 0~1，sumRGB 相当于 (r+g+b)/255
-                float sumRGB = rgb.r + rgb.g + rgb.b;
+                // 在线性色彩空间下，需要先近似还原到 Gamma 空间再做阈值判断，
+                // 否则会导致像 83,36,11 这类深棕色在运行时被当成“更黑”的颜色。
+
+                float3 c;
+                #if defined(UNITY_COLORSPACE_GAMMA)
+                    c = rgb;
+                #else
+                    // Linear -> Gamma 的近似转换：使用 sqrt 代替 pow(x,1/2.2)，
+                    // 性能更好且在暗色区域足够接近。
+                    c = sqrt(rgb);
+                #endif
+
+                float sumRGB = c.r + c.g + c.b;
                 // 80 / 255 ≈ 0.314：只有非常接近黑色的像素才视为描边
                 return sumRGB < (80.0 / 255.0);
             }
@@ -740,11 +764,18 @@ Shader "EquipmentSystem/EquipmentUV"
                 if (!parts.isHead)
                     return false;
 
-                // 若当前像素被头盔覆盖，则不绘制眼部装饰（装饰在头盔下面）
+                // 若当前像素被头盔/面罩覆盖，则不绘制眼部装饰（装饰在头盔/面罩下面）
                 if (_EnableHelmet > 0.5)
                 {
                     fixed3 helmetSample;
                     if (TrySampleEquip(headUVLocal, _HelmetRect, _HelmetTex, helmetSample))
+                        return false;
+                }
+
+                if (_EnableMask > 0.5)
+                {
+                    fixed3 maskSample;
+                    if (TrySampleEquip(headUVLocal, _MaskRect, _MaskTex, maskSample))
                         return false;
                 }
 
@@ -1032,6 +1063,14 @@ Shader "EquipmentSystem/EquipmentUV"
                     wrote = true;
                     headSrcId = SRC_HAIR;
                 }
+
+                // 面罩图层：优先级高于胡子/饰品/头发，仅次于头盔
+                if (_EnableMask > 0.5 && TrySampleEquip(baseHeadUV, _MaskRect, _MaskTex, sampled))
+                {
+                    ioColor.rgb = sampled;
+                    wrote = true;
+                    headSrcId = SRC_MASK;
+                }
                 
                 if (wrote) headLayerAlpha = 1.0;
             }
@@ -1182,9 +1221,10 @@ Shader "EquipmentSystem/EquipmentUV"
                         {
                             fixed3 src = charColor.rgb;
 
-                            // 始终在 srcColors 中找到最近的一条映射，避免因为颜色空间/纹理压缩造成“完全匹配不到”。
-                            int   bestIndex = 0;
-                            float bestDist  = 1e9;
+                            // 只在当前像素颜色与某条源颜色“几乎完全相等”时才进行替换，
+                            // 避免将其他非肤色像素拉到最近的肤色上。
+                            // 这里使用一个非常小的阈值（约 1/255），等价于“严格相等”但允许浮点误差。
+                            const float SKIN_COLOR_EPS = 1.0 / 255.0;
 
                             for (int i = 0; i < MAX_SKIN_COLORS; i++)
                             {
@@ -1192,17 +1232,13 @@ Shader "EquipmentSystem/EquipmentUV"
                                     break;
 
                                 fixed3 srcColor = _SkinSrcColors[i].rgb;
-                                fixed3 diff     = src - srcColor;
-                                float  dist     = dot(diff, diff); // 欧氏距离平方
 
-                                if (dist < bestDist)
+                                if (ColorApproxEqual(src, srcColor, SKIN_COLOR_EPS))
                                 {
-                                    bestDist  = dist;
-                                    bestIndex = i;
+                                    charColor.rgb = _SkinDstColors[i].rgb;
+                                    break;
                                 }
                             }
-
-                            charColor.rgb = _SkinDstColors[bestIndex].rgb;
                         }
                     }
                 }
@@ -1299,71 +1335,76 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                 }
 
-                // 只有最终颜色本身接近黑色时，才有可能是描边像素，才进入受击描边逻辑
-                // 仅对特定来源执行描边检测，避免无关像素进入该分支
-                bool canHitOutline =
-                    srcId == SRC_MAIN ||
-                    srcId == SRC_CLOAK ||
-                    srcId == SRC_HELMET ||
-                    srcId == SRC_FACE ||
-                    srcId == SRC_BEARD ||
-                    srcId == SRC_HAIR ||
-                    srcId == SRC_WEAPON0 ||
-                    srcId == SRC_WEAPON1 ||
-                    srcId == SRC_BAG;
+                // 统一描边开关：同一时间只启用一种描边
+                bool hitOutlineRequested   = _HitOutline > 0.5;
+                bool extraOutlineRequested = _ExtraOutlineEnabled > 0.5;
+                bool anyOutlineRequested   = hitOutlineRequested || extraOutlineRequested;
 
-                if (_HitOutline > 0.5 && finalAlpha > CUTOFF && canHitOutline && IsNearBlack(finalColor.rgb))
+                // 只有最终颜色本身接近黑色时，才有可能是描边像素，才进入描边检测逻辑
+                if (anyOutlineRequested && finalAlpha > CUTOFF && IsNearBlack(finalColor.rgb))
                 {
-                    bool isHitOutline = false;
+                    bool isOutlineEdge = false;
 
-                    // 根据最终像素来源，仅对对应图层执行一次描边检测，避免多余采样
+                    // 根据最终像素来源，仅对对应图层执行一次描边检测，避免无关采样
                     if (srcId == SRC_MAIN)
                     {
-                        isHitOutline = IsMainTexOutlineAtFrameUV(frameUV, frameMin, frameSizeUV);
+                        isOutlineEdge = IsMainTexOutlineAtFrameUV(frameUV, frameMin, frameSizeUV);
                     }
                     else if (srcId == SRC_CLOAK)
                     {
                         if (_EnableCloak > 0.5)
-                            isHitOutline = IsEquipOutlineAtUVLocal(bodyUV.rg, _CloakRect, _CloakTex, finalColor.rgb);
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(bodyUV.rg, _CloakRect, _CloakTex, finalColor.rgb);
                     }
                     else if (srcId == SRC_HELMET)
                     {
                         if (_EnableHelmet > 0.5)
-                            isHitOutline = IsEquipOutlineAtUVLocal(headUV.rg, _HelmetRect, _HelmetTex, finalColor.rgb);
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _HelmetRect, _HelmetTex, finalColor.rgb);
                     }
                     else if (srcId == SRC_FACE)
                     {
                         if (_EnableFaceAccessory > 0.5)
-                            isHitOutline = IsEquipOutlineAtUVLocal(headUV.rg, _FaceAccessoryRect, _FaceAccessoryTex, finalColor.rgb);
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _FaceAccessoryRect, _FaceAccessoryTex, finalColor.rgb);
                     }
                     else if (srcId == SRC_BEARD)
                     {
                         if (_EnableBeard > 0.5)
-                            isHitOutline = IsEquipOutlineAtUVLocal(headUV.rg, _BeardRect, _BeardTex, finalColor.rgb);
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _BeardRect, _BeardTex, finalColor.rgb);
                     }
                     else if (srcId == SRC_HAIR)
                     {
                         if (_EnableHair > 0.5)
-                            isHitOutline = IsEquipOutlineAtUVLocal(headUV.rg, _HairRect, _HairTex, finalColor.rgb);
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _HairRect, _HairTex, finalColor.rgb);
                     }
                     else if (srcId == SRC_WEAPON0)
                     {
-                        isHitOutline = IsWeaponHitOutline(0, hasWeapon0, weapon0Color, frameUV, frameMin, frameSizeUV, finalColor.rgb);
+                        isOutlineEdge = IsWeaponHitOutline(0, hasWeapon0, weapon0Color, frameUV, frameMin, frameSizeUV, finalColor.rgb);
                     }
                     else if (srcId == SRC_WEAPON1)
                     {
-                        isHitOutline = IsWeaponHitOutline(1, hasWeapon1, weapon1Color, frameUV, frameMin, frameSizeUV, finalColor.rgb);
+                        isOutlineEdge = IsWeaponHitOutline(1, hasWeapon1, weapon1Color, frameUV, frameMin, frameSizeUV, finalColor.rgb);
                     }
                     else if (srcId == SRC_BAG)
                     {
                         if (_EnableBag > 0.5)
-                            isHitOutline = IsEquipOutlineAtUVLocal(bodyUV.rg, _BagRect, _BagTex, finalColor.rgb);
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(bodyUV.rg, _BagRect, _BagTex, finalColor.rgb);
+                    }
+                    else if (srcId == SRC_MASK)
+                    {
+                        if (_EnableMask > 0.5)
+                            isOutlineEdge = IsEquipOutlineAtUVLocal(headUV.rg, _MaskRect, _MaskTex, finalColor.rgb);
                     }
 
-                    if (isHitOutline)
+                    if (isOutlineEdge)
                     {
-                        // 受击描边颜色：由 _HitOutlineColor 控制，默认 #b40909
-                        finalColor.rgb = _HitOutlineColor.rgb;
+                        // 受击描边优先，其次是通用描边：同一时间只会有一种颜色
+                        if (hitOutlineRequested)
+                        {
+                            finalColor.rgb = _HitOutlineColor.rgb;
+                        }
+                        else if (extraOutlineRequested)
+                        {
+                            finalColor.rgb = _ExtraOutlineColor.rgb;
+                        }
                     }
                 }
 

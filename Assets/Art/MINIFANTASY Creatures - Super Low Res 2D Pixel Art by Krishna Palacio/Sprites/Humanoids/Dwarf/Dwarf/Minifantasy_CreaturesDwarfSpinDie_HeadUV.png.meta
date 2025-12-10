@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: dd43fe893588a10429f8783ae79040ab
+guid: ef9ab474b1a7c0d4a8523da571e34cc6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1264022566510996207
-    second: "\u9E7F\u5934\u76D44_0"
+      213: -1993347118781391541
+    second: Minifantasy_CreaturesDwarfSpinDie_HeadUV_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -46,18 +46,18 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u9E7F\u5934\u76D44_0"
+      name: Minifantasy_CreaturesDwarfSpinDie_HeadUV_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 16
-        width: 16
-        height: 8
+        x: 0
+        y: 0
+        width: 352
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fea27f0c3d5ba8110800000000000000
-      internalID: 1264022566510996207
+      spriteID: b4d9cfe4b553654e0800000000000000
+      internalID: -1993347118781391541
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u9E7F\u5934\u76D44_0": 1264022566510996207
+      Minifantasy_CreaturesDwarfSpinDie_HeadUV_0: -1993347118781391541
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

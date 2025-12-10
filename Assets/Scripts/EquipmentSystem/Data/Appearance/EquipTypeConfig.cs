@@ -140,7 +140,7 @@ namespace EquipmentSystem
                 DisplayName = "面罩",
                 RenderMode = EquipRenderMode.Sprite,
                 BodyPart = CharacterBodyPart.Head,
-                TexProp = "_HelmetTex", RectProp = "_HelmetRect", EnableProp = "_EnableHelmet",
+                TexProp = "_MaskTex", RectProp = "_MaskRect", EnableProp = "_EnableMask",
                 RenderOrder = 0,
             });
 

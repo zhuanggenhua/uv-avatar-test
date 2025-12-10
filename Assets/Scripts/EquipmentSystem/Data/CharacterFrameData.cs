@@ -516,11 +516,23 @@ namespace EquipmentSystem
 
         public bool IsClosedEyeColor(Color32 pixel)
         {
-            if (closedEyeColor.a == 0)
+            // 闭眼颜色比较时忽略 alpha，只比较 RGB
+            if (closedEyeColor.r == 0 && closedEyeColor.g == 0 && closedEyeColor.b == 0)
                 return false;
             if (pixel.a == 0 || IsOutline(pixel))
                 return false;
-            return ColorSimilar(pixel, closedEyeColor, closedEyeColorThreshold);
+            return ColorSimilarRGB(pixel, closedEyeColor, closedEyeColorThreshold);
+        }
+
+        /// <summary>
+        /// 判断两个颜色的 RGB 是否相近（忽略 alpha）
+        /// </summary>
+        public bool ColorSimilarRGB(Color32 a, Color32 b, int threshold)
+        {
+            int dr = Mathf.Abs(a.r - b.r);
+            int dg = Mathf.Abs(a.g - b.g);
+            int db = Mathf.Abs(a.b - b.b);
+            return (dr + dg + db) < threshold;
         }
 
         /// <summary>
