@@ -380,7 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5272552499143439441, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5272552499143439447, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
       propertyPath: m_RootOrder
@@ -441,6 +441,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5272552500058403403, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 241005997}
+    - targetCorrespondingSourceObject: {fileID: 5272552500058403403, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 241006001}
   m_SourcePrefab: {fileID: 100100000, guid: db553b29ab3d9c34480337c895f9af56, type: 3}
 --- !u!4 &23843574 stripped
 Transform:
@@ -2044,6 +2047,24 @@ MonoBehaviour:
   _debugAnimatorState: 
   _debugHasBodyUVMap: 0
   _debugHasHeadUVMap: 0
+--- !u!114 &241006001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241005993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd33f42c60aaa64a85bf7d063c4965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentSystem.AnimationController
+  animDatabase: {fileID: 11400000, guid: dcfa39904e5228b449bfaddba02ae639, type: 2}
+  directionNames:
+  - SE
+  - SW
+  - NE
+  - NW
 --- !u!1 &279330630
 GameObject:
   m_ObjectHideFlags: 0

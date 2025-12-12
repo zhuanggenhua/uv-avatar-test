@@ -14,7 +14,7 @@ namespace EquipmentSystem.EditorTools
         [SerializeField]
         private float _grayThreshold = 0.15f;
 
-        [MenuItem("Tools/Equipment/Black Outline Cleanup")] 
+        [MenuItem("Tools/Equipment System/Black Outline Cleanup")] 
         private static void ShowWindow()
         {
             var window = GetWindow<BlackOutlineCleanupWindow>("Black Outline Cleanup");

@@ -48,8 +48,6 @@ namespace EquipmentSystem
         SpriteRenderer _charRenderer;
         readonly Dictionary<EquipmentRenderData, SpriteRenderer> _weaponRenderers =
             new Dictionary<EquipmentRenderData, SpriteRenderer>();
-        readonly Dictionary<EquipmentType, SpriteRenderer> _equipSequenceRenderers =
-            new Dictionary<EquipmentType, SpriteRenderer>();
 
         // 动画同步
         Animator _animator;
@@ -127,6 +125,8 @@ namespace EquipmentSystem
         static readonly int Weapon0DepthModeProp = Shader.PropertyToID("_Weapon0DepthMode");
         static readonly int Weapon0EnabledProp = Shader.PropertyToID("_Weapon0Enabled");
         static readonly int Weapon0HandInFrontProp = Shader.PropertyToID("_Weapon0HandInFront");
+        static readonly int Weapon0IsSequenceProp = Shader.PropertyToID("_Weapon0IsSequence");
+        static readonly int Weapon0HideOutlineOnBodyProp = Shader.PropertyToID("_Weapon0HideOutlineOnBody");
 
         // 副手武器参数（Weapon1）
         static readonly int Weapon1TexProp = Shader.PropertyToID("_Weapon1Tex");
@@ -137,6 +137,8 @@ namespace EquipmentSystem
         static readonly int Weapon1DepthModeProp = Shader.PropertyToID("_Weapon1DepthMode");
         static readonly int Weapon1EnabledProp = Shader.PropertyToID("_Weapon1Enabled");
         static readonly int Weapon1HandInFrontProp = Shader.PropertyToID("_Weapon1HandInFront");
+        static readonly int Weapon1IsSequenceProp = Shader.PropertyToID("_Weapon1IsSequence");
+        static readonly int Weapon1HideOutlineOnBodyProp = Shader.PropertyToID("_Weapon1HideOutlineOnBody");
 
         void Awake()
         {
@@ -153,6 +155,9 @@ namespace EquipmentSystem
                 if (e != null)
                     Equip(e, false);
             }
+            // 在第一次 Refresh 之前先同步一次 Animator 动画名，
+            // 避免 _currentAnimName 为空导致武器误走静态贴图路径。
+            SyncAnimationName();
             Refresh();
         }
 
@@ -530,35 +535,8 @@ namespace EquipmentSystem
             _weaponRenderers[equip] = sr;
         }
 
-        SpriteRenderer EnsureEquipSequenceRenderer(EquipmentType type)
-        {
-            if (_equipSequenceRenderers.TryGetValue(type, out var existing) && existing != null)
-                return existing;
-
-            var go = new GameObject($"EquipSeq_{type}");
-            go.transform.SetParent(transform);
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localScale = Vector3.one;
-
-            var sr = go.AddComponent<SpriteRenderer>();
-            if (_charRenderer != null)
-            {
-                sr.sortingLayerID = _charRenderer.sortingLayerID;
-                sr.sortingOrder = _charRenderer.sortingOrder;
-            }
-
-            _equipSequenceRenderers[type] = sr;
-            return sr;
-        }
-
         public void Refresh()
         {
-            foreach (var kv in _equipSequenceRenderers)
-            {
-                if (kv.Value != null)
-                    kv.Value.enabled = false;
-            }
-
             if (frameData == null)
             {
                 Debug.LogWarning("[EquipmentRenderer] frameData 未设置");
@@ -695,6 +673,10 @@ namespace EquipmentSystem
             // 双武器
             _shaderMaterial.SetFloat(Weapon0EnabledProp, 0);
             _shaderMaterial.SetFloat(Weapon1EnabledProp, 0);
+            _shaderMaterial.SetFloat(Weapon0IsSequenceProp, 0);
+            _shaderMaterial.SetFloat(Weapon1IsSequenceProp, 0);
+            _shaderMaterial.SetFloat(Weapon0HideOutlineOnBodyProp, 0);
+            _shaderMaterial.SetFloat(Weapon1HideOutlineOnBodyProp, 0);
 
             // 装备层（遍历配置表）
             foreach (var cfg in EquipTypeRegistry.All)
@@ -889,6 +871,9 @@ namespace EquipmentSystem
             if (equip == null)
                 return;
 
+            if (_shaderMaterial == null)
+                return;
+
             bool hasSequence = equip.HasSequenceForKey(_currentAnimName);
             var facing = GetSpriteFacingForPart(cfg.BodyPart);
 
@@ -897,59 +882,28 @@ namespace EquipmentSystem
                 FrameDepthMode depthMode;
                 var seqSprite = GetEquipSequenceSprite(equip, facing, out depthMode);
 
-                var sr = EnsureEquipSequenceRenderer(cfg.Type);
-                if (sr == null)
+                Sprite finalSprite = seqSprite;
+
+                if (finalSprite == null || finalSprite.texture == null)
                     return;
 
-                if (seqSprite == null)
-                {
-                    sr.enabled = false;
-                    return;
-                }
-
-                sr.enabled = true;
-                sr.sprite = seqSprite;
-
-                if (_charRenderer != null)
-                {
-                    sr.sortingLayerID = _charRenderer.sortingLayerID;
-                    int baseOrder = _charRenderer.sortingOrder;
-                    int bodyBase = 0;
-                    if (cfg.BodyPart == CharacterBodyPart.Head)
-                        bodyBase = 10;
-                    int typeBase = cfg.RenderOrder * 2;
-                    int depthOffset = depthMode == FrameDepthMode.Back ? -1 : 1;
-                    sr.sortingOrder = baseOrder + bodyBase + typeBase + depthOffset;
-                }
-
-                var localPos = Vector3.zero;
-                var charSprite = _charRenderer != null ? _charRenderer.sprite : null;
-                if (_cachedFrame != null && charSprite != null)
-                {
-                    var offset = _cachedFrame.sequenceOffset;
-                    float ppu = charSprite.pixelsPerUnit;
-                    localPos += new Vector3(offset.x / ppu, -offset.y / ppu, 0f);
-                }
-
-                sr.transform.localPosition = localPos;
-                sr.transform.localRotation = Quaternion.identity;
-                sr.flipX = false;
-
+                _shaderMaterial.SetTexture(cfg.TexPropId, finalSprite.texture);
+                _shaderMaterial.SetVector(cfg.RectPropId, SpriteUtils.GetUVRect(finalSprite));
+                _shaderMaterial.SetFloat(cfg.EnablePropId, 1);
                 return;
             }
 
-            if (_shaderMaterial == null)
-                return;
+            {
+                var variant = GetVariantForPart(cfg.BodyPart);
+                Sprite finalSprite = equip.GetSprite(facing, variant);
 
-            var variant = GetVariantForPart(cfg.BodyPart);
-            var finalSprite = equip.GetSprite(facing, variant);
+                if (finalSprite == null || finalSprite.texture == null)
+                    return;
 
-            if (finalSprite == null || finalSprite.texture == null)
-                return;
-
-            _shaderMaterial.SetTexture(cfg.TexPropId, finalSprite.texture);
-            _shaderMaterial.SetVector(cfg.RectPropId, SpriteUtils.GetUVRect(finalSprite));
-            _shaderMaterial.SetFloat(cfg.EnablePropId, 1);
+                _shaderMaterial.SetTexture(cfg.TexPropId, finalSprite.texture);
+                _shaderMaterial.SetVector(cfg.RectPropId, SpriteUtils.GetUVRect(finalSprite));
+                _shaderMaterial.SetFloat(cfg.EnablePropId, 1);
+            }
         }
 
         /// <summary>
@@ -1361,7 +1315,8 @@ namespace EquipmentSystem
         /// </summary>
         void RenderWeaponSlot(EquipmentRenderData equip, AnchorType anchorType, int shaderSlot)
         {
-            if (equip == null) return;
+            if (equip == null)
+                return;
 
             _weaponRenderers.TryGetValue(equip, out var sr);
 
@@ -1374,76 +1329,53 @@ namespace EquipmentSystem
             var anchor = _cachedFrame != null ? _cachedFrame.GetAnchor(anchorType) : null;
 
             // 当前槽位相对角色的前后：根据朝向下“主/副手锚点”对应的左/右手关系来决定
-            // 排序偏移 >0 表示在角色前，<0 表示在角色后
+            // 排序偏移 >0 表示在角色前，<0 表示在角色后（静态武器默认规则）
             int baseSortOffset = GetWeaponSortOffset(anchorType, weaponRowIndex);
             bool slotIsFront = baseSortOffset > 0;
             
             // 判断武器类型（后面处理盾牌特殊逻辑）
             bool isShield = (equip.type == EquipmentType.Shield);
 
-            // 1. 优先使用序列帧（不强制要求有锚点）
-            FrameDepthMode depthMode;
-            var seqSprite = GetEquipSequenceSprite(equip, weaponFacing, out depthMode);
-            if (seqSprite != null && sr != null)
-            {
-                sr.sprite = seqSprite;
-                sr.enabled = true;
-                // 有锚点时，以锚点为基准进行微调，否则保持在角色中心；
-                // 同时叠加帧数据中的武器序列帧偏移（像素）
-                var localPos = Vector3.zero;
-                var localRot = Quaternion.identity;
-                var charSprite = _charRenderer.sprite;
-
-                if (_cachedFrame != null && charSprite != null)
-                {
-                    var offset = _cachedFrame.sequenceOffset;
-                    float ppu = charSprite.pixelsPerUnit;
-                    localPos += new Vector3(offset.x / ppu, -offset.y / ppu, 0f);
-                }
-
-                if (anchor != null && charSprite != null)
-                {
-                    float ppu = charSprite.pixelsPerUnit;
-                    float cx = (_currentAnimData != null ? _currentAnimData.frameSize.x : (int)charSprite.rect.width) * 0.5f;
-                    float cy = (_currentAnimData != null ? _currentAnimData.frameSize.y : (int)charSprite.rect.height) * 0.5f;
-                    localPos += new Vector3((anchor.position.x - cx) / ppu, -(anchor.position.y - cy) / ppu, 0f);
-
-                    localRot = Quaternion.Euler(0, 0, anchor.GetRotationAngle());
-                }
-
-                sr.transform.localPosition = localPos;
-                sr.transform.localRotation = localRot;
-                sr.flipX = false;
-                sr.sortingLayerID = _charRenderer.sortingLayerID;
-                int frontOffset = Mathf.Abs(baseSortOffset);
-                if (frontOffset == 0)
-                    frontOffset = 1;
-                int backOffset = -frontOffset;
-                int finalOffset;
-
-                switch (depthMode)
-                {
-                    case FrameDepthMode.Back:
-                        finalOffset = backOffset;
-                        break;
-                    default:
-                        finalOffset = frontOffset;
-                        break;
-                }
-
-                sr.sortingOrder = _charRenderer.sortingOrder + finalOffset;
+            // Shader 武器层：统一通过 Shader 渲染
+            if (_shaderMaterial == null || _cachedFrame == null)
                 return;
+
+            var charSpriteShader = _charRenderer.sprite;
+            if (charSpriteShader == null)
+                return;
+
+            // 是否配置了当前动画的序列帧
+            bool hasSequence = equip.HasSequenceForKey(_currentAnimName);
+
+            FrameDepthMode depthMode = FrameDepthMode.Front;
+            Sprite seqSprite = null;
+            Sprite weaponSprite = null;
+
+            if (hasSequence)
+            {
+                // 1）有序列帧：完全由序列帧驱动，不再回退到静态四向贴图
+                seqSprite = GetEquipSequenceSprite(equip, weaponFacing, out depthMode);
+                weaponSprite = seqSprite;
+
+                // 该帧拿不到序列帧 Sprite 时，本帧不渲染武器（不使用静态贴图兜底）
+                if (weaponSprite == null || weaponSprite.texture == null)
+                    return;
+
+                // 前/后深度由 FrameDepthMode 控制
+                slotIsFront = (depthMode != FrameDepthMode.Back);
+            }
+            else
+            {
+                // 2）无序列帧：使用静态四向贴图 + 原有前后规则
+                weaponSprite = equip.GetSpriteByRow(weaponRowIndex);
+                if (weaponSprite == null || weaponSprite.texture == null)
+                    return;
             }
 
-            // 2. Shader 武器层（此模式仍然要求有锚点，否则无法确定位置/旋转）
-            if (_shaderMaterial == null || _cachedFrame == null || anchor == null) return;
+            bool useSequence = (seqSprite != null);
 
-            var weaponSprite = equip.GetSpriteByRow(weaponRowIndex);
-            var charSpriteShader = _charRenderer.sprite;
-            if (weaponSprite == null || weaponSprite.texture == null || charSpriteShader == null) return;
-
-            // 更新子对象 Transform（用于挂特效）
-            if (sr != null)
+            // 更新子对象 Transform（仅用于挂特效，不参与主渲染）
+            if (sr != null && anchor != null)
             {
                 float ppu = charSpriteShader.pixelsPerUnit;
                 float cx = weaponSprite.rect.width * 0.5f;
@@ -1455,12 +1387,11 @@ namespace EquipmentSystem
             // 获取当前方向配置（与武器贴图方向一致）
             var cfg = GetWeaponConfig(weaponRowIndex);
 
-            // 西向行（SW=1 / NW=3）是否需要 flipX：
+            // 西向行（SW=1 / NW=3）是否需要 flipX（仅静态贴图使用）：
             // 只有在"没有任何西向贴图（SW 也没配）"时才需要从 SE 翻转生成
-            // 因为 NW 回退链是 NW → SW → SE，只要有 SW 就不会用到 SE
             bool isWestFacing = (weaponRowIndex == 1 || weaponRowIndex == 3);
             bool hasWestSprite = equip.spriteSW != null; // SW 是西向的基础图
-            bool flipX = isWestFacing && !hasWestSprite;
+            bool flipX = !useSequence && isWestFacing && !hasWestSprite;
 
             // 帧尺寸
             var charRect = charSpriteShader.rect;
@@ -1469,9 +1400,25 @@ namespace EquipmentSystem
             frameW = Mathf.Max(frameW, 1);
             frameH = Mathf.Max(frameH, 1);
 
-            // 角色帧中的锚点 UV（手的位置，像素中心）
-            float anchorPixelX = anchor.position.x + 0.5f;
-            float anchorPixelY = anchor.position.y + 0.5f;
+            // 计算手点在角色帧中的像素位置：
+            // - 静态武器：必须有锚点，否则直接返回；
+            // - 序列帧：优先用锚点，缺失时退回到帧中心。
+            float anchorPixelX;
+            float anchorPixelY;
+            if (anchor != null)
+            {
+                anchorPixelX = anchor.position.x + 0.5f;
+                anchorPixelY = anchor.position.y + 0.5f;
+            }
+            else
+            {
+                if (!useSequence)
+                    return;
+
+                anchorPixelX = frameW * 0.5f;
+                anchorPixelY = frameH * 0.5f;
+            }
+
             var anchorFrameUV = PixelToFrameUV(anchorPixelX, anchorPixelY, frameW, frameH);
 
             // 武器贴图中的"虚拟左手"局部 UV（相对于几何中心的像素偏移）
@@ -1479,13 +1426,23 @@ namespace EquipmentSystem
             float weaponH = weaponSprite.rect.height;
             float handLocalU = 0.5f + cfg.HandOffsetX / Mathf.Max(weaponW, 1f);
             float handLocalV = 0.5f + cfg.HandOffsetY / Mathf.Max(weaponH, 1f);
-            var anchorAndHandUV = new Vector4(anchorFrameUV.x, anchorFrameUV.y, handLocalU, handLocalV);
+            Vector4 anchorAndHandUV = new Vector4(anchorFrameUV.x, anchorFrameUV.y, handLocalU, handLocalV);
 
-            // 旋转：只有在 flipX 时角度才需要取反（从 SE 镜像生成西向时）
-            float angleDeg = anchor.GetRotationAngle();
-            if (flipX) angleDeg = -angleDeg;
-            float angleRad = angleDeg * Mathf.Deg2Rad;
-            var rotCosSin = new Vector4(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f, 0f);
+            // 旋转：序列帧固定无旋转/FlipX；静态武器沿用锚点角度 + 可选 FlipX
+            Vector4 rotCosSin;
+            if (useSequence)
+            {
+                float angleDeg = 0f;
+                float angleRad = angleDeg * Mathf.Deg2Rad;
+                rotCosSin = new Vector4(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f, 0f);
+            }
+            else
+            {
+                float angleDeg = anchor.GetRotationAngle();
+                if (flipX) angleDeg = -angleDeg;
+                float angleRad = angleDeg * Mathf.Deg2Rad;
+                rotCosSin = new Vector4(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f, 0f);
+            }
 
             // 根据武器类型决定手部遮挡：
             // 盾牌特殊处理：朝南时盾牌在前，朝北时手在前
@@ -1503,6 +1460,8 @@ namespace EquipmentSystem
                 handInFront = true;
             }
 
+            bool hideOutlineOnBody = equip.hideOutlineOnBody;
+
             // 设置 Shader 参数
             SetWeaponShaderParams(
                 shaderSlot,
@@ -1511,14 +1470,16 @@ namespace EquipmentSystem
                 rotCosSin,
                 flipX,
                 slotIsFront,
-                handInFront
+                handInFront,
+                useSequence,
+                hideOutlineOnBody
             );
         }
 
         /// <summary>
         /// 设置武器 Shader 参数
         /// </summary>
-        void SetWeaponShaderParams(int slot, Sprite sprite, Vector4 anchorAndHandUV, Vector4 rotCosSin, bool flipX, bool isFront, bool handInFront)
+        void SetWeaponShaderParams(int slot, Sprite sprite, Vector4 anchorAndHandUV, Vector4 rotCosSin, bool flipX, bool isFront, bool handInFront, bool isSequence, bool hideOutlineOnBody)
         {
             int texProp    = slot == 0 ? Weapon0TexProp           : Weapon1TexProp;
             int rectProp   = slot == 0 ? Weapon0RectProp          : Weapon1RectProp;
@@ -1527,7 +1488,9 @@ namespace EquipmentSystem
             int flipProp   = slot == 0 ? Weapon0FlipXProp         : Weapon1FlipXProp;
             int depthProp  = slot == 0 ? Weapon0DepthModeProp     : Weapon1DepthModeProp;
             int handInFrontProp = slot == 0 ? Weapon0HandInFrontProp : Weapon1HandInFrontProp;
+            int isSequenceProp = slot == 0 ? Weapon0IsSequenceProp : Weapon1IsSequenceProp;
             int enableProp = slot == 0 ? Weapon0EnabledProp       : Weapon1EnabledProp;
+            int hideOutlineOnBodyProp = slot == 0 ? Weapon0HideOutlineOnBodyProp : Weapon1HideOutlineOnBodyProp;
 
             _shaderMaterial.SetTexture(texProp, sprite.texture);
             _shaderMaterial.SetVector(rectProp, SpriteUtils.GetUVRect(sprite));
@@ -1536,6 +1499,8 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(flipProp, flipX ? 1f : 0f);
             _shaderMaterial.SetFloat(depthProp, isFront ? 1f : 0f);
             _shaderMaterial.SetFloat(handInFrontProp, handInFront ? 1f : 0f);
+            _shaderMaterial.SetFloat(isSequenceProp, isSequence ? 1f : 0f);
+            _shaderMaterial.SetFloat(hideOutlineOnBodyProp, hideOutlineOnBody ? 1f : 0f);
             _shaderMaterial.SetFloat(enableProp, 1f);
         }
 

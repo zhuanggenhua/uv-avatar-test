@@ -59,6 +59,8 @@ Shader "EquipmentSystem/EquipmentUV"
         _Weapon0DepthMode ("Main Hand Depth Mode", Float) = 0
         _Weapon0Enabled ("Enable Main Hand Weapon", Float) = 0
         _Weapon0HandInFront ("Main Hand: Hand In Front", Float) = 1
+        _Weapon0IsSequence ("Main Hand Uses Sequence", Float) = 0
+        _Weapon0HideOutlineOnBody ("Main Hand Hide Outline On Body", Float) = 0
         
         [Header(Weapon Off Hand)]
         _Weapon1Tex ("Off Hand Weapon Texture", 2D) = "white" {}
@@ -69,6 +71,8 @@ Shader "EquipmentSystem/EquipmentUV"
         _Weapon1DepthMode ("Off Hand Depth Mode", Float) = 0
         _Weapon1Enabled ("Enable Off Hand Weapon", Float) = 0
         _Weapon1HandInFront ("Off Hand: Hand In Front", Float) = 1
+        _Weapon1IsSequence ("Off Hand Uses Sequence", Float) = 0
+        _Weapon1HideOutlineOnBody ("Off Hand Hide Outline On Body", Float) = 0
         
         [Header(Enable Layers)]
         _EnableHair ("Enable Hair", Float) = 0
@@ -206,6 +210,8 @@ Shader "EquipmentSystem/EquipmentUV"
             float _Weapon0DepthMode;
             float _Weapon0Enabled;
             float _Weapon0HandInFront;
+            float _Weapon0IsSequence;
+            float _Weapon0HideOutlineOnBody;
             
             // 副手武器参数
             float4 _Weapon1Rect;
@@ -215,6 +221,8 @@ Shader "EquipmentSystem/EquipmentUV"
             float _Weapon1DepthMode;
             float _Weapon1Enabled;
             float _Weapon1HandInFront;
+            float _Weapon1IsSequence;
+            float _Weapon1HideOutlineOnBody;
             
             fixed4 _LeftHandColor;
             fixed4 _RightHandColor;
@@ -946,6 +954,8 @@ Shader "EquipmentSystem/EquipmentUV"
             }
 
             // Mode0 阴影用的 caster alpha：本体 + 身体装备 + 头部装备 + 武器（不含背包）
+            // 注意：当某个武器槽位使用序列帧(_WeaponXIsSequence > 0.5)时，
+            // 视为悬空效果，不计入阴影宽度，仅静态武器参与阴影计算。
             float GetShadowCasterAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
             {
                 // 将帧内 UV 映射回整张 _MainTex 的 UV
@@ -998,9 +1008,10 @@ Shader "EquipmentSystem/EquipmentUV"
                 }
 
                 // 4）叠加武器 alpha（不区分前后，只要有像素就记为不透明，以获得全局阴影宽度）
+                //     但仅静态武器参与阴影；序列帧武器一般为悬空特效，不参与阴影宽度计算。
                 fixed4 weapon0ColorSample, weapon1ColorSample;
-                bool hasWeapon0Sample = TrySampleWeapon0(uvSample, weapon0ColorSample);
-                bool hasWeapon1Sample = TrySampleWeapon1(uvSample, weapon1ColorSample);
+                bool hasWeapon0Sample = (_Weapon0IsSequence < 0.5) && TrySampleWeapon0(uvSample, weapon0ColorSample);
+                bool hasWeapon1Sample = (_Weapon1IsSequence < 0.5) && TrySampleWeapon1(uvSample, weapon1ColorSample);
 
                 if (hasWeapon0Sample)
                     alphaSample = max(alphaSample, weapon0ColorSample.a);
@@ -1011,16 +1022,50 @@ Shader "EquipmentSystem/EquipmentUV"
             }
 
             // 武器专用轮廓 alpha（主手/副手任何有像素即视为占据轮廓）
-            float GetWeaponOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            // 注意：当某个槽位使用序列帧(_WeaponXIsSequence > 0.5)时，不参与程序描边，
+            // 只作为成品图像显示，避免与美术自带描边叠加。
+            float GetWeaponOutlineAlphaAtFrameUV_Slot(float2 frameUVSample, float2 frameMin, float2 frameMax, int slot)
             {
                 float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
-                float alphaSample = 0.0;
-                fixed4 weapon0ColorSample, weapon1ColorSample;
-                if (TrySampleWeapon0(uvSample, weapon0ColorSample))
-                    alphaSample = max(alphaSample, weapon0ColorSample.a);
-                if (TrySampleWeapon1(uvSample, weapon1ColorSample))
-                    alphaSample = max(alphaSample, weapon1ColorSample.a);
-                return alphaSample;
+                fixed4 weaponColorSample;
+
+                // 只要任意一把武器开启了“在身体部分隐藏描边”，
+                // 且当前采样点属于角色本体/头部区域，则不对该位置生成武器程序描边。
+                float hideOnBody = max(_Weapon0HideOutlineOnBody, _Weapon1HideOutlineOnBody);
+                if (hideOnBody > 0.5)
+                {
+                    float bodyAlpha = GetOutlineAlphaAtFrameUV(frameUVSample, frameMin, frameMax);
+                    if (bodyAlpha > CUTOFF)
+                        return 0.0;
+                }
+
+                if (slot == 0)
+                {
+                    // 主手：仅当不是序列帧时参与轮廓
+                    if (_Weapon0IsSequence < 0.5)
+                    {
+                        if (TrySampleWeapon0(uvSample, weaponColorSample))
+                            return weaponColorSample.a;
+                    }
+                }
+                else
+                {
+                    // 副手：仅当不是序列帧时参与轮廓
+                    if (_Weapon1IsSequence < 0.5)
+                    {
+                        if (TrySampleWeapon1(uvSample, weaponColorSample))
+                            return weaponColorSample.a;
+                    }
+                }
+
+                return 0.0;
+            }
+
+            float GetWeaponOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
+            {
+                float a0 = GetWeaponOutlineAlphaAtFrameUV_Slot(frameUVSample, frameMin, frameMax, 0);
+                float a1 = GetWeaponOutlineAlphaAtFrameUV_Slot(frameUVSample, frameMin, frameMax, 1);
+                return max(a0, a1);
             }
 
             // 背包专用轮廓 alpha（通过 BodyUVMap 采样 BagRect）
@@ -1211,20 +1256,12 @@ Shader "EquipmentSystem/EquipmentUV"
                 bool hasWeapon0 = TrySampleWeapon0(i.uv, weapon0Color);
                 bool hasWeapon1 = TrySampleWeapon1(i.uv, weapon1Color);
 
-                // 判断武器黑描边是否在眼睛附近，需要跳过
-                bool skipWeapon0NearEye = false;
-                bool skipWeapon1NearEye = false;
-                if (hasWeapon0)
-                    skipWeapon0NearEye = IsWeaponBlackOutlineNearEyes(frameUV, weapon0Color);
-                if (hasWeapon1)
-                    skipWeapon1NearEye = IsWeaponBlackOutlineNearEyes(frameUV, weapon1Color);
-
                 // ========== 第三步：根据 DepthMode 和是否手/脚/配置合成最终颜色 ==========
                 fixed4 finalColor = charColor;
                 float finalAlpha = charAlpha;
 
                 // 朝北武器（在角色后面）：有角色像素时由角色遮挡；无角色像素时只显示武器
-                if (hasWeapon0 && _Weapon0DepthMode < 0.5 && !skipWeapon0NearEye)
+                if (hasWeapon0 && _Weapon0DepthMode < 0.5)
                 {
                     if (charAlpha <= CUTOFF)
                     {
@@ -1233,7 +1270,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     }
                     finalAlpha = max(finalAlpha, weapon0Color.a);
                 }
-                if (hasWeapon1 && _Weapon1DepthMode < 0.5 && !skipWeapon1NearEye)
+                if (hasWeapon1 && _Weapon1DepthMode < 0.5)
                 {
                     if (charAlpha <= CUTOFF)
                     {
@@ -1251,7 +1288,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 {
                     bool handBlocksW1 = isAnyHand && (_Weapon1HandInFront > 0.5);
                     // 手在前时阻挡武器像素，仅当手不在前面时才由武器覆盖角色
-                    if (!handBlocksW1 && !skipWeapon1NearEye)
+                    if (!handBlocksW1)
                     {
                         finalColor.rgb = weapon1Color.rgb;
                         finalAlpha = max(finalAlpha, weapon1Color.a);
@@ -1262,7 +1299,7 @@ Shader "EquipmentSystem/EquipmentUV"
                 if (hasWeapon0 && _Weapon0DepthMode > 0.5)
                 {
                     bool handBlocksW0 = isAnyHand && (_Weapon0HandInFront > 0.5);
-                    if (!handBlocksW0 && !skipWeapon0NearEye)
+                    if (!handBlocksW0)
                     {
                         finalColor.rgb = weapon0Color.rgb;
                         finalAlpha = max(finalAlpha, weapon0Color.a);
@@ -1284,17 +1321,6 @@ Shader "EquipmentSystem/EquipmentUV"
 
                 finalColor.a = finalAlpha;
 
-                float stepYGround = 1.0 / _FrameSize.y;
-                float dyGround = frameUV.y - _ShadowBaseY;
-                if (dyGround < -0.5 * stepYGround && dyGround > -1.5 * stepYGround)
-                {
-                    if (IsNearBlack(finalColor.rgb))
-                    {
-                        finalAlpha = 0;
-                        finalColor.a = 0;
-                    }
-                }
-
                 // ========== 程序描边 ==========
                 // 使用 GetLayerPriority 函数判断层级，不在此处重复写规则
                 // 层级规则全部集中在 GetLayerPriority 里
@@ -1305,12 +1331,12 @@ Shader "EquipmentSystem/EquipmentUV"
                 float2 step = 1.0 / _FrameSize;
                 bool isOutline = false;
 
-                // 各层的 center alpha
+                // 各层的 center alpha（只用于判断当前像素是否属于某层的“内部”）
                 float centerWeaponAlpha = GetWeaponOutlineAlphaAtFrameUV(frameUV, frameMin, frameMax);
                 float centerBodyAlpha   = GetOutlineAlphaAtFrameUV(frameUV, frameMin, frameMax);
                 float centerBagAlpha    = GetBagOutlineAlphaAtFrameUV(frameUV, frameMin, frameMax);
 
-                // 基线之上才考虑描边
+                // 基线之上才考虑描边；是否可画由各层 center alpha + 层级优先级控制
                 bool aboveBaseline = frameUV.y + 0.5 * step.y >= _ShadowBaseY;
                 
                 // 当前像素的优先级
@@ -1331,21 +1357,32 @@ Shader "EquipmentSystem/EquipmentUV"
                     {
                         float2 n = neighbors[i];
                         
-                        // 检查武器（不在头部）
-                        if (!isHeadCore && centerWeaponAlpha <= CUTOFF)
+                        // 检查武器：若当前像素本身属于身体/头部，且配置了“在身体部分隐藏描边”，
+                        // 则完全跳过武器程序描边，只保留主体/背包描边。
+                        bool hideWeaponOutlineOnBody = (_Weapon0HideOutlineOnBody > 0.5 || _Weapon1HideOutlineOnBody > 0.5);
+                        bool blockWeaponOutlineAtCenter = hideWeaponOutlineOnBody && (centerBodyAlpha > CUTOFF);
+
+                        if (!blockWeaponOutlineAtCenter && centerWeaponAlpha <= CUTOFF)
                         {
                             float aW = GetWeaponOutlineAlphaAtFrameUV(n, frameMin, frameMax);
                             if (aW > CUTOFF)
                             {
                                 float weaponPriority = max(GetLayerPriority(SRC_WEAPON0), GetLayerPriority(SRC_WEAPON1));
                                 
-                                // 如果邻居也有角色像素，且角色优先级更高（朝北时），不画武器描边
-                                // 因为武器在角色后面，武器描边不应该出现在角色外围
+                                // 如果邻居也有“更前”的层，武器描边应该被挡住：
+                                // - 朝北时：身体/背包的优先级都高于武器 → 阻挡武器描边
+                                // - 朝南时：身体优先级低于武器，背包优先级为 0 → 不阻挡
                                 float neighborBodyAlpha = GetOutlineAlphaAtFrameUV(n, frameMin, frameMax);
                                 float bodyPriority = GetLayerPriority(SRC_MAIN);
+
+                                float neighborBagAlpha = GetBagOutlineAlphaAtFrameUV(n, frameMin, frameMax);
+                                float bagPriority = GetLayerPriority(SRC_BAG);
+
                                 bool weaponBlockedByBody = (neighborBodyAlpha > CUTOFF) && (bodyPriority > weaponPriority);
-                                
-                                if (!weaponBlockedByBody && weaponPriority >= currentPriority && weaponPriority > bestPriority)
+                                bool weaponBlockedByBag  = (neighborBagAlpha  > CUTOFF) && (bagPriority  > weaponPriority);
+
+                                if (!weaponBlockedByBody && !weaponBlockedByBag &&
+                                    weaponPriority >= currentPriority && weaponPriority > bestPriority)
                                 {
                                     bestPriority = weaponPriority;
                                 }

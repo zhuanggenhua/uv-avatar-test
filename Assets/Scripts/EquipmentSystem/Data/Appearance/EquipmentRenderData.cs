@@ -144,6 +144,9 @@ namespace EquipmentSystem
         [Tooltip("勾选后武器使用副手锚点（右手侧）而非默认的主手锚点（左手侧）")]
         public bool useOffHandAnchor = false;
 
+        [Tooltip("在身体部分隐藏武器程序描边（头部+身体区域）")]
+        public bool hideOutlineOnBody = false;
+
         // 颜色替换 (手套/鞋子)
         public Color32 leftColor = new Color32(150, 100, 50, 255);
         public Color32 rightColor = new Color32(150, 100, 50, 255);

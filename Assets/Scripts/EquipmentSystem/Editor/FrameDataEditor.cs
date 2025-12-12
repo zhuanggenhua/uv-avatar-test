@@ -1746,11 +1746,35 @@ namespace EquipmentSystem.Editor
             {
                 float x = r.x + a.position.x * _zoom + _zoom/2;
                 float y = r.y + a.position.y * _zoom + _zoom/2;
-                
-                Handles.color = a.type == _anchorType ? Color.yellow : Color.cyan;
-                Handles.DrawSolidDisc(new Vector3(x, y, 0), Vector3.forward, 6);
-                
+
+                Color baseColor;
+                switch (a.type)
+                {
+                    case AnchorType.MainHandWeapon:
+                        baseColor = new Color(1f, 0.9f, 0.2f);
+                        break;
+                    case AnchorType.OffHandWeapon:
+                        baseColor = new Color(0.3f, 0.9f, 1f);
+                        break;
+                    default:
+                        baseColor = Color.cyan;
+                        break;
+                }
+
+                bool isSelected = a.type == _anchorType;
+                float radius = 6f;
+
+                if (isSelected)
+                {
+                    Handles.color = Color.white;
+                    Handles.DrawSolidDisc(new Vector3(x, y, 0), Vector3.forward, radius + 1.5f);
+                }
+
+                Handles.color = baseColor;
+                Handles.DrawSolidDisc(new Vector3(x, y, 0), Vector3.forward, radius);
+
                 Vector2 dir = GetAnchorDirVec(a.direction) * _zoom;
+                Handles.color = Color.white;
                 Handles.DrawLine(new Vector3(x, y), new Vector3(x + dir.x, y + dir.y));
                 
                 GUI.Label(new Rect(x + 8, y - 8, 100, 20), a.type.ToString(), EditorStyles.whiteMiniLabel);

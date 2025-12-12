@@ -20,6 +20,7 @@ namespace EquipmentSystem.Editor
         SerializedProperty _animSequences;
         SerializedProperty _upVariant, _downVariant, _leftVariant, _rightVariant;
         SerializedProperty _hideHair, _hideBeard;
+        SerializedProperty _hideOutlineOnBody;
 
         void OnEnable()
         {
@@ -40,6 +41,7 @@ namespace EquipmentSystem.Editor
             _rightVariant = serializedObject.FindProperty("rightVariant");
             _hideHair = serializedObject.FindProperty("hideHair");
             _hideBeard = serializedObject.FindProperty("hideBeard");
+            _hideOutlineOnBody = serializedObject.FindProperty("hideOutlineOnBody");
         }
         
         public override void OnInspectorGUI()
@@ -153,6 +155,10 @@ namespace EquipmentSystem.Editor
                 "• 副手: 盾牌等，只能装备在副手槽", 
                 MessageType.Info);
             
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("程序描边", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(_hideOutlineOnBody, new GUIContent("在身体部分隐藏程序描边"));
+
             DrawAnimSetField();
         }
         

@@ -7,7 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dwarf_AnimatorOverrideController
-  m_Controller: {fileID: 9100000, guid: 72c58f318475a524d9e0c919cdaf1e3b, type: 2}
+  m_Controller: {fileID: 9100000, guid: e1ea1036a27507c47a51a679db89c235, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 4df535695f4076949801f182c986703f, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 6a9881a93e1558f4d97cad7a85994ea0, type: 2}
@@ -53,3 +53,7 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 57b639f7f311b7648a13bf3c7ae5ee65, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: b31b1375be0d7b5428fc43e596695fb3, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 8293af81f368d064198735141c7651e0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4e0cfaf6f94b60d4fb96a02ecb3bb56f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c522d821034a24b42b9293f95eea241f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1122cd731c803ed41aef40361a138218, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cceea190ffa91f84eb5ead96edb620c3, type: 2}
