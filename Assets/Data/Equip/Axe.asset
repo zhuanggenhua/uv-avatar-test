@@ -40,6 +40,7 @@ MonoBehaviour:
     nw: {fileID: 0}
   weaponSlotType: 0
   useOffHandAnchor: 0
+  hideOutlineOnBody: 0
   leftColor:
     serializedVersion: 2
     rgba: 4281492630
@@ -79,3 +80,35 @@ MonoBehaviour:
       - {fileID: -2033588453, guid: 9aca8fc187b1bd34da7ceb376e2d843e, type: 3}
       - {fileID: 900401127, guid: 9aca8fc187b1bd34da7ceb376e2d843e, type: 3}
       depthModes: 00000000000000000100000001000000
+  - animationType: {fileID: 11400000, guid: 381921f99eee5f44584b409fe08a6788, type: 2}
+    strips:
+    - facing: 0
+      frames:
+      - {fileID: -4304385000106957160, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 7189585609112773794, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -1214874838069019360, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 6099740944071072628, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -4375861025892905661, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 6360772858153933447, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -8383964912144339033, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 2097633915024965066, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -7178678619171453070, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -5368344204398303651, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 1586650372156775621, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -355047937023743464, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -1126058940811892637, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 2748307438003207686, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -1239710300085011840, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 9132422343091984652, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: 7460290512430248259, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      - {fileID: -2113153659773339473, guid: 4e593cec3f8922840ac3ee3f3dba689c, type: 3}
+      depthModes: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    - facing: 1
+      frames: []
+      depthModes: 
+    - facing: 2
+      frames: []
+      depthModes: 
+    - facing: 3
+      frames: []
+      depthModes: 

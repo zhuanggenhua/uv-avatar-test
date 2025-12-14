@@ -47,6 +47,8 @@ namespace EquipmentSystem.Editor
         // ==================== 视图状态 ====================
         /// <summary>右侧面板滚动位置</summary>
         Vector2 _rightScroll;
+        /// <summary>当前选中的动画索引</summary>
+        int _selectedAnimIndex = 0;
 
         #endregion
 
@@ -315,11 +317,121 @@ namespace EquipmentSystem.Editor
             _serializedEquipment.Update();
 
             EditorGUILayout.BeginVertical("box");
+            
+            // 标题行：动画序列 + 动画数量
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("动画序列", EditorStyles.boldLabel);
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.LabelField($"共 {_animSequencesProp.arraySize} 个动画", EditorStyles.miniLabel);
+            EditorGUILayout.EndHorizontal();
 
-            EditorGUILayout.PropertyField(_animSequencesProp, new GUIContent("序列帧动画"), true);
+            if (_animSequencesProp.arraySize == 0)
+            {
+                EditorGUILayout.HelpBox("暂无动画序列，请使用下方工具添加", MessageType.Info);
+            }
+            else
+            {
+                // 动画选择下拉框
+                DrawAnimationSelector();
+                
+                EditorGUILayout.Space(5);
+                
+                // 四向序列帧网格
+                DrawSelectedAnimationGrid();
+            }
 
             _serializedEquipment.ApplyModifiedProperties();
+            EditorGUILayout.EndVertical();
+        }
+
+        /// <summary>
+        /// 绘制动画选择下拉框
+        /// </summary>
+        void DrawAnimationSelector()
+        {
+            if (_animSequencesProp == null || _animSequencesProp.arraySize == 0)
+                return;
+
+            // 构建动画名称列表
+            var names = new string[_animSequencesProp.arraySize];
+            for (int i = 0; i < _animSequencesProp.arraySize; i++)
+            {
+                var entryProp = _animSequencesProp.GetArrayElementAtIndex(i);
+                var animTypeProp = entryProp.FindPropertyRelative("animationType");
+                var animType = animTypeProp?.objectReferenceValue as AnimationTypeItem;
+                
+                string name = animType != null ? animType.name : $"(未设置 {i})";
+                
+                // 统计方向数
+                var stripsProp = entryProp.FindPropertyRelative("strips");
+                int dirCount = 0;
+                if (stripsProp != null)
+                {
+                    for (int j = 0; j < stripsProp.arraySize; j++)
+                    {
+                        var framesProp = stripsProp.GetArrayElementAtIndex(j).FindPropertyRelative("frames");
+                        if (framesProp != null && framesProp.arraySize > 0)
+                            dirCount++;
+                    }
+                }
+                
+                names[i] = dirCount > 0 ? $"{name} [{dirCount}向]" : name;
+            }
+
+            // 确保索引有效
+            if (_selectedAnimIndex >= _animSequencesProp.arraySize)
+                _selectedAnimIndex = 0;
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel("当前动画");
+            _selectedAnimIndex = EditorGUILayout.Popup(_selectedAnimIndex, names);
+            
+            // 删除按钮
+            if (GUILayout.Button("删除", GUILayout.Width(50)))
+            {
+                if (EditorUtility.DisplayDialog("确认删除", $"确定要删除动画 [{names[_selectedAnimIndex]}] 吗？", "删除", "取消"))
+                {
+                    _animSequencesProp.DeleteArrayElementAtIndex(_selectedAnimIndex);
+                    _serializedEquipment.ApplyModifiedProperties();
+                    if (_selectedAnimIndex >= _animSequencesProp.arraySize && _selectedAnimIndex > 0)
+                        _selectedAnimIndex--;
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        /// <summary>
+        /// 绘制选中动画的序列帧网格
+        /// </summary>
+        void DrawSelectedAnimationGrid()
+        {
+            if (_animSequencesProp == null || _selectedAnimIndex >= _animSequencesProp.arraySize)
+                return;
+
+            var entryProp = _animSequencesProp.GetArrayElementAtIndex(_selectedAnimIndex);
+            
+            // 获取实际的 AnimSequenceEntry 对象（用于读取数据）
+            AnimSequenceEntry entry = null;
+            if (_selectedEquipment != null && 
+                _selectedEquipment.animSequences != null && 
+                _selectedAnimIndex < _selectedEquipment.animSequences.Count)
+            {
+                entry = _selectedEquipment.animSequences[_selectedAnimIndex];
+            }
+
+            EditorGUILayout.BeginVertical("helpbox");
+            EditorGUILayout.LabelField("序列帧网格", EditorStyles.miniBoldLabel);
+            EditorGUILayout.LabelField("左键点击切换深度 | 右键菜单 | 拖拽添加/替换帧", EditorStyles.miniLabel);
+            EditorGUILayout.Space(5);
+            
+            bool changed = AnimSequenceDrawerUtils.DrawDirectionalGridLayout(entry, entryProp);
+            
+            if (changed)
+            {
+                _serializedEquipment.ApplyModifiedProperties();
+                Repaint();
+            }
+            
             EditorGUILayout.EndVertical();
         }
 

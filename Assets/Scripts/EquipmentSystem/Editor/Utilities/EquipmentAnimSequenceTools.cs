@@ -85,8 +85,8 @@ namespace EquipmentSystem.Editor
             if (anim == null || sprites == null || sprites.Count == 0)
                 return;
 
-            // 单向模式 + 未指定手动布局：将所有帧平铺到一个方向 strip
-            if (dirCount == 1 && manualRowCount <= 0 && manualFramesPerRow <= 0)
+            // 单向模式：将所有帧平铺到一个方向 strip
+            if (dirCount == 1)
             {
                 anim.strips.Clear();
 
