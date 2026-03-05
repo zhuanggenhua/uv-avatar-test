@@ -132,7 +132,8 @@ namespace EquipmentSystem.Editor
             var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
 
-            var defaultColor = new Color(0, 0, ID_NONE, 1);
+            // 非躯干区域：alpha=0（不视为核心身体）
+            var defaultColor = new Color(0, 0, ID_NONE, 0);
             var pixels = new Color[width * height];
             for (int i = 0; i < pixels.Length; i++)
                 pixels[i] = defaultColor;
@@ -145,8 +146,25 @@ namespace EquipmentSystem.Editor
                 int frameOffsetX = frame.frameIndex * frameW;
                 int frameOffsetY = (anim.rowCount - 1 - frame.rowIndex) * frameH;
 
-                // 躯干
-                WriteRegionToUVMap(frame, CharacterBodyPart.Torso, ID_TORSO, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
+                // 计算“核心躯干区域”像素集合：使用 BodyPartPixel.isCore 标记
+                HashSet<Vector2Int> coreTorsoPixels = null;
+                var torsoRegion = frame.GetRegion(CharacterBodyPart.Torso);
+                if (torsoRegion != null && torsoRegion.pixels.Count > 0)
+                {
+                    var corePositions = new HashSet<Vector2Int>();
+                    foreach (var px in torsoRegion.pixels)
+                    {
+                        if (px.isCore)
+                            corePositions.Add(px.position);
+                    }
+
+                    // 如果至少有一个像素被标记为核心，则使用该集合
+                    if (corePositions.Count > 0)
+                        coreTorsoPixels = corePositions;
+                }
+
+                // 躯干 - 传入核心区域集合用于alpha标记（核心=1，扩展=0）
+                WriteRegionToUVMap(frame, CharacterBodyPart.Torso, ID_TORSO, pixels, width, height, frameOffsetX, frameOffsetY, frameH, null, coreTorsoPixels);
 
                 // 手脚眼睛 - 从 limbMask 读取（只用颜色替换，不需要UV映射）
                 WriteLimbToUVMap(frame, CharacterBodyPart.LeftHand,  ID_LEFTHAND, pixels, width, height, frameOffsetX, frameOffsetY, frameH);
@@ -235,9 +253,9 @@ namespace EquipmentSystem.Editor
         /// 将 UV 部位（头/身体）像素写入 UV Map
         /// </summary>
         /// <param name="excludePositions">需要排除的像素（例如手部像素，防止头覆盖手）</param>
-        /// <param name="coreHeadPositions">
-        ///  仅用于 Head：表示“核心头部区域”的像素集合。
-        ///  核心区域会写入 alpha=1，扩展区域 alpha=0；其它情况 alpha=1。
+        /// <param name="corePositions">
+        ///  若提供：用于 Head 或 Torso 的“核心区域”像素集合。
+        ///  对 Head/Torso：核心区域写入 alpha=1，扩展区域 alpha=0；其它情况 alpha=1。
         /// </param>
         static void WriteRegionToUVMap(
             EquipmentSystem.FrameData frame,
@@ -250,7 +268,7 @@ namespace EquipmentSystem.Editor
             int frameOffsetY,
             int frameH,
             HashSet<Vector2Int> excludePositions = null,
-            HashSet<Vector2Int> coreHeadPositions = null)
+            HashSet<Vector2Int> corePositions = null)
         {
             var region = frame.GetRegion(part);
             if (region == null || region.pixels.Count == 0) return;
@@ -272,10 +290,10 @@ namespace EquipmentSystem.Editor
                 if (px.HasUV)
                 {
                     float alpha = 1f;
-                    // 对 Head：若提供了核心区域集合，则用 alpha 区分核心/扩展
-                    if (part == CharacterBodyPart.Head && coreHeadPositions != null)
+                    // 对 Head/Torso：若提供了核心区域集合，则用 alpha 区分核心/扩展
+                    if ((part == CharacterBodyPart.Head || part == CharacterBodyPart.Torso) && corePositions != null)
                     {
-                        alpha = coreHeadPositions.Contains(px.position) ? 1f : 0f;
+                        alpha = corePositions.Contains(px.position) ? 1f : 0f;
                     }
 
                     pixels[globalY * texWidth + globalX] = new Color(px.uv.x, px.uv.y, partID, alpha);

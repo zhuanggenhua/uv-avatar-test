@@ -407,32 +407,19 @@ BodyPartRegion
     - 仅在正面（`FacingDirection.Front`，即 SE/SW）并且对应眼睛 **未被标记为闭眼** 时，才启用 `_EnableLeftEye/_EnableRightEye`；
     - 背面 NE/NW 或被标记为闭眼的眼睛都不会渲染眼睛颜色，但其像素位置仍会被用于眼部装饰（黑眼圈、刀疤等）。
 
-### 2. 眼部装饰（黑眼圈 & 刀疤）
+### 2. 眼部装饰（贴图方式）
 
-- 新增枚举 `EyeDecorationType`：
-  - `None`：无装饰；
-  - `DarkCircle`：黑眼圈；
-  - `Scar`：刀疤；
 - 在 `CharacterAppearance` 中配置：
-  - `eyeDecorationType`：装饰类型；
-  - `eyeDecorationColor`：装饰颜色；
+  - `eyeDecorationEast`：朝东（SE）时显示的装饰贴图；
+  - `eyeDecorationWest`：朝西（SW）时显示的装饰贴图；
 - 运行时 `EquipmentRenderer.ApplyEyeDecoration()`：
-  - 仅在正面（SE/SW）且 `eyeDecorationType != None` 时生效；
-  - 从 `_cachedFrame.limbMask` 读取 `LeftEye/RightEye` 像素，计算帧内中心 UV；
-  - 若当前帧无眼睛数据，则使用上一帧缓存位置，按方向切换时清空缓存；
-  - 将 `_EyeDecoMode/_EyeDecoColor/_LeftEyePos/_RightEyePos` 传给 Shader。
+  - 仅在正面（SE/SW）且有对应方向的装饰贴图时生效；
+  - 朝北（NE/NW）时不显示眼部装饰；
+  - 将 `_EyeDecoTex/_EyeDecoRect/_EnableEyeDeco` 传给 Shader。
 
 Shader `EquipmentUV.shader` 中：
 
-- `ApplyEyeDecoration(frameUV, headUVLocal, parts, inout color)` 完成眼部装饰绘制：
-  - 仅在头部区域 (`parts.isHead`) 且未被头盔覆盖时生效；
-  - **Mode 1（黑眼圈）**：
-    - 在两只眼睛下方一格（`offset = (0,-1)`）涂上 `_EyeDecoColor`；
-  - **Mode 2（刀疤）**：
-    - 根据 `_BodyInEast` 判断朝向：
-      - 朝东（SE/NE）：使用 `_RightEyePos`；
-      - 朝西（SW/NW）：使用 `_LeftEyePos`；
-    - 在目标眼睛上方一格和下方一格（`offset = (0,1)` 与 `(0,-1)`）绘制刀疤色；
+- 眼部装饰作为独立贴图叠加在头部区域；
 - 同时提供 `IsWeaponBlackOutlineNearEyes`，用于避免武器黑描边在眼睛附近时盖住眼部细节。
 
 ## Shader 说明

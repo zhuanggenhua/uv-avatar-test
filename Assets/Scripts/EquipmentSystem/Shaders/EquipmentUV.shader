@@ -91,13 +91,12 @@ Shader "EquipmentSystem/EquipmentUV"
         _BodyInEast ("Body Facing East", Float) = 1
         
         [Header(Eye Decoration)]
-        _EyeDecoMode ("Eye Deco Mode", Float) = 0
-        [HDR] _EyeDecoColor ("Eye Deco Color", Color) = (0.3, 0.2, 0.2, 1)
-        _LeftEyePos ("Left Eye Pos", Vector) = (0, 0, 0, 0)
-        _RightEyePos ("Right Eye Pos", Vector) = (0, 0, 0, 0)
+        _EyeDecoTex ("Eye Deco Texture", 2D) = "white" {}
+        _EyeDecoRect ("Eye Deco Rect", Vector) = (0, 0, 1, 1)
+        _EnableEyeDeco ("Enable Eye Deco", Float) = 0
         
         [Header(Debug)]
-        // 调试模式：0=关闭，1=身体层区域，2=头部层区域，3=装备采样结果，4=UVMap原始UV，5=顶点UV
+        // 调试模式：0=关闭，1=身体层区域，2=头部层区域，3=装备采样结果，4=UVMap原始UV，5=顶点UV，6=核心区域
         _DebugMode ("Debug Mode", Float) = 0
         
         [Header(Shadow)]
@@ -112,6 +111,10 @@ Shader "EquipmentSystem/EquipmentUV"
         [Header(Hit Outline)]
         _HitOutline ("Hit Outline", Float) = 0
         [HDR] _HitOutlineColor ("Hit Outline Color", Color) = (0.7059, 0.0353, 0.0353, 1)
+
+        [Header(Default Outline)]
+        [Toggle] _DefaultOutlineEnabled ("Default Outline Enabled", Float) = 1
+
         [Header(Extra Outline)]
         _ExtraOutlineEnabled ("Extra Outline Enabled", Float) = 0
         [HDR] _ExtraOutlineColor ("Extra Outline Color", Color) = (1,1,1,1)
@@ -248,11 +251,10 @@ Shader "EquipmentSystem/EquipmentUV"
             float _BodyInEast;
             float _DebugMode;
             
-            // 眼部装饰参数
-            float _EyeDecoMode;
-            fixed4 _EyeDecoColor;
-            float2 _LeftEyePos;
-            float2 _RightEyePos;
+            // 眼部装饰参数（贴图方式）
+            sampler2D _EyeDecoTex;
+            float4 _EyeDecoRect;
+            float _EnableEyeDeco;
             
             // 阴影参数
             float _ShadowEnabled;
@@ -267,6 +269,9 @@ Shader "EquipmentSystem/EquipmentUV"
             // 受击描边
             float _HitOutline;
             fixed4 _HitOutlineColor;
+
+            // 默认黑色程序描边开关（仅影响“默认黑”，Hit/Extra 不受影响）
+            float _DefaultOutlineEnabled;
 
             float _ExtraOutlineEnabled;
             fixed4 _ExtraOutlineColor;
@@ -554,127 +559,6 @@ Shader "EquipmentSystem/EquipmentUV"
                 return inCenter || inVertical || inHorizontal;
             }
             
-            // ============================================================================
-            // 眼部装饰系统
-            // Mode 1: 黑眼圈 - 两只眼睛下方一格
-            // Mode 2: 刀疤 - SE时右眼上下一格，SW时左眼上下一格
-            // ============================================================================
-            
-            // 判断当前像素是否在眼睛的指定偏移位置（上/下一格）
-            bool IsPixelAtEyeOffset(float2 frameUV, float2 eyePos, float2 offset)
-            {
-                float2 step = 1.0 / _FrameSize;
-                float2 targetPos = eyePos + offset * step;
-                
-                float dx = abs(frameUV.x - targetPos.x) / step.x;
-                float dy = abs(frameUV.y - targetPos.y) / step.y;
-                
-                return dx <= 0.5 && dy <= 0.5;
-            }
-            
-            // 应用眼部装饰，返回是否命中装饰区域
-            bool ApplyEyeDecoration(float2 frameUV, float2 headUVLocal, PartIDs parts, inout fixed4 color)
-            {
-                if (_EyeDecoMode < 0.5)
-                    return false;
-
-                // 仅在头部区域内生效
-                if (!parts.isHead)
-                    return false;
-
-                // 若当前像素被头盔/面罩覆盖，则不绘制眼部装饰（装饰在头盔/面罩下面）
-                if (_EnableHelmet > 0.5)
-                {
-                    fixed3 helmetSample;
-                    if (TrySampleEquip(headUVLocal, _HelmetRect, _HelmetTex, helmetSample))
-                        return false;
-                }
-
-                if (_EnableMask > 0.5)
-                {
-                    fixed3 maskSample;
-                    if (TrySampleEquip(headUVLocal, _MaskRect, _MaskTex, maskSample))
-                        return false;
-                }
-
-                bool hit = false;
-                
-                if (_EyeDecoMode < 1.5)
-                {
-                    // Mode 1: 黑眼圈 - 两只眼睛下方一格（frameUV 的 Y 向下为负）
-                    // 左眼下方
-                    if (_LeftEyePos.x > 0.01 || _LeftEyePos.y > 0.01)
-                    {
-                        if (IsPixelAtEyeOffset(frameUV, _LeftEyePos, float2(0, -1)))
-                            hit = true;
-                    }
-                    // 右眼下方
-                    if (_RightEyePos.x > 0.01 || _RightEyePos.y > 0.01)
-                    {
-                        if (IsPixelAtEyeOffset(frameUV, _RightEyePos, float2(0, -1)))
-                            hit = true;
-                    }
-                }
-                else if (_EyeDecoMode < 2.5)
-                {
-                    // Mode 2: 刀疤 - SE时右眼上下一格，SW时左眼上下一格
-                    // _BodyInEast > 0.5 表示朝东（SE/NE）
-                    float2 targetEyePos = _BodyInEast > 0.5 ? _RightEyePos : _LeftEyePos;
-                    
-                    if (targetEyePos.x > 0.01 || targetEyePos.y > 0.01)
-                    {
-                        // 上一格
-                        if (IsPixelAtEyeOffset(frameUV, targetEyePos, float2(0, 1)))
-                            hit = true;
-                        // 下一格
-                        if (IsPixelAtEyeOffset(frameUV, targetEyePos, float2(0, -1)))
-                            hit = true;
-                    }
-                }
-                
-                if (hit)
-                {
-                    color.rgb = _EyeDecoColor.rgb;
-                }
-
-                return hit;
-            }
-
-            // 判断武器黑色描边是否位于眼睛附近（中心+上下左右一格），用于屏蔽武器描边
-            bool IsWeaponBlackOutlineNearEyes(float2 frameUV, fixed4 weaponColor)
-            {
-                if (!IsNearBlack(weaponColor.rgb))
-                    return false;
-
-                bool hit = false;
-
-                if (_LeftEyePos.x > 0.01 || _LeftEyePos.y > 0.01)
-                {
-                    if (IsPixelAtEyeOffset(frameUV, _LeftEyePos, float2(0, 0))
-                        || IsPixelAtEyeOffset(frameUV, _LeftEyePos, float2(0, 1))
-                        || IsPixelAtEyeOffset(frameUV, _LeftEyePos, float2(0, -1))
-                        || IsPixelAtEyeOffset(frameUV, _LeftEyePos, float2(1, 0))
-                        || IsPixelAtEyeOffset(frameUV, _LeftEyePos, float2(-1, 0)))
-                    {
-                        hit = true;
-                    }
-                }
-
-                if (!hit && (_RightEyePos.x > 0.01 || _RightEyePos.y > 0.01))
-                {
-                    if (IsPixelAtEyeOffset(frameUV, _RightEyePos, float2(0, 0))
-                        || IsPixelAtEyeOffset(frameUV, _RightEyePos, float2(0, 1))
-                        || IsPixelAtEyeOffset(frameUV, _RightEyePos, float2(0, -1))
-                        || IsPixelAtEyeOffset(frameUV, _RightEyePos, float2(1, 0))
-                        || IsPixelAtEyeOffset(frameUV, _RightEyePos, float2(-1, 0)))
-                    {
-                        hit = true;
-                    }
-                }
-
-                return hit;
-            }
-
             // 在帧内 UV 空间下，采样基线 y = _ShadowBaseY 上、x=xOnFrame 处的
             // “加上黑边后”的近似轮廓 alpha：在基线附近对 X 轴做一次 3 像素（x, x±1）膨胀，效果接近原先依赖黑描边时的阴影宽度。
             float SampleCasterAlphaAtGroundX(float xOnFrame)
@@ -1009,7 +893,8 @@ Shader "EquipmentSystem/EquipmentUV"
 
                 // 4）叠加武器 alpha（不区分前后，只要有像素就记为不透明，以获得全局阴影宽度）
                 //     但仅静态武器参与阴影；序列帧武器一般为悬空特效，不参与阴影宽度计算。
-                fixed4 weapon0ColorSample, weapon1ColorSample;
+                fixed4 weapon0ColorSample = fixed4(0, 0, 0, 0);
+                fixed4 weapon1ColorSample = fixed4(0, 0, 0, 0);
                 bool hasWeapon0Sample = (_Weapon0IsSequence < 0.5) && TrySampleWeapon0(uvSample, weapon0ColorSample);
                 bool hasWeapon1Sample = (_Weapon1IsSequence < 0.5) && TrySampleWeapon1(uvSample, weapon1ColorSample);
 
@@ -1027,38 +912,42 @@ Shader "EquipmentSystem/EquipmentUV"
             float GetWeaponOutlineAlphaAtFrameUV_Slot(float2 frameUVSample, float2 frameMin, float2 frameMax, int slot)
             {
                 float2 uvSample = lerp(frameMin, frameMax, frameUVSample);
-                fixed4 weaponColorSample;
+                fixed4 weaponColorSample = fixed4(0, 0, 0, 0);
+                float resultAlpha = 0.0;
 
                 // 只要任意一把武器开启了“在身体部分隐藏描边”，
                 // 且当前采样点属于角色本体/头部区域，则不对该位置生成武器程序描边。
+                bool blockWeaponOutline = false;
                 float hideOnBody = max(_Weapon0HideOutlineOnBody, _Weapon1HideOutlineOnBody);
                 if (hideOnBody > 0.5)
                 {
                     float bodyAlpha = GetOutlineAlphaAtFrameUV(frameUVSample, frameMin, frameMax);
-                    if (bodyAlpha > CUTOFF)
-                        return 0.0;
+                    blockWeaponOutline = (bodyAlpha > CUTOFF);
                 }
 
-                if (slot == 0)
+                if (!blockWeaponOutline)
                 {
-                    // 主手：仅当不是序列帧时参与轮廓
-                    if (_Weapon0IsSequence < 0.5)
+                    if (slot == 0)
                     {
-                        if (TrySampleWeapon0(uvSample, weaponColorSample))
-                            return weaponColorSample.a;
+                        // 主手：仅当不是序列帧时参与轮廓
+                        if (_Weapon0IsSequence < 0.5)
+                        {
+                            if (TrySampleWeapon0(uvSample, weaponColorSample))
+                                resultAlpha = weaponColorSample.a;
+                        }
                     }
-                }
-                else
-                {
-                    // 副手：仅当不是序列帧时参与轮廓
-                    if (_Weapon1IsSequence < 0.5)
+                    else
                     {
-                        if (TrySampleWeapon1(uvSample, weaponColorSample))
-                            return weaponColorSample.a;
+                        // 副手：仅当不是序列帧时参与轮廓
+                        if (_Weapon1IsSequence < 0.5)
+                        {
+                            if (TrySampleWeapon1(uvSample, weaponColorSample))
+                                resultAlpha = weaponColorSample.a;
+                        }
                     }
                 }
 
-                return 0.0;
+                return resultAlpha;
             }
 
             float GetWeaponOutlineAlphaAtFrameUV(float2 frameUVSample, float2 frameMin, float2 frameMax)
@@ -1157,6 +1046,24 @@ Shader "EquipmentSystem/EquipmentUV"
                     return fixed4(i.uv.x, i.uv.y, 0, baseColor.a);
                 }
 
+                // 调试模式 6：显示核心区域（BodyUVMap.a 和 HeadUVMap.a）
+                // 绿色=核心躯干, 青色=核心头部, 黄色=两者重叠
+                if (_DebugMode > 5.5 && _DebugMode < 6.5)
+                {
+                    fixed4 debugColor = baseColor;
+                    bool isCoreTorso = bodyUV.a > 0.5;
+                    bool isCoreHead = parts.isHead && headUV.a > 0.5;
+                    
+                    if (isCoreTorso && isCoreHead)
+                        debugColor.rgb = fixed3(1.0, 1.0, 0.0); // 黄色：重叠
+                    else if (isCoreTorso)
+                        debugColor.rgb = fixed3(0.0, 1.0, 0.0); // 绿色：核心躯干
+                    else if (isCoreHead)
+                        debugColor.rgb = fixed3(0.0, 1.0, 1.0); // 青色：核心头部
+                    
+                    return debugColor;
+                }
+
                 // ========== 第一步：先合成角色图层（底图 + 身体层 + 头部层）==========
                 fixed4 charColor = baseColor;
 
@@ -1252,7 +1159,8 @@ Shader "EquipmentSystem/EquipmentUV"
                 bool isAnyFoot = parts.isLeftFoot || parts.isRightFoot;
 
                 // ========== 第二步：采样武器 ==========
-                fixed4 weapon0Color, weapon1Color;
+                fixed4 weapon0Color = fixed4(0, 0, 0, 0);
+                fixed4 weapon1Color = fixed4(0, 0, 0, 0);
                 bool hasWeapon0 = TrySampleWeapon0(i.uv, weapon0Color);
                 bool hasWeapon1 = TrySampleWeapon1(i.uv, weapon1Color);
 
@@ -1353,6 +1261,7 @@ Shader "EquipmentSystem/EquipmentUV"
                     float bestPriority = -1.0;
                     
                     // 检查每个邻居，找出优先级最高的可画描边
+                    [unroll]
                     for (int i = 0; i < 4; i++)
                     {
                         float2 n = neighbors[i];
@@ -1364,11 +1273,11 @@ Shader "EquipmentSystem/EquipmentUV"
 
                         if (!blockWeaponOutlineAtCenter && centerWeaponAlpha <= CUTOFF)
                         {
-                            float aW = GetWeaponOutlineAlphaAtFrameUV(n, frameMin, frameMax);
-                            if (aW > CUTOFF)
+                            float aW0 = GetWeaponOutlineAlphaAtFrameUV_Slot(n, frameMin, frameMax, 0);
+                            float aW1 = GetWeaponOutlineAlphaAtFrameUV_Slot(n, frameMin, frameMax, 1);
+
+                            if (aW0 > CUTOFF || aW1 > CUTOFF)
                             {
-                                float weaponPriority = max(GetLayerPriority(SRC_WEAPON0), GetLayerPriority(SRC_WEAPON1));
-                                
                                 // 如果邻居也有“更前”的层，武器描边应该被挡住：
                                 // - 朝北时：身体/背包的优先级都高于武器 → 阻挡武器描边
                                 // - 朝南时：身体优先级低于武器，背包优先级为 0 → 不阻挡
@@ -1378,13 +1287,30 @@ Shader "EquipmentSystem/EquipmentUV"
                                 float neighborBagAlpha = GetBagOutlineAlphaAtFrameUV(n, frameMin, frameMax);
                                 float bagPriority = GetLayerPriority(SRC_BAG);
 
-                                bool weaponBlockedByBody = (neighborBodyAlpha > CUTOFF) && (bodyPriority > weaponPriority);
-                                bool weaponBlockedByBag  = (neighborBagAlpha  > CUTOFF) && (bagPriority  > weaponPriority);
-
-                                if (!weaponBlockedByBody && !weaponBlockedByBag &&
-                                    weaponPriority >= currentPriority && weaponPriority > bestPriority)
+                                if (aW0 > CUTOFF)
                                 {
-                                    bestPriority = weaponPriority;
+                                    float weaponPriority = GetLayerPriority(SRC_WEAPON0);
+                                    bool weaponBlockedByBody = (neighborBodyAlpha > CUTOFF) && (bodyPriority > weaponPriority);
+                                    bool weaponBlockedByBag  = (neighborBagAlpha  > CUTOFF) && (bagPriority  > weaponPriority);
+
+                                    if (!weaponBlockedByBody && !weaponBlockedByBag &&
+                                        weaponPriority >= currentPriority && weaponPriority > bestPriority)
+                                    {
+                                        bestPriority = weaponPriority;
+                                    }
+                                }
+
+                                if (aW1 > CUTOFF)
+                                {
+                                    float weaponPriority = GetLayerPriority(SRC_WEAPON1);
+                                    bool weaponBlockedByBody = (neighborBodyAlpha > CUTOFF) && (bodyPriority > weaponPriority);
+                                    bool weaponBlockedByBag  = (neighborBagAlpha  > CUTOFF) && (bagPriority  > weaponPriority);
+
+                                    if (!weaponBlockedByBody && !weaponBlockedByBag &&
+                                        weaponPriority >= currentPriority && weaponPriority > bestPriority)
+                                    {
+                                        bestPriority = weaponPriority;
+                                    }
                                 }
                             }
                         }
@@ -1397,15 +1323,25 @@ Shader "EquipmentSystem/EquipmentUV"
                             {
                                 // 检查邻居是否是手部区域
                                 float2 nUV = lerp(frameMin, frameMax, n);
-                                float neighborBodyPartID = tex2D(_BodyUVMap, nUV).b;
+                                fixed4 nBodyUV = tex2D(_BodyUVMap, nUV);
+                                float neighborBodyPartID = nBodyUV.b;
                                 bool neighborIsHand = IsPartID(neighborBodyPartID, ID_LEFTHAND) ||
                                                       IsPartID(neighborBodyPartID, ID_RIGHTHAND);
+
+                                // 手部像素如果落在“实际头部(core head)”或“实际身体(core torso)”区域内，
+                                // 则不让它参与程序描边（避免在身体/头部内部产生多余描边）。
+                                // - core head 由 HeadUVMap.a 标记（alpha>0.5）
+                                // - core torso 由 BodyUVMap.a 标记（alpha>0.5）
+                                fixed4 nHeadUV = tex2D(_HeadUVMap, nUV);
+                                bool neighborHandInCoreHead = neighborIsHand && IsPartID(nHeadUV.b, ID_HEAD) && (nHeadUV.a > 0.5);
+                                bool neighborHandInCoreTorso = neighborIsHand && (nBodyUV.a > 0.5);
+                                bool blockHandOutlineByCoreRegion = neighborHandInCoreHead || neighborHandInCoreTorso;
                                 
                                 // 如果邻居是手部，且当前像素有武器颜色，不画手部描边（避免遮挡武器）
                                 bool handOutlineBlockedByWeapon = neighborIsHand &&
                                                                   (srcId == SRC_WEAPON0 || srcId == SRC_WEAPON1);
                                 
-                                if (!handOutlineBlockedByWeapon)
+                                if (!handOutlineBlockedByWeapon && !blockHandOutlineByCoreRegion)
                                 {
                                     float bodyPriority = GetLayerPriority(SRC_MAIN);
                                     if (bodyPriority >= currentPriority && bodyPriority > bestPriority)
@@ -1436,25 +1372,36 @@ Shader "EquipmentSystem/EquipmentUV"
 
                 if (isOutline)
                 {
-                    fixed3 outlineColor = fixed3(0.0, 0.0, 0.0);
-                    if (hitOutlineRequested)
-                    {
-                        outlineColor = _HitOutlineColor.rgb;
-                    }
-                    else if (extraOutlineRequested)
-                    {
-                        outlineColor = _ExtraOutlineColor.rgb;
-                    }
+                    // 默认黑色描边可开关；但 Hit/Extra 请求时仍然强制绘制
+                    bool defaultOutlineRequested = (_DefaultOutlineEnabled > 0.5);
+                    bool shouldDrawOutline = hitOutlineRequested || extraOutlineRequested || defaultOutlineRequested;
 
-                    finalColor.rgb = outlineColor;
-                    finalAlpha = 1.0;
-                    finalColor.a = finalAlpha;
+                    if (shouldDrawOutline)
+                    {
+                        fixed3 outlineColor = fixed3(0.0, 0.0, 0.0);
+                        if (hitOutlineRequested)
+                        {
+                            outlineColor = _HitOutlineColor.rgb;
+                        }
+                        else if (extraOutlineRequested)
+                        {
+                            outlineColor = _ExtraOutlineColor.rgb;
+                        }
+
+                        finalColor.rgb = outlineColor;
+                        finalAlpha = 1.0;
+                        finalColor.a = finalAlpha;
+                    }
                 }
 
-                // ========== 眼部装饰（在角色和武器之上、阴影之前）==========
-                if (finalAlpha > CUTOFF)
+                // ========== 眼部装饰（贴图方式，在角色和武器之上、阴影之前）==========
+                if (_EnableEyeDeco > 0.5 && parts.isHead)
                 {
-                    ApplyEyeDecoration(frameUV, headUV.rg, parts, finalColor);
+                    fixed3 eyeDecoSample;
+                    if (TrySampleEquip(headUV.rg, _EyeDecoRect, _EyeDecoTex, eyeDecoSample))
+                    {
+                        finalColor.rgb = eyeDecoSample;
+                    }
                 }
 
                 // ========== 像素级阴影系统（帧内 UV 上的 4 种模式）==========

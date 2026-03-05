@@ -24,8 +24,9 @@ MonoBehaviour:
   faceAccessorySW: {fileID: 0}
   faceAccessoryNE: {fileID: 0}
   faceAccessoryNW: {fileID: 0}
-  skinColor: {r: 1, g: 0.85, b: 0.7, a: 1}
+  skinSrcColors: []
+  skinDstColors: []
   leftEyeColor: {r: 0, g: 0, b: 0, a: 1}
   rightEyeColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
-  eyeDecorationType: 2
-  eyeDecorationColor: {r: 1, g: 0, b: 0, a: 1}
+  eyeDecorationEast: {fileID: 21300000, guid: 2a4f6466cc3156649a534d0c593f0152, type: 3}
+  eyeDecorationWest: {fileID: 21300000, guid: 67fa8f0f8e25f04449cf31b9e88fa2a5, type: 3}

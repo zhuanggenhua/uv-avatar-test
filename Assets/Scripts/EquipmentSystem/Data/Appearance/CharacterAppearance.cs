@@ -3,16 +3,6 @@ using UnityEngine;
 namespace EquipmentSystem
 {
     /// <summary>
-    /// 眼部装饰类型
-    /// </summary>
-    public enum EyeDecorationType
-    {
-        None = 0,       // 无装饰
-        DarkCircle = 1, // 黑眼圈：两只眼睛下方一格
-        Scar = 2        // 刀疤：SE时右眼上下一格，SW时左眼上下一格
-    }
-
-    /// <summary>
     /// 角色外观数据 - 用于捏人系统
     /// 包含头发、胡子等角色基础外观（非装备）
     /// </summary>
@@ -50,11 +40,11 @@ namespace EquipmentSystem
         public Color leftEyeColor = Color.black;
         public Color rightEyeColor = Color.black;
         
-        [Header("眼部装饰")]
-        [Tooltip("眼部装饰类型：None=无, DarkCircle=黑眼圈, Scar=刀疤")]
-        public EyeDecorationType eyeDecorationType = EyeDecorationType.None;
-        [Tooltip("眼部装饰颜色")]
-        public Color eyeDecorationColor = new Color(0.3f, 0.2f, 0.2f, 1f);
+        [Header("眼部装饰 (朝南时显示，只需东西两方向)")]
+        [Tooltip("朝东(SE)时显示")]
+        public Sprite eyeDecorationEast;
+        [Tooltip("朝西(SW)时显示")]
+        public Sprite eyeDecorationWest;
         
         /// <summary>
         /// 获取指定方向的头发贴图
@@ -105,5 +95,29 @@ namespace EquipmentSystem
             || faceAccessorySW != null
             || faceAccessoryNE != null
             || faceAccessoryNW != null;
+        
+        /// <summary>
+        /// 获取指定方向的眼部装饰贴图
+        /// 只有东西两方向，朝北时返回 null（不显示）
+        /// </summary>
+        public Sprite GetEyeDecorationSprite(CharacterFacing facing)
+        {
+            switch (facing)
+            {
+                case CharacterFacing.SouthEast:
+                    return eyeDecorationEast;
+                case CharacterFacing.SouthWest:
+                    return eyeDecorationWest;
+                case CharacterFacing.NorthEast:
+                case CharacterFacing.NorthWest:
+                default:
+                    return null; // 朝北不显示
+            }
+        }
+        
+        /// <summary>
+        /// 是否有眼部装饰（任一方向有即可）
+        /// </summary>
+        public bool HasEyeDecoration => eyeDecorationEast != null || eyeDecorationWest != null;
     }
 }

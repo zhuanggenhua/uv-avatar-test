@@ -61,11 +61,6 @@ namespace EquipmentSystem
         int _rowIndex;
         FrameData _cachedFrame;
         AnimationData _currentAnimData;
-        
-        // 眼部装饰位置缓存（用于无数据帧的回退）
-        Vector2 _lastValidLeftEyePos = Vector2.zero;
-        Vector2 _lastValidRightEyePos = Vector2.zero;
-        CharacterFacing _lastEyeFacing = CharacterFacing.SouthEast;
 
         // Shader
         Material _shaderMaterial;
@@ -89,11 +84,10 @@ namespace EquipmentSystem
         static readonly int BodyInFrontProp = Shader.PropertyToID("_BodyInFront");
         static readonly int BodyInEastProp = Shader.PropertyToID("_BodyInEast");
         
-        // 眼部装饰参数
-        static readonly int EyeDecoModeProp = Shader.PropertyToID("_EyeDecoMode");
-        static readonly int EyeDecoColorProp = Shader.PropertyToID("_EyeDecoColor");
-        static readonly int LeftEyePosProp = Shader.PropertyToID("_LeftEyePos");
-        static readonly int RightEyePosProp = Shader.PropertyToID("_RightEyePos");
+        // 眼部装饰参数（贴图方式）
+        static readonly int EyeDecoTexProp = Shader.PropertyToID("_EyeDecoTex");
+        static readonly int EyeDecoRectProp = Shader.PropertyToID("_EyeDecoRect");
+        static readonly int EnableEyeDecoProp = Shader.PropertyToID("_EnableEyeDeco");
         
         // 像素级阴影参数
         static readonly int ShadowModeProp = Shader.PropertyToID("_ShadowMode");
@@ -665,9 +659,7 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(EnableLeftEyeProp, 0);
             _shaderMaterial.SetFloat(EnableRightEyeProp, 0);
             _shaderMaterial.SetFloat(HitOutlineProp, 0);
-            _shaderMaterial.SetFloat(EyeDecoModeProp, 0);
-            _shaderMaterial.SetVector(LeftEyePosProp, Vector2.zero);
-            _shaderMaterial.SetVector(RightEyePosProp, Vector2.zero);
+            _shaderMaterial.SetFloat(EnableEyeDecoProp, 0);
             _shaderMaterial.SetFloat(SkinPaletteEnabledProp, 0);
             _shaderMaterial.SetFloat(SkinColorCountProp, 0);
             // 双武器
@@ -1015,7 +1007,7 @@ namespace EquipmentSystem
             _shaderMaterial.SetFloat(EnableRightEyeProp, enableRightEye ? 1f : 0f);
             
             // 设置眼部装饰
-            ApplyEyeDecoration(headFacing, eyesVisible);
+            ApplyEyeDecoration(headFacing);
 
             // 设置肤色映射（基于颜色表的查表换肤）
             ApplySkinPalette();
@@ -1080,84 +1072,22 @@ namespace EquipmentSystem
         }
         
         /// <summary>
-        /// 设置眼部装饰参数
+        /// 设置眼部装饰贴图（只在朝南时显示）
         /// </summary>
-        void ApplyEyeDecoration(CharacterFacing headFacing, bool eyesVisible)
+        void ApplyEyeDecoration(CharacterFacing headFacing)
         {
             // 默认关闭
-            _shaderMaterial.SetFloat(EyeDecoModeProp, 0);
+            _shaderMaterial.SetFloat(EnableEyeDecoProp, 0);
             
-            // 背面不显示眼部装饰
-            if (!eyesVisible)
+            if (appearance == null || !appearance.HasEyeDecoration)
                 return;
             
-            // 方向改变时清除缓存（不同方向的眼睛位置不能复用）
-            if (headFacing != _lastEyeFacing)
+            var eyeDecoSprite = appearance.GetEyeDecorationSprite(headFacing);
+            if (eyeDecoSprite != null && eyeDecoSprite.texture != null)
             {
-                _lastValidLeftEyePos = Vector2.zero;
-                _lastValidRightEyePos = Vector2.zero;
-                _lastEyeFacing = headFacing;
-            }
-            
-            // 获取眼睛像素位置
-            if (_cachedFrame == null || _cachedFrame.limbMask == null)
-                return;
-            
-            var leftEyePixels = _cachedFrame.GetLimbPixels(CharacterBodyPart.LeftEye);
-            var rightEyePixels = _cachedFrame.GetLimbPixels(CharacterBodyPart.RightEye);
-            
-            bool hasLeftEye = leftEyePixels != null && leftEyePixels.Count > 0;
-            bool hasRightEye = rightEyePixels != null && rightEyePixels.Count > 0;
-            
-            // 获取帧尺寸
-            int frameSizeX = _currentAnimData?.frameSize.x ?? 32;
-            int frameSizeY = _currentAnimData?.frameSize.y ?? 32;
-            
-            // 计算眼睛中心的帧内 UV（像素中心）
-            Vector2 leftEyePos = _lastValidLeftEyePos;  // 回退到上次有效位置
-            Vector2 rightEyePos = _lastValidRightEyePos;
-            
-            if (hasLeftEye)
-            {
-                float sumX = 0, sumY = 0;
-                foreach (var p in leftEyePixels)
-                {
-                    sumX += p.x + 0.5f;
-                    sumY += p.y + 0.5f;
-                }
-                leftEyePos = new Vector2(
-                    sumX / leftEyePixels.Count / frameSizeX,
-                    1f - (sumY / leftEyePixels.Count / frameSizeY)
-                );
-                _lastValidLeftEyePos = leftEyePos;
-            }
-            
-            if (hasRightEye)
-            {
-                float sumX = 0, sumY = 0;
-                foreach (var p in rightEyePixels)
-                {
-                    sumX += p.x + 0.5f;
-                    sumY += p.y + 0.5f;
-                }
-                rightEyePos = new Vector2(
-                    sumX / rightEyePixels.Count / frameSizeX,
-                    1f - (sumY / rightEyePixels.Count / frameSizeY)
-                );
-                _lastValidRightEyePos = rightEyePos;
-            }
-            
-            // 如果当前帧和回退都没有眼睛数据，则不启用装饰
-            if (leftEyePos == Vector2.zero && rightEyePos == Vector2.zero)
-                return;
-            
-            _shaderMaterial.SetVector(LeftEyePosProp, leftEyePos);
-            _shaderMaterial.SetVector(RightEyePosProp, rightEyePos);
-
-            if (appearance != null && appearance.eyeDecorationType != EyeDecorationType.None)
-            {
-                _shaderMaterial.SetFloat(EyeDecoModeProp, (float)appearance.eyeDecorationType);
-                _shaderMaterial.SetColor(EyeDecoColorProp, appearance.eyeDecorationColor);
+                _shaderMaterial.SetTexture(EyeDecoTexProp, eyeDecoSprite.texture);
+                _shaderMaterial.SetVector(EyeDecoRectProp, SpriteUtils.GetUVRect(eyeDecoSprite));
+                _shaderMaterial.SetFloat(EnableEyeDecoProp, 1);
             }
         }
 

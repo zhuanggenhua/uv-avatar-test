@@ -144,7 +144,7 @@ namespace EquipmentSystem
                     {
                         // 使用 Blitter 绘制全屏四边形，Material 方式
                         // scaleBias = (1,1,0,0) 表示完整采样
-                        Blitter.BlitTexture(context.cmd, new Vector4(1, 1, 0, 0), data.material, 0);
+                        Blitter.BlitTexture(context.cmd, data.sourceTexture, new Vector4(1, 1, 0, 0), data.material, 0);
                     });
                 }
                 

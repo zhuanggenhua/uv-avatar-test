@@ -83,6 +83,13 @@ Shader "EquipmentSystem/xBRZFilter"
                 return (DistYCbCr(pixA, pixB) < EQUAL_COLOR_TOLERANCE);
             }
             
+            // 判断像素是否接近黑色（描边色）
+            #define INK_THRESHOLD 0.08
+            bool IsInk(float3 color)
+            {
+                return max(color.r, max(color.g, color.b)) <= INK_THRESHOLD;
+            }
+            
             // 判断是否需要混合
             bool IsBlendingNeeded(int4 blend)
             {
@@ -221,6 +228,9 @@ Shader "EquipmentSystem/xBRZFilter"
                           (IsPixEqual(src[4], src[3]) && IsPixEqual(src[3], src[2]) && IsPixEqual(src[2], src[1]) && IsPixEqual(src[1], src[8]) && !IsPixEqual(src[0], src[2]))));
                     
                     float3 blendPix = (DistYCbCr(src[0], src[1]) <= DistYCbCr(src[0], src[3])) ? src[1] : src[3];
+                    // 黑色保护：如果混合像素是黑色（描边色），且中心像素不是黑色，则跳过混合
+                    bool skipBlend1 = IsInk(blendPix) && !IsInk(src[0]);
+                    if (skipBlend1) { needBlend = false; }
                     dst[2]  = lerp(dst[2],  blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 0.333 : 0.25) : ((haveSteepLine) ? 0.25 : 0.0)) : 0.0);
                     dst[9]  = lerp(dst[9],  blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.0);
                     dst[10] = lerp(dst[10], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.0);
@@ -242,6 +252,9 @@ Shader "EquipmentSystem/xBRZFilter"
                           (IsPixEqual(src[2], src[1]) && IsPixEqual(src[1], src[8]) && IsPixEqual(src[8], src[7]) && IsPixEqual(src[7], src[6]) && !IsPixEqual(src[0], src[8]))));
                     
                     blendPix = (DistYCbCr(src[0], src[7]) <= DistYCbCr(src[0], src[1])) ? src[7] : src[1];
+                    // 黑色保护
+                    bool skipBlend2 = IsInk(blendPix) && !IsInk(src[0]);
+                    if (skipBlend2) { needBlend = false; }
                     dst[1] = lerp(dst[1], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 0.333 : 0.25) : ((haveSteepLine) ? 0.25 : 0.0)) : 0.0);
                     dst[6] = lerp(dst[6], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.0);
                     dst[7] = lerp(dst[7], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.0);
@@ -263,6 +276,9 @@ Shader "EquipmentSystem/xBRZFilter"
                           (IsPixEqual(src[8], src[7]) && IsPixEqual(src[7], src[6]) && IsPixEqual(src[6], src[5]) && IsPixEqual(src[5], src[4]) && !IsPixEqual(src[0], src[6]))));
                     
                     blendPix = (DistYCbCr(src[0], src[5]) <= DistYCbCr(src[0], src[7])) ? src[5] : src[7];
+                    // 黑色保护
+                    bool skipBlend3 = IsInk(blendPix) && !IsInk(src[0]);
+                    if (skipBlend3) { needBlend = false; }
                     dst[0] = lerp(dst[0], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 0.333 : 0.25) : ((haveSteepLine) ? 0.25 : 0.0)) : 0.0);
                     dst[15] = lerp(dst[15], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.0);
                     dst[4] = lerp(dst[4], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.0);
@@ -284,6 +300,9 @@ Shader "EquipmentSystem/xBRZFilter"
                           (IsPixEqual(src[6], src[5]) && IsPixEqual(src[5], src[4]) && IsPixEqual(src[4], src[3]) && IsPixEqual(src[3], src[2]) && !IsPixEqual(src[0], src[4]))));
                     
                     blendPix = (DistYCbCr(src[0], src[3]) <= DistYCbCr(src[0], src[5])) ? src[3] : src[5];
+                    // 黑色保护
+                    bool skipBlend4 = IsInk(blendPix) && !IsInk(src[0]);
+                    if (skipBlend4) { needBlend = false; }
                     dst[3] = lerp(dst[3], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 0.333 : 0.25) : ((haveSteepLine) ? 0.25 : 0.0)) : 0.0);
                     dst[12] = lerp(dst[12], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.0);
                     dst[13] = lerp(dst[13], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.0);
