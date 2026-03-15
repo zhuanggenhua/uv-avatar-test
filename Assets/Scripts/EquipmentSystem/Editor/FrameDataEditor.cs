@@ -534,6 +534,11 @@ namespace EquipmentSystem.Editor
                 "• 滚轮: 缩放\n" +
                 "• 快捷键 1/2: 切换标签页",
                 MessageType.Info);
+            EditorGUILayout.HelpBox(
+                "Actual behavior:\n" +
+                "- Head/Torso: select UV on the palette first, then drag on canvas to copy\n" +
+                "- Hands/Feet/Eyes: click on canvas to add, right click to erase",
+                MessageType.None);
         }
         
         #endregion
@@ -684,6 +689,9 @@ namespace EquipmentSystem.Editor
                 string tips = isLimb
                     ? "【手脚】点击画布设置，Shift+点击清除"
                     : "【头部/身体】画板框选UV→画布框选复制，Shift+拖拽擦除";
+                tips = isLimb
+                    ? "[Hands/Feet/Eyes] Click on canvas to add. Shift+click to clear."
+                    : "[Head/Torso] Select UV on the palette first, then drag on canvas to copy. Shift+drag erases.";
                 EditorGUILayout.HelpBox(tips, MessageType.Info);
             }
             
